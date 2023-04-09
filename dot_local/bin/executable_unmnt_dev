@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case "$@" in
+celular)
+  folder="${HOME}/Celular"
+  ;;
+rasp | raspap)
+  folder="${HOME}/Rasp"
+  ;;
+*)
+  exit
+  ;;
+esac
+
+for dir in "${folder}"/*; do
+  fusermount3 -u ${dir}
+  rmdir ${dir}
+done
+rmdir "${folder}"
+
+case "$@" in
+celular)
+  ssh celular "termux-wake-unlock"
+  ;;
+esac

@@ -1,0 +1,214 @@
+#!/bin/bash
+
+export LC_ALL=$(locale -a | grep -ix 'c.utf-\?8' || echo C)
+
+audioLine() {
+  pass="${1}"
+
+  if [[ "${pass}" == "1" ]]; then
+    echo "-an"
+  elif [[ "${pass}" == "2" ]]; then
+    echo "-c:a aac -b:a 128k"
+  fi
+}
+
+cpuUsed() {
+  pass="${1}"
+
+  if [[ "${pass}" == "1" ]]; then
+    echo "4"
+  elif [[ "${pass}" == "2" ]]; then
+    if [[ "${side}" -lt "720" ]]; then
+      echo "1"
+    else
+      echo "2"
+    fi
+  fi
+}
+
+fileName() {
+  echo "${videoIn}" |
+    rev |
+    cut --delimiter='.' --fields=2- |
+    cut --delimiter='/' --fields=1 |
+    rev
+}
+
+inputInfo() {
+  if [[ "$#" == "2" ]]; then
+    ffprobe -v error -select_streams ${1}:0 -show_entries stream="${2}" -of default=nw=1:nk=1 "${videoIn}" | bc
+  else
+    ffprobe -v error -show_entries format="${1}" -of default=nw=1:nk=1 "${videoIn}"
+  fi
+}
+
+passVideo() {
+  pass="${1}"
+
+  # -c:v libx265 \
+  # -crf 24 \
+  # -cpu-used "$(cpuUsed "${pass}")" \
+  # -tile-columns "$(tileColumns)" \
+  # -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 \
+  # -c:v libx265 \
+  # -x265-params log-level=-1 \
+  /usr/bin/ffmpeg \
+    -hide_banner -loglevel error \
+    -y -i "${videoIn}" \
+    -pass "${pass}" \
+    $(audioLine "${pass}") \
+    -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" \
+    -c:v libx264 \
+    -b:v "$(qualityLevel)" \
+    -threads 6 \
+    -g 240 \
+    "${tempFile}" </dev/null
+}
+
+qualityLevel() {
+  # multiplier="(7/4)" # 1.75
+  multiplier="(9/4)" # 2.25
+  if [[ "${fps}" -gt 30 ]]; then
+    multiplier="${multiplier}*${fps}/30"
+  fi
+  br=$(echo "${side}*${multiplier}" | bc)
+  if [[ "${br}" -lt 1000 ]]; then
+    echo "${br}K"
+  else
+    printf "%.2fM\n" $(echo "${br}/1000" | bc -l)
+  fi
+}
+
+reducedBitrate() {
+  if (($(echo "${targetBitrate}<${bitrate}*0.8" | bc -l))); then
+    true
+  else
+    false
+  fi
+}
+
+threads() {
+  if [[ "${side}" -le "360" ]]; then
+    echo "2"
+  elif [[ "${side}" -le "720" ]]; then
+    echo "4"
+  elif [[ "${side}" -le "1440" ]]; then
+    echo "8"
+  else
+    echo "16"
+  fi
+}
+
+tileColumns() {
+  if [[ "${side}" -le "360" ]]; then
+    echo "0"
+  elif [[ "${side}" -le "720" ]]; then
+    echo "1"
+  elif [[ "${side}" -le "1440" ]]; then
+    echo "2"
+  else
+    echo "3"
+  fi
+}
+
+c=false # hardlink to compressed dir
+i=false # ignore if exists
+q=false # overwrite without confirmation
+while getopts "ciq" o; do
+  case "${o}" in
+  c)
+    c=true
+    ;;
+  i)
+    i=true
+    ;;
+  q)
+    q=true
+    ;;
+  \?)
+    echo "Invalid opt ${OPTARG}"
+    exit
+    ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+videoIn="${1}"
+name=$(fileName)
+dir="$(dirname "${1}")"
+compressed_dir="${dir}/compressed"
+if [[ "$#" == "2" ]]; then
+  videoOut="${2}"
+else
+  videoOut="${compressed_dir}/${name}.mp4"
+fi
+
+if [[ -f "${videoOut}" ]]; then
+  if [[ "${i}" = true ]]; then
+    echo "File ${videoOut} already exists. Ignoring."
+    exit
+  fi
+  if [[ "${q}" = false ]]; then
+    echo "File ${videoOut} already exists"
+    while true; do
+      read -p "Do you wish to overwrite it? " -t 10 yn
+      case $yn in
+      "")
+        echo "Exiting..."
+        exit
+        ;;
+      [Yy]*) ;;
+      [Nn]*) exit ;;
+      *) echo "Please answer yes or no." ;;
+      esac
+    done
+  fi
+fi
+
+width="$(inputInfo "v" "width")"
+height="$(inputInfo "v" "height")"
+fps="$(inputInfo "v" "r_frame_rate")"
+if [[ "${height}" -le "${width}" ]]; then
+  side="${height}"
+else
+  side="${width}"
+fi
+cache="${dir}/temp"
+tempFile="${cache}/${name}.mp4"
+qualLlv=$(qualityLevel)
+bitrate=$(ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 "${videoIn}")
+if [[ -z "${bitrate}" || "${bitrate}" == "N/A" ]]; then
+  bitrate=$(mediainfo --Output='Video;%BitRate%' "${videoIn}")
+fi
+if [ -z "${bitrate}" ]; then
+  bitrate=$(mediainfo --Output='General;%BitRate%' "${videoIn}")
+fi
+targetBitrate="$(numfmt --from=iec "${qualLlv}")"
+echo "$(numfmt --to=iec "${bitrate}")/${qualLlv}"
+
+if ! $(reducedBitrate); then
+  if [[ "${q}" = false ]]; then
+    echo "No [considerable] reduction"
+    if [[ "${c}" = true ]]; then
+      if [[ ! -d "${compressed_dir}" ]]; then
+        mkdir "${compressed_dir}"
+      fi
+      ln -f "${videoIn}" "${compressed_dir}"
+    fi
+    exit
+  fi
+fi
+
+if [[ ! -d "${cache}" ]]; then
+  mkdir "${cache}"
+fi
+
+if [[ ! -d "${compressed_dir}" ]]; then
+  mkdir "${compressed_dir}"
+fi
+
+passVideo "1" &&
+  passVideo "2" &&
+  mv --force "${tempFile}" "${videoOut}" ||
+  rm "${tempFile}"
+rmdir "${cache}" 2>/dev/null

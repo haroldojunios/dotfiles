@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [[ "$@" != "right" ]] && [[ "$@" != "left" ]]; then
+  echo "Invalid option"
+  exit 1
+fi
+
+status=""
+
+if [[ "$HOME" == *"termux"* ]]; then
+  termux="true"
+else
+  termux=""
+fi
+
+if [[ "$@" == "left" ]]; then
+  status+="#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" #window number
+  status+="#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #session name
+  if [[ -z $termux ]]; then
+    status+="#[fg=colour121,bg=colour235] $(whoami) #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]" #user name
+    # status+="#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+  fi
+else
+  status+="#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+  status+="#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           #date
+  status+=" $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #time
+  status+="#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]"
+  if [[ -z $termux ]]; then
+    charging=$(cat /sys/class/power_supply/BAT0/status | grep Discharging >/dev/null || echo "⚡")
+    percentage=$(cat /sys/class/power_supply/BAT0/capacity)
+  else
+    bat_status=$(termux-battery-status)
+    charging=$(grep PLUGGED_AC <<<"$bat_status" >/dev/null && echo "⚡")
+    percentage=$(grep percentage <<<"$bat_status" | grep -oP "[0-9]+")
+  fi
+  status+="#[fg=colour232,bg=colour154]$charging$percentage%"
+fi
+
+echo "$status"

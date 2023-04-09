@@ -1,0 +1,39 @@
+defaultIndent: '  '
+lookForAlignDelims:
+  tabular:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+modifyLineBreaks:
+  textWrapOptions:
+    columns: 80
+    # blocksFollow:
+    #   other: |-
+    #     (?x)
+    #     \\\]
+    #     |
+    #     \\item(?:\h|\[)
+    #     |
+    #     \\begin|{eee\} # <--- new bit
+    #     |                # <--- new bit
+    #     \\end|{eee\}   # <--- new bit
+  environments:
+    BeginStartsOnOwnLine: 1
+    BodyStartsOnOwnLine: 1
+    EndStartsOnOwnLine: 1
+    EndFinishesWithLineBreak: 1
+    DBSStartsOnOwnLine: -1
+    DBSFinishesWithLineBreak: 1
+  commands:
+    part:
+      CommandStartsOnOwnLine: 4
+    chapter:
+      CommandStartsOnOwnLine: 4
+    section:
+      CommandStartsOnOwnLine: 3
+    subsection:
+      CommandStartsOnOwnLine: 4
+    subsubsection:
+      CommandStartsOnOwnLine: 4
+indentPreamble: 1
+dos2unixlinebreaks: 1
+removeTrailingWhitespace: 1

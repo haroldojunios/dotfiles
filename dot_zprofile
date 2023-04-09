@@ -1,0 +1,67 @@
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -f "/usr/bin/gedit" ]; then
+  export EDITOR="/usr/bin/gedit"
+fi
+
+# Ubuntu make installation of Ubuntu Make binary symlink
+if [ -d "$HOME/.local/share/umake/bin" ]; then
+  PATH="$HOME/.local/share/umake/bin:$PATH"
+fi
+
+# Ubuntu make installation of Android Studio
+if [ -d "$HOME/.local/share/umake/android/android-studio" ]; then
+  export ANDROID_HOME="$HOME/.local/share/umake/android/android-studio"
+  export ANDROID_SDK="$HOME/.local/share/umake/android/android-studio"
+fi
+
+if [ -d "/home/haroldo/.platformio/penv/bin" ]; then
+  PATH="$PATH:$HOME/.platformio/penv/bin"
+fi
+
+
+# if [ -d "/opt/android-studio/bin" ]; then
+#   PATH="/opt/android-studio/bin:$PATH"
+# fi
+export ANDROID_SDK_ROOT=~/Android/Sdk
+export ANDROID_AVD_HOME=~/.android/avd
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+
+#if [ -d "$HOME/Programs/texlive/bin/x86_64-linux" ]; then
+#  PATH="$PATH:$HOME/Programs/texlive/bin/x86_64-linux"
+#  export MANPATH="$HOME/Programs/texlive/texmf-dist/doc/man"
+#  export INFOPATH="$HOME/Programs/texlive/texmf-dist/doc/info"
+#fi
+
+if [ -d "$HOME/perl5/bin" ]; then
+  PATH="$HOME/perl5/bin:$PATH"
+  PERL5LIB="/home/haroldo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+  export PERL5LIB
+  PERL_LOCAL_LIB_ROOT="/home/haroldo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+  export PERL_LOCAL_LIB_ROOT
+  PERL_MB_OPT="--install_base \"/home/haroldo/perl5\""
+  export PERL_MB_OPT
+  PERL_MM_OPT="INSTALL_BASE=/home/haroldo/perl5"
+  export PERL_MM_OPT
+fi
+
+export GDK_BACKEND=x11
+
+export QT_STYLE_OVERRIDE=""
+
+export EGL_PLATFORM=x11 #anbox
+
+export PATH
+export PIPENV_VENV_IN_PROJECT=1
+
+export NEXTCLOUD_PHP_CONFIG=/etc/webapps/nextcloud/php.ini
+
+#export TEXMFDIST=/usr/share/texmf-dist

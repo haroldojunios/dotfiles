@@ -1,0 +1,107 @@
+env:
+  TERM: xterm-256color
+
+window:
+  dimensions:
+    columns: 300
+    lines: 150
+  dynamic_padding: true
+  decorations: full
+  title: Alacritty
+  dynamic_title: true
+  opacity: 0.8
+  class:
+    instance: Alacritty
+    general: Alacritty
+  decorations_theme_variant: Dark
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  size: 6
+  normal:
+    family: FiraCode Nerd Font Mono
+  bold:
+    family: FiraCode Nerd Font Mono
+  italic:
+    family: FiraCode Nerd Font Mono
+  bold_italic:
+    family: FiraCode Nerd Font Mono
+    # size: 9
+
+draw_bold_text_with_bright_colors: true
+
+save_to_clipboard: true
+
+window.dynamic_title: true
+
+cursor:
+  style: Beam
+  blinking: On
+
+live_config_reload: true
+
+shell:
+  program: /usr/bin/tmux
+  # args:
+  #   - --login
+
+mouse:
+  hide_when_typing: true
+
+key_bindings:
+  # (Windows, Linux, and BSD only)
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+
+# colors:
+#   primary:
+#     background: '0x232627'
+#     foreground: '0xFCFCFC'
+#   cursor:
+#     text: '0x0a1124'
+#     cursor: '0xFCFCFC'
+#   normal:
+#     black: '0x232627'
+#     red: '0xED1515'
+#     green: '0x11D116'
+#     yellow: '0xF67400'
+#     blue: '0x1D99F3'
+#     magenta: '0x9B59B6'
+#     cyan: '0x1ABC9C'
+#     white: '0xFCFCFC'
+#   bright:
+#     black: '0x7F8C8D'
+#     red: '0xC0392B'
+#     green: '0x1CDC9A'
+#     yellow: '0xFDBC4B'
+#     blue: '0x3DAEE9'
+#     magenta: '0x8E44AD'
+#     cyan: '0x16A085'
+#     white: '0xFFFFFF'
+
+colors:
+  primary:
+    background: '#161925'
+
+    foreground: '#c3c7d1'
+    dim_foreground: '#5c6370'
+    bright_foreground: '#828997'
+
+  normal:
+    black: '#1d1f21'
+    red: '#ed254e'
+    green: '#71f79f'
+    yellow: '#f9dc5c'
+    blue: '#7cb7ff'
+    magenta: '#c74ded'
+    cyan: '#00c1e4'
+    white: '#dcdfe4'

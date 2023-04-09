@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# <(echo "$inputData")
+# <(cat <<< "$inputData")
+# <(printf "%s" "$inputData")
+#- /TWRP
+filter_rsync="+ /MIUI/backup/
++ /Android/media/
++ /Android/media/com.whatsapp/
+- /.*
+- /MIUI/*
+- /Music
+- /DCIM
+- /Download/Flash
+- /Download/PC
+- /documents/PC
+- /documents/books
+- /Documents/PC
+- /Documents/books
+- /Download/torrent
+- /Download/PC
+- /Android/*
+- /Android/media/*
+- /amap
+- /AmazFit_WF
+- /aray
+- /backups
+- /browser
+- /camera_events
+- /com.fanglz.android.filemanager
+- /com.northpark.drinkwater
+- /com.mercadolibre
+- /com.mercadopagowallet
+- /iciba
+- /MiVideoGlobal
+- /Tencent
+- /tencent
+- /systemui
+- /voip-data
+- /zman
+- /dctp
+- /did
+- /Android/media/com.whatsapp/WhatsApp/Media/.Statuses
+- /Android/media/com.whatsapp/WhatsApp/.Shared
+- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs
+- /Android/media/com.whatsapp/WhatsApp/.Thumbs
+- /Android/media/com.whatsapp/WhatsApp/.trash
+- /WhatsApp/Media/.Statuses
+- /WhatsApp/.Shared
+- /WhatsApp/.StickerThumbs
+- /WhatsApp/.Thumbs
+- /WhatsApp/.trash
+- /ReadChan
+- .trashed*
+- .thumbnails
+- .tmfs"
+
+rsync_all() {
+  ssh celular "termux-wake-lock" || completed
+  ssh -t celular "sudo ~/bin/rsync_dbs"
+  ssh celular "remove_wpp_dbs"
+  ssh celular "remove_old_bak"
+  # ssh celular "rsync_ig"
+  [ ! -e ~/Downloads/Celular/ ] ||
+    rsync -amyvhPL --inplace --info=progress2,name --no-inc-recursive --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                               # files from PC
+    rsync -amyvhPL --inplace --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                                                                      # pictures
+    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --info=progress2,name --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ ~/Backup/android/ && # all
+    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                       # books
+    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --exclude={"*.ini",".thumbnails"} ~/Music/ celular:/sdcard/Music/                                         # music
+  # rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --include={"*/","*.mp4","*.mkv"} --exclude="*" ~/Downloads/irc/ celular:/sdcard/Movies &&  # episodes
+  completed
+}
+
+completed() {
+  ssh celular "termux-wake-unlock"
+  exit
+}
+
+trap completed INT
+
+for folder in ~/Pictures/DCIM/ ~/Backup/android/; do
+  mkdir -p $folder
+done
+
+until rsync_all; do
+  sleep 10
+done

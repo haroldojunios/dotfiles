@@ -1,0 +1,97 @@
+body {
+  font-family: Nunito, Arial, Helvetica, sans-serif !important;
+  text-align: justify;
+  font-size: 11pt !important;
+  /* text-indent: 1.5em; */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+li {
+  text-indent: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+img,
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
+table {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-indent: 1.5em;
+}
+
+.token.operator,
+.token.boolean {
+  color: #0184bc;
+}
+
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a626a4;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #50a14f;
+}
+
+.token.property,
+.token.number,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #e45649;
+}
+
+pre[class*='language-'] {
+  tab-size: 4;
+  background: #fafafa;
+}
+
+@media print {
+  h1:first-child,
+  h1:nth-child(2) {
+    margin-top: 0;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  pre,
+  blockquote,
+  table {
+    page-break-inside: auto !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    page-break-after: avoid !important;
+  }
+}

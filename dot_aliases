@@ -1,0 +1,18 @@
+source ~/.config/sh/aliases/general.sh
+source ~/.config/sh/aliases/git.sh
+source ~/.config/sh/aliases/python.sh
+source ~/.config/sh/aliases/npm.sh
+
+DISTRO=$(lsb_release -d | sed -e 's/Description://' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+case "$DISTRO" in
+*openSUSE*)
+  source ~/.config/sh/aliases/suse.sh
+  ;;
+*Garuda* | *Arch*)
+  source ~/.config/sh/aliases/arch.sh
+  ;;
+*Ubuntu*)
+  source ~/.config/sh/aliases/ubuntu.sh
+  ;;
+esac

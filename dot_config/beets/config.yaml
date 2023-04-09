@@ -1,0 +1,46 @@
+# directory: /mnt/linux_home/Music
+paths:
+    # default: $albumartist/$year - $album%aunique{}/$track - $title
+    default: $albumartist/$year - $album%aunique{} $atypes/%if{$multidisc,Disc $disc/}$track - $title
+    singleton: Misc/$artist - $title
+    comp: Compilations/$year - $album%aunique{}/$track - $title
+    # albumtype:soundtrack: Soundtracks/$year - $album/$track $title
+ui:
+    color: yes
+item_fields:
+    multidisc: 1 if disctotal > 1 else 0
+plugins: inline fromfilename albumtypes fetchart embedart lastgenre discogs scrub mbsync web play
+# plugins: inline fromfilename discogs fetchart embedart scrub mbsync web play
+fetchart:
+    auto: yes
+    minwidth: 800
+    # maxwidth: 800
+    sources:
+    - filesystem
+    - coverart
+    - itunes
+    - amazon
+    - albumart
+    enforce_ratio: no
+    cover_names:
+    - cover
+    - front
+    - art
+    - album
+    - folder
+embedart:
+    compare_threshold: 50
+    maxwidth: 500
+    remove_art_file: yes
+lastgenre:
+    canonical: yes
+albumtypes:
+    types:
+        - ep: 'EP'
+        - single: 'Single'
+        - soundtrack: 'OST'
+        - live: 'Live'
+        - compilation: 'Anthology'
+        - remix: 'Remix'
+    ignore_va: compilation
+    bracket: '[]'

@@ -1,0 +1,17 @@
+[user]
+	email = haroldojunios@gmail.com
+	name = Haroldo Júnio
+[pull]
+	rebase = false
+[merge]
+	conflictStyle = diff3
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = input
+	editor = code --wait
+	excludesFile = /home/haroldo/.gitignore
+[gui]
+	recentrepo = /home/haroldo/Documents/Git/rural-tech/lastools-integration
+[safe]
+	directory = /opt/flutter

@@ -1,0 +1,5 @@
+alias i='sudo apt install -y'
+alias r='sudo apt remove -y'
+alias u='sudo apt update && sudo apt upgrade -y'
+alias s='apt search'
+alias cl='sudo apt autoclean -y && sudo apt autoremove -y'

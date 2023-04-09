@@ -1,0 +1,246 @@
+{
+  "configure-viewer-toolbar-geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAFnAAAAQgAAA9oAAAJuAAABbAAAAF8AAAPVAAACaQAAAAAAAAAABVYAAAFsAAAAXwAAA9UAAAJp"
+  },
+  "local_storage": {
+    "simple_input_history_net_search_url": [
+      "https://google.com/search?q={q}"
+    ]
+  },
+  "lookup_location": "Google search",
+  "main_window_geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAAAAAAAAAAAAbMAAAKgAAAABQAAABwAAAGuAAACmwAAAAEAAAAABQAAAAAFAAAAHAAAAa4AAAKb"
+  },
+  "main_window_state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAH9AAAAAwAAAAAAAAEAAAADAPwCAAAAAvsAAAAQAHQAbwBjAC0AZABvAGMAawAAAAAAAAADAAAAAIoA////+wAAABYAcwBlAGEAcgBjAGgALQBkAG8AYwBrAAAAAAD/////AAAAmgD///8AAAABAAAAywAAAuj8AgAAAAP7AAAAHABiAG8AbwBrAG0AYQByAGsAcwAtAGQAbwBjAGsAAAAAAP////8AAADyAP////sAAAAcAGkAbgBzAHAAZQBjAHQAbwByAC0AZABvAGMAawAAAAAA/////wAAABQA////+wAAAB4AaABpAGcAaABsAGkAZwBoAHQAcwAtAGQAbwBjAGsAAAAAAP////8AAADSAP///wAAAAIAAAVWAAAC4vwBAAAAAfsAAAAWAGwAbwBvAGsAdQBwAC0AZABvAGMAawAAAAAAAAAFVgAAAMsA////AAABqgAAAoAAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAAAAAAAAQAAAB4AYQBjAHQAaQBvAG4AcwBfAHQAbwBvAGwAYgBhAHICAAAAAP////8AAAAAAAAAAA=="
+  },
+  "old_prefs_migrated": true,
+  "session_data": {
+    "base_font_size": 16,
+    "book_scrollbar": false,
+    "controls_footer": {
+      "left": "empty",
+      "middle": "empty",
+      "right": "progress"
+    },
+    "controls_help_shown_count": 2,
+    "controls_help_shown_count_rtl_page_progression": 2,
+    "current_color_scheme": "black",
+    "footer": {
+      "left": "pos-book",
+      "middle": "title",
+      "right": "progress"
+    },
+    "header": {
+      "left": "empty",
+      "middle": "empty",
+      "right": "empty"
+    },
+    "hide_tooltips": null,
+    "keyboard_shortcuts": {},
+    "left-margin": {
+      "left": "empty",
+      "middle": "empty",
+      "right": "empty"
+    },
+    "margin_bottom": 20,
+    "margin_top": 0,
+    "override_book_colors": "always",
+    "paged_margin_clicks_scroll_by_screen": true,
+    "paged_taps_scroll_by_screen": true,
+    "paged_wheel_scrolls_by_screen": true,
+    "right-margin": {
+      "left": "empty",
+      "middle": "empty",
+      "right": "empty"
+    },
+    "standalone_font_settings": {
+      "mono_family": "Hack",
+      "sans_family": "Nunito Light",
+      "standard_font": "sans"
+    },
+    "standalone_misc_settings": {},
+    "standalone_recently_opened": [
+      {
+        "authors": [
+          "Koyoharu Gotouge"
+        ],
+        "key": "/home/haroldo/calibre/Koyoharu Gotouge/Kimetsu no Yaiba _ Vol. 1 (222)/Kimetsu no Yaiba _ Vol. 1 - Koyoharu Gotouge.epub",
+        "pathtoebook": "/home/haroldo/calibre/Koyoharu Gotouge/Kimetsu no Yaiba _ Vol. 1 (222)/Kimetsu no Yaiba _ Vol. 1 - Koyoharu Gotouge.epub",
+        "timestamp": "2022-04-04T20:15:01.513Z",
+        "title": "Kimetsu no Yaiba / Vol. 1"
+      },
+      {
+        "key": "/home/haroldo/calibre/Unknown/Kimetsu no Yaiba _ Cap. 01 (10)/Kimetsu no Yaiba _ Cap. 01 - Unknown.epub",
+        "pathtoebook": "/home/haroldo/calibre/Unknown/Kimetsu no Yaiba _ Cap. 01 (10)/Kimetsu no Yaiba _ Cap. 01 - Unknown.epub",
+        "timestamp": "2022-04-04T19:34:47.672Z",
+        "title": "Kimetsu no Yaiba / Cap. 01"
+      },
+      {
+        "authors": [
+          "KCC"
+        ],
+        "key": "/home/haroldo/calibre/KCC/Kimetsu no Yaiba - V1 (9)/Kimetsu no Yaiba - V1 - KCC.epub",
+        "pathtoebook": "/home/haroldo/calibre/KCC/Kimetsu no Yaiba - V1 (9)/Kimetsu no Yaiba - V1 - KCC.epub",
+        "timestamp": "2022-04-04T17:08:00.401Z",
+        "title": "Kimetsu no Yaiba - V1"
+      },
+      {
+        "authors": [
+          "KCC"
+        ],
+        "key": "/home/haroldo/calibre/KCC/Kimetsu no Yaiba - V1 (9)/Kimetsu no Yaiba - V1 - KCC.mobi",
+        "pathtoebook": "/home/haroldo/calibre/KCC/Kimetsu no Yaiba - V1 (9)/Kimetsu no Yaiba - V1 - KCC.mobi",
+        "timestamp": "2022-04-04T17:03:50.992Z",
+        "title": "Kimetsu no Yaiba - V1"
+      },
+      {
+        "authors": [
+          "KCC"
+        ],
+        "key": "/home/haroldo/Downloads/Kimetsu no Yaiba - Capítulo 1 por Canard Scantrad/Kimetsu no Yaiba/Kimetsu no Yaiba - V1.mobi",
+        "pathtoebook": "/home/haroldo/Downloads/Kimetsu no Yaiba - Capítulo 1 por Canard Scantrad/Kimetsu no Yaiba/Kimetsu no Yaiba - V1.mobi",
+        "timestamp": "2022-04-04T17:03:01.549Z",
+        "title": "Kimetsu no Yaiba - V1"
+      },
+      {
+        "authors": [
+          "KCC"
+        ],
+        "key": "/tmp/xa-LEA9J1/Kimetsu no Yaiba - V1.mobi",
+        "pathtoebook": "/tmp/xa-LEA9J1/Kimetsu no Yaiba - V1.mobi",
+        "timestamp": "2022-04-04T17:01:26.574Z",
+        "title": "Kimetsu no Yaiba - V1"
+      },
+      {
+        "authors": [
+          "Eduardo Sphor"
+        ],
+        "key": "/home/haroldo/Downloads/A Batalha do Apocalipse 1.epub",
+        "pathtoebook": "/home/haroldo/Downloads/A Batalha do Apocalipse 1.epub",
+        "timestamp": "2022-03-29T17:22:26.270Z",
+        "title": "A Batalha do Apocalipse"
+      },
+      {
+        "authors": [
+          "EDUARDO SPOHR"
+        ],
+        "key": "/home/haroldo/Downloads/A Batalha do Apocalipse (2007, Eduardo Spohr).mobi",
+        "pathtoebook": "/home/haroldo/Downloads/A Batalha do Apocalipse (2007, Eduardo Spohr).mobi",
+        "timestamp": "2022-03-29T15:07:01.513Z",
+        "title": "Microsoft Word - A batalha do apocalipse.doc"
+      },
+      {
+        "authors": [
+          "Eduardo Spohr"
+        ],
+        "key": "/home/haroldo/calibre/Eduardo Spohr/A batalha do Apocalipse (3)/A batalha do Apocalipse - Eduardo Spohr.epub",
+        "pathtoebook": "/home/haroldo/calibre/Eduardo Spohr/A batalha do Apocalipse (3)/A batalha do Apocalipse - Eduardo Spohr.epub",
+        "timestamp": "2022-03-29T14:40:45.866Z",
+        "title": "A batalha do Apocalipse"
+      },
+      {
+        "authors": [
+          "Brandon Sanderson"
+        ],
+        "key": "/home/haroldo/calibre/Brandon Sanderson/Mistborn Nascidos da bruma 2 - o poco da ascensao (6)/Mistborn Nascidos da bruma 2 - o poco da a - Brandon Sanderson.epub",
+        "pathtoebook": "/home/haroldo/calibre/Brandon Sanderson/Mistborn Nascidos da bruma 2 - o poco da ascensao (6)/Mistborn Nascidos da bruma 2 - o poco da a - Brandon Sanderson.epub",
+        "timestamp": "2022-03-28T01:35:33.579Z",
+        "title": "Mistborn Nascidos da bruma 2 - o poço da ascensão"
+      },
+      {
+        "authors": [
+          "Brandon Sanderson"
+        ],
+        "key": "/home/haroldo/Books/Literatura/3. Mistborn – Primeira Era - O Herói das Eras - Brandon Sanderson.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/3. Mistborn – Primeira Era - O Herói das Eras - Brandon Sanderson.epub",
+        "timestamp": "2022-03-28T01:34:30.861Z",
+        "title": "O herói das eras (Mistborn – Primeira Era)"
+      },
+      {
+        "authors": [
+          "Brandon Sanderson"
+        ],
+        "key": "/home/haroldo/calibre/Brandon Sanderson/O heroi das eras (Mistborn - Primeira Era) (5)/O heroi das eras (Mistborn - Primeira Era) - Brandon Sanderson.epub",
+        "pathtoebook": "/home/haroldo/calibre/Brandon Sanderson/O heroi das eras (Mistborn - Primeira Era) (5)/O heroi das eras (Mistborn - Primeira Era) - Brandon Sanderson.epub",
+        "timestamp": "2022-03-28T01:32:40.926Z",
+        "title": "O herói das eras (Mistborn – Primeira Era)"
+      },
+      {
+        "authors": [
+          "Gabao"
+        ],
+        "key": "/home/haroldo/calibre/Eduardo Spohr/A batalha do apocalipse (3)/A batalha do apocalipse - Eduardo Spohr.epub",
+        "pathtoebook": "/home/haroldo/calibre/Eduardo Spohr/A batalha do apocalipse (3)/A batalha do apocalipse - Eduardo Spohr.epub",
+        "timestamp": "2022-03-28T01:18:31.386Z",
+        "title": "Microsoft Word - A batalha do apocalipse.doc"
+      },
+      {
+        "authors": [
+          "Gabao"
+        ],
+        "key": "/home/haroldo/Books/Literatura/A Batalha do Apocalipse - Eduardo Spohr.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/A Batalha do Apocalipse - Eduardo Spohr.epub",
+        "timestamp": "2022-03-28T01:14:22.121Z",
+        "title": "Microsoft Word - A batalha do apocalipse.doc"
+      },
+      {
+        "authors": [
+          "Andrzej Sapkowski"
+        ],
+        "key": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 6 - A Torre da Andorinha - Andrzej Sapkowski.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 6 - A Torre da Andorinha - Andrzej Sapkowski.epub",
+        "timestamp": "2022-03-11T16:29:19.188Z",
+        "title": "A Torre da Andorinha"
+      },
+      {
+        "authors": [
+          "Andrzej Sapkowski"
+        ],
+        "key": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 5 - Batismo De Fogo - Andrzej Sapkowski.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 5 - Batismo De Fogo - Andrzej Sapkowski.epub",
+        "timestamp": "2022-02-27T15:12:24.725Z",
+        "title": "Batismo de Fogo"
+      },
+      {
+        "authors": [
+          "Andrzej Sapkowski"
+        ],
+        "key": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 4 - Tempo Do Desprezo - Andrzej Sapkowski.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 4 - Tempo Do Desprezo - Andrzej Sapkowski.epub",
+        "timestamp": "2022-02-16T18:27:55.742Z",
+        "title": "Tempo Do Desprezo"
+      },
+      {
+        "authors": [
+          "Andrezej Sapkowski"
+        ],
+        "key": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 3 - O Sangue Dos Elfos - Andrzej Sapkowski.epub",
+        "pathtoebook": "/home/haroldo/Books/Literatura/The Witcher/pt/The Witcher 3 - O Sangue Dos Elfos - Andrzej Sapkowski.epub",
+        "timestamp": "2022-02-05T02:46:47.004Z",
+        "title": "O Sangue Dos Elfos"
+      },
+      {
+        "authors": [
+          "John Schember"
+        ],
+        "key": "/home/haroldo/calibre/John Schember/Quick Start Guide (1)/Quick Start Guide - John Schember.epub",
+        "pathtoebook": "/home/haroldo/calibre/John Schember/Quick Start Guide (1)/Quick Start Guide - John Schember.epub",
+        "timestamp": "2022-02-02T18:51:19.579Z",
+        "title": "Quick Start Guide"
+      },
+      {
+        "authors": [
+          "Ethem Alpaydin"
+        ],
+        "key": "/home/haroldo/Documents/Mestrado/2021_2/AM/(Adaptive computation and machine learning) Ethem Alpaydin - Introduction to machine learning-MIT Press (2020).epub",
+        "pathtoebook": "/home/haroldo/Documents/Mestrado/2021_2/AM/(Adaptive computation and machine learning) Ethem Alpaydin - Introduction to machine learning-MIT Press (2020).epub",
+        "timestamp": "2022-02-02T18:33:23.229Z",
+        "title": "Introduction to Machine Learning"
+      }
+    ]
+  }
+}

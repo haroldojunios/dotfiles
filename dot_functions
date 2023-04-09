@@ -1,0 +1,182 @@
+#!/bin/bash
+
+export CELULAR="192.168.11.12"
+
+monitor() {
+  inotifywait -mq -e create -e moved_to $@ |
+    while read path action file; do
+      echo "$path$file"
+    done
+}
+
+monitor_sync() {
+  while inotifywait -rq -e modify,create,delete $1; do
+    rsync -amyvhP --inplace --delete-after $1/ $2
+  done
+}
+
+###### GIT
+gaph() {
+  git add ${*:---all}
+  git commit -v
+  git pull && git push
+}
+
+gcla() {
+  # Clone getting all branches on remote
+  git clone "$@"
+  cd "$(basename "$_" .git)" || return 1
+  defaultBranch=$(git remote show $(git remote) | grep "HEAD branch" | sed 's/.*: //')
+  for branch in $(git branch -a | grep remotes | grep -v HEAD | grep -v $defaultBranch); do
+    git branch --track ${branch#remotes/origin/} $branch
+  done
+}
+###### end GIT
+
+gign() {
+  curl -sL https://www.toptal.com/developers/gitignore/api/$@
+}
+
+mpv_all() {
+  find -name "$@" | sort | mpv --playlist=-
+}
+
+mpv_alls() {
+  find -name "$@" | mpv --playlist=- --shuffle
+}
+
+duration_all() {
+  LENGTH=0
+  for file in "$@"; do
+    if [ -f "$file" ]; then
+      LENGTH="$LENGTH+$(ffprobe -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$file" 2>/dev/null)"
+    fi
+  done
+  echo "$LENGTH" | bc
+}
+
+get_br() {
+  ffprobe -show_entries format=bit_rate -of default=noprint_wrappers=1:nokey=1 "$@" 2>/dev/null
+}
+
+run_matlab() {
+  matlab -nodisplay -nosplash -nodesktop -r "run('$1');"
+}
+
+arduino_cp_lib() {
+  for folder in $(ls); do
+    if [ -z "${folder##*lib*}" ]; then
+      continue
+    fi
+    cp -r ./lib/* ${folder}
+  done
+}
+
+arduino_verify() {
+  if [ "$#" -eq 2 ]; then
+    file=$2
+    case "$1" in
+    esp)
+      board="esp8266:esp8266:generic"
+      ;;
+    promini | pro)
+      board="arduino:avr:pro:cpu=16MHzatmega328"
+      ;;
+    *)
+      echo "Invalid device"
+      return 1
+      ;;
+    esac
+  else
+    board="esp8266:esp8266:generic"
+    file=$1
+  fi
+  arduino --board "${board}" --verify "${file}"
+}
+
+arduino_verify_all() {
+  # board="target_package:target_platform:board[:cpu=custom_cpu]"
+  case "${@}" in
+  esp)
+    board="esp8266:esp8266:generic"
+    ;;
+  promini | pro)
+    board="arduino:avr:pro:cpu=16MHzatmega328"
+    ;;
+  *)
+    # echo "Invalid device"
+    # return 1
+    board="esp8266:esp8266:generic"
+    ;;
+  esac
+  for folder in $(ls); do
+    if [ -z "${folder##*lib*}" ]; then
+      continue
+    fi
+    cp -r ./lib/* ${folder}
+    file="./${folder}/${folder}.ino"
+    if [ -f "${file}" ]; then
+      echo "${folder}"
+      arduino --board "${board}" --verify "${file}"
+    fi
+  done
+}
+
+trim_images() {
+  for f in $@; do
+    convert -trim "$f" "$f"
+  done
+}
+
+pdf_compress() {
+  if [[ $# -ne 1 ]]; then
+    echo "Insert file name"
+    return 1
+  fi
+  if [[ "${1##*.}" != "pdf" ]]; then
+    echo "File must be pdf"
+    return 1
+  fi
+  if [[ $# -eq 1 ]]; then
+    inFile="${1}"
+    outFile="${inFile%.*}-compressed.pdf"
+  elif [[ $# -eq 2 ]]; then
+    inFile="${1}"
+    outFile"${2}"
+  fi
+  gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile="${outFile}" "${inFile}"
+}
+
+pf() {
+  peerflix --not-on-top --mpv --path ~/Downloads/torrent-stream $(xclip -selection clipboard -o) \
+    $@ -- --pause
+}
+
+clone() {
+  sudo dd if="$1" of="$2" bs=32M conv=sync,noerror status=progress
+}
+
+rsm() {
+  ins=(${@:1:${#}-1})
+  out="${@:$#}"
+  rsync --archive --human-readable --partial --progress --fuzzy --inplace --prune-empty-dirs --hard-links --info=progress2,name --no-inc-recursive --remove-source-files $ins "$out" &&
+    for f in "${ins[@]}"; do
+      if [ -d "$f" ]; then
+        find "$f" -type d -empty -delete
+      fi
+    done
+}
+
+cca() {
+  [[ $# -eq 0 ]] && {
+    echo "No argument passed"
+    return 1
+  }
+  conda create -y --name $@
+  conda activate $1
+}
+
+kikit_pan() {
+  kikit panelize -p kikit.json "$1" panel.kicad_pcb &&
+    kikit fab pcbway panel.kicad_pcb .
+}

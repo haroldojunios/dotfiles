@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case "$@" in
+celular)
+  ssh celular "termux-wake-lock" || (
+    echo "error"
+    exit 1
+  )
+  mkdir -p "${HOME}/Celular/"{sdcard,termux,root}
+  sshfs celular:/sdcard/ "${HOME}/Celular/sdcard"
+  sshfs celular:/data/data/com.termux/files/ "${HOME}/Celular/termux"
+  sshfs celular_root:/ "${HOME}/Celular/root"
+  ;;
+rasp)
+  mkdir -p "${HOME}/Rasp/"{home,root}
+  sshfs rasp:/home/pi "${HOME}/Rasp/home"
+  sshfs rasp:/ "${HOME}/Rasp/root"
+  ;;
+raspap)
+  mkdir -p "${HOME}/Rasp/"{home,root}
+  sshfs raspap:/home/pi "${HOME}/Rasp/home"
+  sshfs raspap:/ "${HOME}/Rasp/root"
+  ;;
+esac
