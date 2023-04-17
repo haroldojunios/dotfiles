@@ -11,10 +11,15 @@ if type qtile >>/dev/null 2>&1
 end
 
 if not functions -q fisher; and status is-interactive
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-    fisher install franciscolourenco/done
-    fisher install edc/bass
-    #     fisher install acomagu/fish-async-prompt
+    curl -sL https://git.io/fisher | source
+    if grep fisher ~/.config/fish/fish_plugins &>/dev/null
+        fisher update
+    else
+        fisher install jorgebucaran/fisher
+        fisher install franciscolourenco/done
+        fisher install edc/bass
+        fisher install Kristoffer-PBS/autols-fish
+    end
 end
 
 # Set settings for https://github.com/franciscolourenco/done
