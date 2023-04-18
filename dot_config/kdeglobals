@@ -153,6 +153,9 @@ smallestReadableFont=Fira Sans,9,-1,5,50,0,0,0,0,0
 toolBarFont=Fira Sans,9,-1,5,50,0,0,0,0,0
 widgetStyle=kvantum-dark
 
+[Icons]
+Theme=candy-icons
+
 [KDE]
 AnimationDurationFactor=2
 ColorScheme=Sweetified
@@ -175,7 +178,7 @@ Show Full Path=false
 Show Inline Previews=true
 Show Preview=false
 Show Speedbar=true
-Show hidden files=false
+Show hidden files=true
 Sort by=Name
 Sort directories first=true
 Sort hidden files last=false
