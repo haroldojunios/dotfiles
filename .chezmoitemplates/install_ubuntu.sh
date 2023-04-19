@@ -160,7 +160,7 @@ packageList=(
 if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
   packageList=(
     "${packageList[@]}"
-    "$appletsPackageList"
+    $appletsPackageList
   )
 fi
 
@@ -178,8 +178,8 @@ packageList=(
 )
 
 for package in "${packageList[@]}"; do
-  if ! dpkg -s "$package" &>/dev/null; then
-    sudo apt install -y "$package" || echo "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+  if ! dpkg -s $package &>/dev/null; then
+    sudo apt install -y $package || echo "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 
