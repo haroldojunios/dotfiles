@@ -53,19 +53,14 @@ if [ -n $NEEDS_UPDATE ]; then
 fi
 
 # desktop enviroment
-dePackageList="
-ark \
-dolphin \
-filelight \
-gwenview \
-kate \
-kcalc \
+dePackageList=(
+  xorg
+  sddm
+  "
 kde-config-screenlocker \
 kde-config-sddm \
 kde-spectacle \
-konsole \
 kwin-addons \
-okular \
 plasma-browser-integration \
 plasma-desktop \
 plasma-disks \
@@ -79,9 +74,18 @@ plasma-thunderbolt \
 plasma-widgets-addons \
 plasma-workspace \
 powerdevil \
-sddm \
-xorg \
 "
+  "
+ark \
+dolphin \
+filelight \
+gwenview \
+kate \
+kcalc \
+konsole \
+okular \
+"
+)
 
 # applets
 appletsPackageList="
@@ -167,6 +171,11 @@ if [ -d "/sys/class/power_supply" ]; then
     tlp-rdw
   )
 fi
+
+packageList=(
+  "${dePackageList[@]}"
+  "${packageList[@]}"
+)
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s "$package" &>/dev/null; then

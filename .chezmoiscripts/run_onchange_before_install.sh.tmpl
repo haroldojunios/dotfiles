@@ -33,20 +33,23 @@ vm.dirty_ratio=20
 EOF
 fi
 
-{{ if eq .osid "linux-ubuntu" }}
-if ! grep "zram-fraction = 1" /etc/systemd/zram-generator.conf | grep on &>/dev/null; then
+{{- if eq .osid "linux-ubuntu" -}}
+if ! grep "zram-fraction" /etc/systemd/zram-generator.conf | grep on &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
 zram-fraction = 1
 EOF
 fi
-# sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
-# [zram0]
-# zram-size = ram
-# compression-algorithm = zstd
-# host-memory-limit = none
-# EOF
-{{ end }}
+{{- else -}}
+if ! grep "zram-size" /etc/systemd/zram-generator.conf | grep on &>/dev/null; then
+  sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
+[zram0]
+zram-size = ram
+compression-algorithm = zstd
+host-memory-limit = none
+EOF
+fi
+{{- end -}}
 
 # sddm
 if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
