@@ -2,3 +2,16 @@ key.txt.age
 .ssh/work-ssh.id_rsa.age
 .ssh/home-ssh.id_rsa.age
 README.md
+
+{{ if ne .osid "android" }}
+.termux
+{{ end }}
+
+{{ if eq .osid "android" }}
+.config/*
+!.config/fish
+!.config/sh
+!.config/zsh
+!.config/black
+!.config/starship.toml
+{{ end }}
