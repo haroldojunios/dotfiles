@@ -81,10 +81,10 @@ continuation_prompt = "▶▶"
 
 [character]
 error_symbol = ""
-success_symbol = " [╰─❯](bold green)"
+success_symbol = "[╰─❯](bold green)"
 
 [username]
-format = " [╭─$user]($style)"
+format = "[╭─$user]($style)"
 show_always = true
 style_root = "bold green"
 style_user = "bold green"
@@ -92,7 +92,7 @@ style_user = "bold green"
 [hostname]
 disabled = false
 format = "@[$hostname]($style)"
-ssh_only = false
+ssh_only = true
 style = "bold dimmed green"
 trim_at = "-"
 
@@ -155,10 +155,14 @@ symbol = ""
 # SYMBOLS
 [status]
 disabled = false
-format = '[\[$symbol$status_common_meaning$status_signal_name$status_maybe_int\]]($style)'
+format = '[╰─❯ \[$symbol$signal_name$common_meaning$maybe_int\]]($style)'
+symbol = ""
+not_executable_symbol = "🚫 "
+not_found_symbol = "🔍 "
+sigint_symbol = "🧱 "
+signal_symbol = "⚡ "
 map_symbol = true
-pipestatus = true
-# symbol = "🔴"
+# pipestatus = true
 
 [aws]
 symbol = " "
