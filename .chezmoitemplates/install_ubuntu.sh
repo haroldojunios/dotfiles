@@ -120,7 +120,6 @@ packageList=(
   conky-all
   crudini
   curl
-
   exa
   ffmpeg
   fish
@@ -182,7 +181,7 @@ packageList=(
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
-    sudo apt install -y $package || echo "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+    sudo apt install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 
