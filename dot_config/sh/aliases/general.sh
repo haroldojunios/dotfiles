@@ -52,6 +52,8 @@ alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536
 alias tlmgr='$TEXMFDIST/scripts/texlive/tlmgr.pl' # --usermode'
 alias freecad="LD_PRELOAD=/usr/lib64/libstdc++.so.6 LIBGL_ALWAYS_SOFTWARE=1 $HOME/Programs/FreeCAD/FreeCAD.AppImage"
 
+alias nano="nano --rcfile ~/.config/nanorc/nanorc"
+
 ## Useful aliases
 # Replace ls with exa
 alias ls='exa -a --color=always --group-directories-first --icons'  # preferred listing
