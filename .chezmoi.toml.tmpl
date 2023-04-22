@@ -3,6 +3,8 @@
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
+{{- $isWork := promptBoolOnce . "isWork" "Is this an work machine" -}}
+
 encryption = "age"
 [age]
     identity = "~/.config/key.txt"
@@ -11,3 +13,4 @@ encryption = "age"
     command = "fish"
 [data]
     osid = {{ $osid | quote }}
+    isWork = {{ $isWork }}

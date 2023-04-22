@@ -1,0 +1,5 @@
+{{- if .isWork -}}
+{{ joinPath .chezmoi.sourceDir "private_dot_ssh/work-ssh.id_rsa.age" | include | decrypt }}
+{{- else -}}
+{{ joinPath .chezmoi.sourceDir "private_dot_ssh/home-ssh.id_rsa.age" | include | decrypt }}
+{{- end -}}

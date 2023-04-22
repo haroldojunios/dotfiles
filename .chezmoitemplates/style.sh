@@ -11,7 +11,7 @@ if ! [ -d /usr/share/themes/sweet ]; then
     mv aurorae/Sweet-Dark-transparent aurorae/themes/Sweet-Dark-transparent
     rm aurorae/.shade.svg
     mv colorschemes color-schemes
-    mkdir -p plasma/look-and-feelnano $__fish_config_dir/fish_plugins
+    mkdir -p plasma/look-and-feel
     mv look-and-feel plasma/look-and-feel/Sweet
     mv sddm sddm-Sweet
     mkdir -p sddm/themes

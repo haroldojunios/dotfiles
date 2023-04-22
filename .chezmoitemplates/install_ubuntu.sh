@@ -53,19 +53,14 @@ if [ -n $NEEDS_UPDATE ]; then
 fi
 
 # desktop enviroment
-dePackageList="
-ark \
-dolphin \
-filelight \
-gwenview \
-kate \
-kcalc \
+dePackageList=(
+  xorg
+  sddm
+  "
 kde-config-screenlocker \
 kde-config-sddm \
 kde-spectacle \
-konsole \
 kwin-addons \
-okular \
 plasma-browser-integration \
 plasma-desktop \
 plasma-disks \
@@ -79,9 +74,18 @@ plasma-thunderbolt \
 plasma-widgets-addons \
 plasma-workspace \
 powerdevil \
-sddm \
-xorg \
 "
+  "
+ark \
+dolphin \
+filelight \
+gwenview \
+kate \
+kcalc \
+konsole \
+okular \
+"
+)
 
 # applets
 appletsPackageList="
@@ -137,6 +141,7 @@ packageList=(
   python3-venv
   sshfs
   systemd-zram-generator
+  {{ if not .isWork }}
   texlive-fonts-recommended
   texlive-lang-portuguese
   texlive-latex-base
@@ -146,6 +151,7 @@ packageList=(
   texlive-pstricks
   texlive-science
   texlive-xetex
+  {{ end }}
   tmux
   ufw
   unzip
@@ -156,7 +162,7 @@ packageList=(
 if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
   packageList=(
     "${packageList[@]}"
-    "$appletsPackageList"
+    $appletsPackageList
   )
 fi
 
@@ -168,9 +174,14 @@ if [ -d "/sys/class/power_supply" ]; then
   )
 fi
 
+packageList=(
+  "${dePackageList[@]}"
+  "${packageList[@]}"
+)
+
 for package in "${packageList[@]}"; do
-  if ! dpkg -s "$package" &>/dev/null; then
-    sudo apt install -y "$package" || echo "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+  if ! dpkg -s $package &>/dev/null; then
+    sudo apt install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 
@@ -193,12 +204,27 @@ if [ -d "/sys/class/power_supply" ]; then
   fi
 fi
 
-if ! dpkg -s "onlyoffice-desktopeditors" &>/dev/null; then
+if ! command -v onlyoffice-desktopeditors &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
   wget -O "$TEMP_FOLDER/onlyoffice.deb" -q "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
   sudo apt install -y "$TEMP_FOLDER/onlyoffice.deb"
   rm -rf "$TEMP_FOLDER"
 fi
+
+{{ if not .isWork }}
+if ! command -v fastfetch &>/dev/null; then
+  TEMP_FOLDER=$(mktemp -d)
+  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
+  (
+    cd "$TEMP_FOLDER/fastfetch"
+    mkdir -p build
+    cd build
+    cmake ..
+    cmake --build . --target fastfetch --target flashfetch
+    sudo cmake --install . --prefix /usr/local
+  )
+fi
+{{ end }}
 
 sudo apt autoremove -y
 sudo apt clean -y
