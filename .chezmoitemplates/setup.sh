@@ -37,7 +37,7 @@ EOF
   fi
 fi
 
-{{ if eq .osid "linux-ubuntu" }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 if ! grep "zram-fraction" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]

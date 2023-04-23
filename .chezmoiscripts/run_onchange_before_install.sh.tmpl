@@ -1,9 +1,12 @@
 #!/bin/bash
 
-{{ if eq .osid "linux-ubuntu" }}
+{{ if eq .osidLike "linux-ubuntu" }}
 {{ template "install_ubuntu.sh" . }}
 {{ template "style.sh" . }}
-{{ else if eq .osid "android" }}
+{{ else if eq .osidLike "linux-arch" }}
+{{ template "install_arch.sh" . }}
+{{ template "style.sh" . }}
+{{ else if eq .osidLike "android" }}
 {{ template "install_termux.sh" . }}
 {{ end }}
 

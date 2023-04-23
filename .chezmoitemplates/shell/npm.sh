@@ -1,3 +1,4 @@
+# npm aliases
 alias n='npm'
 alias nin='npm init --yes'
 alias ni='npm install'

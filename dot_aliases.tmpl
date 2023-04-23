@@ -1,0 +1,14 @@
+{{ template "shell/general.sh" . }}
+{{ template "shell/git.sh" . }}
+{{ template "shell/python.sh" . }}
+{{ template "shell/npm.sh" . }}
+
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{ template "shell/ubuntu.sh" . }}
+{{ else if eq .osidLike "linux-arch" }}
+{{ template "shell/arch.sh" . }}
+{{ else if eq .osidLike "suse opensuse" }}
+{{ template "shell/suse.sh" . }}
+{{ else if eq .osid "android" }}
+{{ template "shell/termux.sh" . }}
+{{ end }}

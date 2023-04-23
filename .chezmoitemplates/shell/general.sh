@@ -1,3 +1,4 @@
+# general aliases
 alias ytd='youtube-dl -o "%(title)s.%(ext)s" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 alias matlab='~/Programs/MATLAB/R2018a/bin/matlab'
 alias gitignore_fix='git rm -r --cached . ; git add .'

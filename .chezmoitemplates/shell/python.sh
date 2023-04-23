@@ -1,3 +1,4 @@
+# python aliases
 alias p='python'
 alias pye='source ./venv/Scripts/activate >/dev/null || source ./venv/bin/activate'
 alias pyv='python -m venv venv'

@@ -33,8 +33,8 @@ if test -f ~/.fish_profile
     source ~/.fish_profile
 end
 
-if test -f ~/.fish_aliases
-    source ~/.fish_aliases
+if test -f ~/.aliases
+    source ~/.aliases
 end
 
 # Add ~/.local/bin to PATH

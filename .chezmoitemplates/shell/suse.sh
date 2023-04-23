@@ -1,3 +1,4 @@
+# suse aliases
 alias i='sudo zypper install --no-confirm --no-recommends --auto-agree-with-licenses'
 alias ir='sudo zypper install --no-confirm --auto-agree-with-licenses'
 alias u='sudo zypper update --no-confirm --no-recommends --auto-agree-with-licenses'

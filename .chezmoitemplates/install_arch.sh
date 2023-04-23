@@ -59,6 +59,7 @@ packageList=(
   age
   alacritty
   bat
+  bc
   calibre
   clang
   cmake
