@@ -118,6 +118,8 @@ function copy
     end
 end
 
+{{ template "shell/colors.fish" . }}
+
 ## Run fastfetch if session is interactive
 if status --is-interactive
     if type -q fastfetch

@@ -124,6 +124,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+{{ template "shell/colors.sh" . }}
+
 if command -v code &>/dev/null; then
   export EDITOR="code --wait"
 elif command -v nano &>/dev/null; then
