@@ -131,6 +131,7 @@ packageList=(
   jq
   keepassxc
   make
+  micro
   mpv
   nano
   ninja-build

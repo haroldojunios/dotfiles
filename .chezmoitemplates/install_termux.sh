@@ -22,6 +22,7 @@ packageList=(
   imagemagick
   jq
   make
+  micro
   nano
   ninja
   p7zip

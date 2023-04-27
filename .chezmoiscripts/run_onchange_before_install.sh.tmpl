@@ -14,6 +14,8 @@
 {{ template "setup.sh" . }}
 {{ end }}
 
+{{ template "setup_micro.sh" . }}
+
 if grep -q "https" {{ .chezmoi.sourceDir }}/.git/config; then
   git -C {{ .chezmoi.sourceDir }} remote set-url origin "git@github.com:haroldojunios/dotfiles.git"
 fi
