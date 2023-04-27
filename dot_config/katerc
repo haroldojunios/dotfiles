@@ -91,6 +91,7 @@ Dynamic Word Wrap Align Indent=80
 Dynamic Word Wrap At Static Marker=false
 Dynamic Word Wrap Indicators=1
 Dynamic Wrap not at word boundaries=false
+Enable Tab completion=false
 Fold First Line=false
 Folding Bar=true
 Folding Preview=true
@@ -143,6 +144,7 @@ RunPrefix=
 SetEditor=false
 
 [MainWindow]
+1920x1080 screen: Window-Maximized=true
 eDP-1 Window-Maximized 1920x1080=true
 
 [Replicode]

@@ -1,5 +1,12 @@
+[Applications][discord]
+Seen=true
+
 [Applications][firefox]
 Seen=true
 
 [Applications][firefox_firefox]
 Seen=true
+
+[DoNotDisturb]
+NotificationSoundsMuted=true
+Until=2023,4,21,6,0,0.34
