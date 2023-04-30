@@ -4,22 +4,33 @@ set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT 1
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x EDITOR nano
-set -v MICRO_TRUECOLOR 1
+set -x MICRO_TRUECOLOR 1
+
+if test $TERM = linux
+    if type -q yaft
+        set -x FRAMEBUFFER /dev/fb0
+        # set -x YAFT wall
+        yaft
+    end
+end
 
 ## Export variable need for qt-theme
-if type qtile >>/dev/null 2>&1
+if type -q qtile
     set -x QT_QPA_PLATFORMTHEME qt5ct
 end
 
 if not functions -q fisher; and status is-interactive
     curl -sL https://git.io/fisher | source
-    if grep fisher ~/.config/fish/fish_plugins &>/dev/null
+    if grep -q fisher ~/.config/fish/fish_plugins
         fisher update
     else
         fisher install jorgebucaran/fisher
         fisher install franciscolourenco/done
         fisher install edc/bass
         fisher install Kristoffer-PBS/autols-fish
+    end
+    if type -q autols-toggle
+        autols-toggle on &>/dev/null
     end
 end
 
@@ -130,11 +141,11 @@ if status --is-interactive
     end
 end
 
-if type code >>/dev/null 2>&1
+if type -q code
     set -x EDITOR "code --wait"
 end
 
 ## Starship prompt
-if type starship >>/dev/null 2>&1
+if type -q starship
     starship init fish | source
 end

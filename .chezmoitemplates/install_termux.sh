@@ -39,5 +39,14 @@ for package in "${packageList[@]}"; do
   fi
 done
 
+passwd &>/dev/null <<EOD
+0000
+0000
+EOD
+
+if su -c echo &>/dev/null; then
+  apt install -y tsu
+fi
+
 apt autoremove -y
 apt clean

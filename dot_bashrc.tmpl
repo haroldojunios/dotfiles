@@ -8,6 +8,12 @@ case $- in
 *) return ;;
 esac
 
+case $TERM in
+linux)
+  command -v yaft &>/dev/null && yaft
+  ;;
+esac
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
