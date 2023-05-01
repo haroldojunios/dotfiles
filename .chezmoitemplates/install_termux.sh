@@ -22,6 +22,7 @@ packageList=(
   imagemagick
   jq
   make
+  micro
   nano
   ninja
   p7zip
@@ -37,6 +38,15 @@ for package in "${packageList[@]}"; do
     apt install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
+
+passwd &>/dev/null <<EOD
+0000
+0000
+EOD
+
+if su -c echo &>/dev/null; then
+  apt install -y tsu
+fi
 
 apt autoremove -y
 apt clean

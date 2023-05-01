@@ -1,0 +1,515 @@
+{
+  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, AlignAfterOpenBracket: DontAlign,SpacesBeforeTrailingComments: 1,BreakBeforeBraces: Allman,BreakStringLiterals: true,ColumnLimit: 80, MaxEmptyLinesToKeep: 1,ContinuationIndentWidth: 2,AlwaysBreakBeforeMultilineStrings: false,AlignEscapedNewlines: Left,AlignConsecutiveMacros: AcrossComments,AllowAllParametersOfDeclarationOnNextLine: false,AllowShortLambdasOnASingleLine: true,BinPackArguments: true,BreakConstructorInitializers: AfterColon,IncludeBlocks: Preserve,AllowShortFunctionsOnASingleLine: None,SortIncludes: false,NamespaceIndentation: All,IndentPPDirectives: AfterHash,AlignArrayOfStructures: Right}",
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  // "C_Cpp.clang_format_fallbackStyle": "/home/haroldo/.clang-format",
+  "C_Cpp.configurationWarnings": "Disabled",
+  "C_Cpp.default.browse.path": ["{$workspaceFolder}/**"],
+  "C_Cpp.default.includePath": ["{$workspaceFolder}/**"],
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.loggingLevel": "Debug",
+  "C_Cpp.workspaceParsingPriority": "low",
+  "[c][cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "[django-html][erb]": {
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  },
+  "[fish]": {
+    "editor.tabSize": 4
+  },
+  "[git-commit]": {
+    "editor.rulers": [50, 72],
+    "workbench.editor.restoreViewState": false
+  },
+  "[html][django-html][javascript][c][cpp][erb]": {
+    "editor.rulers": [80]
+  },
+  "[html][javascript][css][json][jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[latex]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[matlab]": {
+    "files.encoding": "windows1252"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    // "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSaveMode": "file",
+    // "editor.semanticHighlighting.enabled": false
+    "editor.rulers": [79],
+    "editor.tabSize": 4
+  },
+  "[yaml]": {
+    "editor.tabSize": 4
+  },
+  "atomKeymap.promptV3Features": true,
+  "cSpell.allowCompoundWords": true,
+  "cSpell.language": "pt-BR,fr-FR,en-US",
+  "cSpell.userWords": [
+    "Alanna",
+    "bnt",
+    "Catastrofização",
+    "denoised",
+    "Denoised",
+    "deposicional",
+    "django",
+    "DTO",
+    "eeprom",
+    "eigen",
+    "emocionalização",
+    "fft",
+    "GND",
+    "haroldo",
+    "haroldojunios",
+    "idx",
+    "ifft",
+    "img",
+    "inplace",
+    "ipad",
+    "itertuples",
+    "J",
+    "Júnio",
+    "Kori",
+    "latexmk",
+    "ldrs",
+    "mqtt",
+    "MSE",
+    "nio",
+    "NMOS",
+    "numpy",
+    "paho",
+    "platformio",
+    "plt",
+    "println",
+    "qrcode",
+    "Questionalização",
+    "rfid",
+    "seif",
+    "SRSN",
+    "SSID",
+    "submercado",
+    "submercados",
+    "synctex",
+    "UTM",
+    "VCC",
+    "watercolunm",
+    "webm",
+    "webp",
+    "WGS",
+    "WIFI"
+  ],
+  "comments.openView": "never",
+  "customizeUI.activityBar": "bottom",
+  "customizeUI.font.monospace": "Fira Code",
+  "customizeUI.font.regular": "Nunito",
+  "customizeUI.fontSizeMap": {
+    "12px": "11px",
+    "13px": "11px",
+    "menu": "11px", // Used for menu items (windows only)
+    "monospace": "11px", // Used for monospace fonts in user interface
+    "tab-title": "11px", // Used for editor tab titles
+    "window-title": "12px" // Window title font when using custom titlebar
+  },
+  "customizeUI.listRowHeight": 17,
+  "customizeUI.stylesheet": {
+    // "[id='workbench.view.explorer']": "font-size: 10px;",
+    ".composite.title .tabs-and-actions-container ": "height: 10px;"
+  },
+  "debug.console.fontSize": 11.5,
+  // "workbench.tree.indent": 4,
+  "debug.internalConsoleOptions": "neverOpen",
+  "debug.openDebug": "neverOpen",
+  // "editor.tabCompletion": "onlySnippets",
+  // "editor.semanticHighlighting.enabled": false,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.bracketPairColorization.enabled": true,
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": true
+  // },
+  "editor.comments.insertSpace": true,
+  "editor.fontFamily": "'FiraCode Nerd Font','Fira Code', Hack, monospace",
+  "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
+  "editor.fontSize": 12,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.maxColumn": 70,
+  "editor.mouseWheelZoom": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.quickSuggestions": {
+    "comments": true,
+    "other": true,
+    "strings": true
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "[CodeSandbox Black]": {
+      "textMateRules": [
+        {
+          "scope": "invalid.deprecated.line-too-long.git-commit",
+          "settings": {
+            "foreground": "#BBBBBB"
+          }
+        },
+        {
+          "scope": "invalid.illegal.line-too-long.git-commit",
+          "settings": {
+            "foreground": "#FF0000"
+          }
+        }
+      ]
+    },
+    "[One Dark Pro]": {
+      "textMateRules": [
+        {
+          "scope": "invalid.illegal.line-too-long.git-commit",
+          "settings": {
+            "foreground": "#d81b1b"
+          }
+        },
+        {
+          "scope": "variable.other.readwrite",
+          "settings": {
+            "foreground": "#CCCCCC"
+          }
+        }
+      ]
+    }
+  },
+  "editor.wordWrap": "on",
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "django-html": "html",
+    "javascript": "javascriptreact",
+    "markdown": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.sortOrder": "type",
+  "extensions.ignoreRecommendations": true,
+  "extensions.supportUntrustedWorkspaces": {
+    "iocave.customize-ui": {
+      "supported": true
+    },
+    "iocave.monkey-patch": {
+      "supported": true
+    },
+    "ms-vscode.atom-keybindings": {
+      "supported": true
+    }
+  },
+  "files.associations": {
+    "**/*.html": "html",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+    "**/templates/**/*": "django-txt",
+    "**/templates/**/*.html": "django-html",
+    "*.fish.tmpl": "fish",
+    "*.m": "matlab",
+    "*.toml.tmpl": "toml",
+    "*aliases.tmpl": "shellscript",
+    "*bashrc.tmpl": "shellscript"
+  },
+  "files.autoSave": "afterDelay",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.confirmSync": false,
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "html.format.wrapLineLength": 80,
+  // "git.inputValidationSubjectLength": 0,
+  "javascript.autoClosingTags": true,
+  // "emmet.showSuggestionsAsSnippets": true,
+  "javascript.preferences.quoteStyle": "double",
+  "javascript.suggest.paths": false,
+  "jupyter.askForKernelRestart": false,
+  "latex-workshop.bibtex-format.sort.enabled": true,
+  "latex-workshop.latex.autoBuild.interval": 5000,
+  "latex-workshop.latex.build.forceRecipeUsage": false,
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatexmk",
+      "tools": ["xelatexmk"]
+    },
+    {
+      "name": "compress",
+      "tools": ["gs"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "%DOC%"
+      ],
+      "command": "lualatex",
+      "name": "lualatex"
+    },
+    {
+      "args": [
+        "-lualatex",
+        // "-pdflatex=lualatex -shell-escape",
+        // "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-f",
+        "-file-line-error",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "command": "latexmk",
+      "name": "lualatexmk"
+    },
+    {
+      "args": [
+        "-xelatex",
+        // "-pdflatex=xelatex -shell-escape",
+        // "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-f",
+        "-file-line-error",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "command": "latexmk",
+      "name": "xelatexmk"
+    },
+    {
+      "args": ["-c"],
+      "command": "latexmk",
+      "name": "clean"
+    },
+    {
+      "args": ["%DOCFILE%"],
+      "command": "biber",
+      "name": "biber"
+    },
+    {
+      "args": [
+        "-sDEVICE=pdfwrite",
+        "-dCompatibilityLevel=1.5",
+        "-dNOPAUSE",
+        "-dQUIET",
+        "-dBATCH",
+        "-dPrinted=false",
+        "-sOutputFile=%DOC%-compressed.pdf",
+        "%DOC%.pdf"
+      ],
+      "command": "gs",
+      "name": "gs"
+    }
+  ],
+  "latex-workshop.latex.watch.delay": 5000,
+  "latex-workshop.latexindent.args": ["-m", "-c", "%DIR%/", "%TMPFILE%"],
+  "latex-workshop.message.error.show": false,
+  "latex-workshop.message.warning.show": false,
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  // "latex-workshop.view.pdf.hand": true,
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "livePreview.notifyOnOpenLooseFile": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "markdown-preview-enhanced.HTML5EmbedIsAllowedHttp": true,
+  "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+  "markdown-preview-enhanced.breakOnSingleNewLine": false,
+  "markdown-preview-enhanced.chromePath": "/opt/google/chrome/google-chrome",
+  "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
+  "markdown-preview-enhanced.enableExtendedTableSyntax": true,
+  "markdown-preview-enhanced.enableScriptExecution": true,
+  "markdown-preview-enhanced.enableTypographer": true,
+  "markdown-preview-enhanced.latexEngine": "xelatex",
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "markdown-preview-enhanced.puppeteerWaitForTimeout": 500,
+  "markdown.extension.print.absoluteImgPath": false,
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  "markdown.preview.fontSize": 11.5,
+  "markdownlint.config": {
+    "MD024": {
+      "siblings_only": true
+    },
+    "MD033": {
+      "allowed_elements": ["style", "h1", "h2", "h3", "p", "img", "a"]
+    },
+    "default": true
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "notebook.output.textLineLimit": 1000,
+  "oneDarkPro.editorTheme": "Shadow",
+  "oneDarkPro.vivid": true,
+  // "path-intellisense.showHiddenFiles": true,
+  "path-intellisense.autoSlashAfterDirectory": true,
+  "path-intellisense.autoTriggerNextSuggestion": true,
+  "platformio-ide.autoOpenPlatformIOIniFile": false,
+  "platformio-ide.forceUploadAndMonitor": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSameLine": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 79,
+  "prettier.singleQuote": true,
+  "python.defaultInterpreterPath": "/bin/python",
+  // "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "python.experiments.optOutFrom": ["All"],
+  "python.formatting.provider": "black",
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "svg.preview.mode": "svg",
+  "sync.autoUpload": false,
+  "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
+  "sync.quietSync": true,
+  "tabnine.experimentalAutoImports": true,
+  "template-string-converter.autoRemoveTemplateString": true,
+  "terminal.integrated.env.linux": {
+    "VSCODE": "true"
+  },
+  "terminal.integrated.fontFamily": "'monospace','FiraCode Nerd Font','PowerlineSymbols'",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.tabs.enabled": false,
+  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK", "[ ]", "[x]"],
+  "todo-tree.highlights.customHighlight": {
+    "FIXME": {
+      "background": "#FF01FF",
+      "icon": "bug",
+      "iconColour": "#FF01FF"
+    },
+    "MARK": {
+      "background": "#157EFB",
+      "icon": "tag",
+      "iconColour": "#157EFB"
+    },
+    "NOTE": {
+      "background": "#FFA500",
+      "icon": "file",
+      "iconColour": "#FFA500"
+    },
+    "TODO": {
+      "background": "#FFD703",
+      "icon": "tasklist",
+      "iconColour": "#FFD703"
+    },
+    "[ ]": {
+      "background": "#ff000080",
+      "icon": "square",
+      "iconColour": "#ff000080"
+    },
+    "[x]": {
+      "background": "#00ff0080",
+      "icon": "square-fill",
+      "iconColour": "#00ff0080"
+    }
+  },
+  "todo-tree.highlights.defaultHighlight": {
+    "fontStyle": "italic",
+    "fontWeight": "bold",
+    "foreground": "#555",
+    "opacity": 80,
+    "type": "text-and-comment"
+  },
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "typescript.autoClosingTags": true,
+  "typescript.suggest.paths": false,
+  "unibeautify.defaultConfig": "/home/haroldo/.unibeautifyrc.json",
+  "unibeautify.enabled": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.newWindowDimensions": "maximized",
+  "window.titleBarStyle": "native",
+  "window.zoomLevel": -0.5,
+  "workbench.colorCustomizations": {
+    "tab.activeBackground": "#242424",
+    // "editorGroupHeader.tabsBackground": "#242424",
+    // // Argonaut theme color
+    // "terminal.background": "#151718",
+    // "terminal.foreground": "#FFFAF4",
+    // "terminalCursor.background": "#FFFAF4",
+    // "terminalCursor.foreground": "#FFFAF4",
+    // "terminal.ansiBlack": "#444444",
+    // "terminal.ansiBlue": "#0092FF",
+    // "terminal.ansiBrightBlack": "#232323",
+    // "terminal.ansiBrightBlue": "#008DF8",
+    // "terminal.ansiBrightCyan": "#00D8EB",
+    // "terminal.ansiBrightGreen": "#8CE10B",
+    // "terminal.ansiBrightMagenta": "#6D43A6",
+    // "terminal.ansiBrightRed": "#FF000F",
+    // "terminal.ansiBrightWhite": "#FFFFFF",
+    // "terminal.ansiBrightYellow": "#FFB900",
+    // "terminal.ansiCyan": "#67FFF0",
+    // "terminal.ansiGreen": "#ABE15B",
+    // "terminal.ansiMagenta": "#9A5FEB",
+    // "terminal.ansiRed": "#FF2740",
+    // "terminal.ansiWhite": "#FFFFFF",
+    // "terminal.ansiYellow": "#FFD242",
+    // // Seti theme color
+    // "terminal.background": "#151718",
+    // "terminal.foreground": "#D6D6D6",
+    // "terminalCursor.background": "#D6D6D6",
+    // "terminalCursor.foreground": "#D6D6D6",
+    // "terminal.ansiBlack": "#151718",
+    // "terminal.ansiBlue": "#55B5DB",
+    // "terminal.ansiBrightBlack": "#41535B",
+    // "terminal.ansiBrightBlue": "#55B5DB",
+    // "terminal.ansiBrightCyan": "#55DBBE",
+    // "terminal.ansiBrightGreen": "#9FCA56",
+    // "terminal.ansiBrightMagenta": "#A074C4",
+    // "terminal.ansiBrightRed": "#CD3F45",
+    // "terminal.ansiBrightWhite": "#FFFFFF",
+    // "terminal.ansiBrightYellow": "#E6CD69",
+    // "terminal.ansiCyan": "#55DBBE",
+    // "terminal.ansiGreen": "#9FCA56",
+    // "terminal.ansiMagenta": "#A074C4",
+    // "terminal.ansiRed": "#CD3F45",
+    // "terminal.ansiWhite": "#D6D6D6",
+    // "terminal.ansiYellow": "#E6CD69",
+    "tab.activeBorder": "#7e7e7e",
+    "tab.unfocusedActiveBorder": "#000000"
+  },
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.editorAssociations": {
+    // "*.png": "cweijan.officeViewer",
+    "*.ipynb": "jupyter-notebook",
+    "*.md": "default",
+    "*.pdf": "latex-workshop-pdf-hook"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.tree.renderIndentGuides": "always",
+  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode"
+}

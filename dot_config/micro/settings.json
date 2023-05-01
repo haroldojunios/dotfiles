@@ -1,0 +1,16 @@
+{
+    "*.py": {
+        "tabsize": 2
+    },
+    "autosave": 5,
+    "autosu": true,
+    "colorscheme": "atom-dark",
+    "mkparents": true,
+    "rmtrailingws": true,
+    "savecursor": true,
+    "scrollbar": true,
+    "softwrap": true,
+    "tabsize": 2,
+    "tabstospaces": true,
+    "wordwrap": true
+}

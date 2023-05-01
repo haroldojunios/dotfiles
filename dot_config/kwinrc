@@ -57,6 +57,7 @@ Active=true
 LatitudeAuto=-15.7792
 LongitudeAuto=-47.9341
 Mode=Constant
+NightTemperature=3400
 
 [Plugins]
 blurEnabled=true
@@ -87,6 +88,12 @@ BorderActivate=9
 LayoutName=thumbnail_grid
 ShowDesktopMode=1
 TouchBorderActivate=9
+
+[Tiling]
+padding=4
+
+[Tiling][c150ed1e-7250-5bae-bd9f-249aabad5090]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
 BorderlessMaximizedWindows=true

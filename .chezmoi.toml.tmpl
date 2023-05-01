@@ -2,6 +2,12 @@
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
+{{- $osidLike := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "idLike" -}}
+{{-   $osidLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
+{{- else if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osidLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
 
 {{- $isWork := promptBoolOnce . "isWork" "Is this an work machine" -}}
 
@@ -13,4 +19,5 @@ encryption = "age"
     command = "fish"
 [data]
     osid = {{ $osid | quote }}
+    osidLike = {{ $osidLike | quote }}
     isWork = {{ $isWork }}

@@ -37,7 +37,7 @@ EOF
   fi
 fi
 
-{{ if eq .osid "linux-ubuntu" }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 if ! grep "zram-fraction" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
@@ -64,5 +64,27 @@ if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
 [General]
 Numlock=on
 EOF
+  fi
+fi
+
+if ! [ -f /usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf ] && [ -f /usr/share/alsa-card-profile/mixer/profile-sets/default.conf ]; then
+  sudo bash -c "cat >/usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf" <<EOF
+[Element PCM]
+switch = mute
+volume = ignore
+volume-limit = 0.01
+override-map.1 = all
+override-map.2 = all-left,all-right
+EOF
+
+  sudo cp /usr/share/alsa-card-profile/mixer/profile-sets/default.conf /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
+
+  if command -v crudini &>/dev/null; then
+    sudo crudini --set /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf "Mapping analog-stereo" "paths-output" "analog-output-fixed"
+  else
+    LINE_NUMBER=$(grep -n -A8 "Mapping analog-stereo" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf |
+      grep "paths-output = analog-output analog-output-lineout analog-output-speaker analog-output-headphones analog-output-headphones-2" |
+      cut -d - -f 1)
+    sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
   fi
 fi

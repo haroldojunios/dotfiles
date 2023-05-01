@@ -59,6 +59,7 @@ packageList=(
   age
   alacritty
   bat
+  bc
   calibre
   clang
   cmake
@@ -76,6 +77,7 @@ packageList=(
   jq
   keepassxc
   make
+  micro
   mpv
   nano
   ninja-build

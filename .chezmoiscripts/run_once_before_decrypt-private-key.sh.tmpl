@@ -1,8 +1,12 @@
 #!/bin/bash
 
 if ! command -v age &>/dev/null; then
-{{ if eq .osid "linux-ubuntu" }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
     sudo apt install -y age
+{{ else if eq .osidLike "linux-arch" }}
+    sudo pacman -S --noconfirm --needed age
+{{ else }}
+    :
 {{ end }}
 fi
 
