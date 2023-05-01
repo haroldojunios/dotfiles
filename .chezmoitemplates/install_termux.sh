@@ -49,5 +49,9 @@ if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
   apt install -y tsu
 fi
 
+if ! [ -d "$HOME/storage" ]; then
+  termux-setup-storage
+fi 
+
 apt autoremove -y
 apt clean
