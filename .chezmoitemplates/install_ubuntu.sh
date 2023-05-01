@@ -136,6 +136,7 @@ packageList=(
   nano
   ninja-build
   numlockx
+  openssh-server
   p7zip
   python-is-python3
   python3
@@ -224,8 +225,17 @@ if ! command -v fastfetch &>/dev/null; then
     cmake --build . --target fastfetch --target flashfetch
     sudo cmake --install . --prefix /usr/local
   )
+  rm -rf "$TEMP_FOLDER"
 fi
 {{ end }}
+
+if sudo ufw status | grep -q inactive; then
+  sudo ufw enable
+fi
+
+if ! sudo ufw status | grep -q 22/tcp; then
+  sudo ufw allow ssh
+fi
 
 sudo apt autoremove -y
 sudo apt clean -y
