@@ -6,7 +6,7 @@ alias r='paru -Rns --noconfirm'
 alias u='paru -Syu --noconfirm'
 alias s='paru -Ss'
 alias si='paru -Qi'
-alias cl='sudo pacman -Rns (pacman -Qtdq)'
+alias cl='pacman -Qtdq | sudo pacman -Rns --noconfirm - 2>/dev/null'
 
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias rmpkg="sudo pacman -Rdd"
