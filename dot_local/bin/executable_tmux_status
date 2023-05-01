@@ -1,39 +1,62 @@
-#!/bin/bash
+#!/bin/sh
 
-if [[ "$@" != "right" ]] && [[ "$@" != "left" ]]; then
+if [ "$@" != "right" ] && [ "$@" != "left" ]; then
   echo "Invalid option"
   exit 1
 fi
 
 status=""
 
-if [[ "$HOME" == *"termux"* ]]; then
-  termux="true"
-else
-  termux=""
-fi
+case "$HOME" in
+*termux*)
+  termux=true
+  ;;
+*)
+  termux=
+  ;;
+esac
 
-if [[ "$@" == "left" ]]; then
-  status+="#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" #window number
-  status+="#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #session name
-  if [[ -z $termux ]]; then
-    status+="#[fg=colour121,bg=colour235] $(whoami) #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]" #user name
-    # status+="#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+if [ "$@" = "left" ]; then
+  status="${status}#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" #window number
+  status="${status}#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #session name
+  if [ -z $termux ]; then
+    status="${status}#[fg=colour121,bg=colour235] $(whoami) #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]" #user name
+    # status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
   fi
 else
-  status+="#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
-  status+="#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           #date
-  status+=" $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #time
-  status+="#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]"
-  if [[ -z $termux ]]; then
-    charging=$(cat /sys/class/power_supply/BAT0/status | grep Discharging >/dev/null || echo "⚡")
-    percentage=$(cat /sys/class/power_supply/BAT0/capacity)
+  status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           #date
+  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #time
+  if [ $(hostname) != localhost ]; then
+    status="${status}#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]"
+  fi
+  if [ -z $termux ]; then
+    if [ -f /sys/class/power_supply/BAT0/status ]; then
+      if grep -q Discharging /sys/class/power_supply/BAT0/status; then
+        charging=
+      else
+        charging="⚡"
+      fi
+      percentage=$(cat /sys/class/power_supply/BAT0/capacity)
+    else
+      charging=
+      percentage=
+    fi
   else
     bat_status=$(termux-battery-status)
-    charging=$(grep PLUGGED_AC <<<"$bat_status" >/dev/null && echo "⚡")
-    percentage=$(grep percentage <<<"$bat_status" | grep -oP "[0-9]+")
+    case "$bat_status" in
+    *PLUGGED_AC*)
+      charging="⚡"
+      ;;
+    *)
+      charging=
+      ;;
+    esac
+    percentage=$(echo "$bat_status" | jq ".percentage")
   fi
-  status+="#[fg=colour232,bg=colour154]$charging$percentage%"
+  if [ -n "$charging" ] || [ -n "$percentage" ]; then
+    status="${status}#[fg=colour232,bg=colour154]$charging$percentage%"
+  fi
 fi
 
 echo "$status"
