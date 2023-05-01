@@ -8,6 +8,16 @@ case $- in
 *) return ;;
 esac
 
+{{ if eq .osid "android" }}
+if ! pgrep -f "crond" >/dev/null; then
+  crond
+fi
+
+if ! pgrep -f "sshd" >/dev/null; then
+  sshd
+fi
+{{ end }}
+
 case $TERM in
 linux)
   command -v yaft &>/dev/null && yaft

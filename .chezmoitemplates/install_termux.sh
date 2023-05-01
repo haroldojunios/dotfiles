@@ -28,6 +28,7 @@ packageList=(
   p7zip
   python
   scipy
+  termux-api
   tmux
   unzip
   zip
@@ -44,7 +45,7 @@ passwd &>/dev/null <<EOD
 0000
 EOD
 
-if su -c echo &>/dev/null; then
+if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
   apt install -y tsu
 fi
 
