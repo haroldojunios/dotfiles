@@ -1,15 +1,22 @@
+export DEBIAN_FRONTEND=noninteractive
+
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-sudo apt update
-sudo apt upgrade -y
+if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; then
+  sudo mkdir -p /etc/needrestart/conf.d
+  echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
+fi
+
+sudo apt-get update
+sudo apt-get upgrade -y
 
 NEEDS_UPDATE=
 
 # code repo
 if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
-  sudo apt install -y wget gpg apt-transport-https
+  sudo apt-get install -y wget gpg apt-transport-https
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
   sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
   sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -44,12 +51,12 @@ fi
 # kubuntu backports repo
 if ! grep -q "^deb .*kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:kubuntu-ppa/backports -y
-  sudo apt update && sudo apt full-upgrade -y
+  sudo apt-get update && sudo apt-get full-upgrade -y
   NEEDS_UPDATE=
 fi
 
 if [ -n $NEEDS_UPDATE ]; then
-  sudo apt update
+  sudo apt-get update
 fi
 
 # desktop enviroment
@@ -183,7 +190,7 @@ packageList=(
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
-    sudo apt install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+    sudo apt-get install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 
@@ -209,7 +216,7 @@ fi
 if ! command -v onlyoffice-desktopeditors &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
   wget -O "$TEMP_FOLDER/onlyoffice.deb" -q "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
-  sudo apt install -y "$TEMP_FOLDER/onlyoffice.deb"
+  sudo apt-get install -y "$TEMP_FOLDER/onlyoffice.deb"
   rm -rf "$TEMP_FOLDER"
 fi
 
@@ -237,5 +244,5 @@ if ! sudo ufw status | grep -q 22/tcp; then
   sudo ufw allow ssh
 fi
 
-sudo apt autoremove -y
-sudo apt clean -y
+sudo apt-get autoremove -y
+sudo apt-get clean -y
