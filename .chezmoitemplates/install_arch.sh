@@ -149,6 +149,8 @@ packageList=(
   tmux
   ufw
   unzip
+  wget
+  which
   xclip
   zip
   zram-generator

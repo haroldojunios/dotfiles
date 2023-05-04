@@ -35,6 +35,8 @@ packageList=(
   termux-api
   tmux
   unzip
+  wget
+  which
   zip
 )
 

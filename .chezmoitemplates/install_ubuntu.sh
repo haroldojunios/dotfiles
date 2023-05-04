@@ -164,6 +164,7 @@ packageList=(
   tmux
   ufw
   unzip
+  wget
   xclip
   zip
 )
