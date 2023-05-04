@@ -15,6 +15,7 @@ packageList=(
   bat
   clang
   cmake
+  cronie
   curl
   exa
   ffmpeg
@@ -26,6 +27,7 @@ packageList=(
   micro
   nano
   ninja
+  openssh
   p7zip
   python
   scipy
