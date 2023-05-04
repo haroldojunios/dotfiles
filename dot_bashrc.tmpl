@@ -148,10 +148,12 @@ elif command -v nano &>/dev/null; then
   export EDITOR=nano
 fi
 
+{{ if ne .osid "android" }}
 ## Mcfly history
 if command -v mcfly &>/dev/null; then
   eval "$(mcfly init bash)"
 fi
+{{ end }}
 
 ## Starship prompt
 if command -v starship &>/dev/null; then
