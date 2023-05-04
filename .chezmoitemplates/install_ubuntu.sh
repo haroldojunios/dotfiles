@@ -199,10 +199,6 @@ if ! command -v bat &>/dev/null; then
   ln -s /usr/bin/batcat $HOME/.local/bin/bat
 fi
 
-if ! command -v starship &>/dev/null; then
-  curl -sS https://starship.rs/install.sh | sh -s -- -y
-fi
-
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then
   sudo systemctl enable --now ufw
 fi

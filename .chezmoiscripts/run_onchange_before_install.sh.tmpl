@@ -22,6 +22,11 @@ if ! command -v mcfly &>/dev/null && ! [ -f "$HOME/.local/bin/mcfly" ]; then
   curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "$HOME/.local/bin"
 fi
 
+# install starship
+if ! command -v starship &>/dev/null && ! [ -f "$HOME/.local/bin/starship" ]; then
+  curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
+fi
+
 if grep -q "https" {{ .chezmoi.sourceDir }}/.git/config; then
   git -C {{ .chezmoi.sourceDir }} remote set-url origin "git@github.com:haroldojunios/dotfiles.git"
 fi

@@ -15,6 +15,7 @@ packageList=(
   bat
   clang
   cmake
+  curl
   exa
   ffmpeg
   fish
@@ -28,6 +29,7 @@ packageList=(
   p7zip
   python
   scipy
+  starship
   termux-api
   tmux
   unzip
@@ -51,7 +53,7 @@ fi
 
 if ! [ -d "$HOME/storage" ]; then
   termux-setup-storage
-fi 
+fi
 
 apt autoremove -y
 apt clean
