@@ -7,11 +7,11 @@ set -x EDITOR nano
 set -x MICRO_TRUECOLOR 1
 
 {{ if eq .osid "android" }}
-if not pgrep -f "crond" >/dev/null
+if not pgrep -f crond >/dev/null
     crond
 end
 
-if not pgrep -f "sshd" >/dev/null
+if not pgrep -f sshd >/dev/null
     sshd
 end
 {{ end }}
@@ -154,6 +154,11 @@ end
 
 if type -q code
     set -x EDITOR "code --wait"
+end
+
+## Mcfly history
+if type -q mcfly
+    mcfly init fish | source
 end
 
 ## Starship prompt

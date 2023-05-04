@@ -17,6 +17,11 @@
 {{ template "setup_micro.sh" . }}
 {{ template "setup_cron.sh" . }}
 
+# install mcfly
+if ! command -v mcfly &>/dev/null && ! [ -f "$HOME/.local/bin/mcfly" ]; then
+  curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "$HOME/.local/bin"
+fi
+
 if grep -q "https" {{ .chezmoi.sourceDir }}/.git/config; then
   git -C {{ .chezmoi.sourceDir }} remote set-url origin "git@github.com:haroldojunios/dotfiles.git"
 fi
