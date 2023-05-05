@@ -1,5 +1,6 @@
-RED='\033[0;31m'
-BLUE='\033[0;34m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 apt update
@@ -42,6 +43,7 @@ packageList=(
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
+    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
     apt install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done

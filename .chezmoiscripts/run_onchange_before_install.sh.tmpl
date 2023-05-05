@@ -1,17 +1,21 @@
 #!/bin/bash
 
-{{ if eq .osidLike "linux-ubuntu" }}
-{{ template "install_ubuntu.sh" . }}
-{{ template "style.sh" . }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{   template "install_ubuntu.sh" . }}
+{{   if not .isWSL }}
+{{     template "style.sh" . }}
+{{   end }}
 {{ else if eq .osidLike "linux-arch" }}
-{{ template "install_arch.sh" . }}
-{{ template "style.sh" . }}
+{{   template "install_arch.sh" . }}
+{{   template "style.sh" . }}
 {{ else if eq .osidLike "android" }}
-{{ template "install_termux.sh" . }}
+{{   if not .isWSL }}
+{{     template "install_termux.sh" . }}
+{{   end }}
 {{ end }}
 
-{{ if ne .osid "android" }}
-{{ template "setup.sh" . }}
+{{ if and (ne .osid "android") (not .isWSL) }}
+{{   template "setup.sh" . }}
 {{ end }}
 
 {{ template "setup_micro.sh" . }}
@@ -30,3 +34,14 @@ fi
 if grep -q "https" {{ .chezmoi.sourceDir }}/.git/config; then
   git -C {{ .chezmoi.sourceDir }} remote set-url origin "git@github.com:haroldojunios/dotfiles.git"
 fi
+
+# set fish as default terminal
+case "$SHELL" in
+*bash)
+  {{ if eq .osid "android" }}
+  chsh -s fish
+  {{ else }}
+  sudo chsh -s $(command -v fish) $USER
+  {{ end }}
+  ;;
+esac

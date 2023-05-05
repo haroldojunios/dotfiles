@@ -9,7 +9,7 @@ README.md
 .termux
 {{ end }}
 
-{{ if eq .osid "android" }}
+{{ if or (eq .osid "android") .isWSL }}
 .config/*
 !.config/fish
 !.config/sh

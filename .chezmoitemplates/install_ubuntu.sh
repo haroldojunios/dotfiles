@@ -1,7 +1,8 @@
 export DEBIAN_FRONTEND=noninteractive
 
-RED='\033[0;31m'
-BLUE='\033[0;34m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; then
@@ -12,6 +13,7 @@ fi
 sudo apt-get update
 sudo apt-get upgrade -y
 
+{{ if not .isWSL }}
 NEEDS_UPDATE=
 
 # code repo
@@ -148,6 +150,7 @@ packageList=(
   python-is-python3
   python3
   python3-venv
+  shfmt
   sshfs
   systemd-zram-generator
   {{ if not .isWork }}
@@ -188,9 +191,55 @@ packageList=(
   "${dePackageList[@]}"
   "${packageList[@]}"
 )
+{{ else }}
+# wsl packages
+packageList=(
+  age
+  bat
+  clang
+  cmake
+  crudini
+  curl
+  exa
+  ffmpeg
+  fish
+  git
+  imagemagick
+  jq
+  make
+  micro
+  nano
+  ninja-build
+  openssh-server
+  p7zip
+  python-is-python3
+  python3
+  python3-venv
+  shfmt
+  sshfs
+  {{ if not .isWork }}
+  texlive-fonts-recommended
+  texlive-lang-portuguese
+  texlive-latex-base
+  texlive-latex-extra
+  texlive-latex-recommended
+  texlive-pictures
+  texlive-pstricks
+  texlive-science
+  texlive-xetex
+  {{ end }}
+  tmux
+  unzip
+  wget
+  wslu
+  xclip
+  zip
+)
+{{ end }}
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
+    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
     sudo apt-get install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
@@ -200,6 +249,7 @@ if ! command -v bat &>/dev/null; then
   ln -s /usr/bin/batcat $HOME/.local/bin/bat
 fi
 
+{{ if not .isWSL }}
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then
   sudo systemctl enable --now ufw
 fi
@@ -217,7 +267,16 @@ if ! command -v onlyoffice-desktopeditors &>/dev/null; then
   rm -rf "$TEMP_FOLDER"
 fi
 
-{{ if not .isWork }}
+if sudo ufw status | grep -q inactive; then
+  sudo ufw enable
+fi
+
+if ! sudo ufw status | grep -q 22/tcp; then
+  sudo ufw allow ssh
+fi
+{{ end }}
+
+{{ if and (not .isWork) (not .isWSL) }}
 if ! command -v fastfetch &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
   git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
@@ -232,14 +291,6 @@ if ! command -v fastfetch &>/dev/null; then
   rm -rf "$TEMP_FOLDER"
 fi
 {{ end }}
-
-if sudo ufw status | grep -q inactive; then
-  sudo ufw enable
-fi
-
-if ! sudo ufw status | grep -q 22/tcp; then
-  sudo ufw allow ssh
-fi
 
 sudo apt-get autoremove -y
 sudo apt-get clean -y

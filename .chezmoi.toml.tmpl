@@ -9,6 +9,11 @@
 {{-   $osidLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
+{{- $isWSL := false -}}
+{{- if hasKey .chezmoi.kernel "osrelease" -}}
+{{-   $isWSL = contains "microsoft" (lower .chezmoi.kernel.osrelease) -}}
+{{- end -}}
+
 {{- $isWork := promptBoolOnce . "isWork" "Is this an work machine" -}}
 
 encryption = "age"
@@ -21,3 +26,4 @@ encryption = "age"
     osid = {{ $osid | quote }}
     osidLike = {{ $osidLike | quote }}
     isWork = {{ $isWork }}
+    isWSL = {{ $isWSL }}
