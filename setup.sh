@@ -1,11 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-if ! command -v chezmoi &>/dev/null; then
-  if command -v termux-setup-storage; then
+if ! command -v chezmoi >/dev/null; then
+  if command -v termux-setup-storage >/dev/null; then
     apt update
     apt install -y chezmoi
   else
@@ -23,8 +19,8 @@ if ! command -v chezmoi &>/dev/null; then
   fi
 fi
 
-if command -v chezmoi &>/dev/null; then
+if command -v chezmoi >/dev/null; then
   chezmoi init --apply haroldojunios
 else
-  echo -e "${RED}Could not find ${BLUE}chezmoi ${RED}binary!${NC}"
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin init --apply haroldojunios
 fi
