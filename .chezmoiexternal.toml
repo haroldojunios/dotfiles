@@ -1,4 +1,0 @@
-[".config/fish/conf.d/mcfly.fish"]
-  type = "file"
-  url = "https://raw.githubusercontent.com/cantino/mcfly/master/mcfly.fish"
-  refreshPeriod = "168h" # 1 week
