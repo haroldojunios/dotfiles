@@ -122,7 +122,10 @@ packageList=(
   age
   alacritty
   bat
+  bc
+  {{ if not .isWork }}
   calibre
+  {{ end }}
   clang
   cmake
   code
@@ -138,7 +141,9 @@ packageList=(
   imagemagick
   jmtpfs
   jq
+  {{ if not .isWork }}
   keepassxc
+  {{ end }}
   make
   micro
   mpv
@@ -196,6 +201,7 @@ packageList=(
 packageList=(
   age
   bat
+  bc
   clang
   cmake
   crudini
