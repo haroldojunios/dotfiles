@@ -280,6 +280,13 @@ fi
 if ! sudo ufw status | grep -q 22/tcp; then
   sudo ufw allow ssh
 fi
+
+if lspci | grep -i network | grep -iq bcm; then
+  if ! dpkg -s bcmwl-kernel-source &>/dev/null; then
+    sudo apt install -y bcmwl-kernel-source
+    sudo systemctl restart network-manager
+  fi
+fi
 {{ end }}
 
 {{ if and (not .isWork) (not .isWSL) }}
