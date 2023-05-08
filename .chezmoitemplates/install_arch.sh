@@ -121,6 +121,7 @@ packageList=(
   conky
   crudini
   curl
+  docker
   exa
   ffmpeg
   fish
