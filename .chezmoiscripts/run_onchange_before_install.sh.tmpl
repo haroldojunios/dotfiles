@@ -1,4 +1,8 @@
+{{- if ne .osid "android" -}}
 #!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 {{   template "install_ubuntu.sh" . }}
