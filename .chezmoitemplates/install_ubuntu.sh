@@ -94,6 +94,8 @@ kcalc \
 konsole \
 okular \
 "
+  dbus-x11
+  tigervnc-standalone-server
 )
 
 # applets
@@ -133,6 +135,7 @@ packageList=(
   crudini
   curl
   exa
+  expect
   ffmpeg
   fish
   firefox
@@ -317,6 +320,61 @@ if ! command -v docker &>/dev/null; then
   sudo usermod -aG docker $USER
   newgrp docker
 fi
+
+{{ if not .isWSL }}
+if ! [ -f "/etc/systemd/system/vncserver@.service" ]; then
+  expect <<EOF
+spawn "vncserver"
+expect "Password:"
+send "123456\r"
+expect "Verify:"
+send "123456\r"
+expect eof
+exit
+EOF
+
+  vncserver -kill :1 &>/dev/null
+
+  sudo bash -c "cat >/etc/systemd/system/vncserver@.service" <<EOF
+[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User={{ .chezmoi.username }}
+Group={{ .chezmoi.group }}
+WorkingDirectory={{ .chezmoi.homeDir }}
+
+PIDFile={{ .chezmoi.homeDir }}/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x720 -localhost :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  cat >$HOME/.vnc/xstartup <<EOF
+#!/bin/sh
+
+# Start up the standard system desktop
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+/usr/bin/startplasma-x11
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+x-window-manager &
+EOF
+
+  chmod +x ~/.vnc/xstartup
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable --now vncserver@1.service
+fi
+{{ end }}
 
 sudo apt-get autoremove -y
 sudo apt-get clean -y
