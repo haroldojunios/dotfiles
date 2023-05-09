@@ -89,3 +89,6 @@ alias hw='hwinfo --short' # Hardware Info
 
 # Get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
+
+# restart plasmashell
+alias restart-plasma='nohup plasmashell --replace &>/dev/null &'

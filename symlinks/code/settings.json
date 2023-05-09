@@ -43,7 +43,7 @@
     "editor.formatOnType": false
   },
   "[markdown]": {
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "[matlab]": {
     "files.encoding": "windows1252"

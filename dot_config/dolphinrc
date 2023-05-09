@@ -1,14 +1,19 @@
 [$Version]
 update_info=dolphin_detailsmodesettings.upd:rename-leading-padding
 
+[CompactMode]
+FontWeight=50
+
 [CreateDialog]
 LastMimeType=application/zip
+
+[DetailsMode]
+FontWeight=50
 
 [General]
 AutoExpandFolders=true
 BrowseThroughArchives=true
 ConfirmClosingMultipleTabs=false
-GlobalViewProps=false
 RememberOpenedTabs=false
 ShowToolTips=true
 ShowZoomSlider=false
@@ -16,6 +21,7 @@ Version=202
 ViewPropsTimestamp=2023,4,2,11,44,29.179
 
 [IconsMode]
+FontWeight=50
 PreviewSize=48
 
 [KFileDialog Settings]
@@ -42,7 +48,4 @@ CompletionMode=1
 History=only
 
 [PreviewSettings]
-Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,resvgthumbnailer,ffmpegthumbs
-
-[VersionControl]
-enabledPlugins=Git
+Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs
