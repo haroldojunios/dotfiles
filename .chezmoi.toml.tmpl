@@ -16,6 +16,11 @@
 
 {{- $isWork := promptBoolOnce . "isWork" "Is this an work machine" -}}
 
+{{- $isServer := false -}}
+{{- if .isWork -}}
+{{- $isServer = promptBoolOnce . "isServer" "Is this an server machine" -}}
+{{- end -}}
+
 encryption = "age"
 [age]
     identity = "~/.config/key.txt"
