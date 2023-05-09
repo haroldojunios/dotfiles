@@ -65,11 +65,26 @@ fi
   { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons candy-icons &>/dev/null; }
 
 # fonts
+UPDATE_FONT_CACHE=
 if ! [ -d /usr/share/fonts/FiraCode ]; then
   sudo mkdir -p /usr/share/fonts/FiraCode
   wget -O "$TEMP_FOLDER/firacode.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip"
   sudo unzip -q "$TEMP_FOLDER/firacode.zip" -d /usr/share/fonts/FiraCode
   sudo rm -f /usr/share/fonts/FiraCode/*windows*
+  UPDATE_FONT_CACHE=true
+fi
+if ! [ -d /usr/share/fonts/FiraSans ]; then
+  sudo mkdir -p /usr/share/fonts/FiraSans
+  wget -O "$TEMP_FOLDER/firasans.zip" -q "https://fonts.google.com/download?family=Fira%20Sans"
+  sudo unzip -q "$TEMP_FOLDER/firasans.zip" -d /usr/share/fonts/FiraSans
+  UPDATE_FONT_CACHE=true
+fi
+if ! [ -d /usr/share/fonts/ConkySymbols ]; then
+  sudo mkdir -p /usr/share/fonts/ConkySymbols
+  sudo cp "{{ .chezmoi.sourceDir }}/assets/ConkySymbols.ttf" /usr/share/fonts/ConkySymbols
+  UPDATE_FONT_CACHE=true
+fi
+if [ -n $UPDATE_FONT_CACHE ];then
   fc-cache -f
 fi
 

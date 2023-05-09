@@ -1,6 +1,7 @@
 key.txt.age
 .ssh/work-ssh.id_rsa.age
 .ssh/home-ssh.id_rsa.age
+assets
 symlinks
 setup.sh
 README.md
