@@ -142,7 +142,7 @@ fi
 
 {{ template "shell/colors.sh" . }}
 
-if command -v code &>/dev/null; then
+if command -v code &>/dev/null && ! { [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; }; then
   export EDITOR="code --wait"
 elif command -v nano &>/dev/null; then
   export EDITOR=nano

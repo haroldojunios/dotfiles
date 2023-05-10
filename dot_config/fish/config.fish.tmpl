@@ -154,7 +154,9 @@ if status --is-interactive
     end
 end
 
-if type -q code
+if type -q code && not begin
+        test -n "$SSH_CLIENT" || test -n "$SSH_CONNECTION" || test -n "$SSH_TTY"
+    end
     set -x EDITOR "code --wait"
 end
 
