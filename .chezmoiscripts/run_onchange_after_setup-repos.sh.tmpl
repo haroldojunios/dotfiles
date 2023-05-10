@@ -9,15 +9,17 @@ mkdir -p "$HOME/workspace"
 if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
   git -C "$HOME/workspace" clone git@github.com:rural-tech/docker-laser-scanner.git
   {{ if .isServer }}
-  (
-    cd "$HOME/workspace/docker-laser-scanner"
-    if ! groups | grep -q docker; then
-      sudo groupadd docker
-      sudo usermod -aG docker $USER
-      newgrp docker
-    fi
-    docker compose up
-  )
+  if command -v docker >/dev/null; then
+    (
+      cd "$HOME/workspace/docker-laser-scanner"
+      if ! groups | grep -q docker; then
+        sudo groupadd docker
+        sudo usermod -aG docker $USER
+        newgrp docker
+      fi
+      docker compose up --build -d
+    )
+  fi
   {{ end }}
 fi
 if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
@@ -29,14 +31,23 @@ if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
     pip install -r requirements.txt
   )
   {{ if .isServer }}
-  cat >"$HOME/.config/autostart/calc-volume.desktop" <<EOF
-[Desktop Entry]
-Type=Application
-Name=calc-volume
-Exec=$HOME/workspace/calc-volume-pc/venv/bin/python $HOME/workspace/calc-volume-pc/main.py
-StartupNotify=false
-Terminal=false
-EOF
+  #   cat >"$HOME/.config/autostart/calc-volume.desktop" <<EOF
+  # [Desktop Entry]
+  # Type=Application
+  # Name=calc-volume
+  # Exec=$HOME/workspace/calc-volume-pc/venv/bin/python $HOME/workspace/calc-volume-pc/main.py
+  # StartupNotify=false
+  # Terminal=false
+  # EOF
+  if command -v crontab >/dev/null; then
+    CRONTAB="@reboot $HOME/workspace/calc-volume-pc/venv/bin/python $HOME/workspace/calc-volume-pc/main.py"
+    if ! crontab -l &>/dev/null | grep -q "$CRONTAB"; then
+      {
+        crontab -l
+        echo "$CRONTAB"
+      } | crontab -
+    fi
+  fi
   {{ end }}
 fi
 {{ end }}
