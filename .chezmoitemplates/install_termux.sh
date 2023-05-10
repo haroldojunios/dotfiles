@@ -4,7 +4,7 @@ BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 apt update
-apt upgrade -y
+apt upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
 # its pointless repo
 if ! [ -f $PREFIX/etc/apt/sources.list.d/pointless.list ]; then
