@@ -103,7 +103,7 @@ ssh_only = true
 format = '[\($localipv4\)]($style)'
 
 [shlvl]
-disabled = false
+disabled = true
 symbol = '↕️'
 
 [fill]
@@ -112,7 +112,9 @@ symbol = ' '
 [shell]
 disabled = false
 fish_indicator = ''
-bash_indicator = '_'
+# bash_indicator = '_'
+bash_indicator = '$_'
+zsh_indicator = '%_'
 
 [directory]
 format = " in [$path]($style)[$read_only]($read_only_style) "
