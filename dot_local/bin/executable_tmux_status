@@ -24,11 +24,11 @@ if [ "$@" = "left" ]; then
     # status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
   fi
 else
-  status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+  status="${status}#[fg=colour121,bg=colour235] $(curl 'wttr.in?format=%l:+%C+%t+%w') "          #weather
   status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           #date
   status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #time
   if [ $(hostname) != localhost ]; then
-    status="${status}#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]"
+    status="${status}#[fg=colour222,bg=colour238] #H"
   fi
   if [ -z $termux ]; then
     if [ -f /sys/class/power_supply/BAT0/status ]; then
@@ -55,7 +55,7 @@ else
     percentage=$(echo "$bat_status" | jq ".percentage")
   fi
   if [ -n "$charging" ] || [ -n "$percentage" ]; then
-    status="${status}#[fg=colour232,bg=colour154]$charging$percentage%"
+    status="${status} #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154]$charging$percentage%"
   fi
 fi
 
