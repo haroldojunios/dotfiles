@@ -13,6 +13,7 @@ README.md
 {{ if or (eq .osid "android") .isWSL }}
 .config/*
 !.config/fish
+!.config/nanorc
 !.config/sh
 !.config/zsh
 !.config/black
