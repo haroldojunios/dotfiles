@@ -326,6 +326,16 @@ if ! dpkg -s docker-ce &>/dev/null; then
     sudo usermod -aG docker $USER
     newgrp docker
   fi
+  if ! [ -f /etc/docker/daemon.json ]; then
+    cat >/etc/docker/daemon.json <<EOF
+{
+  "dns": [
+    "10.1.2.3",
+    "8.8.8.8"
+  ]
+}
+EOF
+  fi
 fi
 
 {{ if not .isWSL }}
