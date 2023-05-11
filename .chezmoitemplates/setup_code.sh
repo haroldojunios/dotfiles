@@ -1,4 +1,4 @@
-if command -v >/dev/null; then
+if command -v code >/dev/null; then
   extensions=(
     bmalehorn.vscode-fish
     bpruitt-goddard.mermaid-markdown-syntax-highlighting
