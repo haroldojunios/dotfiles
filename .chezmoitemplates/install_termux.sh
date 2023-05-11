@@ -6,16 +6,18 @@ NC='\033[0m' # No Color
 apt update
 apt upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
-# its pointless repo
+# setup its pointless repo
 if ! [ -f $PREFIX/etc/apt/sources.list.d/pointless.list ]; then
   curl -sL https://its-pointless.github.io/setup-pointless-repo.sh | bash
 fi
 
 packageList=(
+  tur-repo # setup tur repo
   age
   bat
   clang
   cmake
+  code-server # needs tur repo
   cronie
   curl
   exa
