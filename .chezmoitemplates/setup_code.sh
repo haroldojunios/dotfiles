@@ -1,4 +1,11 @@
+CODE=
 if command -v code >/dev/null; then
+  CODE=code
+elif command -v code-server >/dev/null; then
+  CODE=code-server
+fi
+
+if [ -n "$CODE" ]; then
   extensions=(
     bmalehorn.vscode-fish
     bpruitt-goddard.mermaid-markdown-syntax-highlighting
