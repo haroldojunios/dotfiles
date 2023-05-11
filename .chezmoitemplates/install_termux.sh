@@ -29,6 +29,7 @@ packageList=(
   make
   micro
   nano
+  net-tools
   ninja
   openssh
   p7zip
