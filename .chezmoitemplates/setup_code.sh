@@ -35,17 +35,23 @@ if [ -n "$CODE" ]; then
     streetsidesoftware.code-spell-checker
     streetsidesoftware.code-spell-checker-portuguese-brazilian
     tabnine.tabnine-vscode
-    visualstudioexptteam.intellicode-api-usage-examples
-    visualstudioexptteam.vscodeintellicode
     yzhang.markdown-all-in-one
     zhuangtongfa.material-theme
   )
 
-  EXT_LIST=$(code --list-extensions)
+  if [ "$CODE" = "code" ]; then
+    extensions=(
+      ${extensions[@]}
+      visualstudioexptteam.intellicode-api-usage-examples
+      visualstudioexptteam.vscodeintellicode
+    )
+  fi
+
+  EXT_LIST=$($CODE --list-extensions)
 
   for extension in "${extensions[@]}"; do
     if ! echo "$EXT_LIST" | grep -qi "$extension"; then
-      code --install-extension "$extension"
+      $CODE --install-extension "$extension"
     fi
   done
 fi
