@@ -1,0 +1,9 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+if [ -f "$HOME/.local/bin/chezmoi" ]; then
+  chezmoi upgrade &>/dev/null
+fi
