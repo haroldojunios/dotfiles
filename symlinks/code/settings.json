@@ -57,6 +57,9 @@
     "editor.rulers": [79],
     "editor.tabSize": 4
   },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt"
+  },
   "[yaml]": {
     "editor.tabSize": 4
   },
@@ -234,6 +237,7 @@
     "**/templates/**/*.html": "django-html",
     "*.fish.tmpl": "fish",
     "*.m": "matlab",
+    "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
     "*bashrc.tmpl": "shellscript"

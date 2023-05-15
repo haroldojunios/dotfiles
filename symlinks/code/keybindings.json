@@ -110,6 +110,11 @@
     "when": "editorFocus"
   },
   {
+    "key": "ctrl+;",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
     "key": "ctrl+abnt_c1", // slash on abnt
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
