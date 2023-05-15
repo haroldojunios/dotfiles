@@ -10,8 +10,8 @@ if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; t
   echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
 fi
 
-sudo apt-get update
-sudo apt-get upgrade -y
+# sudo apt-get update
+# sudo apt-get upgrade -y
 
 {{ if not .isWSL }}
 NEEDS_UPDATE=
@@ -57,7 +57,7 @@ if ! grep -q "^deb .*kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sourc
   NEEDS_UPDATE=
 fi
 
-if [ -n $NEEDS_UPDATE ]; then
+if [ -n "$NEEDS_UPDATE" ]; then
   sudo apt-get update
 fi
 
@@ -322,9 +322,9 @@ if ! dpkg -s docker-ce &>/dev/null; then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    sudo groupadd docker
+    sudo groupadd docker &>/dev/null || true
     sudo usermod -aG docker $USER
-    newgrp docker
+    # newgrp docker
   fi
   if ! [ -f /etc/docker/daemon.json ]; then
     cat >/etc/docker/daemon.json <<EOF
@@ -340,32 +340,33 @@ fi
 
 {{ if not .isWSL }}
 if ! [ -f "/etc/systemd/system/vncserver@.service" ]; then
+  pkill vncserver || true
+
   expect <<EOF
 spawn "vncserver"
-expect "Password:"
-send "123456\r"
-expect "Verify:"
-send "123456\r"
+set timeout 3
+expect "Password:" { send "123456\r" }
+expect "Verify:" { send "123456\r" }
+expect "Would you like to enter a view-only password (y/n)?" { send "n\r" }
 expect eof
 exit
 EOF
 
-  vncserver -kill :1 &>/dev/null
+  pkill vncserver || true
 
   sudo bash -c "cat >/etc/systemd/system/vncserver@.service" <<EOF
 [Unit]
-Description=Start TightVNC server at startup
+Description=Remote desktop service (VNC)
 After=syslog.target network.target
 
 [Service]
-Type=forking
+Type=simple
 User={{ .chezmoi.username }}
 Group={{ .chezmoi.group }}
 WorkingDirectory={{ .chezmoi.homeDir }}
-
-PIDFile={{ .chezmoi.homeDir }}/.vnc/%H:%i.pid
-ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
-ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x720 -localhost :%i
+PAMName=loginPIDFile=/home/%u/.vnc/%H%i.pid
+ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill :%i > /dev/null 2>&1 || :'
+ExecStart=/usr/bin/vncserver :%i -geometry 1280x720 -alwaysshared -fg
 ExecStop=/usr/bin/vncserver -kill :%i
 
 [Install]
@@ -393,5 +394,5 @@ EOF
 fi
 {{ end }}
 
-sudo apt-get autoremove -y
-sudo apt-get clean -y
+# sudo apt-get autoremove -y
+# sudo apt-get clean -y

@@ -13,7 +13,7 @@ if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
     (
       cd "$HOME/workspace/docker-laser-scanner"
       if ! groups | grep -q docker; then
-        sudo groupadd docker
+        sudo groupadd docker &>/dev/null || true
         sudo usermod -aG docker $USER
         newgrp docker
       fi
