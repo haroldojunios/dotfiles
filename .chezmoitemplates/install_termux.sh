@@ -3,8 +3,8 @@ GREEN='\033[1;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
-apt update
-apt upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
+apt-get update
+apt-get upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
 # setup its pointless repo
 if ! [ -f $PREFIX/etc/apt/sources.list.d/pointless.list ]; then
@@ -47,7 +47,7 @@ packageList=(
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
     echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
-    apt install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+    apt-get install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 
@@ -57,12 +57,12 @@ passwd &>/dev/null <<EOD
 EOD
 
 if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
-  apt install -y tsu
+  apt-get install -y tsu
 fi
 
 if ! [ -d "$HOME/storage" ]; then
   termux-setup-storage
 fi
 
-apt autoremove -y
-apt clean
+apt-get autoremove -y
+apt-get clean
