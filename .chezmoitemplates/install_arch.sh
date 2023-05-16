@@ -7,11 +7,11 @@ sudo pacman -Syu --noconfirm
 
 if ! command -v paru &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
-  sudo pacman -S --needed base-devel
+  sudo pacman -S --noconfirm --needed base-devel
   git -C "$TEMP_FOLDER" clone --depth 1 https://aur.archlinux.org/paru.git
   (
     cd "$TEMP_FOLDER/paru"
-    makepkg -si
+    makepkg -si --noconfirm
   )
   rm -rf "$TEMP_FOLDER"
 fi
@@ -51,27 +51,47 @@ Include = /etc/pacman.d/chaotic-mirrorlist
 EOF
 fi
 
+if grep -q "#" /etc/paru.conf; then
+  sudo bash -c "cat >/etc/paru.conf" <<EOF
+[options]
+PgpFetch
+Devel
+Provides
+DevelSuffixes = -git -cvs -svn -bzr -darcs -always -hg -fossil
+BottomUp
+SudoLoop
+CleanAfter
+RemoveMake = ask
+UpgradeMenu
+SortBy = popularity
+Limit = 100
+CompletionInterval = 1
+EOF
+fi
+
 if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
   sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
   sudo pacman-key --lsign-key FBA220DFC880C036
   sudo pacman -U --noconfirm --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
   sudo tee -a /etc/pacman.conf >/dev/null <<EOF
-
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
+
 EOF
+
+  sudo pacman -Syu --noconfirm
 fi
 
 # desktop enviroment
 dePackageList=(
-  "
+  "\
 sddm \
 sddm-kcm \
 xorg-server \
 xorg-apps
 "
-  "
+  "\
 kde-config-screenlocker \
 kde-spectacle \
 kdeplasma-addons \
@@ -88,7 +108,8 @@ plasma-thunderbolt \
 plasma-workspace \
 powerdevil \
 "
-  "ark \
+  "\
+ark \
 dolphin \
 filelight \
 gwenview \
@@ -98,27 +119,6 @@ konsole \
 okular \
 "
 )
-
-# applets
-appletsPackageList="
-cmake \
-extra-cmake-modules \
-g++ \
-gettext \
-libkdecorations2-dev \
-libkf5configwidgets-dev \
-libkf5declarative-dev \
-libkf5plasma-dev \
-libkf5plasma-dev \
-libkf5wayland-dev \
-libqt5x11extras5-dev \
-libsm-dev \
-libxcb-randr0-dev \
-make \
-plasma-workspace-dev \
-qtbase5-dev \
-qtdeclarative5-dev \
-"
 
 # packages
 packageList=(
@@ -173,13 +173,6 @@ packageList=(
   zram-generator
 )
 
-if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
-  packageList=(
-    "${packageList[@]}"
-    "$appletsPackageList"
-  )
-fi
-
 if [ -d "/proc/acpi/button/lid" ]; then
   if ! pacman -Qi power-profiles-daemon &>/dev/null; then
     packageList=(
@@ -192,7 +185,7 @@ fi
 
 for package in "${packageList[@]}"; do
   if ! pacman -Qi $package &>/dev/null; then
-    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
+    echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
     paru -S --noconfirm --needed --skipreview --nouseask --sudoloop $package ||
       echo -e "${RED}Package(s) \"${BLUE}$package${RED}\" not found!${NC}"
   fi
