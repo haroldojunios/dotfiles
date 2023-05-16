@@ -11,6 +11,9 @@
   "[c][cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
+  "[css][qss][scss][html][javascript][typescript][json][jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
@@ -20,6 +23,9 @@
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "[django-html][erb]": {
     "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
@@ -34,9 +40,6 @@
   "[html][django-html][javascript][c][cpp][erb]": {
     "editor.rulers": [80]
   },
-  "[html][javascript][css][json][jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[latex]": {
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false,
@@ -50,7 +53,6 @@
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    // "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
     "editor.formatOnPaste": false,
     "editor.formatOnSaveMode": "file",
     // "editor.semanticHighlighting.enabled": false
@@ -64,6 +66,7 @@
     "editor.tabSize": 4
   },
   "atomKeymap.promptV3Features": true,
+  "autoDocstring.docstringFormat": "numpy",
   "cSpell.allowCompoundWords": true,
   "cSpell.language": "pt-BR,fr-FR,en-US",
   "cSpell.userWords": [
@@ -79,7 +82,10 @@
     "eigen",
     "emocionalização",
     "fft",
+    "fluviometric",
+    "fluviometrics",
     "GND",
+    "gnss",
     "haroldo",
     "haroldojunios",
     "idx",
@@ -87,23 +93,29 @@
     "img",
     "inplace",
     "ipad",
+    "ipadx",
+    "ipady",
     "itertuples",
     "J",
     "Júnio",
     "Kori",
     "latexmk",
     "ldrs",
+    "localizacao",
     "mqtt",
     "MSE",
     "nio",
     "NMOS",
     "numpy",
+    "padx",
+    "pady",
     "paho",
     "platformio",
     "plt",
     "println",
     "qrcode",
     "Questionalização",
+    "rbmc",
     "rfid",
     "seif",
     "SRSN",
@@ -111,8 +123,11 @@
     "submercado",
     "submercados",
     "synctex",
+    "tecnica",
+    "tkcalendar",
     "UTM",
     "VCC",
+    "veiculos",
     "watercolunm",
     "webm",
     "webp",
@@ -148,9 +163,9 @@
   //   "source.fixAll.eslint": true
   // },
   "editor.comments.insertSpace": true,
-  "editor.fontFamily": "'FiraCode Nerd Font','Fira Code', Hack, monospace",
+  "editor.fontFamily": "'FiraCode Nerd Font', 'FiraCode NFM', 'Fira Code', Hack, Consolas, 'Courier New', monospace",
   "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
-  "editor.fontSize": 12,
+  "editor.fontSize": 13,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
@@ -247,6 +262,8 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "git-graph.dialog.addTag.pushToRemote": true,
+  "git.openRepositoryInParentFolders": "always",
   "git.confirmSync": false,
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
@@ -341,6 +358,7 @@
   "latex-workshop.latex.watch.delay": 5000,
   "latex-workshop.latexindent.args": ["-m", "-c", "%DIR%/", "%TMPFILE%"],
   "latex-workshop.message.error.show": false,
+  "latex-workshop.message.information.show": false,
   "latex-workshop.message.warning.show": false,
   "latex-workshop.synctex.afterBuild.enabled": true,
   // "latex-workshop.view.pdf.hand": true,
@@ -348,6 +366,7 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "livePreview.notifyOnOpenLooseFile": false,
   "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
   "markdown-preview-enhanced.HTML5EmbedIsAllowedHttp": true,
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
   "markdown-preview-enhanced.breakOnSingleNewLine": false,
@@ -382,19 +401,20 @@
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
   "platformio-ide.autoOpenPlatformIOIniFile": false,
+  "pasteImage.showFilePathConfirmInputBox": true,
   "platformio-ide.forceUploadAndMonitor": true,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSameLine": true,
   "prettier.jsxSingleQuote": true,
   "prettier.printWidth": 79,
   "prettier.singleQuote": true,
-  "python.defaultInterpreterPath": "/bin/python",
   // "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.experiments.optOutFrom": ["All"],
   "python.formatting.provider": "none",
   "security.workspace.trust.enabled": false,
+  "svg.preview.background": "white",
   "security.workspace.trust.untrustedFiles": "open",
-  "svg.preview.mode": "svg",
+  "svg.preview.mode": "img",
   "sync.autoUpload": false,
   "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
   "sync.quietSync": true,
@@ -407,7 +427,44 @@
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.inheritEnv": false,
   "terminal.integrated.tabs.enabled": false,
-  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK", "[ ]", "[x]"],
+  "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
+  "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "args": [],
+      "icon": "terminal-cmd",
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ]
+    },
+    "MSYS2 Bash": {
+      "args": ["--login", "-i"],
+      "color": "terminal.ansiMagenta",
+      "env": {
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit",
+        "MSYSTEM": "MINGW64"
+      },
+      "icon": "terminal-bash",
+      "path": "C:\\msys64\\usr\\bin\\bash.exe"
+    },
+    "MSYS2 Fish": {
+      "args": ["--login", "-i"],
+      "color": "terminal.ansiCyan",
+      "env": {
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit",
+        "MSYSTEM": "MINGW64"
+      },
+      "icon": "terminal",
+      "path": "C:\\msys64\\usr\\bin\\fish.exe"
+    },
+    "PowerShell": {
+      "icon": "terminal-powershell",
+      "source": "PowerShell"
+    }
+  },
+  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"], // , "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "FIXME": {
       "background": "#FF01FF",
@@ -428,17 +485,17 @@
       "background": "#FFD703",
       "icon": "tasklist",
       "iconColour": "#FFD703"
-    },
-    "[ ]": {
-      "background": "#ff000080",
-      "icon": "square",
-      "iconColour": "#ff000080"
-    },
-    "[x]": {
-      "background": "#00ff0080",
-      "icon": "square-fill",
-      "iconColour": "#00ff0080"
     }
+    // "[ ]": {
+    //   "background": "#ff000080",
+    //   "icon": "square",
+    //   "iconColour": "#ff000080"
+    // },
+    // "[x]": {
+    //   "background": "#00ff0080",
+    //   "icon": "square-fill",
+    //   "iconColour": "#00ff0080"
+    // }
   },
   "todo-tree.highlights.defaultHighlight": {
     "fontStyle": "italic",
@@ -457,52 +514,28 @@
   "window.titleBarStyle": "native",
   "window.zoomLevel": -0.5,
   "workbench.colorCustomizations": {
-    "tab.activeBackground": "#242424",
-    // "editorGroupHeader.tabsBackground": "#242424",
-    // // Argonaut theme color
-    // "terminal.background": "#151718",
-    // "terminal.foreground": "#FFFAF4",
-    // "terminalCursor.background": "#FFFAF4",
-    // "terminalCursor.foreground": "#FFFAF4",
-    // "terminal.ansiBlack": "#444444",
-    // "terminal.ansiBlue": "#0092FF",
-    // "terminal.ansiBrightBlack": "#232323",
-    // "terminal.ansiBrightBlue": "#008DF8",
-    // "terminal.ansiBrightCyan": "#00D8EB",
-    // "terminal.ansiBrightGreen": "#8CE10B",
-    // "terminal.ansiBrightMagenta": "#6D43A6",
-    // "terminal.ansiBrightRed": "#FF000F",
-    // "terminal.ansiBrightWhite": "#FFFFFF",
-    // "terminal.ansiBrightYellow": "#FFB900",
-    // "terminal.ansiCyan": "#67FFF0",
-    // "terminal.ansiGreen": "#ABE15B",
-    // "terminal.ansiMagenta": "#9A5FEB",
-    // "terminal.ansiRed": "#FF2740",
-    // "terminal.ansiWhite": "#FFFFFF",
-    // "terminal.ansiYellow": "#FFD242",
-    // // Seti theme color
-    // "terminal.background": "#151718",
-    // "terminal.foreground": "#D6D6D6",
-    // "terminalCursor.background": "#D6D6D6",
-    // "terminalCursor.foreground": "#D6D6D6",
-    // "terminal.ansiBlack": "#151718",
-    // "terminal.ansiBlue": "#55B5DB",
-    // "terminal.ansiBrightBlack": "#41535B",
-    // "terminal.ansiBrightBlue": "#55B5DB",
-    // "terminal.ansiBrightCyan": "#55DBBE",
-    // "terminal.ansiBrightGreen": "#9FCA56",
-    // "terminal.ansiBrightMagenta": "#A074C4",
-    // "terminal.ansiBrightRed": "#CD3F45",
-    // "terminal.ansiBrightWhite": "#FFFFFF",
-    // "terminal.ansiBrightYellow": "#E6CD69",
-    // "terminal.ansiCyan": "#55DBBE",
-    // "terminal.ansiGreen": "#9FCA56",
-    // "terminal.ansiMagenta": "#A074C4",
-    // "terminal.ansiRed": "#CD3F45",
-    // "terminal.ansiWhite": "#D6D6D6",
-    // "terminal.ansiYellow": "#E6CD69",
-    "tab.activeBorder": "#7e7e7e",
-    "tab.unfocusedActiveBorder": "#000000"
+    // Sweet theme color
+    "terminal.background": "#161925",
+    "terminal.foreground": "#c3c7d1",
+    "terminalCursor.background": "#c3c7d1",
+    "terminalCursor.foreground": "#c3c7d1",
+    "terminal.ansiBlack": "#282c34",
+    "terminal.ansiBlue": "#7cb7ff",
+    "terminal.ansiBrightBlack": "#282c34",
+    "terminal.ansiBrightBlue": "#7cb7ff",
+    "terminal.ansiBrightCyan": "#00c1e4",
+    "terminal.ansiBrightGreen": "#71f79f",
+    "terminal.ansiBrightMagenta": "#c74ded",
+    "terminal.ansiBrightRed": "#ed254e",
+    "terminal.ansiBrightWhite": "#dcdfe4",
+    "terminal.ansiBrightYellow": "#f9dc5c",
+    "terminal.ansiCyan": "#00c1e4",
+    "terminal.ansiGreen": "#71f79f",
+    "terminal.ansiMagenta": "#c74ded",
+    "terminal.ansiRed": "#ed254e",
+    "terminal.ansiWhite": "#dcdfe4",
+    "terminal.ansiYellow": "#f9dc5c",
+    "tab.activeBorder": "#7e7e7e"
   },
   "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.untitled.hint": "hidden",
@@ -510,7 +543,9 @@
     // "*.png": "cweijan.officeViewer",
     "*.ipynb": "jupyter-notebook",
     "*.md": "default",
-    "*.pdf": "latex-workshop-pdf-hook"
+    "*.csv": "default",
+    "*.pdf": "latex-workshop-pdf-hook",
+    "*.svg": "default"
   },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",

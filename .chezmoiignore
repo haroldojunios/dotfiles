@@ -18,4 +18,7 @@ README.md
 !.config/zsh
 !.config/black
 !.config/starship.toml
+{{   if .isWSL }}
+!.config/Code
+{{   end }}
 {{ end }}

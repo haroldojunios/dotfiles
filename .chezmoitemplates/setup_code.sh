@@ -55,3 +55,23 @@ if [ -n "$CODE" ]; then
     fi
   done
 fi
+
+{{ if .isWSL }}
+if [ -f /mnt/c/Users/RZ9/AppData/Roaming/Code/User/settings.json ]; then
+  if ! cmp -s {{ .chezmoi.sourceDir }}/symlinks/code/settings.json /mnt/c/Users/RZ9/AppData/Roaming/Code/User/settings.json; then
+    read -n1 -p "Code settings differ. Choose: (overwrite Target, overwrite Source, Ignore) " ans
+    echo
+    case "$ans" in
+    t | T)
+      cp {{ .chezmoi.sourceDir }}/symlinks/code/settings.json /mnt/c/Users/RZ9/AppData/Roaming/Code/User/
+      ;;
+    s | S)
+      cp /mnt/c/Users/RZ9/AppData/Roaming/Code/User/settings.json {{ .chezmoi.sourceDir }}/symlinks/code/
+      ;;
+    esac
+  fi
+else
+  mkdir -p /mnt/c/Users/RZ9/AppData/Roaming/Code/User/
+  cp {{ .chezmoi.sourceDir }}/symlinks/code/settings.json /mnt/c/Users/RZ9/AppData/Roaming/Code/User/
+fi
+{{ end }}
