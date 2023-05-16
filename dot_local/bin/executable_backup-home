@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd $HOME
+
+sudo mount -o remount,compress-force=zstd:15 /run/media/haroldo/2d16e6d3-9832-4262-9eca-8bd79ce45c60/ &&
+  rsync -amyvhPl --inplace --relative \
+    --no-inc-recursive --info=progress2,name \
+    .config .local/share .ssh Backup bin Books calibre \
+    Celular Desktop Documents Downloads Music \
+    Pictures Videos \
+    /run/media/haroldo/2d16e6d3-9832-4262-9eca-8bd79ce45c60/home

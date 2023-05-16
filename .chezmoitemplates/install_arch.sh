@@ -29,7 +29,10 @@ ILoveCandy
 VerbosePkgLists
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
-
+{{ if eq .osid "linux-garuda" }}
+[garuda]
+Include = /etc/pacman.d/chaotic-mirrorlist
+{{ end }}
 [core]
 Include = /etc/pacman.d/mirrorlist
 
@@ -41,6 +44,10 @@ Include = /etc/pacman.d/mirrorlist
 
 [multilib]
 Include = /etc/pacman.d/mirrorlist
+{{ if eq .osid "linux-garuda" }}
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+{{ end }}
 EOF
 fi
 
@@ -57,18 +64,17 @@ EOF
 fi
 
 # desktop enviroment
-dePackageList="
-ark \
-dolphin \
-filelight \
-gwenview \
-kate \
-kcalc \
+dePackageList=(
+  "
+sddm \
+sddm-kcm \
+xorg-server \
+xorg-apps
+"
+  "
 kde-config-screenlocker \
 kde-spectacle \
-konsole \
 kdeplasma-addons \
-okular \
 plasma-browser-integration \
 plasma-desktop \
 plasma-disks \
@@ -81,11 +87,17 @@ plasma-systemmonitor \
 plasma-thunderbolt \
 plasma-workspace \
 powerdevil \
-sddm \
-sddm-kcm \
-xorg-server \
-xorg-apps \
 "
+  "ark \
+dolphin \
+filelight \
+gwenview \
+kate \
+kcalc \
+konsole \
+okular \
+"
+)
 
 # applets
 appletsPackageList="
@@ -123,7 +135,9 @@ packageList=(
   curl
   docker
   exa
+  expect
   ffmpeg
+  firefox
   fish
   git
   gparted
@@ -139,6 +153,7 @@ packageList=(
   numlockx
   p7zip
   python
+  shfmt
   sshfs
   starship
   texlive-bibtexextra
@@ -195,4 +210,4 @@ if [ -d "/proc/acpi/button/lid" ]; then
   fi
 fi
 
-pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null
+pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :

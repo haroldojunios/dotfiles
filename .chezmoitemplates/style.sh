@@ -47,13 +47,14 @@ if ! [ -d /usr/share/themes/sweet ]; then
   sudo install -Dm644 "$TEMP_FOLDER/kwin-forceblur/metadata.desktop" /usr/share/kservices5/kwin-script-forceblur.desktop
 
   # apply config
-  lookandfeeltool -a Sweet
   sudo crudini --set /etc/sddm.conf Theme Current Sweet
   sudo mkdir -p /var/lib/AccountsService/icons
-  sudo cp "$SCRIPT_FOLDER/assets/avatar.png" "/var/lib/AccountsService/icons/$USER"
+  # sudo cp "$SCRIPT_FOLDER/assets/avatar.png" "/var/lib/AccountsService/icons/$USER"
 
   # killall plasmashell && kstart plasmashell
 fi
+
+lookandfeeltool -a Sweet || :
 
 # icons
 if ! [ -d /usr/share/icons/candy-icons ]; then
@@ -66,17 +67,29 @@ fi
 
 # fonts
 UPDATE_FONT_CACHE=
-if ! [ -d /usr/share/fonts/FiraCode ]; then
-  sudo mkdir -p /usr/share/fonts/FiraCode
-  wget -O "$TEMP_FOLDER/firacode.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip"
-  sudo unzip -q "$TEMP_FOLDER/firacode.zip" -d /usr/share/fonts/FiraCode
-  sudo rm -f /usr/share/fonts/FiraCode/*windows*
-  UPDATE_FONT_CACHE=true
-fi
 if ! [ -d /usr/share/fonts/FiraSans ]; then
   sudo mkdir -p /usr/share/fonts/FiraSans
-  wget -O "$TEMP_FOLDER/firasans.zip" -q "https://fonts.google.com/download?family=Fira%20Sans"
-  sudo unzip -q "$TEMP_FOLDER/firasans.zip" -d /usr/share/fonts/FiraSans
+  wget -O "$TEMP_FOLDER/FiraSans.zip" -q "https://fonts.google.com/download?family=Fira%20Sans"
+  sudo unzip -q "$TEMP_FOLDER/FiraSans.zip" -d /usr/share/fonts/FiraSans
+  UPDATE_FONT_CACHE=true
+fi
+if ! [ -d /usr/share/fonts/FiraCode ]; then
+  sudo mkdir -p /usr/share/fonts/FiraCode
+  wget -O "$TEMP_FOLDER/FiraCode.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+  sudo unzip -q "$TEMP_FOLDER/FiraCode.zip" -d /usr/share/fonts/FiraCode
+  sudo rm -f /usr/share/fonts/FiraCode/*windows* || :
+  UPDATE_FONT_CACHE=true
+fi
+if ! [ -d /usr/share/fonts/FiraMono ]; then
+  sudo mkdir -p /usr/share/fonts/FiraMono
+  wget -O "$TEMP_FOLDER/FiraMono.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip"
+  sudo unzip -q "$TEMP_FOLDER/FiraMono.zip" -d /usr/share/fonts/FiraMono
+  UPDATE_FONT_CACHE=true
+fi
+if ! [ -d /usr/share/fonts/Hack ]; then
+  sudo mkdir -p /usr/share/fonts/Hack
+  wget -O "$TEMP_FOLDER/Hack.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
+  sudo unzip -q "$TEMP_FOLDER/Hack.zip" -d /usr/share/fonts/Hack
   UPDATE_FONT_CACHE=true
 fi
 if ! [ -d /usr/share/fonts/ConkySymbols ]; then
@@ -84,7 +97,7 @@ if ! [ -d /usr/share/fonts/ConkySymbols ]; then
   sudo cp "{{ .chezmoi.sourceDir }}/assets/ConkySymbols.ttf" /usr/share/fonts/ConkySymbols
   UPDATE_FONT_CACHE=true
 fi
-if [ -n $UPDATE_FONT_CACHE ];then
+if [ -n $UPDATE_FONT_CACHE ]; then
   fc-cache -f
 fi
 

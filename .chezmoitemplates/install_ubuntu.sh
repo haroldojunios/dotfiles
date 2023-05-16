@@ -10,8 +10,8 @@ if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; t
   echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
 fi
 
-# sudo apt-get update
-# sudo apt-get upgrade -y
+sudo apt-get update
+sudo apt-get upgrade -y
 
 {{ if not .isWSL }}
 NEEDS_UPDATE=
@@ -94,8 +94,10 @@ kcalc \
 konsole \
 okular \
 "
+{{ if .isServer }}
   dbus-x11
   tigervnc-standalone-server
+{{ end }}
 )
 
 # applets
@@ -176,6 +178,7 @@ packageList=(
   ufw
   unzip
   wget
+  which
   xclip
   zip
 )
@@ -338,7 +341,7 @@ EOF
   fi
 fi
 
-{{ if not .isWSL }}
+{{ if and (not .isWSL) .isServer }}
 if ! [ -f "/etc/systemd/system/vncserver@.service" ]; then
   pkill vncserver || true
 
@@ -394,5 +397,5 @@ EOF
 fi
 {{ end }}
 
-# sudo apt-get autoremove -y
-# sudo apt-get clean -y
+sudo apt-get autoremove -y
+sudo apt-get clean -y

@@ -49,7 +49,7 @@
     "files.encoding": "windows1252"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "ms-python.black-formatter",
     // "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
     "editor.formatOnPaste": false,
     "editor.formatOnSaveMode": "file",
@@ -391,7 +391,7 @@
   "python.defaultInterpreterPath": "/bin/python",
   // "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.experiments.optOutFrom": ["All"],
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "none",
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "svg.preview.mode": "svg",
