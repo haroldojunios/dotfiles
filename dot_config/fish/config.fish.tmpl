@@ -1,9 +1,8 @@
 ## Set values
 # Hide welcome message
 set fish_greeting
-set VIRTUAL_ENV_DISABLE_PROMPT 1
+set -x PAGER "bat --plain"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-set -x EDITOR nano
 set -x MICRO_TRUECOLOR 1
 
 {{ if eq .osid "android" }}
@@ -17,7 +16,7 @@ end
 {{ end }}
 
 
-if test $TERM = linux
+if test "$TERM" = linux
     if type -q yaft
         set -x FRAMEBUFFER /dev/fb0
         # set -x YAFT wall
@@ -30,7 +29,7 @@ if type -q qtile
     set -x QT_QPA_PLATFORMTHEME qt5ct
 end
 
-if not functions -q fisher; and status is-interactive
+if status --is-interactive && not functions -q fisher
     curl -sL https://git.io/fisher | source
     if grep -q fisher ~/.config/fish/fish_plugins
         fisher update
@@ -67,19 +66,17 @@ if test -d ~/.local/bin
     end
 end
 
-# Add depot_tools to PATH
-if test -d ~/Applications/depot_tools
-    if not contains -- ~/Applications/depot_tools $PATH
-        set -p PATH ~/Applications/depot_tools
-    end
-end
-
 ## Advanced command-not-found hook
 if test -f /usr/share/doc/find-the-command/ftc.fish
     source /usr/share/doc/find-the-command/ftc.fish
 end
 
 ## Functions
+# use bat to color --help messages
+function h --argument cmd
+    $cmd --help 2>&1 | bat --plain --language=help
+end
+
 function fish_user_key_bindings
     # ctrl-del
     bind \e\[3\;5~ kill-word
@@ -125,26 +122,10 @@ function history
     builtin history --show-time='%F %T '
 end
 
-function backup --argument filename
-    cp $filename $filename.bak
-end
-
-# Copy DIR1 DIR2
-function copy
-    set count (count $argv | tr -d \n)
-    if test "$count" = 2; and test -d "$argv[1]"
-        set from (echo $argv[1] | trim-right /)
-        set to (echo $argv[2])
-        command cp -r $from $to
-    else
-        command cp $argv
-    end
-end
-
 {{ template "shell/colors.fish" . }}
 
 ## Run fastfetch if session is interactive
-if status --is-interactive
+if status --is-interactive && test -z "$VSCODE"
     if type -q fastfetch
         fastfetch --load-config neofetch
     else if type -q neofetch
@@ -154,18 +135,20 @@ if status --is-interactive
     end
 end
 
-if type -q code && not begin
+if status --is-interactive && type -q code && not begin
         test -n "$SSH_CLIENT" || test -n "$SSH_CONNECTION" || test -n "$SSH_TTY"
     end
     set -x EDITOR "code --wait"
+else if type -q nano
+    set -x EDITOR nano
 end
 
 ## Mcfly history
-if type -q mcfly
+if status --is-interactive && type -q mcfly
     mcfly init fish | source
 end
 
 ## Starship prompt
-if type -q starship
+if status --is-interactive && type -q starship
     starship init fish | source
 end
