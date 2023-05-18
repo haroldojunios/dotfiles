@@ -25,6 +25,7 @@ if [ -n "$CODE" ]; then
     ms-azuretools.vscode-docker
     ms-python.black-formatter
     ms-python.python
+    ms-toolsai.jupyter
     ms-vscode.atom-keybindings
     ms-vscode.cmake-tools
     mushan.vscode-paste-image
