@@ -85,39 +85,42 @@ fi
 
 # desktop enviroment
 dePackageList=(
-  "\
-sddm \
-sddm-kcm \
-xorg-server \
-xorg-apps
-"
-  "\
-kde-config-screenlocker \
-kde-spectacle \
-kdeplasma-addons \
-plasma-browser-integration \
-plasma-desktop \
-plasma-disks \
-plasma-firewall \
-plasma-framework \
-plasma-integration \
-plasma-nm \
-plasma-pa \
-plasma-systemmonitor \
-plasma-thunderbolt \
-plasma-workspace \
-powerdevil \
-"
-  "\
-ark \
-dolphin \
-filelight \
-gwenview \
-kate \
-kcalc \
-konsole \
-okular \
-"
+  # x11 / login manager
+  sddm
+  sddm-kcm
+  xorg-server
+  xorg-apps
+  # plasma
+  kdeplasma-addons
+  plasma-browser-integration
+  plasma-desktop
+  plasma-disks
+  plasma-firewall
+  plasma-framework
+  plasma-integration
+  plasma-nm
+  plasma-pa
+  plasma-systemmonitor
+  plasma-thunderbolt
+  plasma-workspace
+  powerdevil
+  spectacle
+  # kde gui apps
+  ark
+  dolphin
+  filelight
+  gwenview
+  kate
+  kcalc
+  konsole
+  okular
+  # other gui apps
+  calibre
+  firefox
+  gparted
+  keepassxc
+  mpv
+  visual-studio-code-bin
 )
 
 # applets
@@ -126,12 +129,12 @@ appletsPackageList=(
   plasma5-applets-window-buttons
   plasma5-applets-window-title
 )
+
 packageList=(
   age
   alacritty
   bat
   bc
-  calibre
   clang
   cmake
   conky
@@ -141,16 +144,12 @@ packageList=(
   exa
   expect
   ffmpeg
-  firefox
   fish
   git
-  gparted
   imagemagick
   jq
-  keepassxc
   make
   micro
-  mpv
   mtpfs
   nano
   ninja
@@ -170,7 +169,6 @@ packageList=(
   tmux
   ufw
   unzip
-  visual-studio-code-bin
   wget
   which
   xclip
@@ -181,17 +179,24 @@ packageList=(
 packageList=(
   "${packageList[@]}"
   "${dePackageList[@]}"
+  "${appletsPackageList[@]}"
 )
 
-if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
+if lspci -k | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
+  case $(uname -r) in
+  *arch*) nvidiaDriver=nvidia ;;
+  *lts*) nvidiaDriver=nvidia-lts ;;
+  *) nvidiaDriver=nvidia-dkms ;;
+  esac
+
   packageList=(
     "${packageList[@]}"
-    "${appletsPackageList[@]}"
+    $nvidiaDriver
   )
 fi
 
 if [ -d "/proc/acpi/button/lid" ]; then
-  if ! pacman -Qi power-profiles-daemon &>/dev/null; then
+  if ! pacman -Q power-profiles-daemon &>/dev/null; then
     packageList=(
       "${packageList[@]}"
       tlp
@@ -201,7 +206,7 @@ if [ -d "/proc/acpi/button/lid" ]; then
 fi
 
 for package in "${packageList[@]}"; do
-  if ! pacman -Qi $package &>/dev/null; then
+  if ! pacman -Q $package &>/dev/null && ! [ "$(pacman -Sg $package)" = "$(pacman -Qg $package 2>&1)" ]; then
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
     paru -S --noconfirm --needed --skipreview --nouseask --sudoloop $package ||
       echo -e "${RED}Package(s) \"${BLUE}$package${RED}\" not found!${NC}"
@@ -217,7 +222,7 @@ if ! systemctl list-unit-files --state=enabled | grep sddm &>/dev/null; then
 fi
 
 if [ -d "/proc/acpi/button/lid" ]; then
-  if pacman -Qi tlp &>/dev/null && ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
+  if pacman -Q tlp &>/dev/null && ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
     sudo systemctl enable --now tlp
     sudo systemctl enable --now NetworkManager-dispatcher.service
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
