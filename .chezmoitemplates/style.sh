@@ -18,7 +18,7 @@ if ! [ -d /usr/share/themes/sweet ]; then
     mv sddm-Sweet sddm/themes/Sweet
 
     # cursors
-    sudo rm -r /usr/share/icons/Sweet-cursors
+    sudo rm -r /usr/share/icons/Sweet-cursors &>/dev/null || :
     sudo mv cursors/Sweet-cursors /usr/share/icons
 
     # kvantum
@@ -124,6 +124,11 @@ if ! [ -d /usr/share/plasma/plasmoids/org.kde.windowtitle ]; then
     cd "$TEMP_FOLDER/applet-window-title"
     sudo kpackagetool5 --global --install .
   )
+fi
+
+# wallpaper
+if ! [ -f /usr/share/wallpapers/Shani.png ]; then
+  sudo cp {{ .chezmoi.sourceDir }}/assets/Shani.png /usr/share/wallpapers
 fi
 
 rm -rf "$TEMP_FOLDER"

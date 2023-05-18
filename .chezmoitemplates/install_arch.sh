@@ -120,7 +120,12 @@ okular \
 "
 )
 
-# packages
+# applets
+appletsPackageList=(
+  plasma5-applets-window-appmenu
+  plasma5-applets-window-buttons
+  plasma5-applets-window-title
+)
 packageList=(
   age
   alacritty
@@ -129,7 +134,6 @@ packageList=(
   calibre
   clang
   cmake
-  code
   conky
   crudini
   curl
@@ -166,12 +170,25 @@ packageList=(
   tmux
   ufw
   unzip
+  visual-studio-code-bin
   wget
   which
   xclip
   zip
   zram-generator
 )
+
+packageList=(
+  "${packageList[@]}"
+  "${dePackageList[@]}"
+)
+
+if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
+  packageList=(
+    "${packageList[@]}"
+    "${appletsPackageList[@]}"
+  )
+fi
 
 if [ -d "/proc/acpi/button/lid" ]; then
   if ! pacman -Qi power-profiles-daemon &>/dev/null; then
@@ -193,6 +210,10 @@ done
 
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then
   sudo systemctl enable --now ufw
+fi
+
+if ! systemctl list-unit-files --state=enabled | grep sddm &>/dev/null; then
+  sudo systemctl enable sddm
 fi
 
 if [ -d "/proc/acpi/button/lid" ]; then
