@@ -54,7 +54,7 @@ if ! [ -d /usr/share/themes/sweet ]; then
   # killall plasmashell && kstart plasmashell
 fi
 
-lookandfeeltool -a Sweet || :
+lookandfeeltool -a Sweet &>/dev/null || :
 
 # icons
 if ! [ -d /usr/share/icons/candy-icons ]; then
@@ -63,7 +63,7 @@ if ! [ -d /usr/share/icons/candy-icons ]; then
 fi
 
 { command -v plasma-changeicons &>/dev/null && plasma-changeicons candy-icons &>/dev/null; } ||
-  { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons candy-icons &>/dev/null; }
+  { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons candy-icons &>/dev/null; } &>/dev/null || :
 
 # fonts
 UPDATE_FONT_CACHE=
