@@ -26,7 +26,6 @@ set -eu
 
 {{ template "setup_micro.sh" . }}
 {{ template "setup_cron.sh" . }}
-{{ template "setup_code.sh" . }}
 
 {{ if not .isWork }}
 # install mcfly
