@@ -125,7 +125,7 @@ end
 {{ template "shell/colors.fish" . }}
 
 ## Run fastfetch if session is interactive
-if status --is-interactive && test -z "$VSCODE"
+if status --is-interactive && test -n "$VSCODE"
     if type -q fastfetch
         fastfetch --load-config neofetch
     else if type -q neofetch

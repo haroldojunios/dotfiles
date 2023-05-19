@@ -24,11 +24,11 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
-  "[dockercompose]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
   "[django-html][erb]": {
     "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "[fish]": {
     "editor.tabSize": 4
@@ -263,8 +263,8 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git-graph.dialog.addTag.pushToRemote": true,
-  "git.openRepositoryInParentFolders": "always",
   "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
@@ -397,11 +397,11 @@
   "notebook.output.textLineLimit": 1000,
   "oneDarkPro.editorTheme": "Shadow",
   "oneDarkPro.vivid": true,
+  "pasteImage.showFilePathConfirmInputBox": true,
   // "path-intellisense.showHiddenFiles": true,
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
   "platformio-ide.autoOpenPlatformIOIniFile": false,
-  "pasteImage.showFilePathConfirmInputBox": true,
   "platformio-ide.forceUploadAndMonitor": true,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSameLine": true,
@@ -412,22 +412,22 @@
   "python.experiments.optOutFrom": ["All"],
   "python.formatting.provider": "none",
   "security.workspace.trust.enabled": false,
-  "svg.preview.background": "white",
   "security.workspace.trust.untrustedFiles": "open",
+  "svg.preview.background": "white",
   "svg.preview.mode": "img",
   "sync.autoUpload": false,
   "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
   "sync.quietSync": true,
   "tabnine.experimentalAutoImports": true,
   "template-string-converter.autoRemoveTemplateString": true,
-  "terminal.integrated.env.linux": {
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
+  "terminal.integrated.env": {
     "VSCODE": "true"
   },
-  "terminal.integrated.fontFamily": "'monospace','FiraCode Nerd Font','PowerlineSymbols'",
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono','FiraCode NFM','PowerlineSymbols','monospace'",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.inheritEnv": false,
-  "terminal.integrated.tabs.enabled": false,
-  "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
   "terminal.integrated.profiles.windows": {
     "Command Prompt": {
       "args": [],
@@ -464,6 +464,7 @@
       "source": "PowerShell"
     }
   },
+  "terminal.integrated.tabs.enabled": false,
   "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"], // , "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "FIXME": {
@@ -511,14 +512,11 @@
   "unibeautify.enabled": true,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.newWindowDimensions": "maximized",
-  "window.titleBarStyle": "native",
+  "window.titleBarStyle": "custom",
   "window.zoomLevel": -0.5,
   "workbench.colorCustomizations": {
     // Sweet theme color
-    "terminal.background": "#161925",
-    "terminal.foreground": "#c3c7d1",
-    "terminalCursor.background": "#c3c7d1",
-    "terminalCursor.foreground": "#c3c7d1",
+    "tab.activeBorder": "#7e7e7e",
     "terminal.ansiBlack": "#282c34",
     "terminal.ansiBlue": "#7cb7ff",
     "terminal.ansiBrightBlack": "#282c34",
@@ -535,15 +533,18 @@
     "terminal.ansiRed": "#ed254e",
     "terminal.ansiWhite": "#dcdfe4",
     "terminal.ansiYellow": "#f9dc5c",
-    "tab.activeBorder": "#7e7e7e"
+    "terminal.background": "#161925",
+    "terminal.foreground": "#c3c7d1",
+    "terminalCursor.background": "#c3c7d1",
+    "terminalCursor.foreground": "#c3c7d1"
   },
   "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.untitled.hint": "hidden",
   "workbench.editorAssociations": {
-    // "*.png": "cweijan.officeViewer",
+    "*.csv": "default",
     "*.ipynb": "jupyter-notebook",
     "*.md": "default",
-    "*.csv": "default",
+    // "*.png": "cweijan.officeViewer",
     "*.pdf": "latex-workshop-pdf-hook",
     "*.svg": "default"
   },
