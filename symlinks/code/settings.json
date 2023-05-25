@@ -24,11 +24,11 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
-  "[dockercompose]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
   "[django-html][erb]": {
     "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "[fish]": {
     "editor.tabSize": 4
@@ -163,7 +163,7 @@
   //   "source.fixAll.eslint": true
   // },
   "editor.comments.insertSpace": true,
-  "editor.fontFamily": "'FiraCode Nerd Font', 'FiraCode NFM', 'Fira Code', Hack, Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'FiraCode Nerd Font', 'FiraCode NF', 'Fira Code', Hack, Consolas, 'Courier New', monospace",
   "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
   "editor.fontSize": 13,
   "editor.formatOnPaste": true,
@@ -258,13 +258,14 @@
     "*bashrc.tmpl": "shellscript"
   },
   "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2500,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git-graph.dialog.addTag.pushToRemote": true,
-  "git.openRepositoryInParentFolders": "always",
   "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
@@ -276,7 +277,6 @@
   "javascript.suggest.paths": false,
   "jupyter.askForKernelRestart": false,
   "latex-workshop.bibtex-format.sort.enabled": true,
-  "latex-workshop.latex.autoBuild.interval": 5000,
   "latex-workshop.latex.build.forceRecipeUsage": false,
   "latex-workshop.latex.recipes": [
     {
@@ -355,7 +355,6 @@
       "name": "gs"
     }
   ],
-  "latex-workshop.latex.watch.delay": 5000,
   "latex-workshop.latexindent.args": ["-m", "-c", "%DIR%/", "%TMPFILE%"],
   "latex-workshop.message.error.show": false,
   "latex-workshop.message.information.show": false,
@@ -397,37 +396,35 @@
   "notebook.output.textLineLimit": 1000,
   "oneDarkPro.editorTheme": "Shadow",
   "oneDarkPro.vivid": true,
-  // "path-intellisense.showHiddenFiles": true,
+  "pasteImage.showFilePathConfirmInputBox": true,
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
+  "path-intellisense.showHiddenFiles": true,
   "platformio-ide.autoOpenPlatformIOIniFile": false,
-  "pasteImage.showFilePathConfirmInputBox": true,
   "platformio-ide.forceUploadAndMonitor": true,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSameLine": true,
   "prettier.jsxSingleQuote": true,
   "prettier.printWidth": 79,
   "prettier.singleQuote": true,
-  // "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.experiments.optOutFrom": ["All"],
   "python.formatting.provider": "none",
   "security.workspace.trust.enabled": false,
-  "svg.preview.background": "white",
   "security.workspace.trust.untrustedFiles": "open",
+  "svg.preview.background": "white",
   "svg.preview.mode": "img",
   "sync.autoUpload": false,
   "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
   "sync.quietSync": true,
   "tabnine.experimentalAutoImports": true,
   "template-string-converter.autoRemoveTemplateString": true,
+  "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
   "terminal.integrated.env.linux": {
     "VSCODE": "true"
   },
-  "terminal.integrated.fontFamily": "'monospace','FiraCode Nerd Font','PowerlineSymbols'",
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono', 'FiraCode NFM', 'PowerlineSymbols'",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.inheritEnv": false,
-  "terminal.integrated.tabs.enabled": false,
-  "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
   "terminal.integrated.profiles.windows": {
     "Command Prompt": {
       "args": [],
@@ -464,6 +461,7 @@
       "source": "PowerShell"
     }
   },
+  "terminal.integrated.tabs.enabled": false,
   "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"], // , "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "FIXME": {
@@ -511,14 +509,11 @@
   "unibeautify.enabled": true,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.newWindowDimensions": "maximized",
-  "window.titleBarStyle": "native",
+  "window.titleBarStyle": "custom",
   "window.zoomLevel": -0.5,
   "workbench.colorCustomizations": {
     // Sweet theme color
-    "terminal.background": "#161925",
-    "terminal.foreground": "#c3c7d1",
-    "terminalCursor.background": "#c3c7d1",
-    "terminalCursor.foreground": "#c3c7d1",
+    "tab.activeBorder": "#7e7e7e",
     "terminal.ansiBlack": "#282c34",
     "terminal.ansiBlue": "#7cb7ff",
     "terminal.ansiBrightBlack": "#282c34",
@@ -535,15 +530,18 @@
     "terminal.ansiRed": "#ed254e",
     "terminal.ansiWhite": "#dcdfe4",
     "terminal.ansiYellow": "#f9dc5c",
-    "tab.activeBorder": "#7e7e7e"
+    "terminal.background": "#161925",
+    "terminal.foreground": "#c3c7d1",
+    "terminalCursor.background": "#c3c7d1",
+    "terminalCursor.foreground": "#c3c7d1"
   },
   "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.untitled.hint": "hidden",
   "workbench.editorAssociations": {
-    // "*.png": "cweijan.officeViewer",
+    "*.csv": "default",
     "*.ipynb": "jupyter-notebook",
     "*.md": "default",
-    "*.csv": "default",
+    // "*.png": "cweijan.officeViewer",
     "*.pdf": "latex-workshop-pdf-hook",
     "*.svg": "default"
   },
