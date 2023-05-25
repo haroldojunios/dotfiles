@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$#" -ne 3 ]; then
+  echo "Illegal number of parameters"
+  echo "USAGE: $0 key value filename"
+  exit 2
+fi
+
+key="$1"
+value="$2"
+filename="$3"
+
+if ! [ -f "$filename" ] || ! grep "^[#]*\s*${key}=.*" $filename >/dev/null; then
+  # APPENDING because 'filename' or 'key' not found
+  echo "$key=$value" >>$filename
+else
+  # SETTING because 'key' found already
+  sed -i -r "s/^[#]*\s*${key}=.*/$key=$value/" $filename
+fi
