@@ -1,0 +1,91 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+{{ if .isWSL }}
+find /mnt/c/Users -maxdepth 1 -mindepth 1 -type d -print0 | while IFS= read -r -d '' folder; do
+  if [ -d "$folder/AppData/Roaming/Code/User" ]; then
+    cp -L $HOME/.config/Code/User/settings.json "$folder/AppData/Roaming/Code/User/"
+    cp -L $HOME/.config/Code/User/keybindings.json "$folder/AppData/Roaming/Code/User/"
+  fi
+done
+{{ end }}
+
+extensions=(
+  bmalehorn.vscode-fish
+  bpruitt-goddard.mermaid-markdown-syntax-highlighting
+  bungcip.better-toml
+  christian-kohler.path-intellisense
+  donjayamanne.githistory
+  eamodio.gitlens
+  editorconfig.editorconfig
+  esbenp.prettier-vscode
+  formulahendry.code-runner
+  gruntfuggly.todo-tree
+  ibm.output-colorizer
+  james-yu.latex-workshop
+  janisdd.vscode-edit-csv
+  jock.svg
+  mechatroner.rainbow-csv
+  mhutchie.git-graph
+  mkhl.shfmt
+  mrmlnc.vscode-duplicate
+  ms-azuretools.vscode-docker
+  ms-python.black-formatter
+  ms-python.python
+  ms-toolsai.jupyter
+  ms-vscode.atom-keybindings
+  ms-vscode.cmake-tools
+  mushan.vscode-paste-image
+  pkief.material-icon-theme
+  richie5um2.vscode-sort-json
+  ritwickdey.liveserver
+  ryu1kn.partial-diff
+  shd101wyy.markdown-preview-enhanced
+  streetsidesoftware.code-spell-checker
+  streetsidesoftware.code-spell-checker-portuguese-brazilian
+  tabnine.tabnine-vscode
+  yzhang.markdown-all-in-one
+  zhuangtongfa.material-theme
+)
+
+code_bins=(
+  code
+  code-server
+)
+
+if [ -d "$HOME/.vscode-server/bin" ]; then
+  code_bins=(
+    ${code_bins[@]}
+    $(find $HOME/.vscode-server/bin/ -mindepth 1 -maxdepth 1 -type d -print -quit)/bin/code-server
+  )
+fi
+
+for code in "${code_bins[@]}"; do
+  if ! command -v $code >/dev/null || ! [ -x "$code" ]; then
+    continue
+  fi
+
+  case "$code" in
+  code | *vscode-server*)
+    _extensions=(
+      "${extensions[@]}"
+      visualstudioexptteam.intellicode-api-usage-examples
+      visualstudioexptteam.vscodeintellicode
+    )
+    ;;
+  *)
+    _extensions="${extensions[@]}"
+    ;;
+  esac
+
+  ext_list=$($code --list-extensions)
+
+  for extension in "${_extensions[@]}"; do
+    if ! echo "$ext_list" | grep -qi "$extension"; then
+      $code --install-extension "$extension"
+    fi
+  done
+done

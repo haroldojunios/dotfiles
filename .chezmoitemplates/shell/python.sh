@@ -1,6 +1,9 @@
 # python aliases
 alias p='python'
-alias pye='source ./venv/Scripts/activate >/dev/null || source ./venv/bin/activate'
+alias pf='isort .; black .'
+alias pye='source ./venv/Scripts/activate &>/dev/null || \
+source ./venv/bin/activate.fish &>/dev/null || \
+source ./venv/bin/activate &>/dev/null'
 alias pyv='python -m venv venv'
 alias pipf='pip freeze > requirements.txt'
 alias pipr='pip install -r requirements.txt'

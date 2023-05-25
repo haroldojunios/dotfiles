@@ -178,7 +178,6 @@ packageList=(
   ufw
   unzip
   wget
-  which
   xclip
   zip
 )
@@ -252,7 +251,7 @@ packageList=(
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
     echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
-    sudo apt-get install -y $package || echo -e"${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+    sudo apt-get install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
   fi
 done
 

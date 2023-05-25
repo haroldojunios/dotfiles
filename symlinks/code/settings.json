@@ -397,6 +397,7 @@
   "oneDarkPro.editorTheme": "Shadow",
   "oneDarkPro.vivid": true,
   "pasteImage.showFilePathConfirmInputBox": true,
+  // "path-intellisense.showHiddenFiles": true,
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
   "path-intellisense.showHiddenFiles": true,
@@ -418,11 +419,12 @@
   "sync.quietSync": true,
   "tabnine.experimentalAutoImports": true,
   "template-string-converter.autoRemoveTemplateString": true,
+  "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
-  "terminal.integrated.env.linux": {
+  "terminal.integrated.env": {
     "VSCODE": "true"
   },
-  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono', 'FiraCode NFM', 'PowerlineSymbols'",
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono','FiraCode NFM','PowerlineSymbols','monospace'",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.inheritEnv": false,
   "terminal.integrated.profiles.windows": {
