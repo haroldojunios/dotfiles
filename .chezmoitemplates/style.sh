@@ -75,21 +75,23 @@ if ! [ -d /usr/share/fonts/FiraSans ]; then
 fi
 if ! [ -d /usr/share/fonts/FiraCode ]; then
   sudo mkdir -p /usr/share/fonts/FiraCode
-  wget -O "$TEMP_FOLDER/FiraCode.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+  wget -O "$TEMP_FOLDER/FiraCode.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip"
   sudo unzip -q "$TEMP_FOLDER/FiraCode.zip" -d /usr/share/fonts/FiraCode
-  sudo rm -f /usr/share/fonts/FiraCode/*windows* || :
+  sudo rm -f /usr/share/fonts/FiraCode/*Windows* || :
   UPDATE_FONT_CACHE=true
 fi
 if ! [ -d /usr/share/fonts/FiraMono ]; then
   sudo mkdir -p /usr/share/fonts/FiraMono
-  wget -O "$TEMP_FOLDER/FiraMono.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip"
+  wget -O "$TEMP_FOLDER/FiraMono.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraMono.zip"
   sudo unzip -q "$TEMP_FOLDER/FiraMono.zip" -d /usr/share/fonts/FiraMono
+  sudo rm -f /usr/share/fonts/FiraMono/*Windows* || :
   UPDATE_FONT_CACHE=true
 fi
 if ! [ -d /usr/share/fonts/Hack ]; then
   sudo mkdir -p /usr/share/fonts/Hack
-  wget -O "$TEMP_FOLDER/Hack.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
+  wget -O "$TEMP_FOLDER/Hack.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip"
   sudo unzip -q "$TEMP_FOLDER/Hack.zip" -d /usr/share/fonts/Hack
+  sudo rm -f /usr/share/fonts/Hack/*Windows* || :
   UPDATE_FONT_CACHE=true
 fi
 if ! [ -d /usr/share/fonts/ConkySymbols ]; then
