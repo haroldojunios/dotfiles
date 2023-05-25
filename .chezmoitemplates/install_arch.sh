@@ -7,7 +7,7 @@ sudo pacman -Syu --noconfirm
 
 if ! command -v paru &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
-  sudo pacman -S --noconfirm --needed base-devel
+  sudo pacman -S --noconfirm --needed base-devel asp
   git -C "$TEMP_FOLDER" clone --depth 1 https://aur.archlinux.org/paru.git
   (
     cd "$TEMP_FOLDER/paru"
@@ -91,7 +91,10 @@ dePackageList=(
   xorg-server
   xorg-apps
   # plasma
+  bluedevil
   kdeplasma-addons
+  kgamma5
+  kscreen
   plasma-browser-integration
   plasma-desktop
   plasma-disks
@@ -120,6 +123,7 @@ dePackageList=(
   gparted
   keepassxc
   mpv
+  onlyoffice-bin
   visual-studio-code-bin
 )
 
@@ -165,6 +169,7 @@ packageList=(
   texlive-latexindent-meta
   texlive-pictures
   texlive-pstricks
+  texlive-publishers
   texlive-science
   tmux
   ufw
