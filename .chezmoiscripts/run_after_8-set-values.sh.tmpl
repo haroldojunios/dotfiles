@@ -6,5 +6,5 @@
 
 {{ if ne .osid "android" }}
 # fix accents not working on whatsapp on firefox
-sudo set-val GTK_IM_MODULE xim /etc/environment
+sudo $HOME/.local/bin/set-val GTK_IM_MODULE xim /etc/environment
 {{ end }}
