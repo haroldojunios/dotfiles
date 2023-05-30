@@ -26,6 +26,18 @@ if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
   NEEDS_UPDATE=1
 fi
 
+{{ if .isServer }}
+# anydesk repo
+if ! [ -f /etc/apt/sources.list.d/anydesk-stable.list ]; then
+  sudo apt-get install -y wget gpg apt-transport-https
+  wget -qO- https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor >anydesk.gpg
+  sudo install -D -o root -g root -m 644 anydesk.gpg /etc/apt/keyrings/anydesk.gpg
+  sudo sh -c 'echo "deb [signed-by=/etc/apt/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list'
+  rm -f anydesk.gpg
+  NEEDS_UPDATE=1
+fi
+{{ end }}
+
 # alacritty repo
 if ! grep -q "^deb .*aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:aslatter/ppa -y
@@ -94,10 +106,9 @@ kcalc \
 konsole \
 okular \
 "
-{{ if .isServer }}
-  dbus-x11
-  tigervnc-standalone-server
-{{ end }}
+  {{ if .isServer }}
+  anydesk
+  {{ end }}
 )
 
 # applets
