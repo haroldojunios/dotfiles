@@ -8,24 +8,13 @@ set -eu
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 {{   template "install_ubuntu.sh" . }}
-{{   if not .isWSL }}
-{{     template "style.sh" . }}
-{{   end }}
 {{ else if eq .osidLike "linux-arch" }}
 {{   template "install_arch.sh" . }}
-{{   template "style.sh" . }}
 {{ else if eq .osidLike "android" }}
 {{   if not .isWSL }}
 {{     template "install_termux.sh" . }}
 {{   end }}
 {{ end }}
-
-{{ if and (ne .osid "android") (not .isWSL) }}
-{{   template "setup.sh" . }}
-{{ end }}
-
-{{ template "setup_micro.sh" . }}
-{{ template "setup_cron.sh" . }}
 
 {{ if not .isWork }}
 # install mcfly

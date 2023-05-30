@@ -4,6 +4,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 {{ end }}
 
+set -eu
+
 {{ if .isWork }}
 mkdir -p "$HOME/workspace"
 if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then

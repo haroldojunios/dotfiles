@@ -4,6 +4,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 {{ end }}
 
+set -eu
+
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
 if ! bat --version | grep -q "$BAT_VER"; then

@@ -1,4 +1,10 @@
+{{- if ne .osid "android" -}}
 #!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
 
 CRONTAB="
 @reboot fish -c 'fisher update >/dev/null'

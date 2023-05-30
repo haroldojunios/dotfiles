@@ -1,5 +1,12 @@
+{{- if ne .osid "android" -}}
 #!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
 
+set -eu
+
+{{ if and (ne .osid "android") (not .isWSL) }}
 # pc speaker
 if command -v lsmod &>/dev/null; then
   if command -v rmmod &>/dev/null; then
@@ -59,11 +66,11 @@ fi
 if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
   if command -v crudini &>/dev/null; then
     sudo crudini --set /etc/sddm.conf General Numlock on
-  else
-    sudo bash -c "cat >/etc/sddm.conf" <<EOF
-[General]
-Numlock=on
-EOF
+#   else
+#     sudo bash -c "cat >/etc/sddm.conf" <<EOF
+# [General]
+# Numlock=on
+# EOF
   fi
 fi
 
@@ -81,10 +88,11 @@ EOF
 
   if command -v crudini &>/dev/null; then
     sudo crudini --set /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf "Mapping analog-stereo" "paths-output" "analog-output-fixed"
-  else
-    LINE_NUMBER=$(grep -n -A8 "Mapping analog-stereo" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf |
-      grep "paths-output = analog-output analog-output-lineout analog-output-speaker analog-output-headphones analog-output-headphones-2" |
-      cut -d - -f 1)
-    sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
+  # else
+  #   LINE_NUMBER=$(grep -n -A8 "Mapping analog-stereo" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf |
+  #     grep "paths-output = analog-output analog-output-lineout analog-output-speaker analog-output-headphones analog-output-headphones-2" |
+  #     cut -d - -f 1)
+  #   sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
   fi
 fi
+{{ end }}

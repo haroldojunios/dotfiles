@@ -4,6 +4,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 {{ end }}
 
+set -eu
+
 {{ if ne .osid "android" }}
 # fix accents not working on whatsapp on firefox
 sudo $HOME/.local/bin/set-val GTK_IM_MODULE xim /etc/environment

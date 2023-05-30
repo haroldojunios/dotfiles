@@ -4,6 +4,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 {{ end }}
 
+set -eu
+
 if ! command -v age &>/dev/null; then
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
   sudo apt install -y age

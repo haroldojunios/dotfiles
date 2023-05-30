@@ -4,6 +4,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 {{ end }}
 
+set -eu
+
 if [ -f "$HOME/.local/bin/chezmoi" ]; then
   chezmoi upgrade &>/dev/null
 fi

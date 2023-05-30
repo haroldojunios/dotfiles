@@ -1,4 +1,10 @@
+{{- if ne .osid "android" -}}
 #!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
 
 if command -v micro &>/dev/null; then
   for plugin in aspell misspell fzf wc autofmt jump detectindent filemanager; do

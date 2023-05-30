@@ -1,4 +1,14 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+{{ if and (not .isWSL) (eq .osidLike "android") }}
 TEMP_FOLDER=$(mktemp -d)
+trap 'rm -rf "$TEMP_FOLDER"' EXIT
 
 # theme
 if ! [ -d /usr/share/themes/sweet ]; then
@@ -132,5 +142,4 @@ fi
 if ! [ -f /usr/share/wallpapers/Shani.png ]; then
   sudo cp {{ .chezmoi.sourceDir }}/assets/Shani.png /usr/share/wallpapers
 fi
-
-rm -rf "$TEMP_FOLDER"
+{{ end}}
