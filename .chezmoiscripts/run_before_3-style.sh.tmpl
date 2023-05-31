@@ -6,7 +6,7 @@
 
 set -eu
 
-{{ if and (not .isWSL) (eq .osidLike "android") }}
+{{ if and (not .isWSL) (ne .osid "android") }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "$TEMP_FOLDER"' EXIT
 
@@ -71,9 +71,13 @@ if ! [ -d /usr/share/icons/candy-icons ]; then
   sudo mkdir -p /usr/share/icons
   sudo git -C /usr/share/icons clone --depth 1 https://github.com/EliverLara/candy-icons.git
 fi
+if ! [ -d /usr/share/icons/beautyline ]; then
+  sudo mkdir -p /usr/share/icons
+  sudo git -C /usr/share/icons clone --depth 1 https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline.git
+fi
 
-{ command -v plasma-changeicons &>/dev/null && plasma-changeicons candy-icons &>/dev/null; } ||
-  { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons candy-icons &>/dev/null; } &>/dev/null || :
+{ command -v plasma-changeicons &>/dev/null && plasma-changeicons BeautyLine &>/dev/null; } ||
+  { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons BeautyLine &>/dev/null; } &>/dev/null || :
 
 # fonts
 UPDATE_FONT_CACHE=
@@ -142,4 +146,6 @@ fi
 if ! [ -f /usr/share/wallpapers/Shani.png ]; then
   sudo cp {{ .chezmoi.sourceDir }}/assets/Shani.png /usr/share/wallpapers
 fi
-{{ end}}
+
+plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null
+{{ end }}
