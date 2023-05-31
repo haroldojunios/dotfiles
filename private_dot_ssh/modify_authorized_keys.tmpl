@@ -1,0 +1,25 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+tempfile="$(mktemp)"
+trap 'rm -rf "${tempfile}"' EXIT
+cat >"${tempfile}"
+
+keys=(
+  {{ range gitHubKeys "haroldojunios" -}}
+  "{{ .Key }}"
+  {{ end -}}
+)
+
+for key in "${keys[@]}"; do
+  if ! grep -q "$key" "$tempfile"; then
+    echo "$key" >>"${tempfile}"
+  fi
+done
+
+cat "${tempfile}"
