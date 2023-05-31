@@ -1,0 +1,38 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if command -v kwriteconfig5 &>/dev/null; then
+  # dolphin
+  kwriteconfig5 --file dolphinrc --group General --key AutoExpandFolders true
+  kwriteconfig5 --file dolphinrc --group General --key BrowseThroughArchives true
+  kwriteconfig5 --file dolphinrc --group General --key ConfirmClosingMultipleTabs false
+  kwriteconfig5 --file dolphinrc --group General --key RememberOpenedTabs false
+  kwriteconfig5 --file dolphinrc --group General --key ShowToolTips true
+  kwriteconfig5 --file dolphinrc --group General --key ShowZoomSlider false
+  kwriteconfig5 --file dolphinrc --group MainWindow --key MenuBar Disabled
+  kwriteconfig5 --file dolphinrc --group MainWindow --key ToolBarsMovable Disabled
+  kwriteconfig5 --file dolphinrc --group PreviewSettings --key Plugins \
+    "appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,djvuthumbnail,\
+ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,\
+kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,\
+gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
+
+  # kcminputrc
+  kwriteconfig5 --file kcminputrc --group Keyboard --key NumLock 0
+  kwriteconfig5 --file kcminputrc --group Mouse --key X11LibInputXAccelProfileFlat true
+
+  # kscreenlockerrc
+  kwriteconfig5 --file kscreenlockerrc --group Daemon --key Autolock false
+
+  # okularpartrc
+  kwriteconfig5 --file okularpartrc --group General --key ShellOpenFileInTabs true
+  kwriteconfig5 --file okularpartrc --group PageView --key MouseMode RectSelect
+
+  # kwinrc
+  kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
+fi
