@@ -79,8 +79,8 @@ bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip 
 bind -T copy-mode-vi C-j send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
 
 # define shell
-{{ if ne .osid "android" }}
-set -g default-shell '/usr/bin/fish'
+{{ if eq .osid "android" }}
+set -g default-shell '/data/data/com.termux/files/usr/bin/fish'
 {{ else }}
-set -g default-shell '$PREFIX/bin/fish'
+set -g default-shell '/usr/bin/fish'
 {{ end }}
