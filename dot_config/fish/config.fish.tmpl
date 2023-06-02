@@ -6,6 +6,8 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x MICRO_TRUECOLOR 1
 
 {{ if eq .osid "android" }}
+set -x USER haroldo
+
 if not pgrep -f crond >/dev/null
     crond
 end
