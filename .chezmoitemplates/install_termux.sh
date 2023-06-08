@@ -34,6 +34,7 @@ packageList=(
   openssh
   p7zip
   python
+  rsync
   scipy
   starship
   termux-api
@@ -51,10 +52,7 @@ for package in "${packageList[@]}"; do
   fi
 done
 
-passwd &>/dev/null <<EOD
-0000
-0000
-EOD
+sed 's/PasswordAuthentication yes/PasswordAuthentication no/' -i "$PREFIX/etc/ssh/sshd_config"
 
 if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
   apt-get install -y tsu
