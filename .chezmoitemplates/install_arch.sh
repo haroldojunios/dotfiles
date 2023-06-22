@@ -111,6 +111,7 @@ dePackageList=(
   # kde gui apps
   ark
   dolphin
+  ffmpegthumbs
   filelight
   gwenview
   kate
@@ -119,9 +120,11 @@ dePackageList=(
   okular
   # other gui apps
   calibre
+  conky
   firefox
   gparted
   keepassxc
+  kitty
   mpv
   onlyoffice-bin
   visual-studio-code-bin
@@ -136,44 +139,50 @@ appletsPackageList=(
 
 packageList=(
   age
-  alacritty
   bat
   bc
   clang
   cmake
-  conky
   crudini
   curl
   docker
+  docker-compose
   exa
+  expac
   expect
   ffmpeg
+  find-the-command
   fish
+  fzf
   git
   imagemagick
   jq
   make
   micro
-  mtpfs
   nano
+  netcat
   ninja
   numlockx
   p7zip
   python
   shfmt
+  simple-mtpfs
   sshfs
   starship
   texlive-bibtexextra
   texlive-bin
+  texlive-binextra
   texlive-latexextra
   texlive-latexindent-meta
   texlive-pictures
   texlive-pstricks
   texlive-publishers
   texlive-science
+  texlive-xetex
   tmux
   ufw
   unzip
+  usbutils
   wget
   which
   xclip
