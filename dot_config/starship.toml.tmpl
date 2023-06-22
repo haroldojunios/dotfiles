@@ -97,10 +97,12 @@ ssh_only = true
 style = "bold dimmed green"
 trim_at = "-"
 
+{{ if ne .osid "android" -}}
 [localip]
 disabled = false
 ssh_only = true
 format = '[\($localipv4\)]($style)'
+{{ end -}}
 
 [shlvl]
 disabled = true
@@ -138,7 +140,7 @@ disabled = false
 format = "[$duration]($style)"
 min_time = 2500
 
-{{ if ne .osid "android" }}
+{{ if ne .osid "android" -}}
 [battery]
 charging_symbol = ""
 discharging_symbol = ""
@@ -157,7 +159,7 @@ threshold = 50
 [[battery.display]]  # "bold green" style when capacity is between 10% and 30%
 style = "bold green"
 threshold = 80
-{{ end }}
+{{ end -}}
 
 [time]
 disabled = false
