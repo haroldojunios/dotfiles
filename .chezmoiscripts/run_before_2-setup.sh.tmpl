@@ -52,7 +52,7 @@ zram-fraction = 1
 EOF
 fi
 {{ else }}
-if ! grep "zram-size" /etc/systemd/zram-generator.conf &>/dev/null; then
+if ! grep "zram-size = ram" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
 zram-size = ram
