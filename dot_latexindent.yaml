@@ -6,16 +6,10 @@ lookForAlignDelims:
 modifyLineBreaks:
   textWrapOptions:
     columns: 80
+    blocksBeginWith:
+      other: '\w|\\text'
     # blocksFollow:
-    #   other: |-
-    #     (?x)
-    #     \\\]
-    #     |
-    #     \\item(?:\h|\[)
-    #     |
-    #     \\begin|{eee\} # <--- new bit
-    #     |                # <--- new bit
-    #     \\end|{eee\}   # <--- new bit
+    #   other: \\\]|\\item(?:\h|\[)|\\\\|\\newline
   environments:
     BeginStartsOnOwnLine: 1
     BodyStartsOnOwnLine: 1
@@ -25,15 +19,17 @@ modifyLineBreaks:
     DBSFinishesWithLineBreak: 1
   commands:
     part:
-      CommandStartsOnOwnLine: 4
+      CommandStartsOnOwnLine: 3
     chapter:
-      CommandStartsOnOwnLine: 4
+      CommandStartsOnOwnLine: 3
     section:
       CommandStartsOnOwnLine: 3
     subsection:
-      CommandStartsOnOwnLine: 4
+      CommandStartsOnOwnLine: 3
     subsubsection:
-      CommandStartsOnOwnLine: 4
+      CommandStartsOnOwnLine: 3
+  items:
+    ItemStartsOnOwnLine: 3
 indentPreamble: 1
 dos2unixlinebreaks: 1
 removeTrailingWhitespace: 1
