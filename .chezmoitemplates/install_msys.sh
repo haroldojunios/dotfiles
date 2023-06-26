@@ -33,10 +33,6 @@ packageList=(
   unzip
 )
 
-packageList=(
-  "${packageList[@]}"
-)
-
 for package in "${packageList[@]}"; do
   if ! pacman -Q $package &>/dev/null && ! [ "$(pacman -Sg $package)" = "$(pacman -Qg $package 2>&1)" ]; then
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
@@ -45,4 +41,4 @@ for package in "${packageList[@]}"; do
   fi
 done
 
-pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :
+pacman -Qtdq | pacman -Rns --noconfirm 2>/dev/null || :

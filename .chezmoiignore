@@ -11,7 +11,11 @@ README.md
 .termux
 {{ end }}
 
-{{ if or (eq .osid "android") .isWSL }}
+{{ if ne .osid "windows" }}
+AppData
+{{ end }}
+
+{{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
 .config/*
 !.config/fish
 !.config/nanorc
