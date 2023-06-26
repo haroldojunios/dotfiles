@@ -8,8 +8,12 @@ set -eu
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 {{   template "install_ubuntu.sh" . }}
+{{   if not .isWSL }}
+{{     template "style.sh" . }}
+{{   end }}
 {{ else if eq .osidLike "linux-arch" }}
 {{   template "install_arch.sh" . }}
+{{   template "style.sh" . }}
 {{ else if eq .osidLike "android" }}
 {{   if not .isWSL }}
 {{     template "install_termux.sh" . }}
@@ -27,7 +31,7 @@ set -eu
 {{   template "setup_cron.sh" . }}
 {{ end }}
 
-{{ if not .isWork }}
+{{ if and (not .isWork) (ne .osid "windows") }}
 # install mcfly
 if ! command -v mcfly &>/dev/null && ! [ -f "$HOME/.local/bin/mcfly" ]; then
   curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "$HOME/.local/bin"

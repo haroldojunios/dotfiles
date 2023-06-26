@@ -13,6 +13,16 @@ if ! command -v age &>/dev/null; then
   apt install age
 {{ else if eq .osidLike "linux-arch" }}
   sudo pacman -S --noconfirm --needed age
+{{ else if eq .osid "windows" }}
+  if ! [ -f "$HOME/.local/bin/age" ]; then
+    TEMP_FOLDER=$(mktemp -d)
+    trap 'rm -rf "$TEMP_FOLDER"' EXIT
+
+    wget -O "$TEMP_FOLDER/age.zip" "https://dl.filippo.io/age/latest?for=windows/amd64"
+    unzip -q "$TEMP_FOLDER/age.zip" -d "$TEMP_FOLDER"
+    cp "$TEMP_FOLDER/age/"*.exe "$HOME/.local/bin"
+  fi
+  PATH="$PATH:$HOME/.local/bin"
 {{ else }}
   :
 {{ end }}

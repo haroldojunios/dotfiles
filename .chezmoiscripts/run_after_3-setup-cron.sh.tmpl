@@ -6,6 +6,7 @@
 
 set -eu
 
+{{ if ne .osid "windows" }}
 CRONTAB="
 @reboot fish -c 'fisher update >/dev/null'
 {{ if eq .osid "android" -}}
@@ -18,3 +19,4 @@ if command -v crontab &>/dev/null; then
     echo $CRONTAB | crontab -
   fi
 fi
+{{ end }}

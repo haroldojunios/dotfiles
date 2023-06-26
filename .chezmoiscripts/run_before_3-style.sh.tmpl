@@ -6,7 +6,7 @@
 
 set -eu
 
-{{ if and (not .isWSL) (ne .osid "android") }}
+{{ if and (not .isWSL) (ne .osid "android") (ne .osid "windows") }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "$TEMP_FOLDER"' EXIT
 
