@@ -1,12 +1,13 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
 if ! bat --version | grep -q "$BAT_VER"; then
   case $(uname -m) in
@@ -21,4 +22,5 @@ if ! bat --version | grep -q "$BAT_VER"; then
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/bat.deb"
   fi
 fi
+{{   end }}
 {{ end }}

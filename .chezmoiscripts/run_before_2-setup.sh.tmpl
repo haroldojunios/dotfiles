@@ -1,12 +1,13 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
-{{ if and (ne .osid "android") (not .isWSL) }}
+{{   if and (ne .osid "android") (not .isWSL) }}
 # pc speaker
 if command -v lsmod &>/dev/null; then
   if command -v rmmod &>/dev/null; then
@@ -44,14 +45,14 @@ EOF
   fi
 fi
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{     if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 if ! grep "zram-fraction" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
 zram-fraction = 1
 EOF
 fi
-{{ else }}
+{{     else }}
 if ! grep "zram-size = ram" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
@@ -60,7 +61,7 @@ compression-algorithm = zstd
 host-memory-limit = none
 EOF
 fi
-{{ end }}
+{{     end }}
 
 # sddm
 if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
@@ -95,4 +96,5 @@ EOF
   #   sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
   fi
 fi
+{{   end }}
 {{ end }}

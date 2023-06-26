@@ -1,0 +1,20 @@
+{{- if eq .osid "windows" -}}
+# choco upgrade all -y
+
+$packages = @(
+  "bat"
+  "firefox"
+  "git"
+  "microsoft-windows-terminal"
+  "msys2"
+  "nerd-fonts-firacode"
+  "starship"
+  "vscode"
+)
+
+foreach ($package in $packages) {
+  if ((choco list -e $package) -match "0 packages") {
+    choco install $package -y
+  }
+}
+{{ end }}

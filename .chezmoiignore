@@ -4,6 +4,7 @@ key.txt.age
 .ssh/termux-ssh.id_rsa.age
 assets
 symlinks
+setup.ps1
 setup.sh
 README.md
 
