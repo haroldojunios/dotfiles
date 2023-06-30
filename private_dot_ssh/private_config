@@ -42,6 +42,5 @@ Host raspap
   HostName 10.3.141.1
   User pi
 
-Host aur.archlinux.org
-  IdentityFile ~/.ssh/aur
-  User aur
+Host laserscanner1.local
+  User rural

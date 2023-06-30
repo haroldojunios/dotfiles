@@ -17,13 +17,8 @@ set -eu
 {{     end }}
 {{   end }}
 
-{{   if and (ne .osid "android") (not .isWSL) (ne .osid "windows") }}
+{{   if and (ne .osid "android") (not .isWSL) }}
 {{     template "setup.sh" . }}
-{{   end }}
-
-{{   if ne .osid "windows" }}
-{{     template "setup_micro.sh" . }}
-{{     template "setup_cron.sh" . }}
 {{   end }}
 
 {{   if not .isWork }}
