@@ -102,6 +102,8 @@ scoop cache rm -all
 Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
 Add-EnvPath -Path C:\tools\msys64\usr\local\bin -Container User
 Add-EnvPath -Path C:\tools\msys64\mingw64\bin -Container User
+Add-EnvPath -Path C:\Python310 -Container User
+Add-EnvPath -Path C:\Python310\Scripts -Container User
 
 C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
 {{ end }}
