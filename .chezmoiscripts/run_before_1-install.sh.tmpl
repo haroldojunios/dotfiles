@@ -1,27 +1,32 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
-{{   template "install_ubuntu.sh" . }}
-{{ else if eq .osidLike "linux-arch" }}
-{{   template "install_arch.sh" . }}
-{{ else if eq .osidLike "android" }}
-{{   if not .isWSL }}
-{{     template "install_termux.sh" . }}
+{{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{     template "install_ubuntu.sh" . }}
+{{   else if eq .osidLike "linux-arch" }}
+{{     template "install_arch.sh" . }}
+{{   else if eq .osidLike "android" }}
+{{     if not .isWSL }}
+{{       template "install_termux.sh" . }}
+{{     end }}
 {{   end }}
-{{ end }}
 
-{{ if not .isWork }}
+{{   if and (ne .osid "android") (not .isWSL) }}
+{{     template "setup.sh" . }}
+{{   end }}
+
+{{   if not .isWork }}
 # install mcfly
 if ! command -v mcfly &>/dev/null && ! [ -f "$HOME/.local/bin/mcfly" ]; then
   curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "$HOME/.local/bin"
 fi
-{{ end }}
+{{   end }}
 
 # install starship
 if ! command -v starship &>/dev/null && ! [ -f "$HOME/.local/bin/starship" ]; then
@@ -35,10 +40,11 @@ fi
 # set fish as default terminal
 case "$SHELL" in
 *bash)
-  {{ if eq .osid "android" }}
+  {{   if eq .osid "android" }}
   chsh -s fish
-  {{ else }}
+  {{   else }}
   sudo chsh -s $(command -v fish) $USER
-  {{ end }}
+  {{   end }}
   ;;
 esac
+{{ end }}

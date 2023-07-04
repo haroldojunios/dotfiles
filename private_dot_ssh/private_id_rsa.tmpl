@@ -2,6 +2,7 @@
 {{ joinPath .chezmoi.sourceDir "private_dot_ssh/work-ssh.id_rsa.age" | include | decrypt }}
 {{- else if eq .osid "android" -}}
 {{ joinPath .chezmoi.sourceDir "private_dot_ssh/termux-ssh.id_rsa.age" | include | decrypt }}
+{{- else if eq .osid "windows" -}}
 {{- else -}}
 {{ joinPath .chezmoi.sourceDir "private_dot_ssh/home-ssh.id_rsa.age" | include | decrypt }}
 {{- end -}}

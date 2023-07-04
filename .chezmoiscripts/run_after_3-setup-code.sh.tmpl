@@ -1,19 +1,20 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
-{{ if .isWSL }}
+{{   if .isWSL }}
 find /mnt/c/Users -maxdepth 1 -mindepth 1 -type d -print0 | while IFS= read -r -d '' folder; do
   if [ -d "$folder/AppData/Roaming/Code/User" ]; then
     cp -L $HOME/.config/Code/User/settings.json "$folder/AppData/Roaming/Code/User/"
     cp -L $HOME/.config/Code/User/keybindings.json "$folder/AppData/Roaming/Code/User/"
   fi
 done
-{{ end }}
+{{   end }}
 
 extensions=(
   bmalehorn.vscode-fish
@@ -91,3 +92,4 @@ for code in "${code_bins[@]}"; do
     fi
   done
 done
+{{ end }}

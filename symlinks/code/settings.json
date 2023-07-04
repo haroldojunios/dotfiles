@@ -253,6 +253,7 @@
     "**/templates/**/*.html": "django-html",
     "*.fish.tmpl": "fish",
     "*.m": "matlab",
+    "*.ps1.tmpl": "powershell",
     "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
@@ -412,6 +413,9 @@
   "prettier.singleQuote": false,
   "python.experiments.optOutFrom": ["All"],
   "python.formatting.provider": "none",
+  "remote.SSH.remotePlatform": {
+    "laserscanner1.local": "linux"
+  },
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "svg.preview.background": "white",

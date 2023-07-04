@@ -1,24 +1,26 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
 if ! command -v age &>/dev/null; then
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+  {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
   sudo apt install -y age
-{{ else if eq .osid "android" }}
+  {{ else if eq .osid "android" }}
   apt install age
-{{ else if eq .osidLike "linux-arch" }}
+  {{ else if eq .osidLike "linux-arch" }}
   sudo pacman -S --noconfirm --needed age
-{{ else }}
+  {{ else }}
   :
-{{ end }}
+  {{ end }}
 fi
 
 if [ ! -f "$HOME/.config/key.txt" ]; then
   age --decrypt --output "$HOME/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
   chmod 600 "$HOME/.config/key.txt"
 fi
+{{ end }}

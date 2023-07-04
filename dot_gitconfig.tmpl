@@ -10,8 +10,6 @@
 [core]
 	autocrlf = input
 	editor = code --wait
-	excludesFile = /home/haroldo/.gitignore
-[gui]
-	recentrepo = /home/haroldo/Documents/Git/rural-tech/lastools-integration
+	excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 [safe]
-	directory = /opt/flutter
+	directory = *

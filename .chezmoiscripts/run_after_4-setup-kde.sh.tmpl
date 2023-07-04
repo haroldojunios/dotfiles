@@ -1,8 +1,9 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
@@ -36,3 +37,4 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   # kwinrc
   kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
 fi
+{{ end }}

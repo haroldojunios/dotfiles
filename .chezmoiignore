@@ -4,6 +4,7 @@ key.txt.age
 .ssh/termux-ssh.id_rsa.age
 assets
 symlinks
+setup.ps1
 setup.sh
 README.md
 
@@ -11,7 +12,12 @@ README.md
 .termux
 {{ end }}
 
-{{ if or (eq .osid "android") .isWSL }}
+{{ if ne .osid "windows" }}
+AppData
+scoop
+{{ end }}
+
+{{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
 .config/*
 !.config/fish
 !.config/nanorc

@@ -1,12 +1,14 @@
-{{- if ne .osid "android" -}}
+{{- if ne .osid "windows" -}}
+{{-   if ne .osid "android" -}}
 #!/bin/bash
-{{- else -}}
+{{-   else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+{{   end }}
 
 set -eu
 
-{{ if ne .osid "android" }}
+{{   if and (ne .osid "android") (ne .osid "windows") }}
 # fix accents not working on whatsapp on firefox
 sudo "$HOME/.local/bin/set-val" GTK_IM_MODULE xim /etc/environment
+{{   end }}
 {{ end }}
