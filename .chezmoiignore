@@ -15,6 +15,7 @@ README.md
 {{ if ne .osid "windows" }}
 AppData
 scoop
+.local/bin/exa.exe
 {{ end }}
 
 {{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
