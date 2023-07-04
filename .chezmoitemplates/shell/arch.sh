@@ -3,7 +3,7 @@
 
 alias i='paru -S --noconfirm --needed'
 alias r='paru -Rns --noconfirm'
-alias u='paru -Syu --noconfirm'
+alias u='sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist && paru -Syu --noconfirm'
 alias s='paru -Ss'
 alias si='paru -Qi'
 alias cl='paru -Sccd && pacman -Qtdq | sudo pacman -Rns --noconfirm - 2>/dev/null || :'
