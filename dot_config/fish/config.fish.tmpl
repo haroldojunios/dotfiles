@@ -153,4 +153,6 @@ end
 ## Starship prompt
 if status --is-interactive && type -q starship
     starship init fish | source
+else
+    function fish_right_prompt; end
 end
