@@ -3,17 +3,19 @@ GREEN='\033[1;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
+TEMP_FOLDER=$(mktemp -d)
+trap "rm -rf $TEMP_FOLDER" EXIT
+
+command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 sudo pacman -Syu --noconfirm
 
 if ! command -v paru &>/dev/null; then
-  TEMP_FOLDER=$(mktemp -d)
   sudo pacman -S --noconfirm --needed base-devel asp
   git -C "$TEMP_FOLDER" clone --depth 1 https://aur.archlinux.org/paru.git
   (
     cd "$TEMP_FOLDER/paru"
     makepkg -si --noconfirm
   )
-  rm -rf "$TEMP_FOLDER"
 fi
 
 if grep -q "#" /etc/pacman.conf; then
@@ -150,6 +152,7 @@ packageList=(
   exa
   expac
   expect
+  fastfetch
   ffmpeg
   find-the-command
   fish
@@ -157,6 +160,7 @@ packageList=(
   git
   imagemagick
   jq
+  lm_sensors
   make
   micro
   nano
@@ -165,6 +169,9 @@ packageList=(
   numlockx
   p7zip
   python
+  python-black
+  python-isort
+  reflector
   shfmt
   simple-mtpfs
   sshfs
@@ -172,9 +179,13 @@ packageList=(
   texlive-bibtexextra
   texlive-bin
   texlive-binextra
+  texlive-fontutils
+  texlive-langportuguese
   texlive-latexextra
   texlive-latexindent-meta
+  texlive-mathscience
   texlive-pictures
+  texlive-plaingeneric
   texlive-pstricks
   texlive-publishers
   texlive-science
@@ -190,10 +201,20 @@ packageList=(
   zram-generator
 )
 
+qgisPackageList=(
+  python-gdal
+  python-jinja
+  python-owslib
+  python-psycopg2
+  python-yaml
+  qgis
+)
+
 packageList=(
   "${packageList[@]}"
   "${dePackageList[@]}"
   "${appletsPackageList[@]}"
+  "${qgisPackageList[@]}"
 )
 
 if lspci -k | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
@@ -226,6 +247,10 @@ for package in "${packageList[@]}"; do
       echo -e "${RED}Package(s) \"${BLUE}$package${RED}\" not found!${NC}"
   fi
 done
+
+if ! systemctl list-unit-files --state=enabled | grep lm_sensors &>/dev/null; then
+  sudo systemctl enable --now lm_sensors
+fi
 
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then
   sudo systemctl enable --now ufw
