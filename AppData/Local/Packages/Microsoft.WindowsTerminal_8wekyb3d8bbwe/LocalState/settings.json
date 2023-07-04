@@ -78,7 +78,7 @@
       {
         "bellStyle": "taskbar",
         "colorScheme": "Sweet",
-        "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -use-full-path -msys -shell fish",
+        "commandline": "C:/tools/msys64/msys2_shell.cmd -defterm -here -no-start -use-full-path -msys -shell fish",
         "elevate": false,
         "font": {
           "face": "FiraCode NFM",
@@ -86,7 +86,7 @@
         },
         "guid": "{b140dd60-9503-4c85-93e2-6526f7cbd6dc}",
         "hidden": false,
-        "icon": "C:/msys64/msys2.ico",
+        "icon": "C:/tools/msys64/msys2.ico",
         "name": "MSYS2",
         "startingDirectory": "%USERPROFILE%"
       },
