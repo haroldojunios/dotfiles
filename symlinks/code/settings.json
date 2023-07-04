@@ -163,6 +163,7 @@
   //   "source.fixAll.eslint": true
   // },
   "editor.comments.insertSpace": true,
+  "editor.fastScrollSensitivity": 10,
   "editor.fontFamily": "'FiraCode Nerd Font', 'FiraCode NF', 'Fira Code', Hack, Consolas, 'Courier New', monospace",
   "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
   "editor.fontSize": 13,
@@ -422,7 +423,10 @@
   "template-string-converter.autoRemoveTemplateString": true,
   "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
-  "terminal.integrated.env": {
+  "terminal.integrated.env.linux": {
+    "VSCODE": "true"
+  },
+  "terminal.integrated.env.windows": {
     "VSCODE": "true"
   },
   "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono','FiraCode NFM','PowerlineSymbols','monospace'",
