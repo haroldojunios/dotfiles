@@ -66,11 +66,6 @@ fi
 if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
   if command -v crudini &>/dev/null; then
     sudo crudini --set /etc/sddm.conf General Numlock on
-#   else
-#     sudo bash -c "cat >/etc/sddm.conf" <<EOF
-# [General]
-# Numlock=on
-# EOF
   fi
 fi
 
@@ -95,4 +90,17 @@ EOF
   #   sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
   fi
 fi
+
+if command -v sensors-detect &>/dev/null && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
+  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/frankcrawford/it87.git
+  (
+    cd "$TEMP_FOLDER/it87"
+    sudo make dkms
+  )
+  sudo modprobe it87 ignore_resource_conflict=1
+  sudo sensors-detect --auto &>/dev/null
+  sudo bash -c "echo 'options it87 mmio=1' >/etc/modprobe.d/it87.conf"
+  sudo bash -c "echo 'it87' >/etc/modules-load.d/it87.conf"
+fi
+
 {{ end }}
