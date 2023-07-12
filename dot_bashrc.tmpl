@@ -85,6 +85,12 @@ fi
 
 {{ template "shell/colors.sh" . }}
 
+{{ if .isWSL }}
+if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
+  sudo service docker start &>/dev/null
+fi
+{{ end }}
+
 if command -v code &>/dev/null && ! { [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; }; then
   export EDITOR="code --wait"
 elif command -v nano &>/dev/null; then

@@ -8,48 +8,46 @@ set -eu
 
 {{ if .isWork }}
 mkdir -p "$HOME/workspace"
+if ! [ -d "$HOME/workspace/rxp-conversor" ]; then
+  git -C "$HOME/workspace" clone git@github.com:rural-tech/rxp-conversor.git
+  if command -v docker >/dev/null; then
+    (
+      cd "$HOME/workspace/rxp-conversor"
+      if ! groups | grep -q docker; then
+        sudo groupadd docker &>/dev/null || :
+        sudo usermod -aG docker $USER
+        newgrp docker
+      fi
+      docker build -t rxp-conversor .
+    )
+  fi
+fi
 if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
   git -C "$HOME/workspace" clone git@github.com:rural-tech/docker-laser-scanner.git
-  {{ if .isServer }}
   if command -v docker >/dev/null; then
     (
       cd "$HOME/workspace/docker-laser-scanner"
       if ! groups | grep -q docker; then
-        sudo groupadd docker &>/dev/null || true
+        sudo groupadd docker &>/dev/null || :
         sudo usermod -aG docker $USER
         newgrp docker
       fi
       docker compose up --build -d
     )
   fi
-  {{ end }}
 fi
 if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
   git -C "$HOME/workspace" clone git@github.com:rural-tech/calc-volume-pc.git
-  (
-    cd "$HOME/workspace/calc-volume-pc"
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
-  )
-  {{ if .isServer }}
-  #   cat >"$HOME/.config/autostart/calc-volume.desktop" <<EOF
-  # [Desktop Entry]
-  # Type=Application
-  # Name=calc-volume
-  # Exec=$HOME/workspace/calc-volume-pc/venv/bin/python $HOME/workspace/calc-volume-pc/main.py
-  # StartupNotify=false
-  # Terminal=false
-  # EOF
-  if command -v crontab >/dev/null; then
-    CRONTAB="@reboot $HOME/workspace/calc-volume-pc/venv/bin/python $HOME/workspace/calc-volume-pc/main.py"
-    if ! crontab -l &>/dev/null | grep -q "$CRONTAB"; then
-      {
-        crontab -l
-        echo "$CRONTAB"
-      } | crontab -
-    fi
+  if command -v docker >/dev/null; then
+    (
+      cd "$HOME/workspace/calc-volume-pc"
+      if ! groups | grep -q docker; then
+        sudo groupadd docker &>/dev/null || :
+        sudo usermod -aG docker $USER
+        newgrp docker
+      fi
+      docker compose up --build -d
+    )
   fi
-  {{ end }}
 fi
 {{ end }}

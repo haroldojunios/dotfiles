@@ -102,4 +102,11 @@ if command -v sensors-detect &>/dev/null && ! [ -f "/etc/modprobe.d/it87.conf" ]
   sudo bash -c "echo 'options it87 mmio=1' >/etc/modprobe.d/it87.conf"
   sudo bash -c "echo 'it87' >/etc/modules-load.d/it87.conf"
 fi
+{{ else if .isWSL }}
+if ! [ -f "/etc/sudoers.d/service" ]; then
+  echo "$USER ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
+fi
+if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
+  sudo service docker start &>/dev/null
+fi
 {{ end }}

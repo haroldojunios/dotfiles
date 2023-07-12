@@ -126,6 +126,12 @@ end
 
 {{ template "shell/colors.fish" . }}
 
+{{ if .isWSL }}
+if service --status-all 2>/dev/null | grep docker | grep - &>/dev/null
+    sudo service docker start &>/dev/null
+end
+{{ end }}
+
 ## Run fastfetch if session is interactive
 if status --is-interactive && test -z "$VSCODE"
     if type -q fastfetch
@@ -154,5 +160,6 @@ end
 if status --is-interactive && type -q starship
     starship init fish | source
 else
-    function fish_right_prompt; end
+    function fish_right_prompt
+    end
 end
