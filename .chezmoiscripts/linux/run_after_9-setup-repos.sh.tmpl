@@ -16,9 +16,8 @@ if ! [ -d "$HOME/workspace/rxp-conversor" ]; then
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
         sudo usermod -aG docker $USER
-        newgrp docker
       fi
-      docker build -t rxp-conversor .
+      sg docker -c "docker build -t rxp-conversor ."
     )
   fi
 fi
@@ -30,9 +29,8 @@ if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
         sudo usermod -aG docker $USER
-        newgrp docker
       fi
-      docker compose up --build -d
+      sg docker -c "docker compose up --build -d"
     )
   fi
 fi
@@ -44,9 +42,8 @@ if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
         sudo usermod -aG docker $USER
-        newgrp docker
       fi
-      docker compose up --build -d
+      sg docker -c "docker compose up --build -d"
     )
   fi
 fi

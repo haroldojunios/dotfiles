@@ -341,7 +341,7 @@ if ! dpkg -s docker-ce &>/dev/null; then
     # newgrp docker
   fi
   if ! [ -f /etc/docker/daemon.json ]; then
-    cat >/etc/docker/daemon.json <<EOF
+    sudo bash -c "cat >/etc/docker/daemon.json" <<EOF
 {
   "dns": [
     "10.1.2.3",
