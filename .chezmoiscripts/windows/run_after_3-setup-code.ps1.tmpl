@@ -1,5 +1,3 @@
-{{- if eq .osid "windows" -}}
-
 $extensions = @(
   "bmalehorn.vscode-fish"
   "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
@@ -43,5 +41,3 @@ foreach ($extension in $extensions) {
     code --install-extension $extension
   }
 }
-
-{{- end }}

@@ -1,5 +1,3 @@
-{{- if eq .osid "windows" -}}
-
 function Add-EnvPath {
   param(
     [Parameter(Mandatory = $true)]
@@ -107,5 +105,3 @@ Add-EnvPath -Path C:\Python310\Scripts -Container User
 Add-EnvPath -Path $env:HOME\.local\bin -Container User
 
 C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
-
-{{- end }}

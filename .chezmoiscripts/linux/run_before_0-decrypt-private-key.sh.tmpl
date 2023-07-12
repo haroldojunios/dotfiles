@@ -1,9 +1,8 @@
-{{- if ne .osid "windows" -}}
-{{-   if ne .osid "android" -}}
+{{- if ne .osid "android" -}}
 #!/bin/bash
-{{-   else -}}
+{{- else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{   end }}
+{{ end }}
 
 set -eu
 
@@ -23,4 +22,3 @@ if [ ! -f "$HOME/.config/key.txt" ]; then
   age --decrypt --output "$HOME/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
   chmod 600 "$HOME/.config/key.txt"
 fi
-{{ end }}

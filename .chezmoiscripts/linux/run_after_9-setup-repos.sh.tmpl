@@ -1,13 +1,12 @@
-{{- if ne .osid "windows" -}}
-{{-   if ne .osid "android" -}}
+{{- if ne .osid "android" -}}
 #!/bin/bash
-{{-   else -}}
+{{- else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{   end }}
+{{ end }}
 
 set -eu
 
-{{   if .isWork }}
+{{ if .isWork }}
 mkdir -p "$HOME/workspace"
 if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
   git -C "$HOME/workspace" clone git@github.com:rural-tech/docker-laser-scanner.git
@@ -53,5 +52,4 @@ if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
   fi
   {{ end }}
 fi
-{{   end }}
 {{ end }}

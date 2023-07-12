@@ -1,13 +1,12 @@
-{{- if ne .osid "windows" -}}
-{{-   if ne .osid "android" -}}
+{{- if ne .osid "android" -}}
 #!/bin/bash
-{{-   else -}}
+{{- else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{   end }}
+{{ end }}
 
 set -eu
 
-{{   if and (ne .osid "android") (not .isWSL) }}
+{{ if and (ne .osid "android") (not .isWSL) }}
 # pc speaker
 if command -v lsmod &>/dev/null; then
   if command -v rmmod &>/dev/null; then
@@ -45,14 +44,14 @@ EOF
   fi
 fi
 
-{{     if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 if ! grep "zram-fraction" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
 zram-fraction = 1
 EOF
 fi
-{{     else }}
+{{   else }}
 if ! grep "zram-size = ram" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
@@ -61,7 +60,7 @@ compression-algorithm = zstd
 host-memory-limit = none
 EOF
 fi
-{{     end }}
+{{   end }}
 
 # sddm
 if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
@@ -103,5 +102,4 @@ if command -v sensors-detect &>/dev/null && ! [ -f "/etc/modprobe.d/it87.conf" ]
   sudo bash -c "echo 'options it87 mmio=1' >/etc/modprobe.d/it87.conf"
   sudo bash -c "echo 'it87' >/etc/modules-load.d/it87.conf"
 fi
-
 {{ end }}

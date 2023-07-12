@@ -30,3 +30,9 @@ scoop
 !.config/Code
 {{   end }}
 {{ end }}
+
+{{ if ne .osid "windows" }}
+.chezmoiscripts/windows/**
+{{ else }}
+.chezmoiscripts/linux/**
+{{ end }}

@@ -1,9 +1,8 @@
-{{- if ne .osid "windows" -}}
-{{-   if ne .osid "android" -}}
+{{- if ne .osid "android" -}}
 #!/bin/bash
-{{-   else -}}
+{{- else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{   end }}
+{{ end }}
 
 set -eu
 
@@ -83,4 +82,3 @@ for code in "${code_bins[@]}"; do
     fi
   done
 done
-{{ end }}

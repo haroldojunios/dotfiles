@@ -1,13 +1,12 @@
-{{- if ne .osid "windows" -}}
-{{-   if ne .osid "android" -}}
+{{- if ne .osid "android" -}}
 #!/bin/bash
-{{-   else -}}
+{{- else -}}
 #!/data/data/com.termux/files/usr/bin/bash
-{{   end }}
+{{ end }}
 
 set -eu
 
-{{   if and (not .isWSL) (ne .osid "android") (ne .osid "windows") }}
+{{ if and (not .isWSL) (ne .osid "android") (ne .osid "windows") }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "$TEMP_FOLDER"' EXIT
 
@@ -150,5 +149,4 @@ if ! [ -f /usr/share/wallpapers/Shani.png ]; then
 fi
 
 plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null
-{{   end }}
 {{ end }}

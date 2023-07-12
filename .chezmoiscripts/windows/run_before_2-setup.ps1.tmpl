@@ -1,7 +1,3 @@
-{{- if eq .osid "windows" -}}
-
 C:\tools\msys64\usr\bin\bash -c @'
 sed -i 's/db_home:.*/db_home: windows/' /etc/nsswitch.conf
 '@
-
-{{- end }}

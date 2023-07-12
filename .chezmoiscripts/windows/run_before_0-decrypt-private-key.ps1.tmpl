@@ -1,4 +1,3 @@
-{{- if eq .osid "windows" -}}
 if (!(choco list -e age.portable)) {
   choco install age.portable -y
 }
@@ -6,4 +5,3 @@ if (!(choco list -e age.portable)) {
 if (!(Test-Path "$env:USERPROFILE/.config/key.txt")){
   age --decrypt --output "$env:USERPROFILE/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
 }
-{{ end }}
