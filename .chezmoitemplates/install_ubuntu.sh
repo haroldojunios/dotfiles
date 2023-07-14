@@ -26,6 +26,7 @@ if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
   NEEDS_UPDATE=1
 fi
 
+{{- /*
 {{ if .isServer }}
 # anydesk repo
 if ! [ -f /etc/apt/sources.list.d/anydesk-stable.list ]; then
@@ -37,6 +38,24 @@ if ! [ -f /etc/apt/sources.list.d/anydesk-stable.list ]; then
   NEEDS_UPDATE=1
 fi
 {{ end }}
+*/}}
+
+# remove snap
+if dpkg -s snapd &>/dev/null; then
+  if mount | grep -q "/var/snap/firefox/common/host-hunspell"; then
+    sudo umount /var/snap/firefox/common/host-hunspell
+  fi
+  sudo apt-get autopurge snapd -y
+  sudo bash -c "cat >/etc/apt/preferences.d/nosnap.pref" <<EOF
+# To prevent repository packages from triggering the installation of Snap,
+# this file forbids snapd from being installed by APT.
+# For more information: https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
+
+Package: snapd
+Pin: release a=*
+Pin-Priority: -10
+EOF
+fi
 
 # alacritty repo
 if ! grep -q "^deb .*aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
@@ -281,6 +300,10 @@ if [ -d "/sys/class/power_supply" ]; then
   if ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
     sudo systemctl enable --now tlp
   fi
+fi
+
+if ! systemctl list-unit-files --state=masked | grep systemd-networkd-wait-online &>/dev/null; then
+  sudo systemctl mask systemd-networkd-wait-online
 fi
 
 if ! command -v onlyoffice-desktopeditors &>/dev/null; then

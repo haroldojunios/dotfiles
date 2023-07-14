@@ -16,10 +16,6 @@ set -eu
 {{   end }}
 {{ end }}
 
-{{ if and (ne .osid "android") (not .isWSL) }}
-{{   template "setup.sh" . }}
-{{ end }}
-
 {{ if not .isWork }}
 # install mcfly
 if ! command -v mcfly &>/dev/null && ! [ -f "$HOME/.local/bin/mcfly" ]; then
