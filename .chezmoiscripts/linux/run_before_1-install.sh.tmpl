@@ -7,7 +7,11 @@
 set -eu
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
-{{   template "install_ubuntu.sh" . }}
+{{   if .isWSL }}
+{{     template "install_wsl.sh" . }}
+{{   else }}
+{{     template "install_ubuntu.sh" . }}
+{{   end }}
 {{ else if eq .osidLike "linux-arch" }}
 {{   template "install_arch.sh" . }}
 {{ else if eq .osidLike "android" }}

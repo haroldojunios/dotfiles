@@ -10,12 +10,6 @@ if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; t
   echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
 fi
 
-sudo apt-get update
-sudo apt-get upgrade -y
-
-{{ if not .isWSL }}
-NEEDS_UPDATE=
-
 # code repo
 if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
   sudo apt-get install -y wget gpg apt-transport-https
@@ -23,22 +17,7 @@ if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
   sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
   sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
   rm -f packages.microsoft.gpg
-  NEEDS_UPDATE=1
 fi
-
-{{- /*
-{{ if .isServer }}
-# anydesk repo
-if ! [ -f /etc/apt/sources.list.d/anydesk-stable.list ]; then
-  sudo apt-get install -y wget gpg apt-transport-https
-  wget -qO- https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor >anydesk.gpg
-  sudo install -D -o root -g root -m 644 anydesk.gpg /etc/apt/keyrings/anydesk.gpg
-  sudo sh -c 'echo "deb [signed-by=/etc/apt/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list'
-  rm -f anydesk.gpg
-  NEEDS_UPDATE=1
-fi
-{{ end }}
-*/}}
 
 # remove snap
 if dpkg -s snapd &>/dev/null; then
@@ -60,7 +39,6 @@ fi
 # alacritty repo
 if ! grep -q "^deb .*aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:aslatter/ppa -y
-  NEEDS_UPDATE=1
 fi
 
 # firefox repo
@@ -73,7 +51,6 @@ if ! grep -q "^deb .*mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.lis
     fi
   fi
 
-  NEEDS_UPDATE=1
   sudo bash -c "cat >/etc/apt/preferences.d/mozillateamppa" <<EOF
 Package: firefox*
 Pin: release o=LP-PPA-mozillateam
@@ -84,13 +61,10 @@ fi
 # kubuntu backports repo
 if ! grep -q "^deb .*kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:kubuntu-ppa/backports -y
-  sudo apt-get update && sudo apt-get full-upgrade -y
-  NEEDS_UPDATE=
 fi
 
-if [ -n "$NEEDS_UPDATE" ]; then
-  sudo apt-get update
-fi
+sudo apt-get update
+sudo apt-get full-upgrade -y
 
 # desktop enviroment
 dePackageList=(
@@ -125,10 +99,7 @@ kcalc \
 konsole \
 okular \
 "
-  {{ if .isServer }}
-  anydesk
   xserver-xorg-video-dummy
-  {{ end }}
 )
 
 # applets
@@ -177,9 +148,7 @@ packageList=(
   imagemagick
   jmtpfs
   jq
-  {{ if not .isWork }}
   keepassxc
-  {{ end }}
   make
   micro
   mpv
@@ -194,7 +163,6 @@ packageList=(
   shfmt
   sshfs
   systemd-zram-generator
-  {{ if not .isWork }}
   texlive-fonts-recommended
   texlive-lang-portuguese
   texlive-latex-base
@@ -204,7 +172,6 @@ packageList=(
   texlive-pstricks
   texlive-science
   texlive-xetex
-  {{ end }}
   tmux
   ufw
   unzip
@@ -232,52 +199,6 @@ packageList=(
   "${dePackageList[@]}"
   "${packageList[@]}"
 )
-{{ else }}
-# wsl packages
-packageList=(
-  age
-  bat
-  bc
-  clang
-  cmake
-  crudini
-  curl
-  exa
-  ffmpeg
-  fish
-  git
-  imagemagick
-  jq
-  make
-  micro
-  nano
-  ninja-build
-  openssh-server
-  p7zip
-  python-is-python3
-  python3
-  python3-venv
-  shfmt
-  sshfs
-  {{ if not .isWork }}
-  texlive-fonts-recommended
-  texlive-lang-portuguese
-  texlive-latex-base
-  texlive-latex-extra
-  texlive-latex-recommended
-  texlive-pictures
-  texlive-pstricks
-  texlive-science
-  texlive-xetex
-  {{ end }}
-  tmux
-  unzip
-  wget
-  wslu
-  xclip
-  zip
-)
-{{ end }}
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
@@ -291,7 +212,6 @@ if ! command -v bat &>/dev/null; then
   ln -s /usr/bin/batcat $HOME/.local/bin/bat
 fi
 
-{{ if not .isWSL }}
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then
   sudo systemctl enable --now ufw
 fi
@@ -327,9 +247,8 @@ if lspci | grep -i network | grep -iq bcm; then
     sudo systemctl restart network-manager
   fi
 fi
-{{ end }}
 
-{{ if and (not .isWork) (not .isWSL) }}
+{{ if not .isWork }}
 if ! command -v fastfetch &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
   git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
@@ -375,7 +294,6 @@ EOF
   fi
 fi
 
-{{ if and (not .isWSL) .isServer }}
 if ! [ -f "/etc/X11/xorg.conf" ]; then
   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF
 # This xorg configuration file will start a dummy X11 server.
@@ -533,9 +451,7 @@ Section "ServerLayout"
 EndSection
 
 EOF
-
 fi
-{{ end }}
 
 sudo apt-get autoremove -y
 sudo apt-get clean -y
