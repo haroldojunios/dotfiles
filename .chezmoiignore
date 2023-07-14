@@ -14,6 +14,7 @@ README.md
 
 {{ if ne .osid "windows" }}
 AppData
+Documents/WindowsPowerShell
 scoop
 .local/bin/exa.exe
 {{ end }}
