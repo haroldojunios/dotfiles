@@ -280,6 +280,13 @@
   "jupyter.askForKernelRestart": false,
   "latex-workshop.bibtex-format.sort.enabled": true,
   "latex-workshop.latex.build.forceRecipeUsage": false,
+  "latex-workshop.latex.magic.args": [
+    "-synctex=1",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-file-line-error",
+    "%DOC%"
+  ],
   "latex-workshop.latex.recipes": [
     {
       "name": "xelatexmk",
