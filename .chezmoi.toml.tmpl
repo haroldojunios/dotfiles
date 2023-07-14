@@ -21,6 +21,11 @@
 {{- $isServer = promptBoolOnce . "isServer" "Is this an server machine" -}}
 {{- end -}}
 
+{{- $installDE := true -}}
+{{- if $isWork -}}
+{{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
+{{- end -}}
+
 encryption = "age"
 [age]
     identity = "~/.config/key.txt"
@@ -33,3 +38,4 @@ encryption = "age"
     isWork = {{ $isWork }}
     isWSL = {{ $isWSL }}
     isServer = {{ $isServer }}
+    installDE = {{ $installDE }}

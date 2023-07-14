@@ -180,13 +180,6 @@ packageList=(
   zip
 )
 
-if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
-  packageList=(
-    "${packageList[@]}"
-    $appletsPackageList
-  )
-fi
-
 if [ -d "/sys/class/power_supply" ]; then
   packageList=(
     "${packageList[@]}"
@@ -195,10 +188,19 @@ if [ -d "/sys/class/power_supply" ]; then
   )
 fi
 
+{{ if .installDE }}
+if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
+  packageList=(
+    "${packageList[@]}"
+    $appletsPackageList
+  )
+fi
+
 packageList=(
   "${dePackageList[@]}"
   "${packageList[@]}"
 )
+{{ end }}
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s $package &>/dev/null; then
