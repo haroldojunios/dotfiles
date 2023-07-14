@@ -44,13 +44,6 @@ fi
 # firefox repo
 if ! grep -q "^deb .*mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:mozillateam/ppa -y
-
-  if command -v snap &>/dev/null; then
-    if snap list | grep firefox &>/dev/null; then
-      sudo snap remove firefox
-    fi
-  fi
-
   sudo bash -c "cat >/etc/apt/preferences.d/mozillateamppa" <<EOF
 Package: firefox*
 Pin: release o=LP-PPA-mozillateam
@@ -455,5 +448,5 @@ EndSection
 EOF
 fi
 
-sudo apt-get autoremove -y
+sudo apt-get autoremove --purge -y
 sudo apt-get clean -y
