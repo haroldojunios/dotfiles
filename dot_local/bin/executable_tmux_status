@@ -7,26 +7,24 @@ fi
 
 status=""
 
-case "$HOME" in
-*termux*)
+if command -v termux-setup-storage >/dev/null; then
   termux=true
-  ;;
-*)
+else
   termux=
-  ;;
-esac
+fi
 
 if [ "$@" = "left" ]; then
-  status="${status}#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" #window number
-  status="${status}#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #session name
+  status="${status}#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" # window number
+  status="${status}#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" # session name
+  status="${status}#[fg=colour121,bg=colour235] ${USER}"                                                        # user name
   if [ -z $termux ]; then
-    status="${status}#[fg=colour121,bg=colour235] ${USER}@#[fg=colour222]$(hostname -I | awk '{print $1}') #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]" #user name
-    # status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+    status="${status}@#[fg=colour222]$(hostname -I | awk '{print $1}')" # hostname
   fi
+  status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
 else
-  status="${status}#[fg=colour121,bg=colour235] $(curl 'wttr.in?format=%l:+%C+%t+%w') "          #weather
-  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           #date
-  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" #time
+  status="${status}#[fg=colour121,bg=colour235] $(curl 'wttr.in?format=%l:+%C+%t+%w') "          # weather
+  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                           # date
+  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" # time
   if [ $(hostname) != localhost ]; then
     status="${status}#[fg=colour222,bg=colour238] #H"
   fi
