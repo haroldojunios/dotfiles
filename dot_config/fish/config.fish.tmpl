@@ -157,9 +157,12 @@ if status --is-interactive && type -q mcfly
 end
 
 ## Starship prompt
+{{- if eq .osid "windows" }}
+if type -q starship
+    starship init fish | source
+end
+{{- else }}
 if status --is-interactive && type -q starship
     starship init fish | source
-else
-    function fish_right_prompt
-    end
 end
+{{- end }}
