@@ -22,7 +22,7 @@
 {{- end -}}
 
 {{- $installDE := true -}}
-{{- if $isWork -}}
+{{- if and (eq $osid "linux-ubuntu") (not $isWSL) -}}
 {{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
 {{- end -}}
 
