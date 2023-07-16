@@ -1,0 +1,11 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if [ -f "$HOME/.local/bin/chezmoi" ]; then
+  chezmoi completion fish
+fi
