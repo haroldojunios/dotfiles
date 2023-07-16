@@ -7,5 +7,5 @@
 set -eu
 
 if [ -f "$HOME/.local/bin/chezmoi" ]; then
-  chezmoi upgrade &>/dev/null
+  "$HOME/.local/bin/chezmoi" upgrade &>/dev/null
 fi

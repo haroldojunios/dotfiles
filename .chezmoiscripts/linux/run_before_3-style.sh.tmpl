@@ -148,5 +148,5 @@ if ! [ -f /usr/share/wallpapers/Shani.png ]; then
   sudo cp {{ .chezmoi.sourceDir }}/assets/Shani.png /usr/share/wallpapers
 fi
 
-plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null
+plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null || :
 {{ end }}
