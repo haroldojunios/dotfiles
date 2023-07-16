@@ -8,10 +8,7 @@ if ! command -v chezmoi >/dev/null; then
     if [ -f /etc/os-release ]; then
       ID=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
       IDLIKE=$(grep -oP '(?<=^ID_LIKE=).+' /etc/os-release | tr -d '"')
-      if [ "$ID" = ubuntu ] || [ "$IDLIKE" = ubuntu ]; then
-        sudo apt-get update
-        sudo apt-get install -y chezmoi
-      elif [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
+      if [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
         sudo pacman -Syy
         sudo pacman -S --noconfirm --needed chezmoi
       fi
