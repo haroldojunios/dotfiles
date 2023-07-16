@@ -56,6 +56,11 @@ if ! grep -q "^deb .*kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sourc
   sudo add-apt-repository ppa:kubuntu-ppa/backports -y
 fi
 
+# fish repo
+if ! grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  sudo add-apt-repository ppa:fish-shell/release-3 -y
+fi
+
 sudo apt-get update
 sudo apt-get full-upgrade -y
 
@@ -92,6 +97,14 @@ kcalc \
 konsole \
 okular \
 "
+  alacritty
+  {{ if not .isWork }}
+  calibre
+  {{ end }}
+  code
+  firefox
+  gparted
+  keepassxc
   xserver-xorg-video-dummy
 )
 
@@ -119,15 +132,10 @@ qtdeclarative5-dev \
 # packages
 packageList=(
   age
-  alacritty
   bat
   bc
-  {{ if not .isWork }}
-  calibre
-  {{ end }}
   clang
   cmake
-  code
   conky-all
   crudini
   curl
@@ -135,13 +143,10 @@ packageList=(
   expect
   ffmpeg
   fish
-  firefox
   git
-  gparted
   imagemagick
   jmtpfs
   jq
-  keepassxc
   make
   micro
   mpv
@@ -381,7 +386,6 @@ fi
 #   Modeline "1360x768" 24.49 1360 1392 1480 1512 768 786 789 807
 #   Modeline "1024x768" 18.71 1024 1056 1120 1152 768 786 789 807
 #   Modeline "768x1024" 19.50 768 800 872 904 1024 1048 1052 1076
-
 
 #   ##common resolutions for android devices (both orientations):
 #   #Modeline "800x1280" 25.89 800 832 928 960 1280 1310 1315 1345
