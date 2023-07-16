@@ -6,12 +6,11 @@
 
 set -eu
 
-{{ if ne .osid "windows" }}
 CRONTAB="
 @reboot fish -c 'fisher update >/dev/null'
-{{     if eq .osid "android" -}}
+{{ if ne .osid "android" }}
 0 * * * * find $HOME/storage/shared/Android/media/com.whatsapp/WhatsApp/Databases/ -type f ! -name msgstore.db.crypt14 -delete >/dev/null 2>&1
-{{     end -}}
+{{ end }}
 "
 
 if command -v crontab &>/dev/null; then
@@ -19,4 +18,3 @@ if command -v crontab &>/dev/null; then
     echo $CRONTAB | crontab -
   fi
 fi
-{{ end }}
