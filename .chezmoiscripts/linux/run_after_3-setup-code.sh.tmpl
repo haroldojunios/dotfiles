@@ -57,7 +57,7 @@ if [ -d "$HOME/.vscode-server/bin" ]; then
 fi
 
 for code in "${code_bins[@]}"; do
-  if ! command -v $code >/dev/null || ! [ -x "$code" ]; then
+  if ! command -v $code &>/dev/null && ! [ -x "$code" ]; then
     continue
   fi
 
