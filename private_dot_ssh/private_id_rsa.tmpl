@@ -3,6 +3,9 @@
 {{- else if eq .osid "android" -}}
 {{ joinPath .chezmoi.sourceDir "private_dot_ssh/termux-ssh.id_rsa.age" | include | decrypt }}
 {{- else if eq .osid "windows" -}}
+{{ joinPath .chezmoi.sourceDir "private_dot_ssh/windows-ssh.id_rsa.age" | include | decrypt }}
+{{- else if .isRasp -}}
+{{ joinPath .chezmoi.sourceDir "private_dot_ssh/rasp-ssh.id_rsa.age" | include | decrypt }}
 {{- else -}}
 {{ joinPath .chezmoi.sourceDir "private_dot_ssh/home-ssh.id_rsa.age" | include | decrypt }}
 {{- end -}}
