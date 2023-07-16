@@ -7,7 +7,7 @@
 set -eu
 
 if ! command -v age &>/dev/null; then
-  {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+  {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
   sudo apt install -y age
   {{ else if eq .osid "android" }}
   apt install age

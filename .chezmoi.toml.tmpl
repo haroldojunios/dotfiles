@@ -14,7 +14,12 @@
 {{-   $isWSL = contains "microsoft" (lower .chezmoi.kernel.osrelease) -}}
 {{- end -}}
 
+{{- $isRasp := eq .chezmoi.username "pi" -}}
+
+{{- $isWork := false -}}
+{{- if not $isRasp -}}
 {{- $isWork := promptBoolOnce . "isWork" "Is this an work machine" -}}
+{{- end -}}
 
 {{- $isServer := false -}}
 {{- if $isWork -}}
@@ -22,7 +27,9 @@
 {{- end -}}
 
 {{- $installDE := true -}}
-{{- if and (eq $osid "linux-ubuntu") (not $isWSL) -}}
+{{- if or $isRasp $isWSL -}}
+{{- $installDE = false -}}
+{{- else if eq $osid "linux-ubuntu" -}}
 {{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
 {{- end -}}
 
@@ -37,5 +44,6 @@ encryption = "age"
     osidLike = {{ $osidLike | quote }}
     isWork = {{ $isWork }}
     isWSL = {{ $isWSL }}
+    isRasp = {{ $isRasp }}
     isServer = {{ $isServer }}
     installDE = {{ $installDE }}

@@ -15,9 +15,9 @@ set -eu
 {{ else if eq .osidLike "linux-arch" }}
 {{   template "install_arch.sh" . }}
 {{ else if eq .osidLike "android" }}
-{{   if not .isWSL }}
-{{     template "install_termux.sh" . }}
-{{   end }}
+{{   template "install_termux.sh" . }}
+{{ else if .isRasp }}
+{{   template "install_rasp.sh" . }}
 {{ end }}
 
 {{ if not .isWork }}

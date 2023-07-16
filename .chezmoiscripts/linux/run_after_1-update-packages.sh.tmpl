@@ -6,7 +6,7 @@
 
 set -eu
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
 if ! bat --version | grep -q "$BAT_VER"; then
   case $(uname -m) in
