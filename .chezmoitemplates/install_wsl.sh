@@ -80,9 +80,9 @@ for package in "${packageList[@]}"; do
   fi
 done
 
-if ! command -v bat &>/dev/null; then
-  mkdir -p ~/.local/bin
-  ln -s /usr/bin/batcat $HOME/.local/bin/bat
+if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
+  mkdir -p "$HOME/.local/bin"
+  ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
 fi
 
 if ! dpkg -s docker-ce &>/dev/null; then
