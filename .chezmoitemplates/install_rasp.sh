@@ -5,15 +5,6 @@ GREEN='\033[1;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
-if ! dpkg -s software-properties-common &>/dev/null; then
-  sudo apt-get install software-properties-common -y
-fi
-
-# fish repo
-if ! grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  sudo add-apt-repository ppa:fish-shell/release-3 -y
-fi
-
 sudo apt-get update
 sudo apt-get full-upgrade -y
 
