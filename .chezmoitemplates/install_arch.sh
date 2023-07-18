@@ -145,7 +145,7 @@ packageList=(
   bc
   clang
   cmake
-  crudini
+  # crudini
   curl
   docker
   docker-compose
@@ -171,6 +171,7 @@ packageList=(
   python
   python-black
   python-isort
+  python-pipx
   reflector
   shfmt
   simple-mtpfs
@@ -266,6 +267,10 @@ if [ -d "/proc/acpi/button/lid" ]; then
     sudo systemctl enable --now NetworkManager-dispatcher.service
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
   fi
+fi
+
+if ! pipx list --short | grep -q crudini; then
+  pipx install crudini
 fi
 
 pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :
