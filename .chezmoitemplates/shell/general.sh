@@ -39,9 +39,10 @@ alias rsl='rsync --archive --human-readable --whole-file --no-compress --hard-li
 alias rsd='rs --delete-after'
 alias rsh='bash -c "(cd; rsync -amyvhPl --inplace --relative --info=progress2,name \
   --no-inc-recursive --info=progress2,name \
+  --exclude={venv,virtualenv,Cache,CachedData} \
   .config .local/share .ssh Backup Books calibre \
   Desktop Documents Downloads Music Pictures Videos \
-  /run/media/haroldo/2d16e6d3-9832-4262-9eca-8bd79ce45c60/home)"'
+  /run/media/haroldo/data/home)"'
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
 alias c='TMUX= code'
 alias c.='TMUX= code .'

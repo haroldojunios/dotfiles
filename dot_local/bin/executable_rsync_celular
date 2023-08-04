@@ -10,7 +10,6 @@ filter_rsync="+ /MIUI/backup/
 - /.*
 - /MIUI/*
 - /Music
-- /DCIM
 - /Download/Flash
 - /Download/PC
 - /documents/PC
@@ -52,22 +51,25 @@ filter_rsync="+ /MIUI/backup/
 - /WhatsApp/.trash
 - /ReadChan
 - .trashed*
+- .Trash
 - .thumbnails
 - .tmfs"
 
 rsync_all() {
+  RS_OPTS="-amyvhPL --inplace --info=progress2,name --no-inc-recursive"
   ssh celular "termux-wake-lock" || completed
-  ssh -t celular "sudo ~/bin/rsync_dbs"
-  ssh celular "remove_wpp_dbs"
-  ssh celular "remove_old_bak"
+  # ssh -t celular "sudo ~/bin/rsync_dbs"
+  # ssh celular "remove_wpp_dbs"
+  # ssh celular "remove_old_bak"
   # ssh celular "rsync_ig"
-  [ ! -e ~/Downloads/Celular/ ] ||
-    rsync -amyvhPL --inplace --info=progress2,name --no-inc-recursive --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                               # files from PC
-    rsync -amyvhPL --inplace --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                                                                      # pictures
-    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --info=progress2,name --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ ~/Backup/android/ && # all
-    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                       # books
-    rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --exclude={"*.ini",".thumbnails"} ~/Music/ celular:/sdcard/Music/                                         # music
-  # rsync -amyvhPL --inplace --delete-after --info=progress2,name --no-inc-recursive --include={"*/","*.mp4","*.mkv"} --exclude="*" ~/Downloads/irc/ celular:/sdcard/Movies &&  # episodes
+  rsync $RS_OPTS --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/
+  # [ ! -e ~/Downloads/Celular/ ] ||
+  #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
+  #   rsync $RS_OPTS --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
+  #   rsync $RS_OPTS --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                            # books
+  #   rsync $RS_OPTS --exclude={"*.ini",".thumbnails"} ~/Music/ celular:/sdcard/Music/                                              # music
+  # # rsync $RS_OPTS --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                   # pictures
+  # # rsync $RS_OPTS --include={"*/","*.mp4","*.mkv"} --exclude="*" ~/Downloads/irc/ celular:/sdcard/Movies &&  # episodes
   completed
 }
 
@@ -78,9 +80,9 @@ completed() {
 
 trap completed INT
 
-for folder in ~/Pictures/DCIM/ ~/Backup/android/; do
-  mkdir -p $folder
-done
+# for folder in ~/Pictures/DCIM/ ~/Backup/android/; do
+#   mkdir -p $folder
+# done
 
 until rsync_all; do
   sleep 10
