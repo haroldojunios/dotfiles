@@ -119,4 +119,28 @@ fi
 if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
   sudo service docker start &>/dev/null
 fi
+{{ else if .isRasp }}
+if grep "#enable_uart=1" /boot/cmdline.txt &>/dev/null; then
+  sudo sed -i 's/#enable_uart=1/enable_uart=1/g' /boot/cmdline.txt
+  grep -q 'enable_uart=1' /boot/config.txt || echo 'enable_uart=1' | sudo tee -a /boot/config.txt
+  sudo systemctl stop serial-getty@ttyS0.service
+  sudo systemctl disable serial-getty@ttyS0.service
+  sudo sed -i 's/console=serial0,115200//g' /boot/cmdline.txt
+fi
+
+if grep "#dtparam=spi=on" /boot/cmdline.txt &>/dev/null; then
+  sudo sed -i 's/blacklist spi-bcm2708/#blacklist spi-bcm2708/g' /etc/modprobe.d/raspi-blacklist.conf
+  sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/g' /boot/cmdline.txt
+  grep -q 'dtparam=spi=on' /boot/config.txt || echo 'dtparam=spi=on' | sudo tee -a /boot/config.txt
+fi
+
+if grep "#dtparam=i2c1=on" /boot/cmdline.txt &>/dev/null; then
+  sudo sed -i 's/blacklist i2c-bcm2708/#blacklist i2c-bcm2708/g' /etc/modprobe.d/raspi-blacklist.conf
+  sudo sed -i 's/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/g' /boot/cmdline.txt
+  sudo sed -i 's/#dtparam=i2c1=on/dtparam=i2c1=on/g' /boot/cmdline.txt
+  grep -q 'dtparam=i2c_arm=on' /boot/config.txt || echo 'dtparam=i2c_arm=on' | sudo tee -a /boot/config.txt
+  grep -q 'dtparam=i2c1=on' /boot/config.txt || echo 'dtparam=i2c1=on' | sudo tee -a /boot/config.txt
+  grep -q 'i2c-dev' /etc/modules || echo 'i2c-dev' | sudo tee -a /etc/modules
+  sudo adduser pi i2c
+fi
 {{ end }}

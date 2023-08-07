@@ -28,6 +28,7 @@ packageList=(
   ffmpeg
   fish
   git
+  i2c-tools
   imagemagick
   jq
   make
@@ -39,6 +40,7 @@ packageList=(
   openssh-server
   p7zip
   python-is-python3
+  python-smbus
   python3-dev
   python3-pip
   python3-rpi.gpio
