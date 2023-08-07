@@ -27,9 +27,9 @@
 {{- end -}}
 
 {{- $installDE := true -}}
-{{- if or $isRasp $isWSL -}}
+{{- if $isWSL -}}
 {{- $installDE = false -}}
-{{- else if eq $osid "linux-ubuntu" -}}
+{{- else if or (eq $osid "linux-ubuntu") $isRasp -}}
 {{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
 {{- end -}}
 
