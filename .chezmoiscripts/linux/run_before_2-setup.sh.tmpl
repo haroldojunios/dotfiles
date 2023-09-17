@@ -99,7 +99,7 @@ sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btr
 sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
 sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
 
-if command -v sensors-detect &>/dev/null && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
+if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
   if ! [ -d "/var/lib/dkms/it87" ]; then
     git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/frankcrawford/it87.git
     (
