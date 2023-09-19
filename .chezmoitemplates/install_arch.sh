@@ -149,7 +149,7 @@ packageList=(
   curl
   docker
   docker-compose
-  exa
+  eza
   expac
   expect
   fastfetch

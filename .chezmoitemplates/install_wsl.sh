@@ -39,7 +39,7 @@ packageList=(
   cmake
   crudini
   curl
-  exa
+  eza
   ffmpeg
   fish
   git

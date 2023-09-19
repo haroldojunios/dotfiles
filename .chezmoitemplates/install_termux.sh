@@ -20,7 +20,7 @@ packageList=(
   code-server # needs tur repo
   cronie
   curl
-  exa
+  eza
   ffmpeg
   fish
   git

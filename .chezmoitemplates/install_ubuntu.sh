@@ -139,7 +139,7 @@ packageList=(
   conky-all
   crudini
   curl
-  exa
+  eza
   expect
   ffmpeg
   fish
