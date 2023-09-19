@@ -123,5 +123,29 @@
     "key": "ctrl+'",
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "sqltools.executeQueryFromFile",
+    "when": "editorTextFocus && editorLangId == 'sql'"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "sqltools.executeQuery",
+    "when": "editorHasSelection && editorTextFocus && editorLangId == 'sql'"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "sqltools.executeCurrentQuery",
+    "when": "editorTextFocus && editorLangId == 'sql'"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.gotoSymbol"
   }
 ]
