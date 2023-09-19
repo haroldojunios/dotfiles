@@ -6,7 +6,7 @@ alias r='paru -Rns --noconfirm'
 alias u='sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist && paru -Syu --noconfirm'
 alias s='paru -Ss'
 alias si='paru -Qi'
-alias cl='paru -Sccd && pacman -Qtdq | sudo pacman -Rns --noconfirm - 2>/dev/null || :'
+alias cl='yes | paru -Sccd && pacman -Qtdq | sudo pacman -Rns --noconfirm - 2>/dev/null || :'
 
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias rmpkg="sudo pacman -Rdd"
