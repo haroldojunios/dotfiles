@@ -11,10 +11,14 @@ if ! command -v chezmoi >/dev/null; then
       if [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
         sudo pacman -Syy
         sudo pacman -S --noconfirm --needed chezmoi
+      elif [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
+        sudo apt-get update
       fi
     fi
   fi
 fi
+
+export PATH=$PATH:"$HOME/.local/bin"
 
 if command -v chezmoi >/dev/null; then
   chezmoi init --apply haroldojunios

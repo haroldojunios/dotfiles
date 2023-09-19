@@ -61,6 +61,14 @@ if ! grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/source
   sudo add-apt-repository ppa:fish-shell/release-3 -y
 fi
 
+# eza repo
+if ! [ -f /etc/apt/sources.list.d/gierens.list ]; then
+  sudo mkdir -p /etc/apt/keyrings
+  wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list &>/dev/null
+  sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+fi
+
 sudo apt-get update
 sudo apt-get full-upgrade -y
 
