@@ -11,7 +11,7 @@ if ! command -v chezmoi >/dev/null; then
       if [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
         sudo pacman -Syy
         sudo pacman -S --noconfirm --needed chezmoi
-      elif [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
+      elif [ "$ID" = ubuntu ] || [ "$IDLIKE" = ubuntu ] || [ "$ID" = debian ] || [ "$IDLIKE" = debian ]; then
         sudo apt-get update
       fi
     fi
