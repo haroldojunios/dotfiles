@@ -106,16 +106,16 @@ format = '[\($localipv4\)]($style)'
 
 [shlvl]
 disabled = true
-symbol = '↕️'
+symbol = '󰧈'
 
 [fill]
 symbol = ' '
 
 [shell]
 disabled = false
-fish_indicator = ''
-powershell_indicator = '_'
-bash_indicator = '$_'
+fish_indicator = '󰈺'
+powershell_indicator = ''
+bash_indicator = ''
 zsh_indicator = '%_'
 
 [directory]
@@ -127,12 +127,13 @@ truncation_symbol = "…/"
 
 [sudo]
 disabled = false
+symbol = ''
 
 [git_status]
-ahead = "⇡${count}"
-behind = "⇣${count}"
+ahead = "󰁝${count}"
+behind = "󰁅${count}"
 deleted = "x"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+diverged = "󰹹⇡${ahead_count}󰁅${behind_count}"
 style = "white"
 
 [cmd_duration]
@@ -142,9 +143,9 @@ min_time = 2500
 
 {{ if ne .osid "android" -}}
 [battery]
-charging_symbol = ""
-discharging_symbol = ""
-full_symbol = ""
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+full_symbol = "󱟢"
 format = '[$symbol$percentage]($style)'
 
 [[battery.display]]  # "bold red" style when capacity is between 0% and 10%
@@ -163,7 +164,7 @@ threshold = 80
 
 [time]
 disabled = false
-format = " 🕙[$time]($style)"
+format = " 󰅐[$time]($style)"
 style = "bright-blue"
 time_format = "%T"
 
@@ -172,31 +173,31 @@ disabled = false
 format = '[$symbol ${ram} \(${ram_pct}\)( | ${swap})]($style) '
 style = "cyan"
 threshold = -1
-symbol = ""
+symbol = "󰍛"
 
 # SYMBOLS
 [status]
 disabled = false
 format = '[╰─❯ \[$symbol$signal_name$common_meaning$maybe_int\]]($style)'
 symbol = ""
-not_executable_symbol = "🚫 "
-not_found_symbol = "🔍 "
-sigint_symbol = "🧱 "
-signal_symbol = "⚡ "
+not_executable_symbol = " "
+not_found_symbol = "󰍉 "
+sigint_symbol = "󰟾 "
+signal_symbol = "󱐋 "
 map_symbol = true
 # pipestatus = true
 
 [aws]
-symbol = " "
+symbol = "󰸏 "
 
 [conda]
 symbol = " "
 
 [dart]
-symbol = " "
+symbol = " "
 
 [docker_context]
-symbol = " "
+symbol = "󰡨 "
 
 [elixir]
 symbol = " "
@@ -205,16 +206,16 @@ symbol = " "
 symbol = " "
 
 [git_branch]
-symbol = " "
+symbol = " "
 
 [golang]
 symbol = " "
 
 [hg_branch]
-symbol = " "
+symbol = " "
 
 [java]
-symbol = " "
+symbol = " "
 
 [julia]
 symbol = " "
@@ -223,10 +224,10 @@ symbol = " "
 symbol = " "
 
 [nix_shell]
-symbol = " "
+symbol = "󱄅 "
 
 [nodejs]
-symbol = " "
+symbol = "󰎙 "
 
 [package]
 symbol = " "
@@ -235,16 +236,16 @@ symbol = " "
 symbol = " "
 
 [php]
-symbol = " "
+symbol = " "
 
 [python]
-symbol = " "
+symbol = " "
 
 [ruby]
-symbol = " "
+symbol = " "
 
 [rust]
 symbol = " "
 
 [swift]
-symbol = "ﯣ "
+symbol = " "
