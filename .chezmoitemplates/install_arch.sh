@@ -139,8 +139,8 @@ dePackageList=(
   firefox
   gimp
   gparted
+  hyper
   keepassxc
-  kitty
   mpv
   onlyoffice-bin
   ventoy-bin

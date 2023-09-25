@@ -302,6 +302,16 @@ EOF
   fi
 fi
 
+# if ! dpkg -s hyper &>/dev/null; then
+#   TEMP_FOLDER=$(mktemp -d)
+#   (
+#     cd "$TEMP_FOLDER"
+#     curl -fsLS -o hyper.deb "https://releases.hyper.is/download/deb"
+#     sudo apt-get install -y ./hyper.deb
+#   )
+#   rm -rf "$TEMP_FOLDER"
+# fi
+
 # if ! [ -f "/etc/X11/xorg.conf" ]; then
 #   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF
 # # This xorg configuration file will start a dummy X11 server.

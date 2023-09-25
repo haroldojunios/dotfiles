@@ -19,6 +19,17 @@ if ! bat --version | grep -q "$BAT_VER"; then
     trap 'rm -rf "$TEMP_FOLDER"' EXIT
     wget -O "$TEMP_FOLDER/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/bat.deb"
+    rm -rf "$TEMP_FOLDER"
   fi
 fi
+
+HYPER_VER=$(curl --silent "https://api.github.com/repos/vercel/hyper/releases/latest" | jq -r .tag_name | tr -d v)
+if ! hyper version | grep -q "$HYPER_VER"; then
+  TEMP_FOLDER=$(mktemp -d)
+  trap 'rm -rf "$TEMP_FOLDER"' EXIT
+  wget -O "$TEMP_FOLDER/hyper.deb" "https://releases.hyper.is/download/deb"
+  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/hyper.deb"
+  rm -rf "$TEMP_FOLDER"
+fi
+
 {{ end }}
