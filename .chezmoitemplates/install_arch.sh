@@ -73,8 +73,8 @@ fi
 
 if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
   # chaotic-aur
-  sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-  sudo pacman-key --lsign-key FBA220DFC880C036
+  sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+  sudo pacman-key --lsign-key 3056513887B78AEB
   sudo pacman -U --noconfirm --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
   # arch4edu
@@ -82,7 +82,7 @@ if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
   sudo pacman-key --finger 7931B6D628C8D3BA
   sudo pacman-key --lsign-key 7931B6D628C8D3BA
 
-  sudo tee -a /etc/pacman.conf >/dev/null <<EOF
+  sudo tee -a /etc/pacman.conf >/dev/null <<'EOF'
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 
@@ -256,17 +256,6 @@ if lspci -k | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
     nvidia-utils
   )
 fi
-
-if grep -qi amd /proc/cpuinfo; then
-  ucode=amd-ucode
-else
-  ucode=intel-ucode
-fi
-
-packageList=(
-  "${packageList[@]}"
-  $ucode
-)
 
 if [ -d "/proc/acpi/button/lid" ]; then
   if ! pacman -Q power-profiles-daemon &>/dev/null; then
