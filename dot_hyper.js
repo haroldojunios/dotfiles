@@ -93,10 +93,10 @@ module.exports = {
     // //
     // // Cygwin
     // // - Example: `C:\\cygwin64\\bin\\bash.exe`
-    // shell: "",
+    shell: "/usr/bin/tmux",
     // // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // // by default `['--login']` will be used
-    // shellArgs: ["--login"],
+    shellArgs: [],
     // for environment variables
     env: {},
     // Supported Options:

@@ -70,7 +70,7 @@ if ! [ -f /etc/apt/sources.list.d/gierens.list ]; then
 fi
 
 sudo apt-get update
-sudo apt-get full-upgrade -y
+# sudo apt-get full-upgrade -y
 
 # desktop enviroment
 dePackageList=(
@@ -140,6 +140,7 @@ qtdeclarative5-dev \
 # packages
 packageList=(
   age
+  aptitude
   bat
   bc
   clang
@@ -165,6 +166,7 @@ packageList=(
   p7zip
   python-is-python3
   python3
+  python3-requests
   python3-venv
   shfmt
   sshfs
@@ -301,16 +303,6 @@ if ! dpkg -s docker-ce &>/dev/null; then
 EOF
   fi
 fi
-
-# if ! dpkg -s hyper &>/dev/null; then
-#   TEMP_FOLDER=$(mktemp -d)
-#   (
-#     cd "$TEMP_FOLDER"
-#     curl -fsLS -o hyper.deb "https://releases.hyper.is/download/deb"
-#     sudo apt-get install -y ./hyper.deb
-#   )
-#   rm -rf "$TEMP_FOLDER"
-# fi
 
 # if ! [ -f "/etc/X11/xorg.conf" ]; then
 #   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF
@@ -470,5 +462,6 @@ fi
 # EOF
 # fi
 
+sudo aptitude safe-upgrade -y
 sudo apt-get autoremove --purge -y
 sudo apt-get clean -y

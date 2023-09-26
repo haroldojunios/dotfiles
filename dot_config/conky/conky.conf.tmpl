@@ -22,7 +22,7 @@ conky.config = {
     draw_outline = false,
     draw_shades = false,
     extra_newline = false,
-    font = 'Hack:size=9',
+    font = 'Hack Nerd Font:size=9',
     gap_x = 20,
     gap_y = 50,
     minimum_height = 250,
@@ -67,9 +67,13 @@ ${color1}${font ConkySymbols:size=16}f${font} ${voffset -10} System» $hr${color
 ${color1}${goto 35}CPU: ${goto 70}${color}${execi 86400 cat /proc/cpuinfo | grep 'model name' | head -n1 | awk '{gsub(/model.*: /,"");print}'}
 ${color1}${goto 35}GPU: ${goto 70}${color}${execi 86400 lspci | grep -i 'vga' | awk '{gsub(/.*\[/,"");print}' | awk '{gsub(/\].*/,"");print}'}
 
+{{ if le $nproc 12 -}}
 {{ range $i := until $nproc -}}
-${color1}${goto 35}CPU {{ add1 $i }}: ${goto 82}${color}${freq_g {{ add1 $i }}}GHz ${alignr}${cpu cpu{{ $i }}}% ${cpubar cpu{{ $i }} 4,100}
+${color1}${goto 35}CPU {{ add1 $i }}: ${goto 82}${color}${freq_g {{ add1 $i }}}GHz ${alignr}${cpu cpu{{ $i }}}% ${cpubar cpu{{ $i }} 4,120}
 {{ end }}
+{{ else -}}
+${color1}${goto 35}CPU: ${goto 82}${color}${alignr}${cpu cpu0}% ${cpubar cpu0 4,120}
+{{- end }}
 
 ${color1}${goto 35}Uptime: ${color}$uptime_short ${alignr}${color1}Load: ${color}${loadavg}
 
@@ -104,9 +108,9 @@ ${color1}${voffset 8}${goto 35}Speed Down: ${alignr}${color}${downspeed {{ $inte
 ${voffset -12}
 ${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 
-${color1}${font FiraCode Nerd Font Mono:size=32}${font} ${voffset -10} Weather» $hr${color}
+${color1}${font Hack Nerd Font:size=16}${font} ${voffset -10} Weather» $hr${color}
 #${texeci 1800 curl wttr.in/_0pq.png | convert - -transparent black $HOME/.cache/conky_temp.png}
 #${image $HOME/.cache/conky_temp.png}
 #${voffset 70}
-${alignc}${execpi 300 curl wttr.in/?T0 --silent --max-time 3}
+${execp jq -r '.weather_summary' $HOME/.cache/weather | tr ',' '\n' | tr ':' '\n' | sed 's/^/${goto 35}/'}
 ]]

@@ -112,6 +112,16 @@ if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ 
   sudo bash -c "echo 'options it87 mmio=1' >/etc/modprobe.d/it87.conf"
   sudo bash -c "echo 'it87' >/etc/modules-load.d/it87.conf"
 fi
+
+if [ -f /etc/apt/apt.conf.d/20apt-esm-hook.conf ]; then
+  sudo rm /etc/apt/apt.conf.d/20apt-esm-hook.conf
+fi
+
+if ! [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak ] && [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf ]; then
+  sudo mv /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak
+  sudo touch /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
+  sudo systemctl restart NetworkManager
+fi
 {{ else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "$USER ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')

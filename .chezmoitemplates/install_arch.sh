@@ -195,6 +195,7 @@ packageList=(
   python-black
   python-isort
   python-pipx
+  python-requests
   reflector
   shfmt
   simple-mtpfs
