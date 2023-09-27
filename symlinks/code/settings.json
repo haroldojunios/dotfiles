@@ -248,6 +248,8 @@
   },
   "files.associations": {
     "**/*.html": "html",
+    "**/conky.conf*": "lua",
+    "**/fontconfig/*.conf": "xml",
     "**/requirements{/**,*}.{txt,in}": "pip-requirements",
     "**/templates/**/*": "django-txt",
     "**/templates/**/*.html": "django-html",
@@ -257,8 +259,7 @@
     "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
-    "*bashrc.tmpl": "shellscript",
-    "**/fontconfig/*.conf": "xml"
+    "*bashrc.tmpl": "shellscript"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 2500,
@@ -267,6 +268,7 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git-graph.dialog.addTag.pushToRemote": true,
+  "git.autofetch": true,
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "always",
   "gitlens.advanced.messages": {
@@ -573,6 +575,5 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
   "workbench.tree.renderIndentGuides": "always",
-  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode",
-  "git.autofetch": true
+  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode"
 }
