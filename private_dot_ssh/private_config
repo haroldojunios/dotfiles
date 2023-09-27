@@ -13,19 +13,6 @@ Match host celular exec "nc -w 1 -z 192.168.101.12 %p"
 Match host celular exec "true"
   HostName 192.168.1.22
 
-Host celular_root
-  Port 8023
-
-Match host celular_root exec "nc -w 1 -z 192.168.1.212 %p"
-  HostName 192.168.1.212
-Match host celular_root exec "nc -w 1 -z 10.0.0.12 %p"
-  HostName 10.0.0.12
-Match host celular_root exec "nc -w 1 -z 192.168.1.12 %p"
-  HostName 192.168.1.12
-Match host celular_root exec "true"
-  HostName 192.168.1.22
-
-
 Host rasp
   HostName rasp.local
   User pi

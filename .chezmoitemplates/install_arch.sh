@@ -106,6 +106,7 @@ dePackageList=(
   bluez
   bluez-utils
   ffmpegthumbs
+  gtk3-nocsd
   kdeplasma-addons
   kgamma5
   kscreen

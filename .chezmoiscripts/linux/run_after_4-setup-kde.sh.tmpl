@@ -22,6 +22,9 @@ ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpeg
 kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,\
 gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
+  # konsole
+  kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
+
   # kcminputrc
   kwriteconfig5 --file kcminputrc --group Keyboard --key NumLock 0
   kwriteconfig5 --file kcminputrc --group Mouse --key X11LibInputXAccelProfileFlat true
@@ -35,4 +38,35 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # kwinrc
   kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
+
+  # kdeglobals
+  kwriteconfig5 --file kdeglobals --group General --key font "Fira Sans,9,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key menuFont "Fira Sans,10,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key smallestReadableFont "Fira Sans,8,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key toolBarFont "Fira Sans,10,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group WM --key activeFont "Fira Sans,10,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Automatically select filename extension" true
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Show Inline Previews" true
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Show hidden files" true
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort by" Name
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort directories first" true
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort hidden files last" false
+  kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort reversed" false
+  kwriteconfig5 --file $HOME/.config/kdedefaults/kdeglobals --group KDE --key widgetStyle kvantum
+
+  # gtk
+  kwriteconfig5 --file $HOME/.config/gtk-3.0/settings.ini --group Settings --key gtk-font-name "Fira Sans,  10"
+  kwriteconfig5 --file $HOME/.config/gtk-4.0/settings.ini --group Settings --key gtk-font-name "Fira Sans,  10"
+
+  # touchpad
+  for group in "DELL0AB0:00 04F3:3147 Touchpad" "Synaptics s3203"; do
+    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key clickMethodAreas false
+    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key clickMethodClickfinger true
+    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key naturalScroll true
+    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key pointerAcceleration 0.4
+    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key tapToClick true
+  done
+
+  # trolltech
+  crudini --set $HOME/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
 fi

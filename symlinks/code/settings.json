@@ -248,7 +248,6 @@
   },
   "files.associations": {
     "**/*.html": "html",
-    "**/conky.conf*": "lua",
     "**/fontconfig/*.conf": "xml",
     "**/requirements{/**,*}.{txt,in}": "pip-requirements",
     "**/templates/**/*": "django-txt",
@@ -259,7 +258,9 @@
     "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
-    "*bashrc.tmpl": "shellscript"
+    "*bashrc.tmpl": "shellscript",
+    "conky.conf*": "lua",
+    "modify_*.tmpl": "shellscript"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 2500,

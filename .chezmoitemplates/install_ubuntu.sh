@@ -74,37 +74,38 @@ sudo apt-get update
 
 # desktop enviroment
 dePackageList=(
+  # x11 / login manager
   xorg
   sddm
-  "
-kde-config-screenlocker \
-kde-config-sddm \
-kde-spectacle \
-kwin-addons \
-plasma-browser-integration \
-plasma-desktop \
-plasma-disks \
-plasma-firewall \
-plasma-framework \
-plasma-integration \
-plasma-nm \
-plasma-pa \
-plasma-systemmonitor \
-plasma-thunderbolt \
-plasma-widgets-addons \
-plasma-workspace \
-powerdevil \
-"
-  "
-ark \
-dolphin \
-filelight \
-gwenview \
-kate \
-kcalc \
-konsole \
-okular \
-"
+  # plasma
+  gtk3-nocsd
+  kde-config-screenlocker
+  kde-config-sddm
+  kde-spectacle
+  kwin-addons
+  plasma-browser-integration
+  plasma-desktop
+  plasma-disks
+  plasma-firewall
+  plasma-framework
+  plasma-integration
+  plasma-nm
+  plasma-pa
+  plasma-systemmonitor
+  plasma-thunderbolt
+  plasma-widgets-addons
+  plasma-workspace
+  powerdevil
+  # kde gui apps
+  ark
+  dolphin
+  filelight
+  gwenview
+  kate
+  kcalc
+  konsole
+  okular
+  # other gui apps
   alacritty
   {{ if not .isWork }}
   calibre
