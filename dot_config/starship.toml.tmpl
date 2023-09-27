@@ -69,6 +69,7 @@ $container\
 $fill\
 $jobs\
 $shell\
+$os\
 $battery\
 $line_break\
 $status\
@@ -125,6 +126,9 @@ truncate_to_repo = true
 truncation_length = 3
 truncation_symbol = "…/"
 
+[os]
+disabled = false
+
 [sudo]
 disabled = false
 symbol = ''
@@ -164,7 +168,7 @@ threshold = 80
 
 [time]
 disabled = false
-format = " 󰅐[$time]($style)"
+format = " 󰅐 [$time]($style)"
 style = "bright-blue"
 time_format = "%T"
 

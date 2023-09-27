@@ -32,6 +32,10 @@ scoop
 {{   end }}
 {{ end }}
 
+{{ if or (eq .osid "android") (eq .osid "windows") }}
+.config/fontconfig
+{{ end }}
+
 {{ if ne .osid "windows" }}
 .chezmoiscripts/windows/**
 {{ else }}

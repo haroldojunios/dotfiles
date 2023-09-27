@@ -257,7 +257,8 @@
     "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
-    "*bashrc.tmpl": "shellscript"
+    "*bashrc.tmpl": "shellscript",
+    "**/fontconfig/*.conf": "xml"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 2500,
@@ -446,7 +447,7 @@
   "terminal.integrated.env.windows": {
     "VSCODE": "true"
   },
-  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono','FiraCode NFM','PowerlineSymbols','monospace'",
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font','FiraCode NFM','PowerlineSymbols','monospace'",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.inheritEnv": false,
   "terminal.integrated.profiles.windows": {

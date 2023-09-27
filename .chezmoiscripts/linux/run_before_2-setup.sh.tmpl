@@ -154,3 +154,7 @@ if grep "#dtparam=i2c1=on" /boot/cmdline.txt &>/dev/null; then
   sudo adduser pi i2c
 fi
 {{ end }}
+
+if command -v fish &>/dev/null; then
+  fish -c 'fisher update' &>/dev/null
+fi

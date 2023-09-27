@@ -139,7 +139,7 @@ dePackageList=(
   firefox
   gimp
   gparted
-  hyper
+  hyper-bin
   keepassxc
   mpv
   onlyoffice-bin
@@ -164,6 +164,7 @@ packageList=(
   clang
   cmake
   compsize
+  cronie
   curl
   docker
   docker-compose
@@ -243,7 +244,7 @@ packageList=(
   "${qgisPackageList[@]}"
 )
 
-if lspci -k | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
+if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
   case $(uname -r) in
   *arch*) nvidiaDriver=nvidia ;;
   *lts*) nvidiaDriver=nvidia-lts ;;
@@ -285,6 +286,10 @@ fi
 
 if ! systemctl list-unit-files --state=enabled | grep sddm &>/dev/null; then
   sudo systemctl enable sddm
+fi
+
+if ! systemctl list-unit-files --state=enabled | grep cronie &>/dev/null; then
+  sudo systemctl enable cronie
 fi
 
 if [ -d "/proc/acpi/button/lid" ]; then

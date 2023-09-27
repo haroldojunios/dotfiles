@@ -133,7 +133,7 @@ end
 {{ end }}
 
 ## Run fastfetch if session is interactive
-if status --is-interactive && test -z "$VSCODE"
+if status --is-interactive && test -z "$VSCODE" && test -z "$TMUX"
     if type -q fastfetch
         fastfetch --load-config neofetch
     else if type -q neofetch
