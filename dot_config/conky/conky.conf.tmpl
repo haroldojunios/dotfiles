@@ -24,7 +24,7 @@ conky.config = {
     extra_newline = false,
     font = 'Hack Nerd Font:size=9',
     gap_x = 20,
-    gap_y = 50,
+    gap_y = 0,
     minimum_height = 250,
     minimum_width = 350,
     net_avg_samples = 3,
@@ -57,17 +57,30 @@ conky.config = {
 {{- $interface := (output "ip" "-4" "route" "ls" | regexFind "^default.*" | split " ")._4 }}
 {{- $isWifi := stat (joinPath "/sys/class/net/" $interface "wireless") }}
 {{- $nproc := output "nproc" | trim | int }}
+{{- $nbits := output "getconf" "LONG_BIT" | trim | int }}
+{{- $cpuIcon := "󰻠" }}
+{{- if eq $nbits 32 }}
+{{-   $cpuIcon = "󰻟" }}
+{{- end }}
+{{- $distroIcon := "" }}
+{{ if .isRasp }}
+{{-   $distroIcon = "" }}
+{{- else if eq .osid "linux-ubuntu" }}
+{{-   $distroIcon = "" }}
+{{- else if eq .osid "linux-arch" }}
+{{-   $distroIcon = "" }}
+{{- end }}
 
 conky.text = [[
-${color1}${font ConkySymbols:size=20}a${font} ${voffset -10}GNU/Linux» $hr ${color}
+${color1}${font Hack Nerd Font:size=18}{{ $distroIcon }} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}OS: ${goto 88}${color}${execi 86400 cat `ls -atr /etc/*-release | tail -2` | grep "PRETTY_NAME" | cut -d= -f2 |  sed 's/"//g'}
 ${color1}${goto 35}Kernel: ${goto 88}${color}$kernel on $machine
 
-${color1}${font ConkySymbols:size=16}f${font} ${voffset -10} System» $hr${color}
+${color1}${font Hack Nerd Font:size=18}{{ $cpuIcon }} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU: ${goto 70}${color}${execi 86400 cat /proc/cpuinfo | grep 'model name' | head -n1 | awk '{gsub(/model.*: /,"");print}'}
 ${color1}${goto 35}GPU: ${goto 70}${color}${execi 86400 lspci | grep -i 'vga' | awk '{gsub(/.*\[/,"");print}' | awk '{gsub(/\].*/,"");print}'}
 
-{{ if le $nproc 12 -}}
+{{ if ge $nproc 12 -}}
 {{ range $i := until $nproc -}}
 ${color1}${goto 35}CPU {{ add1 $i }}: ${goto 85}${color}${freq_g {{ add1 $i }}}GHz ${alignr}${cpu cpu{{ $i }}}% ${cpubar cpu{{ $i }} 4,120}
 {{ end }}
@@ -77,15 +90,14 @@ ${color1}${goto 35}CPU load: ${goto 82}${color}${alignr}${cpu cpu0}% ${cpubar cp
 
 ${color1}${goto 35}Uptime: ${color}$uptime_short ${alignr}${color1}Load: ${color}${loadavg}
 
-${color1}${font ConkySymbols:size=16}h${font} ${voffset -10} Temperature» $hr${color}
+${color1}${font Hack Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU: ${color}${exec sensors | grep -A 10 'fan1' | grep 'temp1' | awk 'NR==1{print $2}'} ${alignr}${color1}GPU: ${color}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C
 
-${color1}${font ConkySymbols:size=16}J${font} ${voffset -10}Memory» $hr${color}
+${color1}${font Hack Nerd Font:size=18}󰍛 ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}RAM:  ${color}$mem/$memmax ${alignr}$memperc% ${membar 4,100}
 ${color1}${goto 35}SWAP: ${color}$swap/$swapmax ${alignr}$swapperc% ${swapbar 4,100}
 
-${color1}${font ConkySymbols:size=16}n${font} ${voffset -10} Processes» $hr${color}
-
+${color1}${font Hack Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU usage ${alignr}Memory Usage${color}
 ${color1}${goto 35}${stippled_hr}${color}
 {{- range $i := untilStep 1 11 1 }}
@@ -93,11 +105,11 @@ ${goto 35}${top name {{$i}}} ${color}${top cpu {{$i}}}% ${alignr}${top_mem name 
 {{- end }}
 ${color1}${goto 35}Processes: ${color}$processes ${color1}Running: ${color}$running_processes
 
-${color1}${font ConkySymbols:size=16}k${font} ${voffset -10} Storage» $hr${color}
+${color1}${font Hack Nerd Font:size=18}󰋊 ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}ROOT: ${color}${fs_used /}/${fs_size /} ${alignr}${fs_used_perc /}% ${fs_bar 4,100 /}
 # ${color1}${goto 35}HOME: ${color}${fs_used /home}/${fs_size /home} ${alignr}${fs_used_perc /home}% ${fs_bar 4,100 /home}
 
-${color1}${font ConkySymbols:size=16}b${font} ${voffset -10} Internet» $hr${color}
+${color1}${font Hack Nerd Font:size=18}󰛳 ${font} ${voffset -22} $hr${color}
 {{- if $isWifi }}
 ${color1}${goto 35}SSID: ${alignr}${color}${wireless_essid {{ $interface }}} ${color1}${alignr}Signal: ${color}${wireless_link_qual_perc {{ $interface }}}% ${wireless_link_bar 4,100 {{ $interface }}}
 ${color1}${goto 35}Bitrate: ${alignr}${color}${wireless_bitrate {{ $interface }}}
@@ -108,7 +120,8 @@ ${color1}${voffset 8}${goto 35}Speed Down: ${alignr}${color}${downspeed {{ $inte
 ${voffset -12}
 ${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 
-${color1}${font Hack Nerd Font:size=16}${font} ${voffset -10} Weather» $hr${color}
+${color1}${font Hack Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
 #${voffset 70}
 ${execp jq -r '.weather_summary' $HOME/.cache/weather | tr ',' '\n' | tr ':' '\n' | sed 's/^/${goto 35}/'}
+${voffset -45}
 ]]

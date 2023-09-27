@@ -1,4 +1,52 @@
+{{ if ne .osid "windows" }}
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
 refreshPeriod = "168h"
+
+[".local/share/fonts/FiraSans"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Fira%20Sans"
+refreshPeriod = "168h"
+
+[".local/share/fonts/NotoColorEmoji"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
+refreshPeriod = "168h"
+
+[".local/share/fonts/Arimo"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Arimo.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/Cousine"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Cousine.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/FiraCode"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/FiraMono"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/Hack"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/NerdFontsSymbolsOnly"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz"
+refreshPeriod = "168h"
+
+[".local/share/fonts/Tinos"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Tinos.tar.xz"
+refreshPeriod = "168h"
+
+{{ end }}

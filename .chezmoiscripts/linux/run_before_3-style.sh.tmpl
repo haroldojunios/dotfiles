@@ -80,49 +80,6 @@ fi
   { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons beautyline &>/dev/null; } &>/dev/null ||
   { [ -x /usr/lib/plasma-changeicons ] && /usr/lib/plasma-changeicons beautyline &>/dev/null; } &>/dev/null || :
 
-# fonts
-UPDATE_FONT_CACHE=
-if ! [ -d /usr/share/fonts/FiraSans ]; then
-  sudo mkdir -p /usr/share/fonts/FiraSans
-  wget -O "$TEMP_FOLDER/FiraSans.zip" -q "https://fonts.google.com/download?family=Fira%20Sans"
-  sudo unzip -q "$TEMP_FOLDER/FiraSans.zip" -d /usr/share/fonts/FiraSans
-  UPDATE_FONT_CACHE=true
-fi
-if ! [ -d /usr/share/fonts/NotoColorEmoji ]; then
-  sudo mkdir -p /usr/share/fonts/NotoColorEmoji
-  wget -O "$TEMP_FOLDER/NotoColorEmoji.zip" -q "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
-  sudo unzip -q "$TEMP_FOLDER/NotoColorEmoji.zip" -d /usr/share/fonts/NotoColorEmoji
-  UPDATE_FONT_CACHE=true
-fi
-
-fontList=(
-  Arimo
-  Cousine
-  FiraCode
-  FiraMono
-  Hack
-  NerdFontsSymbolsOnly
-  Tinos
-)
-for font in "${fontList[@]}"; do
-  if ! [ -d /usr/share/fonts/$font ]; then
-    sudo mkdir -p /usr/share/fonts/$font
-    wget -O "$TEMP_FOLDER/$font.zip" -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font.zip"
-    sudo unzip -q "$TEMP_FOLDER/$font.zip" -d /usr/share/fonts/$font
-    sudo rm -f /usr/share/fonts/$font/*Windows* || :
-    UPDATE_FONT_CACHE=true
-  fi
-done
-
-if ! [ -d /usr/share/fonts/ConkySymbols ]; then
-  sudo mkdir -p /usr/share/fonts/ConkySymbols
-  sudo cp "{{ .chezmoi.sourceDir }}/assets/ConkySymbols.ttf" /usr/share/fonts/ConkySymbols
-  UPDATE_FONT_CACHE=true
-fi
-if [ -n $UPDATE_FONT_CACHE ]; then
-  fc-cache -f
-fi
-
 # applets
 if ! [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ]; then
   git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/psifidotos/applet-window-buttons.git
