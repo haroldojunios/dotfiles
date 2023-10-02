@@ -96,6 +96,7 @@ dePackageList=(
   plasma-widgets-addons
   plasma-workspace
   powerdevil
+  pulseaudio-module-bluetooth
   # kde gui apps
   ark
   dolphin
@@ -144,6 +145,7 @@ packageList=(
   aptitude
   bat
   bc
+  btrfs-compsize
   clang
   cmake
   conky-all
