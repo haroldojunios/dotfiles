@@ -180,6 +180,7 @@ packageList=(
   git
   htop
   imagemagick
+  inetutils
   jq
   lm_sensors
   make

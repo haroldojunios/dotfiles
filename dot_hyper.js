@@ -4,7 +4,7 @@ module.exports = {
     updateChannel: "stable",
     fontSize: 10,
     fontFamily:
-      '"FiraCode Nerd Font", "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      '"FiraCode Nerd Font", "Fira Code", "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: "normal",
     fontWeightBold: "bold",
     lineHeight: 1,

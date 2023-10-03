@@ -131,7 +131,7 @@ disabled = false
 
 [sudo]
 disabled = false
-symbol = ''
+symbol = ''
 
 [git_status]
 ahead = "󰁝${count}"
@@ -151,19 +151,19 @@ charging_symbol = "󰂄"
 discharging_symbol = "󰂃"
 full_symbol = "󱟢"
 format = '[$symbol$percentage]($style)'
+disabled = false
 
-[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
-# disabled = false
+[[battery.display]]  # "bold red" style when capacity is between 0% and 15%
 style = "bold red"
 threshold = 15
 
-[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+[[battery.display]]  # "bold yellow" style when capacity is between 15% and 30%
 style = "bold yellow"
-threshold = 50
+threshold = 30
 
-[[battery.display]]  # "bold green" style when capacity is between 10% and 30%
+[[battery.display]]  # "bold green" style when capacity is between 30% and 100%
 style = "bold green"
-threshold = 80
+threshold = 100
 {{ end -}}
 
 [time]

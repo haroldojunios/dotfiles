@@ -28,23 +28,15 @@ blacklist snd_pcsp
 EOF
 
 # memory
-TOTAL_MEM=$(grep MemTotal /proc/meminfo | LC_ALL=C awk '{print $2/1024^2}')
-if [ $(echo "$TOTAL_MEM>15" | bc) -eq 1 ]; then
-  if ! grep -q "vm.vfs_cache_pressure=50" /etc/sysctl.conf; then
-    sudo bash -c "cat >/etc/sysctl.conf" <<EOF
-vm.vfs_cache_pressure=50
-vm.swappiness=10
-vm.dirty_background_ratio=1 #increase slowly, up to 10%, if CPU gets too busy with compression.
-vm.dirty_ratio=20
+# TOTAL_MEM=$(grep MemTotal /proc/meminfo | LC_ALL=C awk '{print $2/1024^2}')
+# if [ $(echo "$TOTAL_MEM>15" | bc) -eq 1 ]; then
+if ! grep -q "vm.swappiness = 180" /etc/sysctl.conf; then
+  sudo bash -c "cat >/etc/sysctl.conf" <<EOF
+vm.swappiness = 180
+vm.watermark_boost_factor = 0
+vm.watermark_scale_factor = 125
+vm.page-cluster = 0
 EOF
-  else
-    sudo bash -c "cat >/etc/sysctl.conf" <<EOF
-vm.vfs_cache_pressure=50
-vm.swappiness=10
-vm.dirty_background_ratio=10
-vm.dirty_ratio=20
-EOF
-  fi
 fi
 
 {{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
@@ -55,10 +47,10 @@ zram-fraction = 1
 EOF
 fi
 {{   else }}
-if ! grep "zram-size = ram" /etc/systemd/zram-generator.conf &>/dev/null; then
+if ! grep "zram-size = min(ram, 16384)" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
-zram-size = ram
+zram-size = min(ram, 16384)
 compression-algorithm = zstd
 host-memory-limit = none
 EOF
@@ -121,6 +113,9 @@ if ! [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak ] 
   sudo mv /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak
   sudo touch /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
   sudo systemctl restart NetworkManager
+fi
+if [ -f /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh ] && ! [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ]; then
+  sudo cp /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh /etc/X11/xinit/xinitrc.d/
 fi
 {{ else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then

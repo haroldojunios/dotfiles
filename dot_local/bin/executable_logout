@@ -1,4 +1,4 @@
 #!/bin/bash
 
 tmux kill-server
-gnome-session-quit --logout --force --no-prompt
+qdbus org.kde.ksmserver /KSMServer logout 0 0 1

@@ -11,9 +11,10 @@ CRONTAB=$(
 @reboot fish -c 'fisher update' >/dev/null 2>&1
 {{- if eq .osid "android" }}
 0 * * * * find "$HOME/storage/shared/Android/media/com.whatsapp/WhatsApp/Databases/" -type f ! -name msgstore.db.crypt14 -delete >/dev/null 2>&1
-{{- end }}
+{{- else }}
 @reboot "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
 */20 * * * * "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
+{{- end }}
 @reboot rm -rf "$HOME/.cache/*" >/dev/null 2>&1
 EOF
 )

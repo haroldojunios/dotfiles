@@ -4,28 +4,28 @@ import sys
 
 # raise an exception in case of running under python2 environment.
 if sys.version_info[0] < 3:
-    raise BaseException('Please run under python3 environment.')
+    raise BaseException("Please run under python3 environment.")
 
 import os
 import requests
 import json
 import time
 
-os.environ['DBUS_SESSION_BUS_ADDRESS'] = 'unix:path=/run/user/1000/bus'
+os.environ["DBUS_SESSION_BUS_ADDRESS"] = "unix:path=/run/user/1000/bus"
 
 # get this script current path.
 current_dir = os.path.dirname(os.path.realpath(__file__))
-img_folder = os.path.expanduser('~/Pictures/BingWallpaper')  # image folder
-base_url = 'http://www.bing.com'  # bing website base url.
+img_folder = os.path.expanduser("~/Pictures/BingWallpaper")  # image folder
+base_url = "http://www.bing.com"  # bing website base url.
 # this part makes a request to get image of the day.
-hp_image_archive_url = '/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US'
+hp_image_archive_url = "/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US"
 target_image = None  # target image to set as wallpaper.
 
 
 def get_image_link():
-    '''
+    """
     Fetches json object received from bing.com and gets target image link.
-    '''
+    """
 
     # send a get request to bing.com to read json data.
     url = base_url + hp_image_archive_url
@@ -34,24 +34,24 @@ def get_image_link():
             GET_DATA = requests.get(url)
             break
         except requests.exceptions.ConnectionError:
-            print('Connection error')
+            print("Connection error")
             time.sleep(10)
-    json_obj = json.loads(GET_DATA.content.decode('utf-8'))
-    data = json_obj['images'][0]
-    return data['urlbase'] + '_UHD.jpg', data['startdate']
+    json_obj = json.loads(GET_DATA.content.decode("utf-8"))
+    data = json_obj["images"][0]
+    return data["urlbase"] + "_UHD.jpg", data["startdate"]
 
 
 def download_image(url, date):
-    '''
+    """
     Checks for a valid full-size image file and if valid,
     downloads the image.
-    '''
+    """
 
     # ensure that we got a valid full-size jpeg background image.
     if url is not None:
         # create file named with param "id" of the url.
-        img_name = url.split('=')[-1].split('/')[-1].split('.', 1)[-1]
-        img_name = date + '-' + img_name
+        img_name = url.split("=")[-1].split("/")[-1].split(".", 1)[-1]
+        img_name = date + "-" + img_name
         img_name = os.path.join(img_folder, img_name)
 
         if os.path.exists(img_name):
@@ -59,7 +59,7 @@ def download_image(url, date):
 
         os.makedirs(img_folder, exist_ok=True)
         img = requests.get(url)  # download image.
-        img_file = open(img_name, 'wb')
+        img_file = open(img_name, "wb")
         img_file.write(img.content)  # write bytes to file.
         img_file.close()
         return img_name
@@ -68,7 +68,7 @@ def download_image(url, date):
 
 
 def set_wallpaper():
-    '''
+    """
     Downloads and sets received image from bing.com as
     xfce4 current wallpaper.
 
@@ -80,7 +80,7 @@ def set_wallpaper():
     Then try to change your wallpaper through normal desktop settings and
     see the result on terminal. Substitute the command in variable
     'cmd_set_last_image' with what you see on terminal for proper result.
-    '''
+    """
 
     # make complete image link and download it.
     url, date = get_image_link()
@@ -90,8 +90,8 @@ def set_wallpaper():
     # create command string to change last-image attribute which corresponds
     # to desktop current background.
     cmd_set_last_image = (
-        'xfconf-query -c xfce4-desktop -p /backdrop/'
-        'screen0/monitoreDP-1/workspace0/last-image -s {}'
+        "xfconf-query -c xfce4-desktop -p /backdrop/"
+        "screen0/monitoreDP-1/workspace0/last-image -s {}"
     ).format(path)
 
     # execute generated command above using os module although this can be
