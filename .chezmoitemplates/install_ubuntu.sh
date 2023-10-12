@@ -141,6 +141,7 @@ qtdeclarative5-dev \
 
 # packages
 packageList=(
+  7zip
   age
   aptitude
   bat
@@ -151,8 +152,8 @@ packageList=(
   conky-all
   crudini
   curl
-  eza
   expect
+  eza
   ffmpeg
   fish
   git
@@ -166,7 +167,6 @@ packageList=(
   ninja-build
   numlockx
   openssh-server
-  p7zip
   python-is-python3
   python3
   python3-requests
@@ -223,6 +223,10 @@ done
 if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
   mkdir -p "$HOME/.local/bin"
   ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+fi
+
+if [ -f /usr/bin/7zz ] && ! [ -f /usr/bin/7z ]; then
+  sudo ln -s /usr/bin/7zz /usr/bin/7z
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep ufw &>/dev/null; then

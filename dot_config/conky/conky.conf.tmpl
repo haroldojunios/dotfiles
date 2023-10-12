@@ -111,11 +111,11 @@ ${color1}${goto 35}ROOT: ${color}${fs_used /}/${fs_size /} ${alignr}${fs_used_pe
 
 ${color1}${font Hack Nerd Font:size=18}󰛳 ${font} ${voffset -22} $hr${color}
 {{- if $isWifi }}
-${color1}${goto 35}SSID: ${alignr}${color}${wireless_essid {{ $interface }}} ${color1}${alignr}Signal: ${color}${wireless_link_qual_perc {{ $interface }}}% ${wireless_link_bar 4,100 {{ $interface }}}
-${color1}${goto 35}Bitrate: ${alignr}${color}${wireless_bitrate {{ $interface }}}
+${color1}${goto 35}SSID: ${color}${wireless_essid {{ $interface }}} ${color1}${alignr}Bitrate: ${alignr}${color}${wireless_bitrate {{ $interface }}}
+${color1}${goto 35}Signal: ${alignr}${color}${wireless_link_qual_perc {{ $interface }}}% ${wireless_link_bar 4,150 {{ $interface }}}
 {{- end }}
-${color1}${goto 35}IP: ${goto 135}${color}${addr {{ $interface }}}
-${color1}${goto 35}Total Down/Up: ${goto 135}${color}${totaldown {{ $interface }}}/${totalup {{ $interface }}}
+${color1}${goto 35}IP: ${goto 140}${color}${addr {{ $interface }}}
+${color1}${goto 35}Total Down/Up: ${goto 140}${color}${totaldown {{ $interface }}}/${totalup {{ $interface }}}
 ${color1}${voffset 8}${goto 35}Speed Down: ${alignr}${color}${downspeed {{ $interface }}}${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 ${voffset -12}
 ${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}

@@ -69,4 +69,8 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # trolltech
   crudini --set $HOME/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
+
+  # konsolerc
+  kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
+  kwriteconfig5 --file konsolerc --group MainWindow --key MenuBar Disabled
 fi
