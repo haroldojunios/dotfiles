@@ -18,7 +18,7 @@ if [ "$@" = "left" ]; then
   status="${status}#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" # session name
   status="${status}#[fg=colour121,bg=colour235] ${USER}"                                                        # user name
   if [ -z $termux ]; then
-    status="${status}@#[fg=colour222]$(ip -4 route show default | awk '{print $9}')" # hostname
+    status="${status}@#[fg=colour222]$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')" # hostname
   fi
   status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
 else

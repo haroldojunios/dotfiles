@@ -175,7 +175,6 @@ packageList=(
   python3-venv
   shfmt
   sshfs
-  systemd-zram-generator
   texlive-fonts-recommended
   texlive-lang-portuguese
   texlive-latex-base

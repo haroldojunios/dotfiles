@@ -80,7 +80,7 @@ ${color1}${font Hack Nerd Font:size=18}{{ $cpuIcon }} ${font} ${voffset -22} $hr
 ${color1}${goto 35}CPU: ${goto 70}${color}${execi 86400 cat /proc/cpuinfo | grep 'model name' | head -n1 | awk '{gsub(/model.*: /,"");print}'}
 ${color1}${goto 35}GPU: ${goto 70}${color}${execi 86400 lspci | grep -i 'vga' | awk '{gsub(/.*\[/,"");print}' | awk '{gsub(/\].*/,"");print}'}
 
-{{ if ge $nproc 12 -}}
+{{ if le $nproc 20 -}}
 {{ range $i := until $nproc -}}
 ${color1}${goto 35}CPU {{ add1 $i }}: ${goto 85}${color}${freq_g {{ add1 $i }}}GHz ${alignr}${cpu cpu{{ $i }}}% ${cpubar cpu{{ $i }} 4,120}
 {{ end }}
