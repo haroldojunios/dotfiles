@@ -32,4 +32,13 @@ if ! hyper version | grep -q "$HYPER_VER"; then
   rm -rf "$TEMP_FOLDER"
 fi
 
+ONLYOFFICE_VER=$(curl --silent "https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases/latest" | jq -r .tag_name | tr -d v)
+if ! onlyoffice-desktopeditors --version 2>&1 | grep -q "$ONLYOFFICE_VER"; then
+  TEMP_FOLDER=$(mktemp -d)
+  trap 'rm -rf "$TEMP_FOLDER"' EXIT
+  wget -O "$TEMP_FOLDER/onlyoffice.deb" "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
+  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/onlyoffice.deb"
+  rm -rf "$TEMP_FOLDER"
+fi
+
 {{ end }}

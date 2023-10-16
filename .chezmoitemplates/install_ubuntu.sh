@@ -147,6 +147,7 @@ packageList=(
   bat
   bc
   btrfs-compsize
+  build-essential
   clang
   cmake
   conky-all
@@ -225,7 +226,7 @@ if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
   ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
 fi
 
-if [ -f /usr/bin/7zz ] && ! [ -f /usr/bin/7z ]; then
+if ! command -v 7z &>/dev/null && ! [ -f "/usr/bin/7z" ] && [ -f "/usr/bin/7zz" ]; then
   sudo ln -s /usr/bin/7zz /usr/bin/7z
 fi
 
@@ -241,13 +242,6 @@ fi
 
 if ! systemctl list-unit-files --state=masked | grep systemd-networkd-wait-online &>/dev/null; then
   sudo systemctl mask systemd-networkd-wait-online
-fi
-
-if ! command -v onlyoffice-desktopeditors &>/dev/null; then
-  TEMP_FOLDER=$(mktemp -d)
-  wget -O "$TEMP_FOLDER/onlyoffice.deb" -q "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
-  sudo apt-get install -y "$TEMP_FOLDER/onlyoffice.deb"
-  rm -rf "$TEMP_FOLDER"
 fi
 
 if sudo ufw status | grep -q inactive; then

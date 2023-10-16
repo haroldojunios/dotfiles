@@ -156,6 +156,11 @@ if status --is-interactive && type -q mcfly
     mcfly init fish | source
 end
 
+# stderred
+if test -f /usr/lib/libstderred.so
+    set -x LD_PRELOAD /usr/lib/libstderred.so
+end
+
 ## Starship prompt
 {{- if eq .osid "windows" }}
 if type -q starship

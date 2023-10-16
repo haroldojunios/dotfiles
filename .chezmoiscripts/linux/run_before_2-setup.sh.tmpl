@@ -105,6 +105,18 @@ if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ 
   sudo bash -c "echo 'it87' >/etc/modules-load.d/it87.conf"
 fi
 
+if ! [ -f /usr/lib/libstderred.so ]; then
+  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/ku1ik/stderred.git
+  (
+    cd "$TEMP_FOLDER/stderred"
+    mkdir -p build
+    cd build
+    cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=lib ../src
+    make
+    sudo make install
+  )
+fi
+
 if [ -f /etc/apt/apt.conf.d/20apt-esm-hook.conf ]; then
   sudo rm /etc/apt/apt.conf.d/20apt-esm-hook.conf
 fi

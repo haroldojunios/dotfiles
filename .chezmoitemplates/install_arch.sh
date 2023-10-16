@@ -204,6 +204,7 @@ packageList=(
   simple-mtpfs
   sshfs
   starship
+  stderred-git
   texlive-bibtexextra
   texlive-bin
   texlive-binextra
