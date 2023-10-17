@@ -15,7 +15,7 @@ CRONTAB=$(
 @reboot "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
 */20 * * * * "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
 {{- end }}
-@reboot rm -rf "$HOME/.cache/*" >/dev/null 2>&1
+@reboot rm -rf "$HOME/.cache" >/dev/null 2>&1
 EOF
 )
 
