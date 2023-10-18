@@ -113,6 +113,7 @@ dePackageList=(
   {{ end }}
   code
   firefox
+  gimp
   gparted
   keepassxc
   xserver-xorg-video-dummy
@@ -158,7 +159,7 @@ packageList=(
   ffmpeg
   fish
   git
-  imagemagick
+  # imagemagick
   jmtpfs
   jq
   make
@@ -304,6 +305,12 @@ if ! dpkg -s docker-ce &>/dev/null; then
 EOF
   fi
 fi
+
+## imagemagick
+t=$(mktemp) &&
+  wget 'https://dist.1-2.dev/imei.sh' -qO "$t" &&
+  sudo bash "$t" >/dev/null
+rm "$t"
 
 # if ! [ -f "/etc/X11/xorg.conf" ]; then
 #   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF
