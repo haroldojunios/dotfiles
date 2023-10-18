@@ -182,6 +182,7 @@ packageList=(
   imagemagick
   inetutils
   jq
+  libjxl
   lm_sensors
   make
   mediainfo
@@ -199,6 +200,8 @@ packageList=(
   python-isort
   python-pipx
   python-requests
+  qt5-jpegxl-image-plugin
+  qt6-jpegxl-image-plugin
   reflector
   shfmt
   simple-mtpfs
