@@ -2,6 +2,7 @@
 {{ template "shell/git.sh" . }}
 {{ template "shell/python.sh" . }}
 {{ template "shell/docker.sh" . }}
+{{ template "shell/chezmoi.sh" . }}
 {{ template "shell/npm.sh" . }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}

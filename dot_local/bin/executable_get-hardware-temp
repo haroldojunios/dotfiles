@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [[ "${1}" == 'gpu' ]]; then
+  gpu_temp='N/A'
+  if command -v nvidia-smi &>/dev/null; then
+    gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
+  fi
+
+  echo "${gpu_temp}°C"
+else
+  files=(/sys/class/thermal/thermal_zone*/type)
+
+  cpu_temp='N/A'
+
+  i=0
+  for f in "${files[@]}"; do
+    if grep -q x86_pkg_temp $f; then
+      cpu_temp=$(cat /sys/class/thermal/thermal_zone$i/temp)
+      cpu_temp=$(echo "scale=1; $cpu_temp/1000" | bc -l)
+      break
+    fi
+    i=$((i + 1))
+  done
+
+  echo "${cpu_temp}°C"
+fi

@@ -470,5 +470,6 @@ rm "$t"
 # fi
 
 sudo aptitude safe-upgrade -y
+yes | sudo ubuntu-drivers install &>/dev/null
 sudo apt-get autoremove --purge -y
 sudo apt-get clean -y

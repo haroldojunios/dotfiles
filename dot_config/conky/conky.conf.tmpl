@@ -80,18 +80,17 @@ ${color1}${font Hack Nerd Font:size=18}{{ $cpuIcon }} ${font} ${voffset -22} $hr
 ${color1}${goto 35}CPU: ${goto 70}${color}${execi 86400 cat /proc/cpuinfo | grep 'model name' | head -n1 | awk '{gsub(/model.*: /,"");print}'}
 ${color1}${goto 35}GPU: ${goto 70}${color}${execi 86400 lspci | grep -i 'vga' | awk '{gsub(/.*\[/,"");print}' | awk '{gsub(/\].*/,"");print}'}
 
+${color1}${goto 35}CPU load: ${goto 82}${color}${alignr}${cpu cpu0}% ${cpubar cpu0 4,120}
 {{ if le $nproc 20 -}}
 {{ range $i := until $nproc -}}
 ${color1}${goto 35}CPU {{ add1 $i }}: ${goto 85}${color}${freq_g {{ add1 $i }}}GHz ${alignr}${cpu cpu{{ $i }}}% ${cpubar cpu{{ $i }} 4,120}
 {{ end }}
-{{ else -}}
-${color1}${goto 35}CPU load: ${goto 82}${color}${alignr}${cpu cpu0}% ${cpubar cpu0 4,120}
 {{ end -}}
 
 ${color1}${goto 35}Uptime: ${color}$uptime_short ${alignr}${color1}Load: ${color}${loadavg}
 
 ${color1}${font Hack Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
-${color1}${goto 35}CPU: ${color}${exec sensors | grep -A 10 'fan1' | grep 'temp1' | awk 'NR==1{print $2}'} ${alignr}${color1}GPU: ${color}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C
+${color1}${goto 35}CPU: ${color}${exec get-hardware-temp cpu} ${alignr}${color1}GPU: ${color}${exec get-hardware-temp gpu} ${alignr}
 
 ${color1}${font Hack Nerd Font:size=18}󰍛 ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}RAM:  ${color}$mem/$memmax ${alignr}$memperc% ${membar 4,100}

@@ -40,10 +40,24 @@ EOF
 fi
 
 {{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
-if ! grep "zram-fraction" /etc/systemd/zram-generator.conf &>/dev/null; then
-  sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
-[zram0]
-zram-fraction = 1
+if ! grep "16 * 1024 * 1024 * 1024" /usr/bin/init-zram-swapping &>/dev/null; then
+  sudo bash -c "cat >/usr/bin/init-zram-swapping" <<'EOF'
+#!/bin/sh
+
+modprobe zram
+
+# Calculate memory to use for zram
+totalmem=$(LC_ALL=C free | grep -e "^Mem:" | sed -e 's/^Mem: *//' -e 's/  *.*//')
+mem=$((totalmem * 1024))
+
+# Calculate max memory to 16GB
+mem=$((mem < 16 * 1024 * 1024 * 1024 ? mem : 16 * 1024 * 1024 * 1024))
+
+# initialize the devices
+echo zstd > /sys/block/zram0/comp_algorithm
+echo $mem > /sys/block/zram0/disksize
+mkswap /dev/zram0
+swapon -p 5 /dev/zram0
 EOF
 fi
 {{   else }}

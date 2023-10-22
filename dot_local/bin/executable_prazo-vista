@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+
+def calc_pv(val: float, i: int, perc: float) -> float:
+    return val / ((1 + perc) ** i)
+
+
+def calc_fv(val: float, i: int, perc: float) -> float:
+    return val * ((1 + perc) ** i)
+
+
+def calc_pv_all(val: float, n: int, perc: float) -> float:
+    pv_all = 0
+
+    for i in range(n):
+        pv = calc_pv(val, i, perc)
+        pv_all += pv
+
+    return pv_all
+
+
+def compare_pv(
+    total: float, val: float, i: int, perc: float
+) -> (float, float, bool):
+    pv_all = calc_pv_all(val, i, perc)
+    diff = total - pv_all
+    return pv_all, diff, diff >= 0
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Checa se é melhor pagamento à vista ou à prazo"
+    )
+    parser.add_argument("total_value", type=float, help="Valor à vista")
+    parser.add_argument(
+        "installment_value", type=float, help="Valor da parcela"
+    )
+    parser.add_argument("num_installment", type=int, help="Número de parcelas")
+    parser.add_argument(
+        "percentage_return",
+        type=float,
+        help="Porcentagem de rendimento mensal (default: %(default).2f)",
+        nargs="?",
+        default=1.07,
+    )
+
+    args = parser.parse_args()
+
+    args.percentage_return /= 100
+
+    pv_all, diff, best_in_inst = compare_pv(
+        args.total_value,
+        args.installment_value,
+        args.num_installment,
+        args.percentage_return,
+    )
+
+    if best_in_inst:
+        buy_option = "à prazo"
+        best_val = pv_all
+    else:
+        buy_option = "à vista"
+        best_val = args.total_value
+    print(f"Opção com melhor valor presente: Compra {buy_option}")
+    print(f"Valor presente para essa opção: R${best_val}")
+    print(
+        f"A diferença entre os valores presentes é de: R${round(abs(diff), 2)}"
+    )
