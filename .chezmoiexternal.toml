@@ -1,52 +1,70 @@
-{{ if ne .osid "windows" }}
+{{ if and (ne .osid "windows") (ne .osid "android") }}
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/FiraSans"]
 type = "archive"
 url = "https://fonts.google.com/download?family=Fira%20Sans"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/NotoColorEmoji"]
 type = "archive"
 url = "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/Arimo"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Arimo.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/Cousine"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Cousine.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/FiraCode"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/FiraMono"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/Hack"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz"
+exact = true
 refreshPeriod = "168h"
 
 [".local/share/fonts/Tinos"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Tinos.tar.xz"
+exact = true
 refreshPeriod = "168h"
+{{ end }}
 
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+[".local/bin"]
+type = "archive"
+url = "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-{{ .chezmoi.arch }}-static.tar.xz"
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["*/ff*"]
 {{ end }}
