@@ -8,51 +8,51 @@ set -eu
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
-if ! bat --version | grep -q "$BAT_VER"; then
+if ! bat --version | grep -q "${BAT_VER}"; then
   case $(uname -m) in
   x86_64) ARCH=amd64 ;;
   i386 | i686) ARCH=i686 ;;
   *) ARCH= ;;
   esac
-  if [ -n "$ARCH" ]; then
+  if [ -n "${ARCH}" ]; then
     TEMP_FOLDER=$(mktemp -d)
-    trap 'rm -rf "$TEMP_FOLDER"' EXIT
-    wget -O "$TEMP_FOLDER/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
-    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/bat.deb"
-    rm -rf "$TEMP_FOLDER"
+    trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+    wget -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/bat.deb"
+    rm -rf "${TEMP_FOLDER}"
   fi
 fi
 
 HYPER_VER=$(curl --silent "https://api.github.com/repos/vercel/hyper/releases/latest" | jq -r .tag_name | tr -d v)
-if ! hyper version | grep -q "$HYPER_VER"; then
+if ! hyper version | grep -q "${HYPER_VER}"; then
   TEMP_FOLDER=$(mktemp -d)
-  trap 'rm -rf "$TEMP_FOLDER"' EXIT
-  wget -O "$TEMP_FOLDER/hyper.deb" "https://releases.hyper.is/download/deb"
-  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/hyper.deb"
-  rm -rf "$TEMP_FOLDER"
+  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+  wget -O "${TEMP_FOLDER}/hyper.deb" "https://releases.hyper.is/download/deb"
+  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/hyper.deb"
+  rm -rf "${TEMP_FOLDER}"
 fi
 
 ONLYOFFICE_VER=$(curl --silent "https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases/latest" | jq -r .tag_name | tr -d v)
 if ! onlyoffice-desktopeditors --version 2>&1 | grep -q "$ONLYOFFICE_VER"; then
   TEMP_FOLDER=$(mktemp -d)
-  trap 'rm -rf "$TEMP_FOLDER"' EXIT
-  wget -O "$TEMP_FOLDER/onlyoffice.deb" "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
-  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "$TEMP_FOLDER/onlyoffice.deb"
-  rm -rf "$TEMP_FOLDER"
+  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+  wget -O "${TEMP_FOLDER}/onlyoffice.deb" "https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"
+  DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/onlyoffice.deb"
+  rm -rf "${TEMP_FOLDER}"
 fi
 
 LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" | jq -r .tag_name | tr -d v)
-if ! cjxl --version 2>&1 | grep -q "$LIBJXL_VER"; then
+if ! cjxl --version 2>&1 | grep -q "${LIBJXL_VER}"; then
   TEMP_FOLDER=$(mktemp -d)
-  trap 'rm -rf "$TEMP_FOLDER"' EXIT
+  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 {{   if eq .chezmoi.osRelease.id "ubuntu" }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-ubuntu-{{ .chezmoi.osRelease.versionID }}-v${LIBJXL_VER}.tar.gz"
 {{  else }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-debian-{{ .chezmoi.osRelease.versionCodename }}-v${LIBJXL_VER}.tar.gz"
 {{   end }}
-  wget -O "$TEMP_FOLDER/libjxl.tar.gz" "${URL_LINK}"
+  wget -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
   (
-    cd "$TEMP_FOLDER"
+    cd "${TEMP_FOLDER}"
     tar -xzf libjxl.tar.gz
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y *.deb
 
@@ -61,7 +61,7 @@ if ! cjxl --version 2>&1 | grep -q "$LIBJXL_VER"; then
     ./build_libqjpegxl_dynamic.sh
     sudo make install
   )
-  rm -rf "$TEMP_FOLDER"
+  rm -rf "${TEMP_FOLDER}"
 fi
 
 {{ end }}

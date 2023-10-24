@@ -568,8 +568,6 @@
   "workbench.editorAssociations": {
     "*.csv": "default",
     "*.ipynb": "jupyter-notebook",
-    "*.md": "default",
-    // "*.png": "cweijan.officeViewer",
     "*.pdf": "latex-workshop-pdf-hook",
     "*.svg": "default"
   },

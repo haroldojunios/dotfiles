@@ -205,7 +205,7 @@ fi
 if ! { [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ] && [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; }; then
   packageList=(
     "${packageList[@]}"
-    $appletsPackageList
+    ${appletsPackageList}
   )
 fi
 
@@ -216,15 +216,15 @@ packageList=(
 {{ end }}
 
 for package in "${packageList[@]}"; do
-  if ! dpkg -s $package &>/dev/null; then
-    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
-    sudo apt-get install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+  if ! dpkg -s ${package} &>/dev/null; then
+    echo -e "${GREEN}Installing package ${BLUE}${package} ${GREEN}...${NC}"
+    sudo apt-get install -y ${package} || echo -e "${RED}Package ${BLUE}${package} ${RED}not found!${NC}"
   fi
 done
 
-if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
-  mkdir -p "$HOME/.local/bin"
-  ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+if ! command -v bat &>/dev/null && ! [ -f "${HOME}/.local/bin/bat" ]; then
+  mkdir -p "${HOME}/.local/bin"
+  ln -s /usr/bin/batcat "${HOME}/.local/bin/bat"
 fi
 
 if ! command -v 7z &>/dev/null && ! [ -f "/usr/bin/7z" ] && [ -f "/usr/bin/7zz" ]; then
@@ -263,16 +263,16 @@ fi
 {{ if not .isWork }}
 if ! command -v fastfetch &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
-  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
+  git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
   (
-    cd "$TEMP_FOLDER/fastfetch"
+    cd "${TEMP_FOLDER}/fastfetch"
     mkdir -p build
     cd build
     cmake ..
     cmake --build . --target fastfetch --target flashfetch
     sudo cmake --install . --prefix /usr/local
   )
-  rm -rf "$TEMP_FOLDER"
+  rm -rf "${TEMP_FOLDER}"
 fi
 {{ end }}
 
@@ -291,7 +291,7 @@ if ! dpkg -s docker-ce &>/dev/null; then
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     sudo groupadd docker &>/dev/null || true
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker "${USER}"
     # newgrp docker
   fi
   if ! [ -f /etc/docker/daemon.json ]; then
@@ -307,10 +307,10 @@ EOF
 fi
 
 ## imagemagick
-t=$(mktemp) &&
-  wget 'https://dist.1-2.dev/imei.sh' -qO "$t" &&
-  sudo bash "$t" >/dev/null
-rm "$t"
+TEMP_FILE=$(mktemp) &&
+  wget 'https://dist.1-2.dev/imei.sh' -qO "${TEMP_FILE}" &&
+  sudo bash "${TEMP_FILE}" >/dev/null
+rm "${TEMP_FILE}"
 
 # if ! [ -f "/etc/X11/xorg.conf" ]; then
 #   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF

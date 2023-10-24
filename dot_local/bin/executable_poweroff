@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rm -rf ${HOME}/.cache/.fr-*
-rm -rf ${HOME}/Downloads/vlc-bittorrent
 rm -rf /tmp/*
 
 tmux kill-server

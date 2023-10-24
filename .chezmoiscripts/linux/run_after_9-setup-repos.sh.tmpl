@@ -7,41 +7,41 @@
 set -eu
 
 {{ if .isWork }}
-mkdir -p "$HOME/workspace"
-if ! [ -d "$HOME/workspace/rxp-conversor" ]; then
-  git -C "$HOME/workspace" clone git@github.com:rural-tech/rxp-conversor.git
+mkdir -p "${HOME}/workspace"
+if ! [ -d "${HOME}/workspace/rxp-conversor" ]; then
+  git -C "${HOME}/workspace" clone git@github.com:rural-tech/rxp-conversor.git
   if command -v docker >/dev/null; then
     (
-      cd "$HOME/workspace/rxp-conversor"
+      cd "${HOME}/workspace/rxp-conversor"
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
-        sudo usermod -aG docker $USER
+        sudo usermod -aG docker "${USER}"
       fi
       sg docker -c "docker build -t rxp-conversor ."
     )
   fi
 fi
-if ! [ -d "$HOME/workspace/docker-laser-scanner" ]; then
-  git -C "$HOME/workspace" clone git@github.com:rural-tech/docker-laser-scanner.git
+if ! [ -d "${HOME}/workspace/docker-laser-scanner" ]; then
+  git -C "${HOME}/workspace" clone git@github.com:rural-tech/docker-laser-scanner.git
   if command -v docker >/dev/null; then
     (
-      cd "$HOME/workspace/docker-laser-scanner"
+      cd "${HOME}/workspace/docker-laser-scanner"
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
-        sudo usermod -aG docker $USER
+        sudo usermod -aG docker "${USER}"
       fi
       sg docker -c "docker compose up --build -d"
     )
   fi
 fi
-if ! [ -d "$HOME/workspace/calc-volume-pc" ]; then
-  git -C "$HOME/workspace" clone git@github.com:rural-tech/calc-volume-pc.git
+if ! [ -d "${HOME}/workspace/calc-volume-pc" ]; then
+  git -C "${HOME}/workspace" clone git@github.com:rural-tech/calc-volume-pc.git
   if command -v docker >/dev/null; then
     (
-      cd "$HOME/workspace/calc-volume-pc"
+      cd "${HOME}/workspace/calc-volume-pc"
       if ! groups | grep -q docker; then
         sudo groupadd docker &>/dev/null || :
-        sudo usermod -aG docker $USER
+        sudo usermod -aG docker "${USER}"
       fi
       sg docker -c "docker compose up --build -d"
     )

@@ -4,11 +4,11 @@
 #   typeset -g "$1"="$2" && return 3
 # }
 
-# fastfile_dir="$HOME/.config/fastfile"
+# fastfile_dir="${HOME}/.config/fastfile"
 # fastfile_var_prefix="@"
 # # <<< needed for fastfile <<<
 
-WD_CONFIG="$HOME/.config/warprc"
+WD_CONFIG="${HOME}/.config/warprc"
 
 if [ ! -f "${HOME}/.zgenom/zgenom.zsh" ]; then
   git clone --depth 1 https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
@@ -39,8 +39,8 @@ if ! zgenom saved; then
 
   zgenom save
 
-  zgenom compile "$HOME/.zshrc"
-  [ -d "$HOME/.zsh" ] && zgenom compile "$HOME/.zsh"
+  zgenom compile "${HOME}/.zshrc"
+  [ -d "${HOME}/.zsh" ] && zgenom compile "${HOME}/.zsh"
   [ -n "$ZDOTDIR" ] && zgenom compile "$ZDOTDIR"
 fi
 

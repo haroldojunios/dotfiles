@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-
-
 def calc_pv(val: float, i: int, perc: float) -> float:
     return val / ((1 + perc) ** i)
 

@@ -50,19 +50,19 @@ code_bins=(
   code-server
 )
 
-if [ -d "$HOME/.vscode-server/bin" ]; then
+if [ -d "${HOME}/.vscode-server/bin" ]; then
   code_bins=(
     ${code_bins[@]}
-    $(find $HOME/.vscode-server/bin/ -mindepth 1 -maxdepth 1 -type d -print -quit)/bin/code-server
+    $(find ${HOME}/.vscode-server/bin/ -mindepth 1 -maxdepth 1 -type d -print -quit)/bin/code-server
   )
 fi
 
 for code in "${code_bins[@]}"; do
-  if ! command -v $code &>/dev/null && ! [ -x "$code" ]; then
+  if ! command -v "${code}" &>/dev/null && ! [ -x "${code}" ]; then
     continue
   fi
 
-  case "$code" in
+  case "${code}" in
   code | *vscode-server*)
     _extensions=(
       "${extensions[@]}"
@@ -75,11 +75,11 @@ for code in "${code_bins[@]}"; do
     ;;
   esac
 
-  ext_list=$($code --list-extensions)
+  ext_list=$(${code} --list-extensions)
 
   for extension in "${_extensions[@]}"; do
     if ! echo "$ext_list" | grep -qi "$extension"; then
-      $code --install-extension "$extension"
+      ${code} --install-extension "$extension"
     fi
   done
 done

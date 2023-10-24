@@ -14,7 +14,7 @@ if [ -f ~/.zsh_aliases ]; then
   source ~/.zsh_aliases
 fi
 
-ZSH="$HOME/.zsh"
+ZSH="${HOME}/.zsh"
 ZSH_CACHE_DIR="$ZSH/cache"
 ZSH_COMPLETION_DIR="$ZSH_CACHE_DIR/completions"
 

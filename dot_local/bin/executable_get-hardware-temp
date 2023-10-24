@@ -14,9 +14,9 @@ else
 
   i=0
   for f in "${files[@]}"; do
-    if grep -q x86_pkg_temp $f; then
-      cpu_temp=$(cat /sys/class/thermal/thermal_zone$i/temp)
-      cpu_temp=$(echo "scale=1; $cpu_temp/1000" | bc -l)
+    if grep -q x86_pkg_temp ${f}; then
+      cpu_temp=$(cat /sys/class/thermal/thermal_zone${i}/temp)
+      cpu_temp=$(echo "scale=1; ${cpu_temp}/1000" | bc -l)
       break
     fi
     i=$((i + 1))

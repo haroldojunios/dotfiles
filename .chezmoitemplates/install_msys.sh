@@ -34,10 +34,10 @@ packageList=(
 )
 
 for package in "${packageList[@]}"; do
-  if ! pacman -Q $package &>/dev/null && ! [ "$(pacman -Sg $package)" = "$(pacman -Qg $package 2>&1)" ]; then
+  if ! pacman -Q ${package} &>/dev/null && ! [ "$(pacman -Sg ${package})" = "$(pacman -Qg ${package} 2>&1)" ]; then
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
-    pacman -S --noconfirm --needed $package ||
-      echo -e "${RED}Package(s) \"${BLUE}$package${RED}\" not found!${NC}"
+    pacman -S --noconfirm --needed ${package} ||
+      echo -e "${RED}Package(s) \"${BLUE}${package}${RED}\" not found!${NC}"
   fi
 done
 

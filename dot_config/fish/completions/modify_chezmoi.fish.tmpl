@@ -8,6 +8,6 @@ set -eu
 
 if command -v chezmoi &>/dev/null; then
   chezmoi completion fish
-elif [ -f "$HOME/.local/bin/chezmoi" ]; then
-  "$HOME/.local/bin/chezmoi" completion fish
+elif [ -f "${HOME}/.local/bin/chezmoi" ]; then
+  "${HOME}/.local/bin/chezmoi" completion fish
 fi

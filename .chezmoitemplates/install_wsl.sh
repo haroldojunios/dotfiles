@@ -74,15 +74,15 @@ packageList=(
 )
 
 for package in "${packageList[@]}"; do
-  if ! dpkg -s $package &>/dev/null; then
-    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
-    sudo apt-get install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+  if ! dpkg -s ${package} &>/dev/null; then
+    echo -e "${GREEN}Installing package ${BLUE}${package} ${GREEN}...${NC}"
+    sudo apt-get install -y ${package} || echo -e "${RED}Package ${BLUE}${package} ${RED}not found!${NC}"
   fi
 done
 
-if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
-  mkdir -p "$HOME/.local/bin"
-  ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+if ! command -v bat &>/dev/null && ! [ -f "${HOME}/.local/bin/bat" ]; then
+  mkdir -p "${HOME}/.local/bin"
+  ln -s /usr/bin/batcat "${HOME}/.local/bin/bat"
 fi
 
 if ! dpkg -s docker-ce &>/dev/null; then
@@ -100,7 +100,7 @@ if ! dpkg -s docker-ce &>/dev/null; then
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     sudo groupadd docker &>/dev/null || true
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker "${USER}"
     # newgrp docker
   fi
   if ! [ -f /etc/docker/daemon.json ]; then

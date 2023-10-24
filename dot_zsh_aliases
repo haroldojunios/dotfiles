@@ -1,4 +1,4 @@
 unalias cc > /dev/null 2>&1
 cc() { python3 -c "from math import *; print($*);" }
 alias cc='noglob cc'
-alias sc="source $HOME/.zprofile; source $HOME/.zshrc"
+alias sc="source ${HOME}/.zprofile; source ${HOME}/.zshrc"

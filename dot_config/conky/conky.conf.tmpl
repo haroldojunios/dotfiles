@@ -121,6 +121,6 @@ ${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interfac
 
 ${color1}${font Hack Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
 #${voffset 70}
-${execp jq -r '.weather_summary' $HOME/.cache/weather | tr ',' '\n' | tr ':' '\n' | sed 's/^/${goto 35}/'}
+${execp jq -r '.weather_summary' ${HOME}/.cache/weather | tr ',' '\n' | tr ':' '\n' | sed 's/^/${goto 35}/'}
 ${voffset -45}
 ]]

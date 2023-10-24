@@ -116,4 +116,10 @@ url = "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-{{ .chezmoi.arch
 refreshPeriod = "168h"
 stripComponents = 1
 include = ["*/ff*"]
+
+[".local/bin/latexindent"]
+type = "file"
+url = "https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexindent-linux"
+executable = true
+refreshPeriod = "168h"
 {{ end }}

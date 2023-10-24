@@ -8,7 +8,7 @@ set -eu
 
 {{ if and (ne .osid "android") (not .isWSL) }}
 TEMP_FOLDER=$(mktemp -d)
-trap 'rm -rf "$TEMP_FOLDER"' EXIT
+trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
 # pc speaker
 if command -v lsmod &>/dev/null; then
@@ -119,9 +119,9 @@ sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-wi
 
 if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
   if ! [ -d "/var/lib/dkms/it87" ]; then
-    git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/frankcrawford/it87.git
+    git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/frankcrawford/it87.git
     (
-      cd "$TEMP_FOLDER/it87"
+      cd "${TEMP_FOLDER}/it87"
       sudo make dkms
     )
   fi
@@ -132,9 +132,9 @@ if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ 
 fi
 
 if ! [ -f /usr/lib/libstderred.so ]; then
-  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/ku1ik/stderred.git
+  git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/ku1ik/stderred.git
   (
-    cd "$TEMP_FOLDER/stderred"
+    cd "${TEMP_FOLDER}/stderred"
     mkdir -p build
     cd build
     cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=lib ../src
@@ -157,7 +157,7 @@ if [ -f /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh ] && ! [ 
 fi
 {{ else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
-  echo "$USER ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
+  echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
 fi
 if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
   sudo service docker start &>/dev/null

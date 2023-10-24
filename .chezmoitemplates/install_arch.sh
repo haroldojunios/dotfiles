@@ -4,16 +4,16 @@ BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 TEMP_FOLDER=$(mktemp -d)
-trap "rm -rf $TEMP_FOLDER" EXIT
+trap 'rm -rf ${TEMP_FOLDER}' EXIT
 
 command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 sudo pacman -Syu --noconfirm
 
 if ! command -v paru &>/dev/null; then
   sudo pacman -S --noconfirm --needed base-devel asp
-  git -C "$TEMP_FOLDER" clone --depth 1 https://aur.archlinux.org/paru.git
+  git -C "${TEMP_FOLDER}" clone --depth 1 https://aur.archlinux.org/paru.git
   (
-    cd "$TEMP_FOLDER/paru"
+    cd "${TEMP_FOLDER}/paru"
     makepkg -si --noconfirm
   )
 fi
@@ -259,7 +259,7 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
 
   packageList=(
     "${packageList[@]}"
-    $nvidiaDriver
+    "${nvidiaDriver}"
     nvidia-utils
   )
 fi
@@ -275,10 +275,10 @@ if [ -d "/proc/acpi/button/lid" ]; then
 fi
 
 for package in "${packageList[@]}"; do
-  if ! pacman -Q $package &>/dev/null && ! [ "$(pacman -Sg $package)" = "$(pacman -Qg $package 2>&1)" ]; then
+  if ! pacman -Q ${package} &>/dev/null && ! [ "$(pacman -Sg ${package})" = "$(pacman -Qg ${package} 2>&1)" ]; then
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
-    paru -S --noconfirm --needed --skipreview --nouseask --sudoloop $package ||
-      echo -e "${RED}Package(s) \"${BLUE}$package${RED}\" not found!${NC}"
+    paru -S --noconfirm --needed --skipreview --nouseask --sudoloop ${package} ||
+      echo -e "${RED}Package(s) \"${BLUE}${package}${RED}\" not found!${NC}"
   fi
 done
 

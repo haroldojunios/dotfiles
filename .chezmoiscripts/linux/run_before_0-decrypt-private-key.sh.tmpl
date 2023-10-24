@@ -18,7 +18,7 @@ if ! command -v age &>/dev/null; then
   {{ end }}
 fi
 
-if [ ! -f "$HOME/.config/key.txt" ]; then
-  age --decrypt --output "$HOME/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
-  chmod 600 "$HOME/.config/key.txt"
+if [ ! -f "${HOME}/.config/key.txt" ]; then
+  age --decrypt --output "${HOME}/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
+  chmod 600 "${HOME}/.config/key.txt"
 fi

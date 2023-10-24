@@ -62,15 +62,15 @@ packageList=(
 {{ end }}
 
 for package in "${packageList[@]}"; do
-  if ! dpkg -s $package &>/dev/null; then
-    echo -e "${GREEN}Installing package ${BLUE}$package ${GREEN}...${NC}"
-    sudo apt-get install -y $package || echo -e "${RED}Package ${BLUE}$package ${RED}not found!${NC}"
+  if ! dpkg -s ${package} &>/dev/null; then
+    echo -e "${GREEN}Installing package ${BLUE}${package} ${GREEN}...${NC}"
+    sudo apt-get install -y ${package} || echo -e "${RED}Package ${BLUE}${package} ${RED}not found!${NC}"
   fi
 done
 
-if ! command -v bat &>/dev/null && ! [ -f "$HOME/.local/bin/bat" ]; then
-  mkdir -p "$HOME/.local/bin"
-  ln -s /usr/bin/batcat "$HOME/.local/bin/bat"
+if ! command -v bat &>/dev/null && ! [ -f "${HOME}/.local/bin/bat" ]; then
+  mkdir -p "${HOME}/.local/bin"
+  ln -s /usr/bin/batcat "${HOME}/.local/bin/bat"
 fi
 
 sudo apt-get autoremove -y

@@ -56,7 +56,7 @@ passVideo() {
     -hide_banner -loglevel error \
     -y -i "${videoIn}" \
     -pass "${pass}" \
-    $(audioLine "${pass}") \
+    "$(audioLine "${pass}")" \
     -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" \
     -c:v libx264 \
     -b:v "$(qualityLevel)" \
@@ -75,7 +75,7 @@ qualityLevel() {
   if [[ "${br}" -lt 1000 ]]; then
     echo "${br}K"
   else
-    printf "%.2fM\n" $(echo "${br}/1000" | bc -l)
+    printf "%.2fM\n" "$(echo "${br}/1000" | bc -l)"
   fi
 }
 
@@ -186,7 +186,7 @@ fi
 targetBitrate="$(numfmt --from=iec "${qualLlv}")"
 echo "$(numfmt --to=iec "${bitrate}")/${qualLlv}"
 
-if ! $(reducedBitrate); then
+if ! reducedBitrate; then
   if [[ "${q}" = false ]]; then
     echo "No [considerable] reduction"
     if [[ "${c}" = true ]]; then

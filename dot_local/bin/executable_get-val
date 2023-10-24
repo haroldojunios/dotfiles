@@ -2,16 +2,16 @@
 
 if [ "$#" -ne 2 ]; then
   echo "Illegal number of parameters"
-  echo "USAGE: $0 key value filename"
+  echo "USAGE: $0 key filename"
   exit 2
 fi
 
-key="$1"
-filename="$2"
+key="${1}"
+filename="${2}"
 
-if ! [ -f "$filename" ]; then
-  echo "File \"$filename\" does not exist!"
+if ! [ -f "${filename}" ]; then
+  echo "File \"${filename}\" does not exist!"
   exit 1
 fi
 
-awk -F= '$1=="'"$key"'"{print $2}' "$filename"
+awk -F= '$1=="'"${key}"'"{print $2}' "${filename}"

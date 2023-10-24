@@ -10,17 +10,17 @@ CRONTAB=$(
   cat <<'EOF'
 @reboot fish -c 'fisher update' >/dev/null 2>&1
 {{- if eq .osid "android" }}
-0 * * * * find "$HOME/storage/shared/Android/media/com.whatsapp/WhatsApp/Databases/" -type f ! -name msgstore.db.crypt14 -delete >/dev/null 2>&1
+0 * * * * find "${HOME}/storage/shared/Android/media/com.whatsapp/WhatsApp/Databases/" -type f ! -name msgstore.db.crypt14 -delete >/dev/null 2>&1
 {{- else }}
-@reboot "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
-*/20 * * * * "$HOME/.local/bin/get-weather" >"$HOME/.cache/weather" 2>/dev/null
+@reboot "${HOME}/.local/bin/get-weather" >"${HOME}/.cache/weather" 2>/dev/null
+*/20 * * * * "${HOME}/.local/bin/get-weather" >"${HOME}/.cache/weather" 2>/dev/null
 {{- end }}
-@reboot rm -rf "$HOME/.cache" >/dev/null 2>&1
+@reboot rm -rf "${HOME}/.cache" >/dev/null 2>&1
 EOF
 )
 
 if command -v crontab &>/dev/null; then
-  if ! [ "$(crontab -l 2>/dev/null)" = "$CRONTAB" ]; then
-    echo "$CRONTAB" | crontab -
+  if ! [ "$(crontab -l 2>/dev/null)" = "${CRONTAB}" ]; then
+    echo "${CRONTAB}" | crontab -
   fi
 fi

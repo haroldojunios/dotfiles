@@ -1,6 +1,6 @@
 #!/bin/bash
 
-case "$@" in
+case "${@}" in
 celular)
   ssh celular "termux-wake-lock" || (
     echo "error"

@@ -22,9 +22,9 @@ if [ "$@" = "left" ]; then
   fi
   status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
 else
-  status="${status}#[fg=colour121,bg=colour235] $(jq -r '.weather_summary' $HOME/.cache/weather) " # weather
-  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                             # date
-  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]"   # time
+  status="${status}#[fg=colour121,bg=colour235] $(jq -r '.weather_summary' ${HOME}/.cache/weather) " # weather
+  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                               # date
+  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]"     # time
   if [ $(hostname) != localhost ]; then
     status="${status}#[fg=colour222,bg=colour238] #H"
   fi

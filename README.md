@@ -9,7 +9,7 @@ sh -c "$(curl -fsLS bit.ly/hjdots)"
 To setup the dotfiles through chezmoi install script run:
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin init --apply haroldojunios
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply haroldojunios
 ```
 
 ## KDE config files
