@@ -190,6 +190,7 @@ packageList=(
   wget
   xclip
   zip
+  zram-config
 )
 
 if [ -d "/sys/class/power_supply" ]; then
