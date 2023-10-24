@@ -4,60 +4,109 @@ type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/FiraSans"]
 type = "archive"
 url = "https://fonts.google.com/download?family=Fira%20Sans"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/Lato"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Lato"
+exact = true
+refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/Montserrat"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Montserrat"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/NotoColorEmoji"]
 type = "archive"
 url = "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/Nunito"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Nunito"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/Quicksand"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Quicksand"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/Raleway"]
+type = "archive"
+url = "https://fonts.google.com/download?family=Raleway"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/Arimo"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Arimo.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/Cousine"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Cousine.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/FiraCode"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/FiraMono"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/Hack"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/Tinos"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Tinos.tar.xz"
 exact = true
 refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
 {{ end }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}

@@ -1,0 +1,16 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+{{ if ne .osid "android" }}
+find "${HOME}/.local/share/fonts" -mindepth 1 -maxdepth 1 -type d | while IFS= read -r d; do
+  font="$(basename "${d}")"
+  if ! [ -d "/usr/local/share/fonts/${font}" ]; then
+    sudo ln -s "${d}" "/usr/local/share/fonts/${font}"
+  fi
+done
+{{ end }}

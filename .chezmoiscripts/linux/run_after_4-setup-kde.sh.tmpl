@@ -9,7 +9,7 @@ set -eu
 if command -v kwriteconfig5 &>/dev/null; then
   # dolphin
   kwriteconfig5 --file dolphinrc --group General --key AutoExpandFolders true
-  kwriteconfig5 --file dolphinrc --group General --key BrowseThroughArchives true
+  kwriteconfig5 --file dolphinrc --group General --key BrowseThroughArchives false
   kwriteconfig5 --file dolphinrc --group General --key ConfirmClosingMultipleTabs false
   kwriteconfig5 --file dolphinrc --group General --key RememberOpenedTabs false
   kwriteconfig5 --file dolphinrc --group General --key ShowToolTips true
@@ -52,23 +52,23 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort directories first" true
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort hidden files last" false
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort reversed" false
-  kwriteconfig5 --file $HOME/.config/kdedefaults/kdeglobals --group KDE --key widgetStyle kvantum
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group KDE --key widgetStyle kvantum
 
   # gtk
-  kwriteconfig5 --file $HOME/.config/gtk-3.0/settings.ini --group Settings --key gtk-font-name "Fira Sans,  10"
-  kwriteconfig5 --file $HOME/.config/gtk-4.0/settings.ini --group Settings --key gtk-font-name "Fira Sans,  10"
+  kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "Fira Sans,  10"
+  kwriteconfig5 --file "${HOME}/.config/gtk-4.0/settings.ini" --group Settings --key gtk-font-name "Fira Sans,  10"
 
   # touchpad
   for group in "DELL0AB0:00 04F3:3147 Touchpad" "Synaptics s3203"; do
-    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key clickMethodAreas false
-    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key clickMethodClickfinger true
-    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key naturalScroll true
-    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key pointerAcceleration 0.4
-    kwriteconfig5 --file touchpadxlibinputrc --group "$group" --key tapToClick true
+    kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key clickMethodAreas false
+    kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key clickMethodClickfinger true
+    kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key naturalScroll true
+    kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key pointerAcceleration 0.4
+    kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key tapToClick true
   done
 
   # trolltech
-  crudini --set $HOME/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
+  crudini --set ${HOME}/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
 
   # konsolerc
   kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
