@@ -147,6 +147,7 @@ packageList=(
   aptitude
   bat
   bc
+  biber
   btrfs-compsize
   build-essential
   clang
@@ -159,9 +160,9 @@ packageList=(
   ffmpeg
   fish
   git
-  # imagemagick
   jmtpfs
   jq
+  latexmk
   make
   micro
   mpv
@@ -175,6 +176,7 @@ packageList=(
   python3-venv
   shfmt
   sshfs
+  texlive-bibtex-extra
   texlive-fonts-recommended
   texlive-lang-portuguese
   texlive-latex-base
@@ -182,6 +184,7 @@ packageList=(
   texlive-latex-recommended
   texlive-pictures
   texlive-pstricks
+  texlive-publishers
   texlive-science
   texlive-xetex
   tmux
