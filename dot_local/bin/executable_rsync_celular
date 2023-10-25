@@ -50,6 +50,7 @@ filter_rsync="+ /MIUI/backup/
 - /WhatsApp/.Thumbs
 - /WhatsApp/.trash
 - /ReadChan
+- /Tachiyomi
 - .trashed*
 - .Trash
 - .thumbnails
@@ -62,7 +63,8 @@ rsync_all() {
   # ssh celular "remove_wpp_dbs"
   # ssh celular "remove_old_bak"
   # ssh celular "rsync_ig"
-  rsync ${RS_OPTS} --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /media/data/home/Backup/android/
+
+  rsync ${RS_OPTS} --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /media/data/Backup/android/
   # [ ! -e ~/Downloads/Celular/ ] ||
   #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
   #   rsync $RS_OPTS --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all

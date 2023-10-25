@@ -309,6 +309,18 @@ EOF
   fi
 fi
 
+if ! [ -f /usr/lib/libstderred.so ]; then
+  git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/ku1ik/stderred.git
+  (
+    cd "$TEMP_FOLDER/stderred"
+    mkdir -p build
+    cd build
+    cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/usr -DLIBDIR=lib ../src
+    make
+    sudo make install
+  )
+fi
+
 ## imagemagick
 TEMP_FILE=$(mktemp) &&
   wget 'https://dist.1-2.dev/imei.sh' -qO "${TEMP_FILE}" &&

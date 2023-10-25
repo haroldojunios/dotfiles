@@ -9,7 +9,7 @@ alias gsettings_list='gsettings list-recursively | grep -e'
 # alias clean_desktop_icons='for i in ~/.local/share/applications/*.desktop; do which $(grep -Poh "(?<=Exec=).*?( |$)" $i) > /dev/null || rm -i $i; done'
 alias font_cache='fc-cache -f -v'
 #alias update_joplin='wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash'
-#alias joplin='${HOME}/.joplin/Joplin.AppImage'
+#alias joplin='$HOME/.joplin/Joplin.AppImage'
 alias search_text='sudo grep -i -a -B1000 -A1000'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection c -o'
@@ -30,7 +30,7 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 # alias ar='aria2c --enable-rpc --rpc-listen-all'
 alias ar='aria2c'
 alias arpc='aria2rpc'
-# alias argt='aria2c --bt-metadata-only=true --bt-save-metadata=true --dir=${HOME}/Downloads/aria2'
+# alias argt='aria2c --bt-metadata-only=true --bt-save-metadata=true --dir=$HOME/Downloads/aria2'
 # alias arst='aria2c --show-files'
 # alias arsf='aria2c --select-file=INDEX TORRENT'
 alias rc=rsync_celular
@@ -51,7 +51,7 @@ alias 7zc='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on -aoa'
 alias 7zc2='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -aoa'
 alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 -aoa'
 alias tlmgr='$TEXMFDIST/scripts/texlive/tlmgr.pl' # --usermode'
-alias freecad="LD_PRELOAD=/usr/lib64/libstdc++.so.6 LIBGL_ALWAYS_SOFTWARE=1 ${HOME}/Programs/FreeCAD/FreeCAD.AppImage"
+alias freecad='LD_PRELOAD=/usr/lib64/libstdc++.so.6 LIBGL_ALWAYS_SOFTWARE=1 $HOME/Programs/FreeCAD/FreeCAD.AppImage'
 
 alias nano="nano --rcfile ~/.config/nanorc/nanorc"
 
