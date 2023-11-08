@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # git aliases
 alias g='git'
 alias gi='git init'

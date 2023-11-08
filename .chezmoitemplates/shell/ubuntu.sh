@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # ubuntu aliases
 alias i='sudo apt install -y'
 alias r='sudo apt remove -y'

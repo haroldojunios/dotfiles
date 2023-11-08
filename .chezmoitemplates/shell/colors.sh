@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # color aliases
 # foreground
 FMT_BLACK='\033[30m'  # black

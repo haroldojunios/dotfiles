@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 export DEBIAN_FRONTEND=noninteractive
 
 RED='\033[1;31m'

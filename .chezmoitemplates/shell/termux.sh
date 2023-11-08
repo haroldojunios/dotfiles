@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # termux aliases
 alias i='apt install -y'
 alias r='apt remove -y'

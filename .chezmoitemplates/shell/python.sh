@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # python aliases
 alias p='python'
 alias pf='isort .; black .'

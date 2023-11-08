@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # npm aliases
 alias n='npm'
 alias nin='npm init --yes'

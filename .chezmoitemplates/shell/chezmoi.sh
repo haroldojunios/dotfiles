@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# chezmoi aliases
 alias cm=chezmoi
 alias cma='chezmoi add'
 alias cmae='chezmoi add --encrypt'

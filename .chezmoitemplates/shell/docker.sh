@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# docker aliases
 alias d='docker'
 alias de='docker exec -it'
 alias drmd='docker rm -fv'

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # arch aliases
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
