@@ -7,7 +7,7 @@ TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf ${TEMP_FOLDER}' EXIT
 
 command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
-sudo pacman -Syu --noconfirm
+command -v paru &>/dev/null && paru -Syu --noconfirm || sudo pacman -Syu --noconfirm
 
 if ! command -v paru &>/dev/null; then
   sudo pacman -S --noconfirm --needed base-devel asp
@@ -115,7 +115,7 @@ dePackageList=(
   plasma-desktop
   plasma-disks
   plasma-firewall
-  plasma-framework
+  plasma-framework5
   plasma-integration
   plasma-nm
   plasma-pa
@@ -195,6 +195,7 @@ packageList=(
   os-prober
   p7zip
   pandoc
+  perl-image-exiftool
   python
   python-black
   python-isort
@@ -312,4 +313,5 @@ fi
 
 sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 
+yes | paru -Scd
 pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :

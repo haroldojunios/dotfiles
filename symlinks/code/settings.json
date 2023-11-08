@@ -1,13 +1,4 @@
 {
-  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, AlignAfterOpenBracket: DontAlign,SpacesBeforeTrailingComments: 1,BreakBeforeBraces: Allman,BreakStringLiterals: true,ColumnLimit: 80, MaxEmptyLinesToKeep: 1,ContinuationIndentWidth: 2,AlwaysBreakBeforeMultilineStrings: false,AlignEscapedNewlines: Left,AlignConsecutiveMacros: AcrossComments,AllowAllParametersOfDeclarationOnNextLine: false,AllowShortLambdasOnASingleLine: true,BinPackArguments: true,BreakConstructorInitializers: AfterColon,IncludeBlocks: Preserve,AllowShortFunctionsOnASingleLine: None,SortIncludes: false,NamespaceIndentation: All,IndentPPDirectives: AfterHash,AlignArrayOfStructures: Right}",
-  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
-  // "C_Cpp.clang_format_fallbackStyle": "/home/haroldo/.clang-format",
-  "C_Cpp.configurationWarnings": "Disabled",
-  "C_Cpp.default.browse.path": ["{$workspaceFolder}/**"],
-  "C_Cpp.default.includePath": ["{$workspaceFolder}/**"],
-  "C_Cpp.intelliSenseEngineFallback": "Enabled",
-  "C_Cpp.loggingLevel": "Debug",
-  "C_Cpp.workspaceParsingPriority": "low",
   "[c][cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
@@ -67,6 +58,16 @@
   },
   "atomKeymap.promptV3Features": true,
   "autoDocstring.docstringFormat": "numpy",
+  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, AlignAfterOpenBracket: DontAlign,SpacesBeforeTrailingComments: 1,BreakBeforeBraces: Allman,BreakStringLiterals: true,ColumnLimit: 80, MaxEmptyLinesToKeep: 1,ContinuationIndentWidth: 2,AlwaysBreakBeforeMultilineStrings: false,AlignEscapedNewlines: Left,AlignConsecutiveMacros: AcrossComments,AllowAllParametersOfDeclarationOnNextLine: false,AllowShortLambdasOnASingleLine: true,BinPackArguments: true,BreakConstructorInitializers: AfterColon,IncludeBlocks: Preserve,AllowShortFunctionsOnASingleLine: None,SortIncludes: false,NamespaceIndentation: All,IndentPPDirectives: AfterHash,AlignArrayOfStructures: Right}",
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  // "C_Cpp.clang_format_fallbackStyle": "/home/haroldo/.clang-format",
+  "C_Cpp.configurationWarnings": "Disabled",
+  "C_Cpp.default.browse.path": ["{$workspaceFolder}/**"],
+  "C_Cpp.default.includePath": ["{$workspaceFolder}/**"],
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.loggingLevel": "Debug",
+  "C_Cpp.workspaceParsingPriority": "low",
+  "comments.openView": "never",
   "cSpell.allowCompoundWords": true,
   "cSpell.language": "pt-BR,fr-FR,en-US",
   "cSpell.userWords": [
@@ -134,7 +135,6 @@
     "WGS",
     "WIFI"
   ],
-  "comments.openView": "never",
   "customizeUI.activityBar": "bottom",
   "customizeUI.font.monospace": "Fira Code",
   "customizeUI.font.regular": "Nunito",
@@ -380,7 +380,6 @@
   "livePreview.notifyOnOpenLooseFile": false,
   "liveServer.settings.donotShowInfoMsg": true,
   "liveServer.settings.donotVerifyTags": true,
-  "markdown-preview-enhanced.HTML5EmbedIsAllowedHttp": true,
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
   "markdown-preview-enhanced.breakOnSingleNewLine": false,
   "markdown-preview-enhanced.chromePath": "/opt/google/chrome/google-chrome",
@@ -388,6 +387,7 @@
   "markdown-preview-enhanced.enableExtendedTableSyntax": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.enableTypographer": true,
+  "markdown-preview-enhanced.HTML5EmbedIsAllowedHttp": true,
   "markdown-preview-enhanced.latexEngine": "xelatex",
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "markdown-preview-enhanced.puppeteerWaitForTimeout": 500,
@@ -395,13 +395,13 @@
   "markdown.extension.tableFormatter.normalizeIndentation": true,
   "markdown.preview.fontSize": 11.5,
   "markdownlint.config": {
+    "default": true,
     "MD024": {
       "siblings_only": true
     },
     "MD033": {
       "allowed_elements": ["style", "h1", "h2", "h3", "p", "img", "a"]
-    },
-    "default": true
+    }
   },
   "notebook.cellToolbarLocation": {
     "default": "right",
@@ -564,7 +564,7 @@
     "terminalCursor.foreground": "#c3c7d1"
   },
   "workbench.colorTheme": "One Dark Pro",
-  "workbench.editor.untitled.hint": "hidden",
+  "workbench.editor.empty.hint": "hidden",
   "workbench.editorAssociations": {
     "*.csv": "default",
     "*.ipynb": "jupyter-notebook",
@@ -574,7 +574,5 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
   "workbench.tree.renderIndentGuides": "always",
-  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode",
-  "git.autofetch": true,
-  "workbench.editor.empty.hint": "hidden"
+  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode"
 }

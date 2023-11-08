@@ -64,7 +64,7 @@ rsync_all() {
   # ssh celular "remove_old_bak"
   # ssh celular "rsync_ig"
 
-  rsync ${RS_OPTS} --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /media/data/Backup/android/
+  rsync ${RS_OPTS} --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /media/data/Android/
   # [ ! -e ~/Downloads/Celular/ ] ||
   #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
   #   rsync $RS_OPTS --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
