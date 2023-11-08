@@ -114,6 +114,8 @@ fi
 
 sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
 sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress-force=zstd:15"
+sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:15"
+sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:15"
 sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
 sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
 

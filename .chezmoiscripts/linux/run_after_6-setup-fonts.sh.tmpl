@@ -7,6 +7,8 @@
 set -eu
 
 {{ if ne .osid "android" }}
+sudo mkdir -p /usr/local/share/fonts
+
 find "${HOME}/.local/share/fonts" -mindepth 1 -maxdepth 1 -type d | while IFS= read -r d; do
   font="$(basename "${d}")"
   if ! [ -d "/usr/local/share/fonts/${font}" ]; then
