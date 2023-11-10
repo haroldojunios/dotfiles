@@ -1,4 +1,4 @@
-defaultIndent: '  '
+defaultIndent: "  "
 lookForAlignDelims:
   tabular:
     multiColumnGrouping: 1
@@ -7,9 +7,22 @@ modifyLineBreaks:
   textWrapOptions:
     columns: 80
     blocksBeginWith:
-      other: '\w|\\text'
-    # blocksFollow:
-    #   other: \\\]|\\item(?:\h|\[)|\\\\|\\newline
+      other: \w|\\text|\\noindent|\\label
+    blocksFollow:
+      #   other: \\\]|\\item(?:\h|\[)|\\\\|\\newline
+      other: |-
+        (?x)
+        \\\]
+        |
+        \\item(?:\h|\[)
+        |
+        \\begin\{(?:center|flushleft|flushright|minipage)\}
+        |
+        \\(?:caption)\{
+        |
+        \\(?:caption)\[
+        |
+        \\begin\{abstract\}
   environments:
     BeginStartsOnOwnLine: 1
     BodyStartsOnOwnLine: 1
@@ -28,6 +41,8 @@ modifyLineBreaks:
       CommandStartsOnOwnLine: 3
     subsubsection:
       CommandStartsOnOwnLine: 3
+    label:
+      CommandStartsOnOwnLine: 1
   items:
     ItemStartsOnOwnLine: 3
 indentPreamble: 1

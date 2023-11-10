@@ -170,9 +170,9 @@ packageList=(
   curl
   docker
   docker-compose
-  eza
   expac
   expect
+  eza
   fastfetch
   ffmpeg
   find-the-command
@@ -196,7 +196,9 @@ packageList=(
   os-prober
   p7zip
   pandoc
+  perl-file-homedir
   perl-image-exiftool
+  perl-yaml-tiny
   python
   python-black
   python-isort
