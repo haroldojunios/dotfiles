@@ -106,10 +106,11 @@ dePackageList=(
   bluedevil
   bluez
   bluez-utils
-  ffmpegthumbs
   gtk3-nocsd
+  kde-cli-tools
   kdeplasma-addons
   kgamma5
+  kio-admin
   kscreen
   kwallet-pam
   plasma-browser-integration
@@ -124,17 +125,29 @@ dePackageList=(
   plasma-thunderbolt
   plasma-workspace
   powerdevil
-  spectacle
+  purpose5
   # kde gui apps
   ark
   dolphin
   ffmpegthumbs
   filelight
   gwenview
+  kalgebra
   kate
   kcalc
+  kdegraphics-thumbnailers
+  kdenetwork-filesharing
+  kdialog
+  kfind
+  kjournald
+  kmix
+  kolourpaint
   konsole
+  ksystemlog
+  labplot
   okular
+  partitionmanager
+  spectacle
   # other gui apps
   calibre
   conky
@@ -195,10 +208,12 @@ packageList=(
   numlockx
   os-prober
   p7zip
+  pacman-contrib
   pandoc
   perl-file-homedir
   perl-image-exiftool
   perl-yaml-tiny
+  pkgfile
   python
   python-black
   python-isort
@@ -229,7 +244,6 @@ packageList=(
   ufw
   unrar
   unzip
-  usbutils
   usbutils
   wget
   which
@@ -299,7 +313,11 @@ if ! systemctl list-unit-files --state=enabled | grep sddm &>/dev/null; then
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep cronie &>/dev/null; then
-  sudo systemctl enable cronie
+  sudo systemctl enable --now cronie
+fi
+
+if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/dev/null; then
+  sudo systemctl enable --now pkgfile-update.timer
 fi
 
 if [ -d "/proc/acpi/button/lid" ]; then

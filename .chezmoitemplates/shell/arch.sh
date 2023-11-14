@@ -10,6 +10,7 @@ alias si='paru -Qi'
 alias cl='yes | paru -Scd && pacman -Qtdq | sudo pacman -Rns --noconfirm - 2>/dev/null || :'
 
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias fixkeys='sudo rm -rf /etc/pacman.d/gnupg && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -S --noconfirm archlinux-keyring'
 alias rmpkg="sudo pacman -Rdd"
 alias upd='/usr/bin/garuda-update'
 alias big="expac -H M '%m\t%n' | sort -h | nl"                                # Sort installed packages according to size in MB
