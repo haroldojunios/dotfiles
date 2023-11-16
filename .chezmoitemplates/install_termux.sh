@@ -7,13 +7,9 @@ NC='\033[0m' # No Color
 apt-get update
 apt-get upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
-# setup its pointless repo
-if ! [ -f "${PREFIX}/etc/apt/sources.list.d/pointless.list" ]; then
-  curl -sL https://its-pointless.github.io/setup-pointless-repo.sh | bash
-fi
-
 packageList=(
   tur-repo # setup tur repo
+  7zip
   age
   bat
   clang
@@ -30,10 +26,10 @@ packageList=(
   make
   micro
   nano
+  ncdu
   net-tools
   ninja
   openssh
-  p7zip
   python
   rsync
   scipy
@@ -43,6 +39,7 @@ packageList=(
   unzip
   wget
   which
+  xz-utils
   zip
 )
 

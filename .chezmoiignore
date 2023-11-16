@@ -21,6 +21,7 @@ scoop
 {{ end }}
 
 {{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
+.local/share
 .config/*
 !.config/fish
 !.config/nanorc

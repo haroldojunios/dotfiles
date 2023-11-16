@@ -123,3 +123,11 @@ url = "https://github.com/cmhughes/latexindent.pl/releases/latest/download/latex
 executable = true
 refreshPeriod = "168h"
 {{ end }}
+
+{{ if eq .osid "android" }}
+[".termux/font.ttf"]
+type = "archive-file"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
+path = "FiraCodeNerdFont-Regular.ttf"
+refreshPeriod = "168h"
+{{ end }}

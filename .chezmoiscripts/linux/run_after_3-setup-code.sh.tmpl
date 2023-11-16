@@ -65,19 +65,19 @@ for code in "${code_bins[@]}"; do
   case "${code}" in
   code | *vscode-server*)
     _extensions=(
-      "${extensions[@]}"
+      ${extensions[@]}
       visualstudioexptteam.intellicode-api-usage-examples
       visualstudioexptteam.vscodeintellicode
     )
     ;;
   *)
-    _extensions="${extensions[@]}"
+    _extensions=${extensions[@]}
     ;;
   esac
 
   ext_list=$(${code} --list-extensions)
 
-  for extension in "${_extensions[@]}"; do
+  for extension in ${_extensions[@]}; do
     if ! echo "$ext_list" | grep -qi "$extension"; then
       ${code} --install-extension "$extension"
     fi
