@@ -332,7 +332,7 @@
       "args": [
         "-xelatex",
         // "-pdflatex=xelatex -shell-escape",
-        // "-shell-escape",
+        "-shell-escape",
         "-synctex=1",
         "-interaction=nonstopmode",
         "-f",

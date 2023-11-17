@@ -24,6 +24,7 @@ packageList=(
   imagemagick
   jq
   make
+  matplotlib
   micro
   nano
   ncdu
@@ -31,8 +32,12 @@ packageList=(
   ninja
   openssh
   python
+  python-numpy
+  python-pandas
+  python-pillow
+  python-pip
+  python-scipy
   rsync
-  scipy
   starship
   termux-api
   tmux

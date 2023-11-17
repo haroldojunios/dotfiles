@@ -11,6 +11,9 @@ if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; t
   echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
 fi
 
+mkdir -p -m 700 ~/.gnupg
+gpg --refresh-keys
+
 # code repo
 if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
   sudo apt-get install -y wget gpg apt-transport-https
@@ -70,6 +73,17 @@ if ! [ -f /etc/apt/sources.list.d/gierens.list ]; then
   sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 fi
 
+# onlyoffice repo
+if ! [ -f /etc/apt/sources.list.d/onlyoffice.list ]; then
+  # mkdir -p -m 700 ~/.gnupg
+  gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
+  chmod 644 /tmp/onlyoffice.gpg
+  sudo chown root:root /tmp/onlyoffice.gpg
+  sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
+
+  sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" > /etc/apt/sources.list.d/onlyoffice.list'
+fi
+
 sudo apt-get update
 # sudo apt-get full-upgrade -y
 
@@ -101,12 +115,25 @@ dePackageList=(
   # kde gui apps
   ark
   dolphin
+  ffmpegthumbs
   filelight
   gwenview
+  kalgebra
   kate
   kcalc
+  kde-spectacle
+  kdegraphics-thumbnailers
+  kdenetwork-filesharing
+  kdialog
+  kfind
+  kjournald
+  kmix
+  kolourpaint
   konsole
+  ksystemlog
+  labplot
   okular
+  partitionmanager
   # other gui apps
   alacritty
   {{ if not .isWork }}
@@ -117,6 +144,8 @@ dePackageList=(
   gimp
   gparted
   keepassxc
+  onlyoffice-desktopeditors
+  xournalpp
   xserver-xorg-video-dummy
 )
 

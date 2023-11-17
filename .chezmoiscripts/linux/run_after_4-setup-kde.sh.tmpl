@@ -21,6 +21,7 @@ if command -v kwriteconfig5 &>/dev/null; then
 ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,\
 kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,\
 gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
+  kwriteconfig5 --file "${HOME}/.local/share/dolphin/view_properties/global/.directory" --group Settings --key HiddenFilesShown true
 
   # konsole
   kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"

@@ -50,11 +50,11 @@ filter_rsync="+ /MIUI/backup/
 - /WhatsApp/.Thumbs
 - /WhatsApp/.trash
 - /ReadChan
-- /Tachiyomi
 - .trashed*
 - .Trash
 - .thumbnails
 - .tmfs"
+# - /Tachiyomi
 
 rsync_all() {
   RS_OPTS="-amyvhPL --inplace --info=progress2,name --no-inc-recursive"

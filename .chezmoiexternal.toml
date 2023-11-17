@@ -2,9 +2,7 @@
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
-exact = true
 refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/FiraSans"]
 type = "archive"
