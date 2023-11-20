@@ -193,6 +193,7 @@ packageList=(
   fzf
   git
   htop
+  hwinfo
   imagemagick
   inetutils
   jq

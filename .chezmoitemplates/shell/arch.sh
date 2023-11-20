@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# arch aliases
+# arch
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 alias i='paru -S --noconfirm --needed'

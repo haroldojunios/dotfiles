@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ubuntu aliases
+# ubuntu
 alias i='sudo apt install -y'
 alias r='sudo apt remove -y'
 alias u='sudo apt update && sudo apt upgrade -y'

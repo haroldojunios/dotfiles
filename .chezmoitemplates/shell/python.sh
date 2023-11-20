@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# python aliases
+# python
 alias p='python'
 alias pf='isort .; black .'
 alias pye='source ./venv/Scripts/activate &>/dev/null || \

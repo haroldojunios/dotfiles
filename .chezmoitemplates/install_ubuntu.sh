@@ -190,6 +190,7 @@ packageList=(
   ffmpeg
   fish
   git
+  hwinfo
   jmtpfs
   jq
   latexmk

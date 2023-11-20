@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# git aliases
+# git
 alias g='git'
 alias gi='git init'
 alias gig='curl -sL https://www.toptal.com/developers/gitignore/api/'

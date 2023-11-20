@@ -44,7 +44,6 @@ packageList=(
   unzip
   wget
   which
-  xz-utils
   zip
 )
 
