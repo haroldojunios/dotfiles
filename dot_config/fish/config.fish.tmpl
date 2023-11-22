@@ -73,6 +73,10 @@ if test -f /usr/share/doc/find-the-command/ftc.fish
     source /usr/share/doc/find-the-command/ftc.fish
 end
 
+if test -f ~/.config/rclone/rclone.fish
+    source ~/.config/rclone/rclone.fish
+end
+
 ## Functions
 # use bat to color --help messages
 function h --argument cmd

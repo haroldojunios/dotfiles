@@ -222,6 +222,7 @@ packageList=(
   python-requests
   qt5-jpegxl-image-plugin
   qt6-jpegxl-image-plugin
+  rclone
   reflector
   shfmt
   simple-mtpfs

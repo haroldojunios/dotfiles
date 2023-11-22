@@ -37,6 +37,7 @@ packageList=(
   python-pillow
   python-pip
   python-scipy
+  rclone
   rsync
   starship
   termux-api

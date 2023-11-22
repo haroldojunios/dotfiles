@@ -169,6 +169,11 @@ if ! [ -f /etc/tmpfiles.d/media.conf ]; then
 D /media 0755 root root 0 -
 EOF
 fi
+
+if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" ]; then
+  mkdir -p "${HOME}/.config/rclone"
+  sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
+fi
 {{ else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
@@ -203,5 +208,5 @@ fi
 {{ end }}
 
 if command -v fish &>/dev/null; then
-  fish -c 'fisher update' &>/dev/null
+  fish -c 'fisher update' &>/dev/null || :
 fi
