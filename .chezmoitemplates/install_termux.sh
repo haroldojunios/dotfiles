@@ -12,6 +12,7 @@ packageList=(
   7zip
   age
   bat
+  binutils
   clang
   cmake
   code-server # needs tur repo

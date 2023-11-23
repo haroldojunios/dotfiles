@@ -11,6 +11,7 @@ README.md
 
 {{ if ne .osid "android" }}
 .termux
+.config/android-as-linux.js
 {{ end }}
 
 {{ if ne .osid "windows" }}
@@ -27,6 +28,7 @@ scoop
 !.config/nanorc
 !.config/sh
 !.config/zsh
+!.config/android-as-linux.js
 !.config/black
 !.config/starship.toml
 {{   if .isWSL }}
