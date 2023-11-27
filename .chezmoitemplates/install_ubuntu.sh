@@ -187,6 +187,7 @@ packageList=(
   curl
   expect
   eza
+  fd-find
   ffmpeg
   fish
   git
@@ -260,6 +261,11 @@ done
 if ! command -v bat &>/dev/null && ! [ -f "${HOME}/.local/bin/bat" ]; then
   mkdir -p "${HOME}/.local/bin"
   ln -s /usr/bin/batcat "${HOME}/.local/bin/bat"
+fi
+
+if ! command -v fd &>/dev/null && ! [ -f "${HOME}/.local/bin/fd" ]; then
+  mkdir -p "${HOME}/.local/bin"
+  ln -s /usr/bin/fdfind "${HOME}/.local/bin/fd"
 fi
 
 if ! command -v 7z &>/dev/null && ! [ -f "/usr/bin/7z" ] && [ -f "/usr/bin/7zz" ]; then

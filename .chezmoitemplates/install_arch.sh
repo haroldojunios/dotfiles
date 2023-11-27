@@ -172,6 +172,7 @@ appletsPackageList=(
 )
 
 packageList=(
+  7-zip-full
   age
   android-tools
   bat
@@ -187,6 +188,7 @@ packageList=(
   expect
   eza
   fastfetch
+  fd
   ffmpeg
   find-the-command
   fish
@@ -197,6 +199,7 @@ packageList=(
   imagemagick
   inetutils
   jq
+  less
   libjxl
   lm_sensors
   make
@@ -208,7 +211,6 @@ packageList=(
   ninja
   numlockx
   os-prober
-  p7zip
   pacman-contrib
   pandoc
   perl-file-homedir
