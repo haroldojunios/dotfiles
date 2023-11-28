@@ -5,7 +5,7 @@ set -x PAGER "bat --plain"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x MICRO_TRUECOLOR 1
 
-{{- if eq .osid "android" }}
+{{ if eq .osid "android" }}
 set -x USER haroldo
 
 if not pgrep -f crond >/dev/null
@@ -15,9 +15,8 @@ end
 if not pgrep -f sshd >/dev/null
     sshd
 end
-{{- else }}
-set -x TEXMFDIST /usr/share/texmf-dist
-{{- end }}
+{{ end }}
+
 
 if test "$TERM" = linux
     if type -q yaft
@@ -159,6 +158,11 @@ end
 ## Mcfly history
 if status --is-interactive && type -q mcfly
     mcfly init fish | source
+end
+
+## zoxide
+if status --is-interactive && type -q zoxide
+    zoxide init fish | source
 end
 
 # stderred

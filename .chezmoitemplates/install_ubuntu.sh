@@ -126,7 +126,6 @@ dePackageList=(
   kdenetwork-filesharing
   kdialog
   kfind
-  kjournald
   kmix
   kolourpaint
   konsole
@@ -187,7 +186,6 @@ packageList=(
   curl
   expect
   eza
-  fd-find
   ffmpeg
   fish
   git
@@ -226,6 +224,7 @@ packageList=(
   wget
   xclip
   zip
+  # zoxide
   zram-config
 )
 
@@ -261,11 +260,6 @@ done
 if ! command -v bat &>/dev/null && ! [ -f "${HOME}/.local/bin/bat" ]; then
   mkdir -p "${HOME}/.local/bin"
   ln -s /usr/bin/batcat "${HOME}/.local/bin/bat"
-fi
-
-if ! command -v fd &>/dev/null && ! [ -f "${HOME}/.local/bin/fd" ]; then
-  mkdir -p "${HOME}/.local/bin"
-  ln -s /usr/bin/fdfind "${HOME}/.local/bin/fd"
 fi
 
 if ! command -v 7z &>/dev/null && ! [ -f "/usr/bin/7z" ] && [ -f "/usr/bin/7zz" ]; then
@@ -523,7 +517,7 @@ rm "${TEMP_FILE}"
 # EOF
 # fi
 
-sudo aptitude safe-upgrade -y
+sudo aptitude safe-upgrade -o APT::Get::Fix-Missing=true -y
 yes | sudo ubuntu-drivers install &>/dev/null
 sudo apt-get autoremove --purge -y
 sudo apt-get clean -y

@@ -69,4 +69,3 @@ alias ug="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias wget='wget -c '
 alias pm='ps auxf | sort -nr -k 4'
 alias pm10='ps auxf | sort -nr -k 4 | head -10'
-alias tlmgr='$TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'

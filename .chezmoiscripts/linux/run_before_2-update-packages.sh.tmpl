@@ -6,14 +6,15 @@
 
 set -eu
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
-BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
-if ! bat --version | grep -q "${BAT_VER}"; then
-  case $(uname -m) in
+case $(uname -m) in
   x86_64) ARCH=amd64 ;;
   i386 | i686) ARCH=i686 ;;
   *) ARCH= ;;
-  esac
+esac
+
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
+if ! bat --version | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
     TEMP_FOLDER=$(mktemp -d)
     trap 'rm -rf "${TEMP_FOLDER}"' EXIT
@@ -54,5 +55,27 @@ if ! cjxl --version 2>&1 | grep -q "${LIBJXL_VER}"; then
   )
   rm -rf "${TEMP_FOLDER}"
 fi
+
+ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" | jq -r .tag_name | tr -d v)
+if ! command -v zoxide &>/dev/null || ! zoxide --version | grep -q "${ZOXIDE_VER}"; then
+  if [ -n "${ARCH}" ]; then
+    TEMP_FOLDER=$(mktemp -d)
+    trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+    wget -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}_${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/zoxide.deb"
+    rm -rf "${TEMP_FOLDER}"
+  fi
+fi
+
+if ! [ -d "${HOME}/.local/share/fzf" ]; then
+  mkdir -p "${HOME}/.local/share"
+  git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf"
+else
+  (
+    cd "${HOME}/.local/share/fzf"
+    git pull
+  )
+fi
+"${HOME}/.local/share/fzf/install" --xdg --no-update-rc --completion --key-bindings &>/dev/null
 
 {{ end }}
