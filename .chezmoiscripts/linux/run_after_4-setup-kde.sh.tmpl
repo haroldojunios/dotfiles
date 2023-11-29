@@ -29,9 +29,14 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   # kcminputrc
   kwriteconfig5 --file kcminputrc --group Keyboard --key NumLock 0
   kwriteconfig5 --file kcminputrc --group Mouse --key X11LibInputXAccelProfileFlat true
+  kwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Sweet-cursors
 
   # kscreenlockerrc
   kwriteconfig5 --file kscreenlockerrc --group Daemon --key Autolock false
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kscreenlockerrc" --group Greeter --key Theme Sweet
+
+  # ksplashrc
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/ksplashrc" --group KSplash --key Theme Sweet
 
   # okularpartrc
   kwriteconfig5 --file okularpartrc --group General --key ShellOpenFileInTabs true
@@ -39,6 +44,7 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # kwinrc
   kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kwinrc" --group org.kde.kdecoration2 --key theme __aurorae__svg__Sweet-Dark
 
   # kdeglobals
   kwriteconfig5 --file kdeglobals --group General --key font "Fira Sans,9,-1,5,50,0,0,0,0,0"
@@ -53,7 +59,14 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort directories first" true
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort hidden files last" false
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Sort reversed" false
+  kwriteconfig5 --file kdeglobals --group Icons --key Theme beautyline
+  kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage Sweet
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group General --key ColorScheme Sweet
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group Icons --key Theme candy-icons
   kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group KDE --key widgetStyle kvantum
+
+  # plasmarc
+  kwriteconfig5 --file "${HOME}/.config/kdedefaults/plasmarc" --group Theme --key name Sweet
 
   # gtk
   kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "Fira Sans,  10"
@@ -74,4 +87,18 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   # konsolerc
   kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
   kwriteconfig5 --file konsolerc --group MainWindow --key MenuBar Disabled
+fi
+
+# # https://www.reddit.com/r/kde/comments/g986ql/comment/fov5aql/
+if command -v kbuildsycoca5 &>/dev/null; then
+  rm -f "${HOME}/.cache/*.kcache"
+  for i in $(seq 0 9); do
+    dbus-send --session --type=signal /KGlobalSettings org.kde.KGlobalSettings.notifyChange int32:${i} int32:0
+  done
+  for i in $(seq 0 5); do
+    dbus-send --session --type=signal /KIconLoader org.kde.KIconLoader.iconChanged int32:${i}
+  done
+  dbus-send --session --type=signal /KWin org.kde.KWin.reloadConfig
+  kbuildsycoca5 &>/dev/null
+  (kquitapp5 plasmashell || killall plasmashell && kstart5 plasmashell) &>/dev/null
 fi
