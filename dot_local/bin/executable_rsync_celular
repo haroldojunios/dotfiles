@@ -4,56 +4,59 @@
 # <(cat <<< "$inputData")
 # <(printf "%s" "$inputData")
 #- /TWRP
-filter_rsync="+ /MIUI/backup/
-+ /Android/media/
-+ /Android/media/com.whatsapp/
+RSYNC_FILTERS="
+- .thumbnails
+- .tmfs
+- .Trash
+- .trashed*
 - /.*
-- /MIUI/*
-- /Music
-- /Download/Flash
-- /Download/PC
-- /documents/PC
-- /documents/books
-- /Documents/PC
-- /Documents/books
-- /Download/torrent
-- /Download/PC
-- /Android/*
-- /Android/media/*
 - /amap
 - /AmazFit_WF
+- /Android/*
+- /Android/media/*
+- /Android/media/com.whatsapp/WhatsApp/.Shared
+- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs
+- /Android/media/com.whatsapp/WhatsApp/.Thumbs
+- /Android/media/com.whatsapp/WhatsApp/.trash
+- /Android/media/com.whatsapp/WhatsApp/Media/.Statuses
 - /aray
 - /backups
 - /browser
 - /camera_events
 - /com.fanglz.android.filemanager
-- /com.northpark.drinkwater
 - /com.mercadolibre
 - /com.mercadopagowallet
-- /iciba
-- /MiVideoGlobal
-- /Tencent
-- /tencent
-- /systemui
-- /voip-data
-- /zman
+- /com.northpark.drinkwater
+- /DCIM/Cam/
 - /dctp
 - /did
-- /Android/media/com.whatsapp/WhatsApp/Media/.Statuses
-- /Android/media/com.whatsapp/WhatsApp/.Shared
-- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs
-- /Android/media/com.whatsapp/WhatsApp/.Thumbs
-- /Android/media/com.whatsapp/WhatsApp/.trash
-- /WhatsApp/Media/.Statuses
+- /documents/books
+- /Documents/books
+- /documents/PC
+- /Documents/PC
+- /Download/Flash
+- /Download/PC
+- /Download/PC
+- /Download/torrent
+- /iciba
+- /MIUI/*
+- /MiVideoGlobal
+- /Music
+- /ReadChan
+- /systemui
+- /tencent
+- /Tencent
+- /voip-data
 - /WhatsApp/.Shared
 - /WhatsApp/.StickerThumbs
 - /WhatsApp/.Thumbs
 - /WhatsApp/.trash
-- /ReadChan
-- .trashed*
-- .Trash
-- .thumbnails
-- .tmfs"
+- /WhatsApp/Media/.Statuses
+- /zman
++ /Android/media/
++ /Android/media/com.whatsapp/
++ /MIUI/backup/
+"
 # - /Tachiyomi
 
 rsync_all() {
@@ -64,10 +67,10 @@ rsync_all() {
   # ssh celular "remove_old_bak"
   # ssh celular "rsync_ig"
 
-  rsync ${RS_OPTS} --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /media/data/Android/
+  rsync ${RS_OPTS} --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /media/data/Android/
   # [ ! -e ~/Downloads/Celular/ ] ||
   #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
-  #   rsync $RS_OPTS --include-from <(printf "%s" "$filter_rsync") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
+  #   rsync $RS_OPTS --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
   #   rsync $RS_OPTS --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                            # books
   #   rsync $RS_OPTS --exclude={"*.ini",".thumbnails"} ~/Music/ celular:/sdcard/Music/                                              # music
   # # rsync $RS_OPTS --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                   # pictures

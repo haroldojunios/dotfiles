@@ -139,6 +139,7 @@ dePackageList=(
   kdenetwork-filesharing
   kdialog
   kfind
+  kimageformats5
   kjournald
   kmix
   kolourpaint
@@ -148,7 +149,7 @@ dePackageList=(
   okular
   partitionmanager
   spectacle
-  # other gui apps
+  # other gui apps/plugins
   calibre
   conky
   firefox
@@ -158,6 +159,9 @@ dePackageList=(
   keepassxc
   mpv
   onlyoffice-bin
+  qt5-imageformats
+  qt5-jpegxl-image-plugin
+  qt6-jpegxl-image-plugin
   ventoy-bin
   virtualbox
   visual-studio-code-bin
@@ -187,6 +191,7 @@ packageList=(
   expect
   eza
   fastfetch
+  fd
   ffmpeg
   find-the-command
   fish
@@ -202,7 +207,6 @@ packageList=(
   make
   mediainfo
   micro
-  mlocate
   nano
   netcat
   ninja
@@ -215,15 +219,15 @@ packageList=(
   perl-image-exiftool
   perl-yaml-tiny
   pkgfile
+  plocate
   python
   python-black
   python-isort
   python-pipx
   python-requests
-  qt5-jpegxl-image-plugin
-  qt6-jpegxl-image-plugin
   rclone
   reflector
+  ripgrep
   shfmt
   simple-mtpfs
   sshfs
@@ -323,6 +327,10 @@ if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/de
   sudo systemctl enable --now pkgfile-update.timer
 fi
 
+if ! systemctl list-unit-files --state=enabled | grep plocate-updatedb.timer &>/dev/null; then
+  sudo systemctl enable --now plocate-updatedb.timer
+fi
+
 if [ -d "/proc/acpi/button/lid" ]; then
   if pacman -Q tlp &>/dev/null && ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
     sudo systemctl enable --now tlp
@@ -339,3 +347,5 @@ sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorl
 
 yes | paru -Scd
 pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :
+
+echo

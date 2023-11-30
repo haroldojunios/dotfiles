@@ -1,0 +1,26 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if command -v crudini &>/dev/null; then
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General BackupBeforeSave true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General ConfigVersion 2
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General GlobalAutoTypeKey 80
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General HideWindowOnCopy true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General MinimizeAfterUnlock true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" Browser Enabled true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI MinimizeOnClose true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI MinimizeOnStartup true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI MinimizeToTray true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI MonospaceNotes true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI ShowTrayIcon true
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" GUI TrayIconAppearance colorful
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" PasswordGenerator AdditionalChars ""
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" PasswordGenerator SpecialChars false
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" Security ClearClipboardTimeout 30
+  crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" Security IconDownloadFallback true
+fi

@@ -112,12 +112,14 @@ D /media 0755 root root 0 -
 EOF
 fi
 
-sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
-sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress-force=zstd:15"
-sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:15"
-sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:15"
-sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
-sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
+if command -v crudini &>/dev/null; then
+  sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress-force=zstd:15"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:15"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:15"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
+fi
 
 if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
   if ! [ -d "/var/lib/dkms/it87" ]; then
