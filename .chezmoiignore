@@ -4,27 +4,11 @@ key.txt.age
 .ssh/termux-ssh.id_rsa.age
 .local/share/fonts/**/.uuid
 assets
-symlinks
 setup.ps1
 setup.sh
 README.md
 
-{{ if ne .osid "android" }}
-.termux
-.config/android-as-linux.js
-{{ end }}
-
-{{ if ne .osid "windows" }}
-AppData
-Documents/WindowsPowerShell
-scoop
-.local/bin/exa.exe
-{{ else }}
-.config/fish/completions/chezmoi.fish
-.hyper.js
-{{ end }}
-
-{{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
+{{ if ne .chezmoi.os "linux" }}
 .local/share
 .config/*
 !.config/fish
@@ -33,17 +17,25 @@ scoop
 !.config/zsh
 !.config/black
 !.config/starship.toml
-{{   if .isWSL }}
-!.config/Code
-{{   end }}
 {{ end }}
 
-{{ if or (eq .osid "android") (eq .osid "windows") }}
-.config/fontconfig
+{{ if ne .chezmoi.os "android" }}
+.termux
+.config/android-as-linux.js
 {{ end }}
 
-{{ if ne .osid "windows" }}
+{{ if ne .chezmoi.os "windows" }}
 .chezmoiscripts/windows/**
+AppData
+Documents/WindowsPowerShell
+scoop
+.local/bin/exa.exe
 {{ else }}
 .chezmoiscripts/linux/**
+.config/fish/completions/chezmoi.fish
+.hyper.js
+{{ end }}
+
+{{ if .isWSL }}
+!.config/Code
 {{ end }}
