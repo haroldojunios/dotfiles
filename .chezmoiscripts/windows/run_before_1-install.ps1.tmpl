@@ -1,94 +1,101 @@
-# function Add-EnvPath {
-#   param(
-#     [Parameter(Mandatory = $true)]
-#     [string]$Path,
+function Add-EnvPath {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Path,
 
-#     [ValidateSet('Machine', 'User', 'Session')]
-#     [string]$Container = 'Session'
-#   )
+    [ValidateSet('Machine', 'User', 'Session')]
+    [string]$Container = 'Session'
+  )
 
-#   if ($Container -ne 'Session') {
-#     $containerMapping = @{
-#       Machine = [EnvironmentVariableTarget]::Machine
-#       User    = [EnvironmentVariableTarget]::User
-#     }
-#     $containerType = $containerMapping[$Container]
+  if ($Container -ne 'Session') {
+    $containerMapping = @{
+      Machine = [EnvironmentVariableTarget]::Machine
+      User    = [EnvironmentVariableTarget]::User
+    }
+    $containerType = $containerMapping[$Container]
 
-#     $persistedPaths = [Environment]::GetEnvironmentVariable('Path', $containerType) -split ';'
-#     if ($persistedPaths -notcontains $Path) {
-#       $persistedPaths = $persistedPaths + $Path | Where-Object { $_ }
-#       [Environment]::SetEnvironmentVariable('Path', $persistedPaths -join ';', $containerType)
-#     }
-#   }
+    $persistedPaths = [Environment]::GetEnvironmentVariable('Path', $containerType) -split ';'
+    if ($persistedPaths -notcontains $Path) {
+      $persistedPaths = $persistedPaths + $Path | Where-Object { $_ }
+      [Environment]::SetEnvironmentVariable('Path', $persistedPaths -join ';', $containerType)
+    }
+  }
 
-#   $envPaths = $env:Path -split ';'
-#   if ($envPaths -notcontains $Path) {
-#     $envPaths = $envPaths + $Path | Where-Object { $_ }
-#     $env:Path = $envPaths -join ';'
-#   }
-# }
+  $envPaths = $env:Path -split ';'
+  if ($envPaths -notcontains $Path) {
+    $envPaths = $envPaths + $Path | Where-Object { $_ }
+    $env:Path = $envPaths -join ';'
+  }
+}
 
-# if (!($(Get-PackageProvider).Name -eq "NuGet")) {
-#   Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
-# }
+if (!($(Get-PackageProvider).Name -eq "NuGet")) {
+  Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
+}
 
-# if (!($(Get-InstalledModule).Name -eq "PowerShell-Beautifier")) {
-#   Install-Module -Name PowerShell-Beautifier -Force -Scope CurrentUser
-# }
+if (!($(Get-InstalledModule).Name -eq "PowerShell-Beautifier")) {
+  Install-Module -Name PowerShell-Beautifier -Force -Scope CurrentUser
+}
 
-# gsudo choco upgrade all -y
+gsudo choco upgrade all -y
 
-# $packages = @(
-#   "7zip"
-#   "bat"
-#   "choco-cleaner"
-#   "filezilla"
-#   "firefox"
-#   "foxitreader"
-#   "gimp"
-#   "git"
-#   "imagemagick"
-#   "inkscape"
-#   "microsoft-windows-terminal"
-#   # "msys2"
-#   "nerd-fonts-firacode"
-#   "nerd-fonts-hack"
-#   "python310"
-#   "starship"
-#   "virtualbox"
-#   "vlc"
-#   "vnc-viewer"
-#   "vscode"
-#   "windirstat"
-# )
+$packages = @(
+  "7zip"
+  "bat"
+  "choco-cleaner"
+  "ffmpeg"
+  "firefox"
+  "git"
+  "imagemagick"
+  "microsoft-windows-terminal"
+  "nerd-fonts-firacode"
+  "nerd-fonts-hack"
+  "python310"
+  "starship"
+  "vnc-viewer"
+  "vscode"
+  "windirstat"
+)
 
-# foreach ($package in $packages) {
-#   if ((choco list -e $package) -match "0 packages") {
-#     gsudo choco install $package -y
-#   }
-# }
+if (!(((Get-WmiObject Win32_ComputerSystem).model).Contains("Virtual") -or ((Get-WmiObject Win32_ComputerSystem).model).Contains("VMware"))) {
+  $packages += @(
+    "filezilla"
+    "foxitreader"
+    "gimp"
+    "inkscape"
+    "keepassxc"
+    "qbittorrent"
+    "virtualbox"
+    "vlc"
+  )
+}
 
-# gsudo choco-cleaner.bat
+foreach ($package in $packages) {
+  if ((choco list -e $package) -match "0 packages") {
+    gsudo choco install $package -y
+  }
+}
 
-# # Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
-# # Add-EnvPath -Path C:\tools\msys64\usr\local\bin -Container User
-# # Add-EnvPath -Path C:\tools\msys64\mingw64\bin -Container User
-# Add-EnvPath -Path C:\Python310 -Container User
-# Add-EnvPath -Path C:\Python310\Scripts -Container User
-# Add-EnvPath -Path $env:HOME\.local\bin -Container User
+gsudo choco-cleaner.bat
 
-# # C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
+# Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
+# Add-EnvPath -Path C:\tools\msys64\usr\local\bin -Container User
+# Add-EnvPath -Path C:\tools\msys64\mingw64\bin -Container User
+Add-EnvPath -Path C:\Python310 -Container User
+Add-EnvPath -Path C:\Python310\Scripts -Container User
+Add-EnvPath -Path $env:HOME\.local\bin -Container User
 
-# $pyPackages = @(
-#   "black"
-#   "crudini"
-#   "isort"
-# )
+# C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
 
-# $installedPyPackages = pip freeze
+$pyPackages = @(
+  "black"
+  "crudini"
+  "isort"
+)
 
-# foreach ($package in $pyPackages) {
-#   if (!(echo $installedPyPackages | Select-String -Pattern $package)) {
-#     gsudo pip install $package
-#   }
-# }
+$installedPyPackages = pip freeze
+
+foreach ($package in $pyPackages) {
+  if (!(Write-Output $installedPyPackages | Select-String -Pattern $package)) {
+    gsudo pip install $package
+  }
+}
