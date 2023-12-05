@@ -19,6 +19,9 @@ AppData
 Documents/WindowsPowerShell
 scoop
 .local/bin/exa.exe
+{{ else }}
+.config/fish/completions/chezmoi.fish
+.hyper.js
 {{ end }}
 
 {{ if or (eq .osid "android") (eq .osid "windows") .isWSL }}
@@ -28,7 +31,6 @@ scoop
 !.config/nanorc
 !.config/sh
 !.config/zsh
-!.config/android-as-linux.js
 !.config/black
 !.config/starship.toml
 {{   if .isWSL }}

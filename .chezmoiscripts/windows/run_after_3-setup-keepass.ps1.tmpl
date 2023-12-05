@@ -1,0 +1,21 @@
+if (Get-Command crudini -errorAction SilentlyContinue) {
+  if (!(Test-Path "$env:USERPROFILE\.config\keepassxc\keepassxc.ini")) {
+    New-Item -path "$env:USERPROFILE\.config\keepassxc" -name "keepassxc.ini" -type "file" -Force | out-null
+  }
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" General BackupBeforeSave true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" General ConfigVersion 2
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" General GlobalAutoTypeKey 80
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" General HideWindowOnCopy true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" General MinimizeAfterUnlock true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" Browser Enabled true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI MinimizeOnClose true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI MinimizeOnStartup true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI MinimizeToTray true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI MonospaceNotes true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI ShowTrayIcon true
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" GUI TrayIconAppearance colorful
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" PasswordGenerator AdditionalChars ""
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" PasswordGenerator SpecialChars false
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" Security ClearClipboardTimeout 30
+  crudini --set "$env:USERPROFILE\.config\keepassxc\keepassxc.ini" Security IconDownloadFallback true
+}
