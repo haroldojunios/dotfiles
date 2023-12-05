@@ -28,16 +28,19 @@ $extensions = @(
   "ritwickdey.liveserver"
   "ryu1kn.partial-diff"
   "shd101wyy.markdown-preview-enhanced"
-  "streetsidesoftware.code-spell-checker-portuguese-brazilian"
   "streetsidesoftware.code-spell-checker"
+  "streetsidesoftware.code-spell-checker-portuguese-brazilian"
   "tabnine.tabnine-vscode"
   "tamasfe.even-better-toml"
+  "timonwong.shellcheck"
   "yzhang.markdown-all-in-one"
   "zhuangtongfa.material-theme"
 )
 
+$installed = code --list-extensions
+
 foreach ($extension in $extensions) {
-  if (!(code --list-extensions) -match $extension) {
+  if (!(echo $installed | Select-String -Pattern $extension)) {
     code --install-extension $extension
   }
 }

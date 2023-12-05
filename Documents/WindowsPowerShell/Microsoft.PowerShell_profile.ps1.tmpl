@@ -12,6 +12,8 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
+Import-Module 'gsudoModule'
+
 Set-PSReadLineOption -Colors @{
   Parameter = 'Blue'
   Operator  = 'Blue'

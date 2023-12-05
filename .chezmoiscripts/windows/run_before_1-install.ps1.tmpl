@@ -36,39 +36,11 @@ if (!($(Get-InstalledModule).Name -eq "PowerShell-Beautifier")) {
   Install-Module -Name PowerShell-Beautifier -Force -Scope CurrentUser
 }
 
-$buckets = @(
-  "extras"
-)
-
-$packages = @(
-  "extras/age"
-  "main/bat"
-  "main/starship"
-  "main/gsudo"
-  "main/sudo"
-)
-
-foreach ($bucket in $buckets) {
-  if (!($(scoop bucket list).Name -eq "$bucket")) {
-    scoop bucket add $bucket
-  }
-}
-
-foreach ($package in $packages) {
-  if (!(scoop info $package).Installed) {
-    scoop install $package
-  }
-}
-
-if (gsudo config | Select-String -Pattern "Explicit") {
-  gsudo config CacheMode Auto
-  gsudo config CacheDuration "00:20:00"
-}
-
 gsudo choco upgrade all -y
 
 $packages = @(
   "7zip"
+  "bat"
   "choco-cleaner"
   "filezilla"
   "firefox"
@@ -78,10 +50,11 @@ $packages = @(
   "imagemagick"
   "inkscape"
   "microsoft-windows-terminal"
-  "msys2"
+  # "msys2"
   "nerd-fonts-firacode"
   "nerd-fonts-hack"
   "python310"
+  "starship"
   "virtualbox"
   "vlc"
   "vnc-viewer"
@@ -95,13 +68,12 @@ foreach ($package in $packages) {
 }
 
 gsudo choco-cleaner.bat
-scoop cache rm -all
 
-Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
-Add-EnvPath -Path C:\tools\msys64\usr\local\bin -Container User
-Add-EnvPath -Path C:\tools\msys64\mingw64\bin -Container User
+# Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
+# Add-EnvPath -Path C:\tools\msys64\usr\local\bin -Container User
+# Add-EnvPath -Path C:\tools\msys64\mingw64\bin -Container User
 Add-EnvPath -Path C:\Python310 -Container User
 Add-EnvPath -Path C:\Python310\Scripts -Container User
 Add-EnvPath -Path $env:HOME\.local\bin -Container User
 
-C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
+# C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
