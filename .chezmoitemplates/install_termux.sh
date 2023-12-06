@@ -8,14 +8,12 @@ apt-get update
 apt-get upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
 packageList=(
-  tur-repo # setup tur repo
   7zip
   age
   bat
   binutils
   clang
   cmake
-  code-server # needs tur repo
   cronie
   curl
   eza
