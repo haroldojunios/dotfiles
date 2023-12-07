@@ -43,8 +43,15 @@ modifyLineBreaks:
       CommandStartsOnOwnLine: 3
     label:
       CommandStartsOnOwnLine: 1
+    renewcommand:
+      CommandStartsOnOwnLine: 1
   items:
     ItemStartsOnOwnLine: 3
+  mandatoryArguments:
+    hypersetup:
+      MandArgBodyStartsOnOwnLine: 1
+      RCuBStartsOnOwnLine: 1
+      CommaFinishesWithLineBreak: 1
 indentPreamble: 1
 dos2unixlinebreaks: 1
-removeTrailingWhitespace: 1
+onlyOneBackUp: 1

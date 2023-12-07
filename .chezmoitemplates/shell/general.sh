@@ -1,10 +1,10 @@
 # shellcheck shell=bash
 # ls
-alias l='eza -a --color=always --group-directories-first --icons'     # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons'    # all files and dirs
-alias ll='eza -a -l --color=always --group-directories-first --icons' # long format
-alias lt='eza -aT --color=always --group-directories-first --icons'   # tree listing
-alias l.="eza -a | egrep '^\.'"                                       # show only dotfiles
+alias l='eza -a --color=always --group-directories-first --icons'           # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons'          # all files and dirs
+alias ll='eza -a -l --color=always --group-directories-first --icons'       # long format
+alias lt='eza -aT -I .git --color=always --group-directories-first --icons' # tree listing
+alias l.="eza -a .git | egrep '^\.'"                                        # show only dotfiles
 
 # cd
 alias ..='cd ..'
@@ -69,3 +69,4 @@ alias ug="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias wget='wget -c '
 alias pm='ps auxf | sort -nr -k 4'
 alias pm10='ps auxf | sort -nr -k 4 | head -10'
+alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
