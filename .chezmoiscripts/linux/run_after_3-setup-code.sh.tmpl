@@ -16,6 +16,7 @@ extensions=(
   esbenp.prettier-vscode
   formulahendry.code-runner
   gruntfuggly.todo-tree
+  hediet.vscode-drawio
   ibm.output-colorizer
   james-yu.latex-workshop
   janisdd.vscode-edit-csv
@@ -76,7 +77,7 @@ for code in "${code_bins[@]}"; do
   esac
 
   ext_list=$(${code} --list-extensions)
-  
+
 
 
   for extension in ${_extensions[@]}; do
