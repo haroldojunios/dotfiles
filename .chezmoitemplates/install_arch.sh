@@ -109,7 +109,7 @@ dePackageList=(
   gtk3-nocsd
   kde-cli-tools
   kdeplasma-addons
-  kgamma5
+  kgamma
   kio-admin
   kscreen
   kwallet-pam
