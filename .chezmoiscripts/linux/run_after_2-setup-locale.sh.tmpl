@@ -19,7 +19,6 @@ sudo "${HOME}/.local/bin/set-val" LC_MEASUREMENT C "${locale}"
 sudo "${HOME}/.local/bin/set-val" LC_MONETARY C "${locale}"
 sudo "${HOME}/.local/bin/set-val" LC_NUMERIC C "${locale}"
 sudo "${HOME}/.local/bin/set-val" LC_TIME pt_BR.UTF-8 "${locale}"
-sudo "${HOME}/.local/bin/set-val" LANGUAGE en_US:pt_BR "${locale}"
 
 if ! localedef --list-archive | grep -q "en_US.utf8" || ! localedef --list-archive | grep -q "pt_BR.utf8"; then
   sudo sed -e '/en_US.UTF-8/s/^#*//g' -i /etc/locale.gen
