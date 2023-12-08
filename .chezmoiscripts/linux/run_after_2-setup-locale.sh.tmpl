@@ -7,11 +7,7 @@
 set -eu
 
 {{- if ne .osid "android" }}
-{{- if eq .osidLike "linux-arch" }}
 locale="/etc/locale.conf"
-{{- else }}
-locale="/etc/default/locale"
-{{- end }}
 
 sudo "${HOME}/.local/bin/set-val" LC_ALL pt_BR.UTF-8 "${locale}"
 sudo "${HOME}/.local/bin/set-val" LANG en_US.UTF-8 "${locale}"

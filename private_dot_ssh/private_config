@@ -4,14 +4,10 @@ Host *
 Host celular
   Port 8022
 
-Match host celular exec "nc -w 1 -z 192.168.1.212 %p"
-  HostName 192.168.1.212
-Match host celular exec "nc -w 1 -z 192.168.6.222 %p"
-  HostName 192.168.6.222
+Match host celular exec "nc -w 1 -z 192.168.1.122 %p"
+  HostName 192.168.1.122
 Match host celular exec "nc -w 1 -z 10.0.0.12 %p"
-  HostName 10.0.0.12
-Match host celular exec "nc -w 1 -z 192.168.101.12 %p"
-  HostName 192.168.101.12
+  HostName 10.0.0.22
 Match host celular exec "true"
   HostName 192.168.1.22
 
