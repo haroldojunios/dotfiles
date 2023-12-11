@@ -156,6 +156,7 @@ dePackageList=(
   gimp
   gparted
   hyper-bin
+  inkscape
   keepassxc
   mpv
   onlyoffice-bin

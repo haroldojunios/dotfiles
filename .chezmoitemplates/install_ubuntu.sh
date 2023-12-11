@@ -147,6 +147,7 @@ dePackageList=(
   firefox
   gimp
   gparted
+  inkscape
   keepassxc
   onlyoffice-desktopeditors
   xournalpp
