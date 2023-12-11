@@ -1,7 +1,5 @@
 key.txt.age
-.ssh/work-ssh.id_rsa.age
-.ssh/home-ssh.id_rsa.age
-.ssh/termux-ssh.id_rsa.age
+.ssh/*.id_rsa.age
 .local/share/fonts/**/.uuid
 assets
 setup.ps1
