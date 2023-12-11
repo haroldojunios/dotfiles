@@ -9,7 +9,7 @@
 	defaultBranch = main
 [core]
 	autocrlf = input
-	editor = {{ if eq .osid "android" }} micro {{ else }} code --wait {{ end }}
+	editor = {{ if .installDE }} code --wait {{ else }} micro {{ end }}
 	excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 [safe]
 	directory = *
