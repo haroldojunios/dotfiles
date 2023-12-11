@@ -36,12 +36,18 @@ if (!($(Get-InstalledModule).Name -eq "PowerShell-Beautifier")) {
   Install-Module -Name PowerShell-Beautifier -Force -Scope CurrentUser
 }
 
+# update choco modules
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+refreshenv | Out-Null
+
 gsudo choco upgrade all -y
 
 $packages = @(
   "7zip"
   "bat"
   "choco-cleaner"
+  "dos2unix"
   "ffmpeg"
   "firefox"
   "git"
@@ -54,6 +60,7 @@ $packages = @(
   "vnc-viewer"
   "vscode"
   "windirstat"
+  "winget"
 )
 
 if (!(((Get-WmiObject Win32_ComputerSystem).model).Contains("Virtual") -or ((Get-WmiObject Win32_ComputerSystem).model).Contains("VMware"))) {
@@ -75,6 +82,11 @@ foreach ($package in $packages) {
   }
 }
 
+# update choco modules
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+refreshenv | Out-Null
+
 gsudo choco-cleaner.bat
 
 # Add-EnvPath -Path C:\tools\msys64\usr\bin -Container User
@@ -85,6 +97,20 @@ Add-EnvPath -Path C:\Python310\Scripts -Container User
 Add-EnvPath -Path $env:HOME\.local\bin -Container User
 
 # C:\tools\msys64\usr\bin\bash {{ .chezmoi.workingTree }}\.chezmoitemplates\install_msys.sh
+
+$wingetPackages = @(
+  "eza-community.eza"
+)
+
+$installedWingetPackages = winget list
+
+foreach ($package in $wingetPackages) {
+  if (!(Write-Output $installedWingetPackages | Select-String -Pattern $package)) {
+    winget install $package --accept-package-agreements --accept-source-agreements
+  }
+}
+
+refreshenv | Out-Null
 
 $pyPackages = @(
   "black"

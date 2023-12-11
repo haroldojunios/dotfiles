@@ -2,6 +2,11 @@ if (!(choco list -e age.portable)) {
   choco install age.portable -y
 }
 
+# update choco modules
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+refreshenv | Out-Null
+
 if (!(Test-Path "$env:USERPROFILE/.config/key.txt")){
   age --decrypt --output "$env:USERPROFILE/.config/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
 }
