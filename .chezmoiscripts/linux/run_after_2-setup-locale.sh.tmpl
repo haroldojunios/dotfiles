@@ -9,7 +9,6 @@ set -eu
 {{- if ne .osid "android" }}
 locale="/etc/locale.conf"
 
-sudo "${HOME}/.local/bin/set-val" LC_ALL pt_BR.UTF-8 "${locale}"
 sudo "${HOME}/.local/bin/set-val" LANG en_US.UTF-8 "${locale}"
 sudo "${HOME}/.local/bin/set-val" LC_MEASUREMENT C "${locale}"
 sudo "${HOME}/.local/bin/set-val" LC_MONETARY C "${locale}"

@@ -65,6 +65,9 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group Icons --key Theme candy-icons
   kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group KDE --key widgetStyle kvantum
 
+  # ksmserverrc
+  kwriteconfig5 --file ksmserverrc --group General --key loginMode emptySession
+
   # plasmarc
   kwriteconfig5 --file "${HOME}/.config/kdedefaults/plasmarc" --group Theme --key name Sweet
 

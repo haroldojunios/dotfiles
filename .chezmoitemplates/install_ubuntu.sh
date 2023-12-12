@@ -362,8 +362,8 @@ fi
 ## imagemagick
 TEMP_FILE=$(mktemp) &&
   wget 'https://dist.1-2.dev/imei.sh' -qO "${TEMP_FILE}" &&
-  sudo bash "${TEMP_FILE}" >/dev/null
-rm "${TEMP_FILE}"
+  sudo bash "${TEMP_FILE}" >/dev/null || :
+rm -f "${TEMP_FILE}"
 
 # if ! [ -f "/etc/X11/xorg.conf" ]; then
 #   sudo bash -c "cat >/etc/X11/xorg.conf" <<EOF
@@ -525,5 +525,6 @@ rm "${TEMP_FILE}"
 
 sudo aptitude safe-upgrade -o APT::Get::Fix-Missing=true -y
 yes | sudo ubuntu-drivers install &>/dev/null
+dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge 2>/dev/null || :
 sudo apt-get autoremove --purge -y
 sudo apt-get clean -y
