@@ -4,6 +4,7 @@ set fish_greeting
 set -x PAGER "bat --plain"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x MICRO_TRUECOLOR 1
+set -U fish_features qmark-noglob
 
 {{ if eq .osid "android" }}
 set -x USER haroldo
@@ -14,6 +15,11 @@ end
 
 if not pgrep -f sshd >/dev/null
     sshd
+end
+{{ else }}
+if not test -f ~/.cache/weather
+    get-weather ~/.cache/weather &>/dev/null &
+    disown
 end
 {{ end }}
 
@@ -40,6 +46,7 @@ if status --is-interactive && not functions -q fisher
         fisher install franciscolourenco/done
         fisher install edc/bass
         fisher install Kristoffer-PBS/autols-fish
+        fisher install jorgebucaran/nvm.fish
     end
     if type -q autols-toggle
         autols-toggle on &>/dev/null
