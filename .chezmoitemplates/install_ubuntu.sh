@@ -45,6 +45,11 @@ if ! grep -q "^deb .*aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d
   sudo add-apt-repository ppa:aslatter/ppa -y
 fi
 
+# chromium repo
+if ! grep -q "^deb .*saiarcot895/chromium-beta" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  sudo add-apt-repository ppa:saiarcot895/chromium-beta -y
+fi
+
 # firefox repo
 if ! grep -q "^deb .*mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:mozillateam/ppa -y

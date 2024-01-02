@@ -46,7 +46,7 @@ if ! cjxl --version 2>&1 | grep -q "${LIBJXL_VER}"; then
   (
     cd "${TEMP_FOLDER}"
     tar -xzf libjxl.tar.gz
-    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y *.deb
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y ./*.deb
 
     git clone --depth 1 https://github.com/novomesk/qt-jpegxl-image-plugin
     cd qt-jpegxl-image-plugin
