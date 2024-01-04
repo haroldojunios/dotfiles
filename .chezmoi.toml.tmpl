@@ -47,6 +47,6 @@ encryption = "age"
     isRasp = {{ $isRasp }}
     isServer = {{ $isServer }}
     installDE = {{ $installDE }}
-[edit]
-    command = {{ if $installDE }} "code" {{ else }} "micro" {{ end }}
-    {{ if $installDE }} args = "--wait" {{ end }}
+# [edit]
+#     command = {{ if $installDE -}} "code" {{ else -}} "micro" {{- end }}
+#     {{ if $installDE -}} args = "--wait" {{- end }}
