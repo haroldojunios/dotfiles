@@ -162,6 +162,12 @@ else if type -q nano
     set -x EDITOR nano
 end
 
+if test -f ~/.config/env
+    while read -la line
+        set -x $(string split -m1 '=' "$line")
+    end <~/.config/env
+end
+
 ## Mcfly history
 if status --is-interactive && type -q mcfly
     mcfly init fish | source

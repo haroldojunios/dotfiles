@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+import os
+import json
+import time
+
+import requests
+import sys
+
+IP_API_KEY = os.getenv("IPGEO_API_KEY")
+WEATHER_API_KEY = os.getenv("OWM_API_KEY")
+
+if IP_API_KEY is None or WEATHER_API_KEY is None:
+    print("API keys not found!", file=sys.stderr)
+    exit(1)
+
+IP_URL = f"https://api.ipgeolocation.io/ipgeo?apiKey={IP_API_KEY}"
+WEATHER_URL = (
+    "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}"
+    f"&units=metric&appid={WEATHER_API_KEY}"
+)
+TEST_URL = "http://google.com/"
+TEST_TIMEOUT = 60
+
+# WIND_DIRECTIONS = ""
+WIND_DIRECTIONS = "󰁝󰁜󰁔󰁃󰁅󰁂󰁍󰁛"
+WEATHER_ICONS = {
+    "01d": "",
+    "02d": "",
+    "03d": "",
+    "04d": "",
+    "09d": "",
+    "10d": "",
+    "11d": "",
+    "13d": "",
+    "50d": "󰖑",
+    "01n": "",
+    "02n": "",
+    "03n": "",
+    "04n": "",
+    "09n": "",
+    "10n": "",
+    "11n": "",
+    "13n": "",
+    "50n": "󰖑",
+}
+BEAUFORT_SCALE = ""
+BEAUFORT_THRESHOLDS = (1, 3, 6, 10, 16, 21, 27, 33, 40, 47, 55, 63)
+
+if len(sys.argv) > 1 and sys.argv[1]:
+    file = sys.argv[1]
+else:
+    file = None
+
+# OFFSET = ord("🇦") - ord("A")
+
+
+# def flag(code):
+#     if not code:
+#         return ""
+#     points = map(lambda x: ord(x) + OFFSET, code.upper())
+#     return ("\\U%08x\\U%08x" % tuple(points)).encode("utf8").decode("unicode-escape")
+
+# print(flag("BR"))
+start = time.time()
+
+while True:
+    try:
+        ok = requests.get(TEST_URL, timeout=5).ok
+        if ((time.time() - start) > TEST_TIMEOUT) or not ok:
+            print("BO")
+            exit(1)
+        elif ok:
+            break
+    except requests.ConnectionError:
+        time.sleep(1)
+        continue
+
+
+data = None
+
+with requests.get(IP_URL) as r:
+    if r.status_code != 200:
+        exit(1)
+    data = r.json()
+
+if data and "latitude" in data and "longitude" in data:
+    lat = data["latitude"]
+    lon = data["longitude"]
+
+    with requests.get(WEATHER_URL.format(lat=lat, lon=lon)) as r:
+        if r.status_code != 200:
+            exit(1)
+        data.update(r.json())
+
+wind_icon = WIND_DIRECTIONS[round(data["wind"]["deg"] / 45)]
+weather_icon = WEATHER_ICONS.get(data["weather"][0]["icon"], "")
+cloud_percentage = (
+    f' ({data["clouds"]["all"]}%)'
+    if data["weather"][0]["main"] == "Clouds"
+    else ""
+)
+rain = data.get("rain", {}).get("1h", 0)
+wind_speed_kmph = data["wind"]["speed"]
+wind_speed_knots = wind_speed_kmph * 1.852
+
+for i, thresh in enumerate(BEAUFORT_THRESHOLDS):
+    if wind_speed_knots < thresh:
+        beaufort_scale = i
+        break
+else:
+    beaufort_scale = 12
+wind_icon = f"{BEAUFORT_SCALE[beaufort_scale]} {wind_icon}"
+
+data["weather_summary"] = (
+    f'{data["city"]} - {"/".join(data["state_code"].split("-")[::-1])}:'
+    f' {weather_icon} {data["weather"][0]["description"]}{cloud_percentage},'
+    f'  {data["main"]["temp"]:.1f}({data["main"]["feels_like"]:.1f})°C,'
+    f" 󰖌 {rain:.1f}mm,"
+    f' 󰖎 {data["main"]["humidity"]}%,'
+    f" {wind_icon} {wind_speed_kmph:.1f}km/h"
+)
+
+if file is not None:
+    with open(file, "w") as f:
+        json.dump(data, f, ensure_ascii=False)
+else:
+    print(json.dumps(data, ensure_ascii=False))

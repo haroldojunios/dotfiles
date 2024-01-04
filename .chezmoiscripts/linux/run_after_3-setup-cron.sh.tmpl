@@ -6,15 +6,23 @@
 
 set -eu
 
-CRONTAB=$(
+CRONTAB=$(<${HOME}/.config/env)
+CRONTAB+=$(
   cat <<'EOF'
-@reboot rm -rf "${HOME}/.cache" >/dev/null 2>&1
+
+{{ if eq .osid "android" -}}
+SHELL=/data/data/com.termux/files/usr/bin/bash
+{{ else -}}
+SHELL=/bin/bash
+{{- end }}
+
+@reboot rm -rf "${HOME}/.cache/{mozilla,thumbnails,plasmashell,*.kcache,ksycoca5*}" >/dev/null 2>&1
 @reboot fish -c 'fisher update' >/dev/null 2>&1
 {{- if eq .osid "android" }}
 0 * * * * find "${HOME}/storage/shared/Android/media/com.whatsapp/WhatsApp/Databases/" -type f ! -name msgstore.db.crypt14 -delete >/dev/null 2>&1
 {{- else }}
-@reboot "${HOME}/.local/bin/get-weather" >"${HOME}/.cache/weather" 2>/dev/null
-*/20 * * * * "${HOME}/.local/bin/get-weather" >"${HOME}/.cache/weather" 2>/dev/null
+@reboot sleep 5; "${HOME}/.local/bin/get-weather" "${HOME}/.cache/weather" >/dev/null 2>&1s
+*/20 * * * * "${HOME}/.local/bin/get-weather" "${HOME}/.cache/weather" >/dev/null 2>&1s
 {{- end }}
 EOF
 )
