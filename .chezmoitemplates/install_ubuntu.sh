@@ -188,6 +188,7 @@ packageList=(
   bat
   bc
   biber
+  black
   btrfs-compsize
   build-essential
   clang
@@ -195,6 +196,7 @@ packageList=(
   conky-all
   crudini
   curl
+  exfatprogs
   expect
   eza
   ffmpeg
@@ -213,6 +215,7 @@ packageList=(
   openssh-server
   python-is-python3
   python3
+  python3-isort
   python3-requests
   python3-venv
   rclone
@@ -235,7 +238,6 @@ packageList=(
   wget
   xclip
   zip
-  # zoxide
   zram-config
 )
 

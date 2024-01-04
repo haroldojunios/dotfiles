@@ -14,7 +14,7 @@ esac
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
-if ! bat --version | grep -q "${BAT_VER}"; then
+if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
     TEMP_FOLDER=$(mktemp -d)
     trap 'rm -rf "${TEMP_FOLDER}"' EXIT
@@ -25,7 +25,7 @@ if ! bat --version | grep -q "${BAT_VER}"; then
 fi
 
 HYPER_VER=$(curl --silent "https://api.github.com/repos/vercel/hyper/releases/latest" | jq -r .tag_name | tr -d v)
-if ! hyper version | grep -q "${HYPER_VER}"; then
+if ! dpkg -s hyper 2>&1 | grep "Version" | grep -q "${HYPER_VER}"; then
   TEMP_FOLDER=$(mktemp -d)
   trap 'rm -rf "${TEMP_FOLDER}"' EXIT
   wget -O "${TEMP_FOLDER}/hyper.deb" "https://releases.hyper.is/download/deb"
@@ -34,7 +34,7 @@ if ! hyper version | grep -q "${HYPER_VER}"; then
 fi
 
 LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" | jq -r .tag_name | tr -d v)
-if ! cjxl --version 2>&1 | grep -q "${LIBJXL_VER}"; then
+if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
   TEMP_FOLDER=$(mktemp -d)
   trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 {{   if eq .chezmoi.osRelease.id "ubuntu" }}
@@ -57,7 +57,7 @@ if ! cjxl --version 2>&1 | grep -q "${LIBJXL_VER}"; then
 fi
 
 ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" | jq -r .tag_name | tr -d v)
-if ! command -v zoxide &>/dev/null || ! zoxide --version | grep -q "${ZOXIDE_VER}"; then
+if ! dpkg -s zoxide 2>&1 | grep "Version" | grep -q "${ZOXIDE_VER}"; then
   if [ -n "${ARCH}" ]; then
     TEMP_FOLDER=$(mktemp -d)
     trap 'rm -rf "${TEMP_FOLDER}"' EXIT
