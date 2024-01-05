@@ -355,6 +355,7 @@ EOF
 fi
 
 if ! [ -f /usr/lib/libstderred.so ]; then
+  TEMP_FOLDER=$(mktemp -d)
   git -C "$TEMP_FOLDER" clone --depth 1 https://github.com/ku1ik/stderred.git
   (
     cd "$TEMP_FOLDER/stderred"
@@ -364,6 +365,7 @@ if ! [ -f /usr/lib/libstderred.so ]; then
     make
     sudo make install
   )
+  rm -rf "${TEMP_FOLDER}"
 fi
 
 ## imagemagick
