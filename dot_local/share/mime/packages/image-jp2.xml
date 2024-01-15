@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="image/jp2">
+        <comment>JPEG2000 raster data</comment>
+        <icon name="image-jpeg2000"/>
+        <glob-deleteall/>
+        <glob pattern="*.j2k"/>
+        <glob pattern="*.jp2"/>
+        <glob pattern="*.jpg2"/>
+    </mime-type>
+</mime-info>

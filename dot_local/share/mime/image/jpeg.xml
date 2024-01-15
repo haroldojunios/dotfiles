@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/jpeg">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>JPEG raster data</comment>
+  <icon name="image-jpeg"/>
+  <glob-deleteall/>
+  <glob pattern="*.jpe"/>
+  <glob pattern="*.jpeg"/>
+  <glob pattern="*.jpg"/>
+</mime-type>
