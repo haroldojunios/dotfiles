@@ -8,4 +8,5 @@ alias cl='dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs dpkg --purge && apt
 
 # termux api
 alias tp='termux-camera-photo storage/pictures/$(date "+%Y%m%d_%H%M%S").jpg'
+alias tpf='termux-camera-photo -c 1 storage/pictures/$(date "+%Y%m%d_%H%M%S").jpg'
 alias code-server='NODE_OPTIONS="--require ${HOME}/.config/android-as-linux.js" code-server'
