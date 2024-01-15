@@ -7,7 +7,7 @@ modifyLineBreaks:
   textWrapOptions:
     columns: 80
     blocksBeginWith:
-      other: \w|\\text|\\noindent|\\label
+      other: \w|\\text|\\noindent|\\label|\\chapter|\\section|\\subsection|\\subsubsection
     blocksFollow:
       #   other: \\\]|\\item(?:\h|\[)|\\\\|\\newline
       other: |-
