@@ -168,6 +168,12 @@ if test -f ~/.config/env
     end <~/.config/env
 end
 
+if test -f ~/.config/env-local
+    while read -la line
+        set -x $(string split -m1 '=' "$line")
+    end <~/.config/env-local
+end
+
 ## Mcfly history
 if status --is-interactive && type -q mcfly
     mcfly init fish | source
