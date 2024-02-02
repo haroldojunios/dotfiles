@@ -128,4 +128,15 @@ type = "archive-file"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
 path = "FiraCodeNerdFont-Regular.ttf"
 refreshPeriod = "168h"
+
+{{   if .installDE }}
+[".local/share/themes/sweet"]
+type = "archive"
+url = "https://github.com/EliverLara/Sweet/releases/latest/download/Sweet-Dark.zip"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+include = ["xfwm4/**", "gtk-*/**"]
+{{   end }}
+
 {{ end }}

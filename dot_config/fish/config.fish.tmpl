@@ -16,6 +16,9 @@ end
 if not pgrep -f sshd >/dev/null
     sshd
 end
+{{   if .installDE }}
+set -x DISPLAY ":1"
+{{   end }}
 {{ else }}
 if not test -f ~/.cache/weather
     get-weather ~/.cache/weather &>/dev/null &

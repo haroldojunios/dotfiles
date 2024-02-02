@@ -6,10 +6,10 @@
 
 set -eu
 
-{{ if and (not .isWSL) (ne .osid "android") (.installDE) }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
+{{ if and (not .isWSL) (ne .osid "android") (.installDE) }}
 # theme
 if ! [ -d /usr/share/themes/sweet ]; then
   sudo mkdir -p /usr/share/icons
@@ -101,7 +101,7 @@ fi
 
 # wallpaper
 if ! [ -f /usr/share/wallpapers/Shani.png ]; then
-  sudo cp {{ .chezmoi.sourceDir }}/assets/Shani.png /usr/share/wallpapers
+  sudo cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" /usr/share/wallpapers
 fi
 
 # apply
@@ -112,4 +112,24 @@ lookandfeeltool -a Sweet &>/dev/null || :
   { [ -x /usr/lib/plasma-changeicons ] && /usr/lib/plasma-changeicons beautyline &>/dev/null; } &>/dev/null || :
 
 plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null || :
+{{ else if and (ne .osid "android") (.installDE) }}
+# theme
+if [ ! -d "${PREFIX}/usr/share/themes/sweet" ]; then
+  git -C "${PREFIX}/usr/share/themes" clone --depth 1 -b nova https://github.com/EliverLara/sweet
+  (
+    cd "${TEMP_FOLDER}/sweet"
+
+  )
+fi
+
+# icons
+if ! [ -d /usr/share/icons/beautyline ]; then
+  mkdir -p "${PREFIX}/usr/share/icons"
+  git -C "${PREFIX}/usr/share/icons" clone --depth 1 https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline.git
+fi
+
+# wallpaper
+if ! [ -f "${PREFIX}/usr/share/wallpapers/Shani.png" ]; then
+  cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" "${PREFIX}/usr/share/wallpapers"
+fi
 {{ end }}

@@ -46,6 +46,27 @@ packageList=(
   which
   zip
 )
+# desktop enviroment
+dePackageList=(
+  # x11
+  x11-repo
+  termux-x11-nightly
+  tigervnc
+  # xfce
+  xfce4
+  xfce4-screenshooter
+  xfce4-terminal
+  xfce4-whiskermenu-plugin
+  # other gui apps/plugins
+  keepassxc
+)
+
+{{ if .installDE }}
+packageList=(
+  "${packageList[@]}"
+  "${dePackageList[@]}"
+)
+{{ end }}
 
 for package in "${packageList[@]}"; do
   if ! dpkg -s ${package} &>/dev/null; then
