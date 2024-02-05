@@ -16,6 +16,7 @@ packageList=(
   cmake
   cronie
   curl
+  expect
   eza
   ffmpeg
   fish

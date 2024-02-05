@@ -21,6 +21,7 @@ README.md
 {{ if ne .chezmoi.os "android" }}
 .termux
 .config/android-as-linux.js
+.vnc
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
