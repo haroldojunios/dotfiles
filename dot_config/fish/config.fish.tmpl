@@ -9,18 +9,18 @@ set -U fish_features qmark-noglob
 {{ if eq .osid "android" }}
 set -x USER haroldo
 
-if not pgrep -f crond >/dev/null and type -q crond
+if not pgrep -f crond >/dev/null && type -q crond
     crond
 end
 
-if not pgrep -f sshd >/dev/null and type -q sshd
+if not pgrep -f sshd >/dev/null && type -q sshd
     sshd
 end
 
-if not pgrep -f vnc >/dev/null and type -q vncserver
+{{   if .installDE }}
+if not pgrep -f vnc >/dev/null && type -q vncserver
     vncserver
 end
-{{   if .installDE }}
 set -x DISPLAY ":1"
 {{   end }}
 {{ else }}

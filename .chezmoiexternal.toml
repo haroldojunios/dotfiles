@@ -1,4 +1,4 @@
-{{ if and (ne .osid "windows") (ne .osid "android") }}
+{{ if and (ne .osid "windows") (.installDE) }}
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
@@ -136,7 +136,7 @@ url = "https://github.com/EliverLara/Sweet/releases/latest/download/Sweet-Dark.z
 exact = true
 refreshPeriod = "168h"
 stripComponents = 1
-include = ["xfwm4/**", "gtk-*/**"]
+include = ["*/xfwm4/**", "*/gtk-*/**"]
 {{   end }}
 
 {{ end }}
