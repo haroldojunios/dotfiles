@@ -12,7 +12,7 @@ set -eu
 {{   else }}
 {{     template "install_ubuntu.sh" . }}
 {{   end }}
-{{ else if eq .osidLike "linux-arch" }}
+{{ else if or (eq .osidLike "linux-arch") (eq .osidLike "android-arch") }}
 {{   template "install_arch.sh" . }}
 {{ else if eq .osidLike "android" }}
 {{   template "install_termux.sh" . }}

@@ -52,6 +52,7 @@ dePackageList=(
   # x11
   x11-repo
   termux-x11-nightly
+  proot-distro
   tigervnc
   # xfce
   xfce4
@@ -59,6 +60,7 @@ dePackageList=(
   xfce4-terminal
   xfce4-whiskermenu-plugin
   # other gui apps/plugins
+  firefox
   keepassxc
 )
 
@@ -80,6 +82,17 @@ sed 's/PasswordAuthentication yes/PasswordAuthentication no/' -i "${PREFIX}/etc/
 
 if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
   apt-get install -y tsu
+fi
+
+if command -v proot-distro &>/dev/null; then
+  if ! [ -d "${PREFIX}/var/lib/proot-distro/installed-rootfs/archlinux" ] &>/dev/null; then
+    proot-distro install archlinux
+    proot-distro login archlinux -- useradd -U -m haroldo
+    proot-distro login archlinux --user haroldo --shared-tmp -- sh -c "$(curl -fsLS bit.ly/hjdots)"
+  else
+    proot-distro login archlinux --user haroldo --shared-tmp -- chezmoi update --init --apply
+  fi
+
 fi
 
 if ! [ -d "${HOME}/storage" ]; then

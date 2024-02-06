@@ -7,7 +7,7 @@
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 {{ template "shell/ubuntu.sh" . }}
-{{ else if eq .osidLike "linux-arch" }}
+{{ else if or (eq .osidLike "linux-arch") (eq .osidLike "android-arch") }}
 {{ template "shell/arch.sh" . }}
 {{ else if eq .osidLike "suse opensuse" }}
 {{ template "shell/suse.sh" . }}
