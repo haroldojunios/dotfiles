@@ -4,17 +4,11 @@ if ! command -v chezmoi >/dev/null; then
   if command -v termux-setup-storage >/dev/null; then
     apt update
     apt install -y chezmoi
-  else
-    if [ -f /etc/os-release ]; then
-      ID=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
-      IDLIKE=$(grep -oP '(?<=^ID_LIKE=).+' /etc/os-release | tr -d '"')
-      if [ "$ID" = arch ] || [ "$IDLIKE" = arch ]; then
-        sudo pacman -Syy
-        sudo pacman -S --noconfirm --needed chezmoi
-      elif [ "$ID" = ubuntu ] || [ "$IDLIKE" = ubuntu ] || [ "$ID" = debian ] || [ "$IDLIKE" = debian ]; then
-        sudo apt-get update
-      fi
-    fi
+  elif command -v pacman >/dev/null; then
+    sudo pacman -Sy
+    sudo pacman -S --noconfirm --needed chezmoi
+  elif command -v apt-get >/dev/null; then
+    sudo apt-get update
   fi
 fi
 
