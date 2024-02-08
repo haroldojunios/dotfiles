@@ -7,16 +7,19 @@ NC='\033[0m' # No Color
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf ${TEMP_FOLDER}' EXIT
 
-command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
-command -v paru &>/dev/null && paru -Syu --noconfirm || sudo pacman -Syu --noconfirm
+command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort delay --protocol "http,https" --save /etc/pacman.d/mirrorlist
 
 if ! command -v paru &>/dev/null; then
-  sudo pacman -S --noconfirm --needed base-devel asp
+  sudo pacman -Syu --noconfirm
+  sudo pacman -S --noconfirm --needed base-devel
   git -C "${TEMP_FOLDER}" clone --depth 1 https://aur.archlinux.org/paru.git
   (
-    cd "${TEMP_FOLDER}/paru"
+    cd "${TEMP_FOLDER}/paru" || exit
     makepkg -si --noconfirm
   )
+else
+  paru -Syu --noconfirm
+  paru -Fy
 fi
 
 if grep -q "#" /etc/pacman.conf; then
@@ -44,9 +47,16 @@ Include = /etc/pacman.d/mirrorlist
 
 [community]
 Include = /etc/pacman.d/mirrorlist
+{{ if eq .chezmoi.osRelease.id "archarm" }}
+[alarm]
+Include = /etc/pacman.d/mirrorlist
 
+[aur]
+Include = /etc/pacman.d/mirrorlist
+{{ else }}
 [multilib]
 Include = /etc/pacman.d/mirrorlist
+{{ end }}
 {{ if eq .osid "linux-garuda" }}
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
@@ -72,6 +82,7 @@ CompletionInterval = 1
 EOF
 fi
 
+{{ if ne .chezmoi.osRelease.id "archarm" }}
 if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
   # chaotic-aur
   sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
@@ -94,6 +105,7 @@ EOF
 
   sudo pacman -Syu --noconfirm
 fi
+{{ end }}
 
 # desktop enviroment
 dePackageList=(
@@ -273,7 +285,6 @@ packageList=(
   "${packageList[@]}"
   "${dePackageList[@]}"
   "${appletsPackageList[@]}"
-  "${qgisPackageList[@]}"
 )
 
 if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
@@ -324,6 +335,12 @@ if ! systemctl list-unit-files --state=enabled | grep cronie &>/dev/null; then
   sudo systemctl enable --now cronie
 fi
 
+if ! systemctl list-unit-files --state=enabled | grep docker &>/dev/null; then
+  sudo systemctl enable --now docker
+  sudo groupadd docker &>/dev/null || true
+  sudo usermod -aG docker "${USER}"
+fi
+
 if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/dev/null; then
   sudo systemctl enable --now pkgfile-update.timer
 fi
@@ -343,8 +360,6 @@ fi
 if ! pipx list --short | grep -q crudini; then
   pipx install crudini
 fi
-
-sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 
 yes | paru -Scd
 pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :
