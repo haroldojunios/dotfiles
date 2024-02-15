@@ -233,6 +233,7 @@ packageList=(
   perl-yaml-tiny
   pkgfile
   plocate
+  pyenv
   python
   python-black
   python-isort

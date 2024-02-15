@@ -78,4 +78,9 @@ else
 fi
 "${HOME}/.local/share/fzf/install" --xdg --no-update-rc --completion --key-bindings &>/dev/null
 
+if ! [ -d "${HOME}/.pyenv" ]; then
+  curl https://pyenv.run | bash
+else
+  "${HOME}/.pyenv/bin/pyenv" update
+fi
 {{ end }}

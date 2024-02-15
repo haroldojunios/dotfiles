@@ -12,7 +12,7 @@ if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; t
 fi
 
 mkdir -p -m 700 ~/.gnupg
-gpg --refresh-keys
+gpg --refresh-keys &>/dev/null || :
 
 # code repo
 if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
