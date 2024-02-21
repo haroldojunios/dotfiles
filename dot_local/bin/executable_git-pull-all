@@ -1,0 +1,13 @@
+#!/bin/bash
+
+git fetch --all
+
+current_branch="$(git branch --show-current)"
+git pull &>/dev/null
+
+trap 'git checkout "${current_branch}"' EXIT
+
+for branch in $(git branch | grep -v '^\*'); do
+  git checkout "$branch"
+  git pull &>/dev/null
+done
