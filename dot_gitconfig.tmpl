@@ -3,13 +3,15 @@
 	name = Haroldo Júnio
 [pull]
 	rebase = false
+[push]
+  default = current
 [merge]
 	conflictStyle = diff3
 [init]
 	defaultBranch = main
 [core]
 	autocrlf = input
-	editor = {{ if .installDE }} code --wait {{ else }} micro {{ end }}
+	editor = {{ if .installDE -}} code --wait {{ else -}} micro {{- end }}
 	excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 [safe]
 	directory = *
