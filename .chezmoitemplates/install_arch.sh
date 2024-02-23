@@ -164,7 +164,6 @@ dePackageList=(
   # other gui apps/plugins
   calibre
   conky
-  firefox
   gimp
   gparted
   hyper-bin
@@ -178,6 +177,7 @@ dePackageList=(
   ventoy-bin
   virtualbox
   visual-studio-code-bin
+  vivaldi
   xournalpp
 )
 

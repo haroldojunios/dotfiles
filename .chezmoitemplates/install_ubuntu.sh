@@ -50,6 +50,12 @@ if ! grep -q "^deb .*saiarcot895/chromium-beta" /etc/apt/sources.list /etc/apt/s
   sudo add-apt-repository ppa:saiarcot895/chromium-beta -y
 fi
 
+# vivaldi repo
+if ! grep -q "^deb .*vivaldi" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -y -
+  sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+fi
+
 # firefox repo
 if ! grep -q "^deb .*mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:mozillateam/ppa -y
@@ -149,12 +155,12 @@ dePackageList=(
   calibre
   {{ end }}
   code
-  firefox
   gimp
   gparted
   inkscape
   keepassxc
   onlyoffice-desktopeditors
+  vivaldi-stable
   xournalpp
   xserver-xorg-video-dummy
 )
