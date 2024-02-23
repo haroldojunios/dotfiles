@@ -13,30 +13,25 @@ i386 | i686) ARCH=i686 ;;
 esac
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+TEMP_FOLDER=$(mktemp -d)
+trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
 if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
-    TEMP_FOLDER=$(mktemp -d)
-    trap 'rm -rf "${TEMP_FOLDER}"' EXIT
     wget -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/bat.deb"
-    rm -rf "${TEMP_FOLDER}"
   fi
 fi
 
 HYPER_VER=$(curl --silent "https://api.github.com/repos/vercel/hyper/releases/latest" | jq -r .tag_name | tr -d v)
 if ! dpkg -s hyper 2>&1 | grep "Version" | grep -q "${HYPER_VER}"; then
-  TEMP_FOLDER=$(mktemp -d)
-  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
   wget -O "${TEMP_FOLDER}/hyper.deb" "https://releases.hyper.is/download/deb"
   DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/hyper.deb"
-  rm -rf "${TEMP_FOLDER}"
 fi
 
 LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" | jq -r .tag_name | tr -d v)
 if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
-  TEMP_FOLDER=$(mktemp -d)
-  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 {{   if eq .chezmoi.osRelease.id "ubuntu" }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-ubuntu-{{ .chezmoi.osRelease.versionID }}-v${LIBJXL_VER}.tar.gz"
 {{  else }}
@@ -53,18 +48,22 @@ if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
     ./build_libqjpegxl_dynamic.sh
     sudo make install
   )
-  rm -rf "${TEMP_FOLDER}"
 fi
 
 ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" | jq -r .tag_name | tr -d v)
 if ! dpkg -s zoxide 2>&1 | grep "Version" | grep -q "${ZOXIDE_VER}"; then
   if [ -n "${ARCH}" ]; then
-    TEMP_FOLDER=$(mktemp -d)
-    trap 'rm -rf "${TEMP_FOLDER}"' EXIT
     wget -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}_${ARCH}.deb" ||
       wget -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}-1_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/zoxide.deb"
-    rm -rf "${TEMP_FOLDER}"
+  fi
+fi
+
+FD_VER=$(curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" | jq -r .tag_name | tr -d v)
+if ! dpkg -s fd 2>&1 | grep "Version" | grep -q "${FD_VER}"; then
+  if [ -n "${ARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/fd.deb" -q "https://github.com/sharkdp/fd/releases/download/v${FD_VER}/fd_${FD_VER}_${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/fd.deb"
   fi
 fi
 
