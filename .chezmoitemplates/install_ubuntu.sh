@@ -128,6 +128,7 @@ dePackageList=(
   plasma-workspace
   powerdevil
   pulseaudio-module-bluetooth
+  xdg-desktop-portal-kde
   # kde gui apps
   ark
   dolphin

@@ -1,9 +1,11 @@
 #!/bin/bash
 
-git fetch --all
-
 current_branch="$(git branch --show-current)"
 git pull &>/dev/null
+
+if [ "$(git branch | wc -l)" -eq 1 ]; then
+  exit
+fi
 
 trap 'git checkout "${current_branch}"' EXIT
 

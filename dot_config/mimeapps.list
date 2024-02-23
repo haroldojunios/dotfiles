@@ -17,8 +17,8 @@ image/tiff=org.kde.gwenview.desktop;org.kde.kolourpaint.desktop;org.qgis.qgis.de
 inode/directory=org.kde.dolphin.desktop;code.desktop;org.kde.kate.desktop;org.kde.gwenview.desktop;org.kde.filelight.desktop;thunar.desktop;
 text/plain=code.desktop;org.kde.kate.desktop;okularApplication_txt.desktop;calibre-ebook-viewer.desktop;calibre-gui.desktop;vim.desktop;
 x-scheme-handler/geo=google-maps-geo-handler.desktop;
-x-scheme-handler/http=firefox.desktop;chromium-browser.desktop;
-x-scheme-handler/https=firefox.desktop;chromium-browser.desktop;
+x-scheme-handler/http=firefox.desktop;chromium-browser.desktop,vivaldi-stable.desktop;
+x-scheme-handler/https=firefox.desktop;chromium-browser.desktop,vivaldi-stable.desktop;
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;
 
 [Default Applications]
@@ -40,7 +40,7 @@ image/tiff=org.kde.gwenview.desktop;
 inode/directory=org.kde.dolphin.desktop;
 text/plain=code.desktop;
 x-scheme-handler/geo=google-maps-geo-handler.desktop;
-x-scheme-handler/http=firefox.desktop;
-x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/http=vivaldi-stable.desktop;
+x-scheme-handler/https=vivaldi-stable.desktop;
 x-scheme-handler/ssh=ktelnetservice5.desktop
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;

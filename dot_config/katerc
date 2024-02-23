@@ -145,6 +145,7 @@ SetEditor=false
 
 [MainWindow]
 1920x1080 screen: Window-Maximized=true
+HDMI-0 Window-Maximized 2560x1080=true
 eDP-1 Window-Maximized 1920x1080=true
 
 [Replicode]

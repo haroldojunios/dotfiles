@@ -53,6 +53,11 @@
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
   },
+  "[toml]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
   "[yaml]": {
     "editor.tabSize": 4
   },
@@ -67,6 +72,7 @@
   "C_Cpp.intelliSenseEngineFallback": "Enabled",
   "C_Cpp.loggingLevel": "Debug",
   "C_Cpp.workspaceParsingPriority": "low",
+  "code-runner.enableAppInsights": false,
   "comments.openView": "never",
   "cSpell.allowCompoundWords": true,
   "cSpell.language": "pt-BR,fr-FR,en-US",
@@ -259,7 +265,9 @@
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
     "*bashrc.tmpl": "shellscript",
+    ".env.sample": "properties",
     "conky.conf*": "lua",
+    "fish_variables": "fish",
     "modify_*.tmpl": "shellscript"
   },
   "files.autoSave": "afterDelay",
@@ -275,6 +283,7 @@
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
+  "gitlens.telemetry.enabled": false,
   "html.format.wrapLineLength": 80,
   // "git.inputValidationSubjectLength": 0,
   "javascript.autoClosingTags": true,
@@ -410,6 +419,7 @@
   "notebook.output.textLineLimit": 1000,
   "oneDarkPro.editorTheme": "Shadow",
   "oneDarkPro.vivid": true,
+  "partialDiff.enableTelemetry": false,
   "pasteImage.showFilePathConfirmInputBox": true,
   // "path-intellisense.showHiddenFiles": true,
   "path-intellisense.autoSlashAfterDirectory": true,
@@ -441,6 +451,7 @@
   "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
   "sync.quietSync": true,
   "tabnine.experimentalAutoImports": true,
+  "telemetry.telemetryLevel": "off",
   "template-string-converter.autoRemoveTemplateString": true,
   "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.defaultProfile.windows": "MSYS2 Bash",
