@@ -1,9 +1,0 @@
-source ~/.config/zsh/init.zsh
-source ~/.config/zsh/theme.zsh
-source ~/.config/zsh/plugins.zsh
-source ~/.config/zsh/opts.zsh
-source ~/.config/zsh/colors.zsh
-source ~/.config/zsh/conda.zsh
-source ~/.config/zsh/completion.zsh
-source ~/.config/zsh/keys.zsh
-source ~/.config/zsh/nvm.zsh
