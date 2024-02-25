@@ -6,9 +6,8 @@ GREEN='\033[1;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
-if [ -d /etc/needrestart ] && ! [ -f /etc/needrestart/conf.d/no-prompt.conf ]; then
-  sudo mkdir -p /etc/needrestart/conf.d
-  echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/no-prompt.conf >/dev/null
+if [ -f "/etc/needrestart/needrestart.conf" ]; then
+  sudo sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" "/etc/needrestart/needrestart.conf"
 fi
 
 mkdir -p -m 700 ~/.gnupg
@@ -52,8 +51,8 @@ fi
 
 # vivaldi repo
 if ! grep -q "^deb .*vivaldi" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -y -
-  sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+  wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
+  sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main' -y
 fi
 
 # firefox repo
@@ -223,6 +222,7 @@ packageList=(
   python-is-python3
   python3
   python3-isort
+  python3-psutil
   python3-requests
   python3-venv
   rclone
