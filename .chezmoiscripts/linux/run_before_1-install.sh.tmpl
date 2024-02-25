@@ -37,12 +37,14 @@ if grep -q "https" {{ .chezmoi.sourceDir }}/.git/config; then
 fi
 
 # set fish as default terminal
-case "${SHELL}" in
-*bash)
-  {{ if eq .osid "android" }}
-  chsh -s fish
-  {{ else }}
-  sudo chsh -s $(command -v fish) $USER
-  {{ end }}
-  ;;
-esac
+if command -v fish &>/dev/null; then
+  case "${SHELL}" in
+  *bash)
+    {{ if eq .osid "android" }}
+    chsh -s fish
+    {{ else }}
+    sudo chsh -s $(command -v fish) $USER
+    {{ end }}
+    ;;
+  esac
+fi

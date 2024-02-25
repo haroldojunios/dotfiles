@@ -21,6 +21,9 @@ alias gz='gzip -kv'
 alias t='tar -acf '
 alias ut='tar -xvf '
 
+# find
+alias red='find . -type d -empty -delete'
+
 # general
 alias ytd='youtube-dl -o "%(title)s.%(ext)s" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 alias matlab='~/Programs/MATLAB/R2018a/bin/matlab'
@@ -55,7 +58,7 @@ alias rsh='bash -c "(cd; rsync -amyvhPl --inplace --relative --info=progress2,na
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
 alias c='TMUX= code'
 alias c.='TMUX= code .'
-alias tkill='tmux list-sessions | grep -v attached | cut -d: -f1 |  xargs -t -n1 tmux kill-session -t'
+alias tkill='tmux list-sessions | grep -v attached | cut -d: -f1 | xargs -r -t -n1 tmux kill-session -t'
 alias nano="nano --rcfile ~/.config/nanorc/nanorc"
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -64,11 +67,12 @@ alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
 alias hw='hwinfo --short'
 alias ct='bat --style full'
-alias ip="ip -color"
+command -v ip >/dev/null && alias ip="ip -color"
 alias jc="journalctl -rxb"
 alias ug="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias wget='wget -c '
 alias pm='ps auxf | sort -nr -k 4'
 alias pm10='ps auxf | sort -nr -k 4 | head -10'
 alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
-alias fp='firefox -P personal &>/dev/null &; disown'
+alias fp='firefox -P personal &>/dev/null & disown'
+alias vp='vivaldi --profile-directory=personal &>/dev/null & disown'

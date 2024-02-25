@@ -1,9 +1,13 @@
 #!/bin/sh
 
-if [ "$@" != "right" ] && [ "$@" != "left" ]; then
+if [ "$1" != "right" ] && [ "$1" != "left" ]; then
   echo "Invalid option"
   exit 1
 fi
+
+black="colour232"
+dark_gray="colour237"
+light_gray="colour234"
 
 status=""
 
@@ -13,22 +17,38 @@ else
   termux=
 fi
 
-if [ "$@" = "left" ]; then
-  status="${status}#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]" # window number
-  status="${status}#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]" # session name
-  status="${status}#[fg=colour121,bg=colour235] ${USER}"                                                        # user name
-  if [ -z $termux ]; then
-    status="${status}@#[fg=colour222]$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')" # hostname
+if [ "$*" = "left 0" ] || [ "$*" = "left" ]; then
+  status="${status}#[fg=${black},bg=magenta] #{session_name} #[fg=magenta,bg=${dark_gray},nobold,nounderscore,noitalics]" # session name
+  status="${status}#[fg=cyan,bg=${dark_gray}] #{active_window_index} #[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics]"
+  status="${status}#[fg=blue,bg=${light_gray}] #{window_name} | #{pane_current_command}" # window name
+elif [ "$*" = "left 1" ]; then
+  status="${status}#[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics]█"
+  status="${status}#[fg=blue,bg=${light_gray}] ${USER}" # user name
+  if [ -z "${termux}" ]; then
+    ip_address="$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')"
+    status="${status}@#[fg=cyan]${ip_address}" # ip address
   fi
-  status="${status}#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
-else
-  status="${status}#[fg=colour121,bg=colour235] $(jq -r '.weather_summary' ${HOME}/.cache/weather) " # weather
-  status="${status}#[fg=colour121,bg=colour235] $(date +'%a, %d %b') "                               # date
-  status="${status} $(date +'%H:%M') #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]"     # time
-  if [ $(hostname) != localhost ]; then
-    status="${status}#[fg=colour222,bg=colour238] #H"
+elif [ "$*" = "right 0" ]; then
+  status="${status}#[fg=blue,bg=${light_gray}] $(jq -r '.weather_summary' ${HOME}/.cache/weather)" # weather
+  status="${status}#[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics] █"
+elif [ "$*" = "right 1" ] || [ "$*" = "right" ]; then
+  mem_total="$(LANG=C free -h | awk '/^Mem:/{print $2}')"
+  mem_used="$(LANG=C free -h | awk '/^Mem:/{print $3}')"
+  swap_total="$(LANG=C free -h | awk '/^Swap:/{print $2}')"
+  swap_used="$(LANG=C free -h | awk '/^Swap:/{print $3}')"
+  mem_total="${mem_total%?}"
+  mem_used="${mem_used%?}"
+  swap_total="${swap_total%?}"
+  swap_used="${swap_used%?}"
+  cpu_temp="$(${HOME}/.local/bin/get-hardware-temp cpu)"
+  cpu_usage=$(python3 -c "import psutil;print('{}%'.format(psutil.cpu_percent(interval=2)))")
+  status="${status}#[fg=blue,bg=${light_gray}]  ${mem_used}B/${mem_total}B | ${swap_used}B/${swap_total}B | ${cpu_temp} | ${cpu_usage} " # mem/cpu
+  status="${status}#[fg=blue,bg=${light_gray}] $(date +'%a, %d %b') "                                                                     # date
+  status="${status} $(date +'%H:%M') #[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics]"                                   # time
+  if [ "$(hostname)" != localhost ]; then
+    status="${status}#[fg=cyan,bg=${dark_gray}] #{host}"
   fi
-  if [ -z $termux ]; then
+  if [ -z "${termux}" ]; then
     if [ -f /sys/class/power_supply/BAT0/status ]; then
       if grep -q Discharging /sys/class/power_supply/BAT0/status; then
         charging=
@@ -53,8 +73,19 @@ else
     percentage=$(echo "$bat_status" | jq ".percentage")
   fi
   if [ -n "$charging" ] || [ -n "$percentage" ]; then
-    status="${status} #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154]$charging$percentage%"
+    status="${status} #[fg=magenta,bg=${dark_gray},nobold,nounderscore,noitalics]#[fg=${black},bg=magenta]$charging$percentage%"
   fi
+elif [ "$*" = "left 0" ]; then
+  status="${status}#[fg=${black},bg=magenta] #I #[fg=magenta,bg=${dark_gray},nobold,nounderscore,noitalics]"
+  status="${status}#W  #F#[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics]" # window number
+elif [ "$*" = "left 1" ]; then
+  status="${status}#[fg=${black},bg=magenta] #S #[fg=magenta,bg=${dark_gray},nobold,nounderscore,noitalics]"        # window number
+  status="${status}#[fg=cyan,bg=${dark_gray}] #W #[fg=${dark_gray},bg=${light_gray},nobold,nounderscore,noitalics]" # session name
+  status="${status}#[fg=blue,bg=${light_gray}] ${USER}"                                                              # user name
+  if [ -z "${termux}" ]; then
+    status="${status}@#[fg=cyan]$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')" # hostname
+  fi
+  status="${status}#[fg=${light_gray},bg=${light_gray},nobold,nounderscore,noitalics]"
 fi
 
 echo "$status"

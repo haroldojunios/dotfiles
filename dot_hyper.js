@@ -49,7 +49,7 @@ module.exports = {
       lightCoral: "#F08080",
     },
     shell: "/usr/bin/tmux",
-    shellArgs: ["new", "-As0"],
+    shellArgs: [], // ["new", "-As0"],
     env: {},
     bell: false,
     copyOnSelect: false,
