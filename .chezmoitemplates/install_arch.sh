@@ -221,6 +221,7 @@ packageList=(
   mediainfo
   micro
   nano
+  neovim
   netcat
   ninja
   numlockx

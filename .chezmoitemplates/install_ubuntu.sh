@@ -75,6 +75,11 @@ if ! grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/source
   sudo add-apt-repository ppa:fish-shell/release-3 -y
 fi
 
+# neovim repo
+if ! grep -q "^deb .*neovim-ppa/unstable" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  sudo add-apt-repository ppa:neovim-ppa/unstable -y
+fi
+
 # ubuntugis repo
 if ! grep -q "^deb .*ubuntugis/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:ubuntugis/ppa -y
@@ -216,6 +221,7 @@ packageList=(
   micro
   mpv
   nano
+  neovim
   ninja-build
   numlockx
   openssh-server
