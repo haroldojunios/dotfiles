@@ -232,6 +232,7 @@ packageList=(
   python3-requests
   python3-venv
   rclone
+  ripgrep
   shfmt
   sshfs
   texlive-bibtex-extra

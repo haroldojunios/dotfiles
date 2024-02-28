@@ -36,6 +36,10 @@ scoop
 .hyper.js
 {{ end }}
 
+{{ if eq .chezmoi.os "android" }}
+!.config/nvim
+{{ end }}
+
 {{ if .isWSL }}
 !.config/Code
 {{ end }}
