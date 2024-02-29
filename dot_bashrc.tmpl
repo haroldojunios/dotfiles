@@ -24,6 +24,8 @@ fi
 if ! pgrep -f "sshd" >/dev/null; then
   sshd
 fi
+{{ else }}
+[ -f "/usr/share/xdg-desktop-portal/portals/kde.portal" ] && export GTK_USE_PORTAL=1
 {{ end }}
 
 case $TERM in

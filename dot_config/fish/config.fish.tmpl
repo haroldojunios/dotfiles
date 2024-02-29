@@ -28,6 +28,7 @@ if not test -f ~/.cache/weather
     get-weather ~/.cache/weather &>/dev/null &
     disown
 end
+test -f /usr/share/xdg-desktop-portal/portals/kde.portal && set -x GTK_USE_PORTAL 1
 {{ end }}
 
 
