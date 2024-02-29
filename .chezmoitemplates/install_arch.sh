@@ -138,6 +138,7 @@ dePackageList=(
   plasma-workspace
   powerdevil
   purpose5
+  pulseaudio-bluetooth
   # kde gui apps
   ark
   dolphin
@@ -190,6 +191,7 @@ appletsPackageList=(
 
 packageList=(
   age
+  alsa-card-profiles
   android-tools
   bat
   bc
@@ -335,6 +337,10 @@ fi
 
 if ! systemctl list-unit-files --state=enabled | grep cronie &>/dev/null; then
   sudo systemctl enable --now cronie
+fi
+
+if ! systemctl list-unit-files --state=enabled | grep bluetooth &>/dev/null; then
+  sudo systemctl enable --now bluetooth
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep docker &>/dev/null; then
