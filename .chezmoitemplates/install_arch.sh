@@ -189,7 +189,7 @@ dePackageList=(
   virtualbox
   vivaldi
   {{ else }}
-  vivaldi-snapshot
+  vivaldi-multiarch-bin
   {{ end }}
 )
 
