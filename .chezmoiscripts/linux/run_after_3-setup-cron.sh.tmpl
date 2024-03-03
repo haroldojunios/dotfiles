@@ -6,8 +6,9 @@
 
 set -eu
 
-CRONTAB=$(<${HOME}/.config/env)
-CRONTAB+=$(
+if command -v crontab &>/dev/null; then
+  CRONTAB=$(<${HOME}/.config/env)
+  CRONTAB+=$(
   cat <<'EOF'
 
 {{ if eq .osid "android" -}}
@@ -27,7 +28,6 @@ SHELL=/bin/bash
 EOF
 )
 
-if command -v crontab &>/dev/null; then
   if ! [ "$(crontab -l 2>/dev/null)" = "${CRONTAB}" ]; then
     echo "${CRONTAB}" | crontab -
   fi

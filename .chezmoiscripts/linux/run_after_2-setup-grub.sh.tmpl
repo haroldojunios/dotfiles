@@ -7,9 +7,11 @@
 set -eu
 
 {{ if ne .osid "android" }}
-sudo "${HOME}/.local/bin/set-val" GRUB_DEFAULT 0 /etc/default/grub
-sudo "${HOME}/.local/bin/set-val" GRUB_TIMEOUT 3 /etc/default/grub
-sudo "${HOME}/.local/bin/set-val" GRUB_RECORDFAIL_TIMEOUT '${GRUB_TIMEOUT}' /etc/default/grub
+if command -v grub-mkconfig &>/dev/null; then
+  sudo "${HOME}/.local/bin/set-val" GRUB_DEFAULT 0 /etc/default/grub
+  sudo "${HOME}/.local/bin/set-val" GRUB_TIMEOUT 3 /etc/default/grub
+  sudo "${HOME}/.local/bin/set-val" GRUB_RECORDFAIL_TIMEOUT '${GRUB_TIMEOUT}' /etc/default/grub
 
-sudo grub-mkconfig -o /boot/grub/grub.cfg &>/dev/null
+  sudo grub-mkconfig -o /boot/grub/grub.cfg &>/dev/null
+fi
 {{ end }}

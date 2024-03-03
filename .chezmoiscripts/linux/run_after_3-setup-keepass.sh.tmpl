@@ -6,7 +6,7 @@
 
 set -eu
 
-if command -v crudini &>/dev/null; then
+if command -v crudini &>/dev/null && command -v keepassxc &>/dev/null; then
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General BackupBeforeSave true
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General ConfigVersion 2
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General GlobalAutoTypeKey 80

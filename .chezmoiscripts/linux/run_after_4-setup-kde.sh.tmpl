@@ -85,7 +85,9 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   done
 
   # trolltech
-  crudini --set ${HOME}/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
+  if command -v crudini &>/dev/null; then
+    crudini --set ${HOME}/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
+  fi
 
   # konsolerc
   kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
@@ -93,7 +95,7 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 fi
 
 # # https://www.reddit.com/r/kde/comments/g986ql/comment/fov5aql/
-if command -v kbuildsycoca5 &>/dev/null; then
+if command -v kbuildsycoca5 &>/dev/null && command -v dbus-send &>/dev/null; then
   rm -f "${HOME}/.cache/*.kcache"
   for i in $(seq 0 9); do
     dbus-send --session --type=signal /KGlobalSettings org.kde.KGlobalSettings.notifyChange int32:${i} int32:0

@@ -6,6 +6,6 @@
 
 set -eu
 
-if [ -f "${HOME}/.local/bin/chezmoi" ]; then
+if [ -x "${HOME}/.local/bin/chezmoi" ]; then
   "${HOME}/.local/bin/chezmoi" upgrade &>/dev/null
 fi

@@ -6,13 +6,13 @@
 
 set -eu
 
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 case $(uname -m) in
 x86_64) ARCH=amd64 ;;
 i386 | i686) ARCH=i686 ;;
 *) ARCH= ;;
 esac
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
