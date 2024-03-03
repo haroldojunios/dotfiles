@@ -116,7 +116,7 @@ dePackageList=(
   xorg-server
   xorg-apps
   {{ else }}
-  tigervnc-server
+  x11vnc
   {{ end }}
   # plasma
   gtk3-nocsd
@@ -247,7 +247,6 @@ packageList=(
   shfmt
   sshfs
   starship
-  stderred-git
   texlive-bibtexextra
   texlive-bin
   texlive-binextra
@@ -282,6 +281,7 @@ packageList=(
   os-prober
   reflector
   simple-mtpfs
+  stderred-git
   ufw
   usbutils
   zram-generator
