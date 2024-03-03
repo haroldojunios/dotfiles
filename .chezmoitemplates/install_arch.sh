@@ -61,7 +61,7 @@ if ! command -v paru &>/dev/null; then
   )
 else
   paru -Syu --noconfirm
-  paru -Fy
+  paru -Fy || :
 fi
 
 if grep -q "#" /etc/paru.conf; then
