@@ -110,10 +110,15 @@ fi
 # desktop enviroment
 dePackageList=(
   # x11 / login manager
+  {{ if ne .chezmoi.osRelease.id "archarm" }}
   sddm
   sddm-kcm
   xorg-server
   xorg-apps
+  {{ else }}
+  dbus-x11
+  tightvncserver
+  {{ end }}
   # plasma
   bluedevil
   bluez
@@ -139,6 +144,9 @@ dePackageList=(
   powerdevil
   purpose5
   pulseaudio-bluetooth
+  {{ if ne .chezmoi.osRelease.id "archarm" }}
+
+  {{ end }}
   # kde gui apps
   ark
   dolphin
@@ -163,11 +171,10 @@ dePackageList=(
   partitionmanager
   spectacle
   # other gui apps/plugins
+  alacritty
   calibre
   conky
   gimp
-  gparted
-  hyper-bin
   inkscape
   keepassxc
   mpv
@@ -175,11 +182,16 @@ dePackageList=(
   qt5-imageformats
   qt5-jpegxl-image-plugin
   qt6-jpegxl-image-plugin
+  visual-studio-code-bin
+  xournalpp
+  {{ if ne .chezmoi.osRelease.id "archarm" }}
+  gparted
   ventoy-bin
   virtualbox
-  visual-studio-code-bin
   vivaldi
-  xournalpp
+  {{ else }}
+  vivaldi-snapshot
+  {{ end }}
 )
 
 # applets
@@ -191,17 +203,11 @@ appletsPackageList=(
 
 packageList=(
   age
-  alsa-card-profiles
-  android-tools
   bat
   bc
   clang
   cmake
-  compsize
-  cronie
   curl
-  docker
-  docker-compose
   expac
   expect
   eza
@@ -213,12 +219,9 @@ packageList=(
   fzf
   git
   htop
-  hwinfo
   imagemagick
-  inetutils
   jq
   libjxl
-  lm_sensors
   make
   mediainfo
   micro
@@ -227,7 +230,6 @@ packageList=(
   netcat
   ninja
   numlockx
-  os-prober
   p7zip
   pacman-contrib
   pandoc
@@ -246,7 +248,6 @@ packageList=(
   reflector
   ripgrep
   shfmt
-  simple-mtpfs
   sshfs
   starship
   stderred-git
@@ -264,16 +265,29 @@ packageList=(
   texlive-science
   texlive-xetex
   tmux
-  ufw
   unrar
   unzip
-  usbutils
   wget
   which
   xclip
   zip
   zoxide
+  {{ if ne .chezmoi.osRelease.id "archarm" }}
+  alsa-card-profiles
+  android-tools
+  compsize
+  cronie
+  docker
+  docker-compose
+  hwinfo
+  inetutils
+  lm_sensors
+  os-prober
+  simple-mtpfs
+  ufw
+  usbutils
   zram-generator
+  {{ else }}
 )
 
 qgisPackageList=(
@@ -323,6 +337,7 @@ for package in "${packageList[@]}"; do
   fi
 done
 
+{{ if ne .chezmoi.osRelease.id "archarm" }}
 if ! systemctl list-unit-files --state=enabled | grep lm_sensors &>/dev/null; then
   sudo systemctl enable --now lm_sensors
 fi
@@ -364,6 +379,7 @@ if [ -d "/proc/acpi/button/lid" ]; then
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
   fi
 fi
+{{ end }}
 
 if ! pipx list --short | grep -q crudini; then
   pipx install crudini

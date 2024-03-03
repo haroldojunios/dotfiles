@@ -7,7 +7,7 @@ setup.sh
 README.md
 
 {{ if ne .chezmoi.os "linux" }}
-.local/share
+.local/share/*
 .config/*
 !.config/fish
 !.config/nanorc
@@ -19,9 +19,9 @@ README.md
 {{ end }}
 
 {{ if ne .chezmoi.os "android" }}
+.local/bin/executable_start-proot
 .termux
 .config/android-as-linux.js
-.vnc
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
@@ -34,10 +34,12 @@ scoop
 .chezmoiscripts/linux/**
 .config/fish/completions/chezmoi.fish
 .hyper.js
+.vnc
 {{ end }}
 
 {{ if eq .chezmoi.os "android" }}
 !.config/nvim
+!.local/bin/executable_start-proot
 {{ end }}
 
 {{ if .isWSL }}

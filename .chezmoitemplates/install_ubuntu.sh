@@ -228,6 +228,7 @@ packageList=(
   python-is-python3
   python3
   python3-isort
+  python3-pip
   python3-psutil
   python3-requests
   python3-venv
