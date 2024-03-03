@@ -8,6 +8,7 @@ apt-get update
 apt-get upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
 
 packageList=(
+  tur-repo # Termux User Repository
   7zip
   age
   bat
