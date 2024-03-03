@@ -72,9 +72,11 @@ fi
 {{   end }}
 
 # sddm
-if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
-  if command -v crudini &>/dev/null; then
-    sudo crudini --set /etc/sddm.conf General Numlock on
+if [ -f /etc/sddm.conf ]; then
+  if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
+    if command -v crudini &>/dev/null; then
+      sudo crudini --set /etc/sddm.conf General Numlock on
+    fi
   fi
 fi
 
