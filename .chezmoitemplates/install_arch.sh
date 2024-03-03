@@ -9,19 +9,6 @@ trap 'rm -rf ${TEMP_FOLDER}' EXIT
 
 command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort delay --protocol "http,https" --save /etc/pacman.d/mirrorlist
 
-if ! command -v paru &>/dev/null; then
-  sudo pacman -Syu --noconfirm
-  sudo pacman -S --noconfirm --needed base-devel
-  git -C "${TEMP_FOLDER}" clone --depth 1 https://aur.archlinux.org/paru.git
-  (
-    cd "${TEMP_FOLDER}/paru" || exit
-    makepkg -si --noconfirm
-  )
-else
-  paru -Syu --noconfirm
-  paru -Fy
-fi
-
 if grep -q "#" /etc/pacman.conf; then
   sudo bash -c "cat >/etc/pacman.conf" <<EOF
 [options]
@@ -62,6 +49,19 @@ Include = /etc/pacman.d/mirrorlist
 Include = /etc/pacman.d/chaotic-mirrorlist
 {{ end }}
 EOF
+fi
+
+if ! command -v paru &>/dev/null; then
+  sudo pacman -Syu --noconfirm
+  sudo pacman -S --noconfirm --needed base-devel
+  git -C "${TEMP_FOLDER}" clone --depth 1 https://aur.archlinux.org/paru.git
+  (
+    cd "${TEMP_FOLDER}/paru" || exit
+    makepkg -si --noconfirm
+  )
+else
+  paru -Syu --noconfirm
+  paru -Fy
 fi
 
 if grep -q "#" /etc/paru.conf; then
