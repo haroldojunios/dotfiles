@@ -119,7 +119,6 @@ dePackageList=(
   x11vnc
   {{ end }}
   # plasma
-  gtk3-nocsd
   kde-cli-tools
   kdeplasma-addons
   kgamma
@@ -143,6 +142,7 @@ dePackageList=(
   bluedevil
   bluez
   bluez-utils
+  gtk3-nocsd
   pulseaudio-bluetooth
   {{ end }}
   # kde gui apps

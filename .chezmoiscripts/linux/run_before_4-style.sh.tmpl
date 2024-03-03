@@ -57,7 +57,9 @@ if ! [ -d /usr/share/themes/sweet ] && command -v crudini &>/dev/null; then
   sudo install -Dm644 "${TEMP_FOLDER}/kwin-forceblur/metadata.desktop" /usr/share/kservices5/kwin-script-forceblur.desktop
 
   # apply config
-  [ -f /etc/sddm.conf ] && sudo crudini --set /etc/sddm.conf Theme Current Sweet
+  if [ -f /etc/sddm.conf ];then
+    sudo crudini --set /etc/sddm.conf Theme Current Sweet
+  fi
   sudo mkdir -p /var/lib/AccountsService/icons
   # sudo cp "$SCRIPT_FOLDER/assets/avatar.png" "/var/lib/AccountsService/icons/$USER"
 
