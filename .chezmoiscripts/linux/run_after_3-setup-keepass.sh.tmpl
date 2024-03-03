@@ -7,6 +7,10 @@
 set -eu
 
 if command -v crudini &>/dev/null && command -v keepassxc &>/dev/null; then
+  if [ ! -f "${HOME}/.config/keepassxc/keepassxc.ini" ]; then
+    mkdir -p "${HOME}/.config/keepassxc"
+    touch "${HOME}/.config/keepassxc/keepassxc.ini"
+  fi
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General BackupBeforeSave true
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General ConfigVersion 2
   crudini --set "${HOME}/.config/keepassxc/keepassxc.ini" General GlobalAutoTypeKey 80
