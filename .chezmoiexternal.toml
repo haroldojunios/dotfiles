@@ -137,6 +137,13 @@ exact = true
 refreshPeriod = "168h"
 stripComponents = 1
 include = ["*/xfwm4/**", "*/gtk-*/**"]
+
+[".local/share/icons/beautyline"]
+type = "archive"
+url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
 {{   end }}
 
 {{ end }}
