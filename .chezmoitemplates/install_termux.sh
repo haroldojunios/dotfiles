@@ -87,12 +87,17 @@ fi
 if command -v proot-distro &>/dev/null; then
   if ! [ -d "${PREFIX}/var/lib/proot-distro/installed-rootfs/archlinux" ] &>/dev/null; then
     proot-distro install archlinux
-    proot-distro login archlinux -- useradd -U -m haroldo
-    proot-distro login archlinux --user haroldo --shared-tmp -- sh -c "$(curl -fsLS bit.ly/hjdots)"
+    timezone=$(getprop persist.sys.timezone)
+    proot-distro login archlinux --shared-tmp -- ln -sf "/usr/share/zoneinfo/${timezone}" /etc/localtime
+    proot-distro login archlinux --shared-tmp -- pacman -Sy
+    proot-distro login archlinux --shared-tmp -- pacman -S --noconfirm --needed sudo
+    proot-distro login archlinux --shared-tmp -- useradd -m haroldo
+    echo "haroldo ALL=(ALL) NOPASSWD: ALL" | proot-distro login archlinux --shared-tmp -- tee -a /etc/sudoers >/dev/null
+    echo "haroldo:1234" | proot-distro login archlinux --shared-tmp -- chpasswd
+    proot-distro login archlinux --shared-tmp --user haroldo -- sh -c "$(curl -fsLS bit.ly/hjdots)"
   else
-    proot-distro login archlinux --user haroldo --shared-tmp -- chezmoi update --init --apply
+    proot-distro login archlinux --shared-tmp --user haroldo -- chezmoi update --init --apply
   fi
-
 fi
 
 if ! [ -d "${HOME}/storage" ]; then
