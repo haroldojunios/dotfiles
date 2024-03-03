@@ -77,18 +77,16 @@ for code in "${code_bins[@]}"; do
 
   ext_list=$(${code} --list-extensions)
 
-
-
   for extension in ${_extensions[@]}; do
     if ! echo "$ext_list" | grep -qi "$extension"; then
       {{ if eq .osid "android" }}
       if [ "${code}" = "code-server" ]; then
-        NODE_OPTIONS="--require ${HOME}/.config/android-as-linux.js" code-server --install-extension "$extension"
+        NODE_OPTIONS="--require ${HOME}/.config/android-as-linux.js" code-server --install-extension "$extension" || :
       else
-        ${code} --install-extension "$extension"
+        ${code} --install-extension "$extension" || :
       fi
       {{ else }}
-      ${code} --install-extension "$extension"
+      ${code} --install-extension "$extension" || :
       {{ end }}
     fi
   done
