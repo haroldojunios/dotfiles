@@ -24,6 +24,7 @@ packageList=(
   git
   imagemagick
   jq
+  lazygit
   make
   matplotlib
   micro

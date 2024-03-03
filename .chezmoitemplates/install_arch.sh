@@ -219,6 +219,7 @@ packageList=(
   htop
   imagemagick
   jq
+  lazygit
   libjxl
   make
   mediainfo

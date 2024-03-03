@@ -40,3 +40,6 @@ alias gbd='git branch --delete'
 alias gm='git merge'
 alias gmc='git merge --no-ff'
 alias gsh='git stash'
+alias gshp='git stash pop'
+
+alias lg='lazygit'
