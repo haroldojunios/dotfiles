@@ -116,8 +116,7 @@ dePackageList=(
   xorg-server
   xorg-apps
   {{ else }}
-  dbus-x11
-  tightvncserver
+  tigervnc-server
   {{ end }}
   # plasma
   gtk3-nocsd
@@ -244,7 +243,6 @@ packageList=(
   python-pipx
   python-requests
   rclone
-  reflector
   ripgrep
   shfmt
   sshfs
@@ -282,6 +280,7 @@ packageList=(
   inetutils
   lm_sensors
   os-prober
+  reflector
   simple-mtpfs
   ufw
   usbutils

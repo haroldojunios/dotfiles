@@ -6,7 +6,8 @@
 
 set -eu
 
-{{ if and (ne .osid "android") (not .isWSL) }}
+{{ if ne .chezmoi.osRelease.id "archarm" }}
+{{  if and (ne .osid "android") (not .isWSL) }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
@@ -39,7 +40,7 @@ vm.page-cluster = 0
 EOF
 fi
 
-{{   if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+{{    if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 if ! grep "16 * 1024 * 1024 * 1024" /usr/bin/init-zram-swapping &>/dev/null; then
   sudo bash -c "cat >/usr/bin/init-zram-swapping" <<'EOF'
 #!/bin/sh
@@ -60,7 +61,7 @@ mkswap /dev/zram0
 swapon -p 5 /dev/zram0
 EOF
 fi
-{{   else }}
+{{    else }}
 if ! grep "zram-size = min(ram, 16384)" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
@@ -69,7 +70,7 @@ compression-algorithm = zstd
 host-memory-limit = none
 EOF
 fi
-{{   end }}
+{{    end }}
 
 # sddm
 if [ -f /etc/sddm.conf ]; then
@@ -94,11 +95,6 @@ EOF
 
   if command -v crudini &>/dev/null; then
     sudo crudini --set /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf "Mapping analog-stereo" "paths-output" "analog-output-fixed"
-  # else
-  #   LINE_NUMBER=$(grep -n -A8 "Mapping analog-stereo" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf |
-  #     grep "paths-output = analog-output analog-output-lineout analog-output-speaker analog-output-headphones analog-output-headphones-2" |
-  #     cut -d - -f 1)
-  #   sudo sed -i "${LINE_NUMBER}s/.*/paths-output = analog-output-fixed/" /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
   fi
 fi
 
@@ -178,14 +174,14 @@ if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" 
   mkdir -p "${HOME}/.config/rclone"
   sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
 fi
-{{ else if .isWSL }}
+{{  else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
 fi
 if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
   sudo service docker start &>/dev/null
 fi
-{{ else if .isRasp }}
+{{  else if .isRasp }}
 if grep "#enable_uart=1" /boot/cmdline.txt &>/dev/null; then
   sudo sed -i 's/#enable_uart=1/enable_uart=1/g' /boot/cmdline.txt
   grep -q 'enable_uart=1' /boot/config.txt || echo 'enable_uart=1' | sudo tee -a /boot/config.txt
@@ -209,7 +205,8 @@ if grep "#dtparam=i2c1=on" /boot/cmdline.txt &>/dev/null; then
   grep -q 'i2c-dev' /etc/modules || echo 'i2c-dev' | sudo tee -a /etc/modules
   sudo adduser pi i2c
 fi
-{{ end }}
+{{  end }}
+{{ end}}
 
 if command -v fish &>/dev/null; then
   fish -c 'command -v fisher &>/dev/null && fisher update || :' &>/dev/null

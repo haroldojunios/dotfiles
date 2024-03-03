@@ -18,13 +18,10 @@ if not pgrep -f sshd >/dev/null && type -q sshd
 end
 
 {{   if .installDE }}
-if not pgrep -f vnc >/dev/null && type -q vncserver
-    vncserver
-end
 set -x DISPLAY ":1"
 {{   end }}
 {{ else }}
-if not test -f ~/.cache/weather
+if not test -f ~/.cache/weather && type -q get-weather
     get-weather ~/.cache/weather &>/dev/null &
     disown
 end
