@@ -120,9 +120,6 @@ dePackageList=(
   tightvncserver
   {{ end }}
   # plasma
-  bluedevil
-  bluez
-  bluez-utils
   gtk3-nocsd
   kde-cli-tools
   kdeplasma-addons
@@ -143,9 +140,11 @@ dePackageList=(
   plasma-workspace
   powerdevil
   purpose5
-  pulseaudio-bluetooth
   {{ if ne .chezmoi.osRelease.id "archarm" }}
-
+  bluedevil
+  bluez
+  bluez-utils
+  pulseaudio-bluetooth
   {{ end }}
   # kde gui apps
   ark
@@ -287,7 +286,7 @@ packageList=(
   ufw
   usbutils
   zram-generator
-  {{ else }}
+  {{ end }}
 )
 
 qgisPackageList=(
