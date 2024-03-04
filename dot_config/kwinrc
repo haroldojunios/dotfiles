@@ -53,11 +53,6 @@ zPosition=815
 Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 
 [NightColor]
-{{ if .isServer -}}
-Active=false
-{{ else -}}
-Active=true
-{{ end -}}
 LatitudeAuto=-15.7792
 LongitudeAuto=-47.9341
 Mode=Constant
@@ -98,6 +93,12 @@ TouchBorderActivate=9
 
 [Tiling]
 padding=4
+
+[Tiling][4ec73320-d5e3-5a3c-b748-97e283da655b]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][54d08a49-660f-5fbf-9f0f-7a88efccc7a0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c150ed1e-7250-5bae-bd9f-249aabad5090]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
