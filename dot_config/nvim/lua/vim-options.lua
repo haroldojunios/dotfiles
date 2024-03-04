@@ -2,6 +2,8 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
+vim.cmd("set foldmethod=indent")
+
 vim.g.mapleader = " "
 
 -- disable netrw at the very start of your init.lua
