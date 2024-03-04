@@ -30,5 +30,3 @@ vim.keymap.set('i', '<C-Up>', '<Esc>:m-2<CR>==gi', { silent = true })
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>', { silent = true })
 vim.wo.number = true
-
-vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
