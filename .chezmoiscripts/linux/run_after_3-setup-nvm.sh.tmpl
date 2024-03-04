@@ -1,0 +1,13 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if command -v nvm &>/dev/null; then
+  nvm install lts &>/dev/null
+  nvm use lts &>/dev/null
+  ln -sf "$(dirname $(dirname $(command -v npm)))" "${HOME}/.local/share/nvm/lts"
+fi
