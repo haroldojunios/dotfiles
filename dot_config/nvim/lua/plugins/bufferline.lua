@@ -1,26 +1,31 @@
 return {
-  'akinsho/bufferline.nvim',
+  "akinsho/bufferline.nvim",
   version = "*",
   dependencies = {
-    'nvim-tree/nvim-web-devicons'
+    "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    local groups = require('bufferline.groups')
+    local groups = require("bufferline.groups")
 
     require("bufferline").setup({
       options = {
         separator_style = "slant",
         numbers = "ordinal",
         diagnostics = "nvim_lsp",
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        diagnostics_indicator = function(
+          count,
+          level,
+          diagnostics_dict,
+          context
+        )
           local icon = level:match("error") and " " or " "
           return " " .. icon .. count
         end,
         groups = {
           items = {
-            require('bufferline.groups').builtin.pinned:with({ icon = "" }),
-            groups.builtin.ungrouped -- other items
-          }
+            require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+            groups.builtin.ungrouped, -- other items
+          },
         },
         offsets = {
           {
@@ -29,10 +34,10 @@ return {
               return vim.fn.getcwd()
             end,
             highlight = "Directory",
-            separator = true
-          }
-        }
-      }
+            separator = true,
+          },
+        },
+      },
     })
-  end
+  end,
 }

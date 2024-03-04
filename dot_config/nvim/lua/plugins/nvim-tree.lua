@@ -21,11 +21,16 @@ return {
           },
         },
         filters = {
-          custom = { "^.git$" }
-        }
+          custom = { "^.git$" },
+        },
       })
 
-      vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
-    end
+      vim.api.nvim_set_keymap(
+        "n",
+        "<C-h>",
+        ":NvimTreeToggle<cr>",
+        { silent = true, noremap = true }
+      )
+    end,
   },
 }
