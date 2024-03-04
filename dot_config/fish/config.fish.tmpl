@@ -167,22 +167,22 @@ else if type -q nano
     set -x EDITOR nano
 end
 
-if test -f ~/.config/env
+if test -f ~/.config/.env
     while read -la line
         set -x $(string split -m1 '=' "$line")
-    end <~/.config/env
+    end <~/.config/.env
 end
 
-if test -f ~/.config/env-local
+if test -f ~/.config/.env.local
     while read -la line
         set -x $(string split -m1 '=' "$line")
-    end <~/.config/env-local
+    end <~/.config/.env.local
 end
 
 ## nvm
 if status --is-interactive && type -q nvm
-    if nvm list lts
-        nvm use lts
+    if nvm list lts &>/dev/null
+        nvm use lts &>/dev/null
     else
         nvm install lts &>/dev/null
     end

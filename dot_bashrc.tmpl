@@ -102,8 +102,8 @@ elif command -v nano &>/dev/null; then
   export EDITOR=nano
 fi
 
-if [ -f "${HOME}/.config/env" ]; then
-  source "${HOME}/.config/env"
+if [ -f "${HOME}/.config/.env" ]; then
+  source "${HOME}/.config/.env"
 fi
 
 {{ if ne .osid "android" }}

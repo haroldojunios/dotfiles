@@ -14,7 +14,7 @@ README.md
 !.config/sh
 !.config/zsh
 !.config/black
-!.config/env
+!.config/.env
 !.config/starship.toml
 {{ end }}
 
