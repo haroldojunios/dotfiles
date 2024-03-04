@@ -15,9 +15,7 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off"
   },
-  "[django-html][erb]": {
-    "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
-  },
+  "stylua.searchParentDirectories": true,
   "[dockercompose]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
@@ -46,7 +44,6 @@
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnPaste": false,
     "editor.formatOnSaveMode": "file",
-    // "editor.semanticHighlighting.enabled": false
     "editor.rulers": [79],
     "editor.tabSize": 4
   },
@@ -61,11 +58,9 @@
   "[yaml]": {
     "editor.tabSize": 4
   },
-  "atomKeymap.promptV3Features": true,
   "autoDocstring.docstringFormat": "numpy",
   "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, AlignAfterOpenBracket: DontAlign,SpacesBeforeTrailingComments: 1,BreakBeforeBraces: Allman,BreakStringLiterals: true,ColumnLimit: 80, MaxEmptyLinesToKeep: 1,ContinuationIndentWidth: 2,AlwaysBreakBeforeMultilineStrings: false,AlignEscapedNewlines: Left,AlignConsecutiveMacros: AcrossComments,AllowAllParametersOfDeclarationOnNextLine: false,AllowShortLambdasOnASingleLine: true,BinPackArguments: true,BreakConstructorInitializers: AfterColon,IncludeBlocks: Preserve,AllowShortFunctionsOnASingleLine: None,SortIncludes: false,NamespaceIndentation: All,IndentPPDirectives: AfterHash,AlignArrayOfStructures: Right}",
   "C_Cpp.clang_format_path": "/usr/bin/clang-format",
-  // "C_Cpp.clang_format_fallbackStyle": "/home/haroldo/.clang-format",
   "C_Cpp.configurationWarnings": "Disabled",
   "C_Cpp.default.browse.path": ["{$workspaceFolder}/**"],
   "C_Cpp.default.includePath": ["{$workspaceFolder}/**"],
@@ -141,33 +136,11 @@
     "WGS",
     "WIFI"
   ],
-  "customizeUI.activityBar": "bottom",
-  "customizeUI.font.monospace": "Fira Code",
-  "customizeUI.font.regular": "Nunito",
-  "customizeUI.fontSizeMap": {
-    "12px": "11px",
-    "13px": "11px",
-    "menu": "11px", // Used for menu items (windows only)
-    "monospace": "11px", // Used for monospace fonts in user interface
-    "tab-title": "11px", // Used for editor tab titles
-    "window-title": "12px" // Window title font when using custom titlebar
-  },
-  "customizeUI.listRowHeight": 17,
-  "customizeUI.stylesheet": {
-    // "[id='workbench.view.explorer']": "font-size: 10px;",
-    ".composite.title .tabs-and-actions-container ": "height: 10px;"
-  },
   "debug.console.fontSize": 11.5,
-  // "workbench.tree.indent": 4,
   "debug.internalConsoleOptions": "neverOpen",
   "debug.openDebug": "neverOpen",
-  // "editor.tabCompletion": "onlySnippets",
-  // "editor.semanticHighlighting.enabled": false,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.bracketPairColorization.enabled": true,
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.eslint": true
-  // },
   "editor.comments.insertSpace": true,
   "editor.fastScrollSensitivity": 10,
   "editor.fontFamily": "'FiraCode Nerd Font', 'FiraCode NF', 'Fira Code', Hack, Consolas, 'Courier New', monospace",
@@ -190,22 +163,6 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[CodeSandbox Black]": {
-      "textMateRules": [
-        {
-          "scope": "invalid.deprecated.line-too-long.git-commit",
-          "settings": {
-            "foreground": "#BBBBBB"
-          }
-        },
-        {
-          "scope": "invalid.illegal.line-too-long.git-commit",
-          "settings": {
-            "foreground": "#FF0000"
-          }
-        }
-      ]
-    },
     "[One Dark Pro]": {
       "textMateRules": [
         {
@@ -241,17 +198,6 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.sortOrder": "type",
   "extensions.ignoreRecommendations": true,
-  "extensions.supportUntrustedWorkspaces": {
-    "iocave.customize-ui": {
-      "supported": true
-    },
-    "iocave.monkey-patch": {
-      "supported": true
-    },
-    "ms-vscode.atom-keybindings": {
-      "supported": true
-    }
-  },
   "files.associations": {
     "**/*.html": "html",
     "**/fontconfig/*.conf": "xml",
@@ -285,9 +231,7 @@
   },
   "gitlens.telemetry.enabled": false,
   "html.format.wrapLineLength": 80,
-  // "git.inputValidationSubjectLength": 0,
   "javascript.autoClosingTags": true,
-  // "emmet.showSuggestionsAsSnippets": true,
   "javascript.preferences.quoteStyle": "double",
   "javascript.suggest.paths": false,
   "jupyter.askForKernelRestart": false,
@@ -325,8 +269,6 @@
     {
       "args": [
         "-lualatex",
-        // "-pdflatex=lualatex -shell-escape",
-        // "-shell-escape",
         "-synctex=1",
         "-interaction=nonstopmode",
         "-f",
@@ -340,7 +282,6 @@
     {
       "args": [
         "-xelatex",
-        // "-pdflatex=xelatex -shell-escape",
         "-shell-escape",
         "-synctex=1",
         "-interaction=nonstopmode",
@@ -383,7 +324,6 @@
   "latex-workshop.message.information.show": false,
   "latex-workshop.message.warning.show": false,
   "latex-workshop.synctex.afterBuild.enabled": true,
-  // "latex-workshop.view.pdf.hand": true,
   "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
   "latex-workshop.view.pdf.viewer": "tab",
   "livePreview.notifyOnOpenLooseFile": false,
@@ -421,7 +361,6 @@
   "oneDarkPro.vivid": true,
   "partialDiff.enableTelemetry": false,
   "pasteImage.showFilePathConfirmInputBox": true,
-  // "path-intellisense.showHiddenFiles": true,
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
   "path-intellisense.showHiddenFiles": true,
@@ -433,10 +372,6 @@
   "prettier.printWidth": 79,
   "prettier.singleQuote": false,
   "python.experiments.optOutFrom": ["All"],
-  "python.formatting.provider": "none",
-  "remote.SSH.remotePlatform": {
-    "laserscanner1.local": "linux"
-  },
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "sqltools.autoOpenSessionFiles": false,
@@ -447,9 +382,6 @@
   },
   "svg.preview.background": "white",
   "svg.preview.mode": "img",
-  "sync.autoUpload": false,
-  "sync.gist": "0ddd7f67d6d73fa04c8525d244191706",
-  "sync.quietSync": true,
   "tabnine.experimentalAutoImports": true,
   "telemetry.telemetryLevel": "off",
   "template-string-converter.autoRemoveTemplateString": true,
@@ -501,57 +433,15 @@
     }
   },
   "terminal.integrated.tabs.enabled": false,
-  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"], // , "[ ]", "[x]"],
-  "todo-tree.highlights.customHighlight": {
-    "FIXME": {
-      "background": "#FF01FF",
-      "icon": "bug",
-      "iconColour": "#FF01FF"
-    },
-    "MARK": {
-      "background": "#157EFB",
-      "icon": "tag",
-      "iconColour": "#157EFB"
-    },
-    "NOTE": {
-      "background": "#FFA500",
-      "icon": "file",
-      "iconColour": "#FFA500"
-    },
-    "TODO": {
-      "background": "#FFD703",
-      "icon": "tasklist",
-      "iconColour": "#FFD703"
-    }
-    // "[ ]": {
-    //   "background": "#ff000080",
-    //   "icon": "square",
-    //   "iconColour": "#ff000080"
-    // },
-    // "[x]": {
-    //   "background": "#00ff0080",
-    //   "icon": "square-fill",
-    //   "iconColour": "#00ff0080"
-    // }
-  },
-  "todo-tree.highlights.defaultHighlight": {
-    "fontStyle": "italic",
-    "fontWeight": "bold",
-    "foreground": "#555",
-    "opacity": 80,
-    "type": "text-and-comment"
-  },
+  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "typescript.autoClosingTags": true,
   "typescript.suggest.paths": false,
-  "unibeautify.defaultConfig": "/home/haroldo/.unibeautifyrc.json",
-  "unibeautify.enabled": true,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "custom",
   "window.zoomLevel": -0.5,
   "workbench.colorCustomizations": {
-    // Sweet theme color
     "tab.activeBorder": "#7e7e7e",
     "terminal.ansiBlack": "#282c34",
     "terminal.ansiBlue": "#7cb7ff",
@@ -585,6 +475,5 @@
   },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
-  "workbench.tree.renderIndentGuides": "always",
-  "workspaceExplorer.workspaceStorageDirectory": "/home/haroldo/Documents/vscode"
+  "workbench.tree.renderIndentGuides": "always"
 }
