@@ -179,6 +179,15 @@ if test -f ~/.config/env-local
     end <~/.config/env-local
 end
 
+## nvm
+if status --is-interactive && type -q nvm
+    if nvm list lts
+        nvm use lts
+    else
+        nvm install lts &>/dev/null
+    end
+end
+
 ## Mcfly history
 if status --is-interactive && type -q mcfly
     mcfly init fish | source
