@@ -96,11 +96,7 @@ if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
 fi
 {{ end }}
 
-if command -v code &>/dev/null && ! { [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; }; then
-  export EDITOR="code --wait"
-elif command -v nano &>/dev/null; then
-  export EDITOR=nano
-fi
+command -v nvim >/dev/null && export EDITOR=nvim || export EDITOR=vim
 
 if [ -f "${HOME}/.config/.env" ]; then
   source "${HOME}/.config/.env"

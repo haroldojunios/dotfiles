@@ -159,13 +159,7 @@ if status --is-interactive && test -z "$VSCODE" && test -z "$TMUX"
     end
 end
 
-if status --is-interactive && type -q code && not begin
-        test -n "$SSH_CLIENT" || test -n "$SSH_CONNECTION" || test -n "$SSH_TTY"
-    end
-    set -x EDITOR "code --wait"
-else if type -q nano
-    set -x EDITOR nano
-end
+type -q nvim && set -x EDITOR nvim || set -x EDITOR vim
 
 if test -f ~/.config/.env
     while read -la line

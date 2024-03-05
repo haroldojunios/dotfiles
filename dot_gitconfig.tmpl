@@ -11,7 +11,7 @@
 	defaultBranch = main
 [core]
 	autocrlf = input
-	editor = {{ if .installDE -}} code --wait {{ else -}} micro {{- end }}
+	editor = nvim
 	excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 [safe]
 	directory = *
