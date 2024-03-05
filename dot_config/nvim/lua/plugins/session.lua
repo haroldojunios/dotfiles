@@ -2,7 +2,8 @@ return {
   "Shatur/neovim-session-manager",
   config = function()
     local config = require("session_manager.config")
-    require("session_manager").setup({
+    local session_manager = require("session_manager")
+    session_manager.setup({
       autoload_mode = config.AutoloadMode.CurrentDir,
     })
 
@@ -16,8 +17,7 @@ return {
           and not vim.bo.filetype ~= "gitcommit"
           and not vim.bo.filetype ~= "gitrebase"
         then
-          session_manager.delete_current_session()
-          session_manager.save_current_session()
+          session_manager.autosave_session()
         end
       end,
     })
