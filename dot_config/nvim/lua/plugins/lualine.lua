@@ -3,7 +3,7 @@ return {
   config = function()
     require("lualine").setup({
       options = {
-        theme = "onedark_vivid",
+        theme = "auto",
       },
     })
   end,
