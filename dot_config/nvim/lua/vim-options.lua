@@ -44,3 +44,10 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+if vim.fn.has("unix") then
+  local node_dir = vim.env.HOME .. ".local/share/nvm/lts/bin/"
+  if vim.fn.isdirectory(node_dir) then
+    vim.env.PATH = node_dir .. ":" .. vim.env.PATH
+  end
+end
