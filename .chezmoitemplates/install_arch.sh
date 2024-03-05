@@ -219,7 +219,9 @@ packageList=(
   htop
   imagemagick
   jq
+  lazydocker
   lazygit
+  lazynpm
   libjxl
   make
   mediainfo

@@ -4,6 +4,7 @@
 {{ template "shell/docker.sh" . }}
 {{ template "shell/chezmoi.sh" . }}
 {{ template "shell/npm.sh" . }}
+{{ template "shell/lazy.sh" . }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
 {{ template "shell/ubuntu.sh" . }}

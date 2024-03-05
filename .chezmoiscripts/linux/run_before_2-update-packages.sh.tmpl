@@ -95,4 +95,28 @@ if ! [ -x "/usr/local/bin/lazygit" ] || ! "/usr/local/bin/lazygit" --version | g
     )
   fi
 fi
+
+LAZYDOCKER_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" | jq -r .tag_name | tr -d v)
+if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --version | grep -q "version=${LAZYDOCKER_VER}"; then
+  if [ -n "${UARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/lazydocker.tar.gz" -q "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${LAZYDOCKER_VER}_Linux_${UARCH}.tar.gz"
+    (
+      cd "${TEMP_FOLDER}"
+      tar -xf lazydocker.tar.gz
+      sudo install lazydocker /usr/local/bin
+    )
+  fi
+fi
+
+LAZYNPM_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazynpm/releases/latest" | jq -r .tag_name | tr -d v)
+if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | grep -q "version=${LAZYNPM_VER}"; then
+  if [ -n "${UARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/lazynpm.tar.gz" -q "https://github.com/jesseduffield/lazynpm/releases/latest/download/lazynpm_${LAZYNPM_VER}_Linux_${UARCH}.tar.gz"
+    (
+      cd "${TEMP_FOLDER}"
+      tar -xf lazynpm.tar.gz
+      sudo install lazynpm /usr/local/bin
+    )
+  fi
+fi
 {{ end }}
