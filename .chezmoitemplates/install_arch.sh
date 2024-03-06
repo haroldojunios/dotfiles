@@ -387,6 +387,6 @@ if ! pipx list --short | grep -q crudini; then
 fi
 
 yes | paru -Scd
-pacman -Qtdq | sudo pacman -Rns --noconfirm 2>/dev/null || :
+pacman -Qtdq | xargs -r -n 1 sudo pacman -Rns --noconfirm
 
 echo
