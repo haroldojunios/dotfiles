@@ -15,7 +15,6 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off"
   },
-  "stylua.searchParentDirectories": true,
   "[dockercompose]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
@@ -380,6 +379,7 @@
     "linesBetweenQueries": 2,
     "reservedWordCase": "upper"
   },
+  "stylua.searchParentDirectories": true,
   "svg.preview.background": "white",
   "svg.preview.mode": "img",
   "tabnine.experimentalAutoImports": true,
@@ -433,7 +433,7 @@
     }
   },
   "terminal.integrated.tabs.enabled": false,
-  "todo-tree.general.tags": ["NOTE", "TODO", "FIXME", "MARK"],
+  "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "NOTE", "MARK"],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "typescript.autoClosingTags": true,
   "typescript.suggest.paths": false,
