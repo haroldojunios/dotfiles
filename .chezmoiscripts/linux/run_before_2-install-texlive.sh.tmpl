@@ -63,4 +63,5 @@ for package in "${packageList[@]}"; do
   if tlmgr list --only-installed "${package}" | grep installed | grep -qi no &>/dev/null; then
     sudo /usr/local/texlive/bin/x86_64-linux/tlmgr install "${package}"
   fi
+done
 {{ end }}

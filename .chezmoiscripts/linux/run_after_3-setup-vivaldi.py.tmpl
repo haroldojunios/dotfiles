@@ -1,0 +1,32 @@
+# {{- if ne .osid "android" -}}!/usr/bin/env python3{{- else -}}!/data/data/com.termux/files/usr/bin/env python3{{ end }}
+
+# {{ if ne .osid "android" }}
+import json
+from pathlib import Path
+
+ignored_vivaldi_prefs = ("privacy", "startup", "vivaldi_account")
+
+default_prefs_path = (
+    Path.home() / ".local/share/chezmoi/assets/vivaldi/vivaldi-prefs.json"
+)
+prefs_path = Path.home() / ".config/vivaldi/Default/Preferences"
+
+with default_prefs_path.open() as f:
+    default_prefs = json.load(f)
+
+with prefs_path.open() as f:
+    prefs = json.load(f)
+
+for pref in default_prefs:
+    if pref in prefs:
+        if pref == "vivaldi":
+            for key in default_prefs["vivaldi"]:
+                if key not in ignored_vivaldi_prefs:
+                    prefs["vivaldi"][key] = default_prefs["vivaldi"][key]
+        else:
+            prefs[pref] = default_prefs[pref]
+
+with prefs_path.open("w", encoding="utf-8") as f:
+    json.dump(prefs, f, ensure_ascii=False)
+
+# {{ end }}

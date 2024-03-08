@@ -206,6 +206,7 @@
     "*.fish.tmpl": "fish",
     "*.m": "matlab",
     "*.ps1.tmpl": "powershell",
+    "*.py.tmpl": "python",
     "*.sh.tmpl": "shellscript",
     "*.toml.tmpl": "toml",
     "*aliases.tmpl": "shellscript",
