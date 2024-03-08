@@ -7,6 +7,10 @@
 set -eu
 
 if command -v crudini &>/dev/null && command -v rclone &>/dev/null; then
+  if [ ! -f "${HOME}/.config/rclone/rclone.conf" ]; then
+    mkdir -p "${HOME}/.config/rclone"
+    touch "${HOME}/.config/rclone/rclone.conf"
+  fi
   # drive
   crudini --set "${HOME}/.config/rclone/rclone.conf" drive type drive
   crudini --set "${HOME}/.config/rclone/rclone.conf" drive scope drive

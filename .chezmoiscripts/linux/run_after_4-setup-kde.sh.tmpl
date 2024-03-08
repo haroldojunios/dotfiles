@@ -86,6 +86,9 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # trolltech
   if command -v crudini &>/dev/null; then
+    if [ -f "${HOME}/.config/Trolltech.conf" ]; then
+      touch "${HOME}/.config/Trolltech.conf"
+    fi
     crudini --set ${HOME}/.config/Trolltech.conf qt font "Fira Sans,9,-1,5,50,0,0,0,0,0"
   fi
 
