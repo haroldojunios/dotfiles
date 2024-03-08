@@ -151,7 +151,9 @@ end
 {{ end }}
 
 ## Run fastfetch if session is interactive
-if status --is-interactive && test -z "$VSCODE" && test -z "$TMUX"
+if status --is-interactive && test -z "$VSCODE" && begin
+        test -z "$TMUX" || test $(tmux display -p '#{pane_index}') -eq 1
+    end
     if type -q fastfetch
         fastfetch --load-config neofetch
     else if type -q neofetch
