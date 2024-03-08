@@ -371,6 +371,7 @@
   "prettier.printWidth": 79,
   "prettier.singleQuote": false,
   "python.experiments.optOutFrom": ["All"],
+  "python.terminal.activateEnvironment": false,
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "sqltools.autoOpenSessionFiles": false,
