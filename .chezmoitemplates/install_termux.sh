@@ -19,6 +19,7 @@ packageList=(
   curl
   expect
   eza
+  fd
   ffmpeg
   fish
   git
@@ -40,6 +41,7 @@ packageList=(
   python-pip
   python-scipy
   rclone
+  ripgrep
   rsync
   starship
   termux-api
