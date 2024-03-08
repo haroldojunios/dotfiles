@@ -1,0 +1,33 @@
+{{- if ne .osid "android" -}}
+#!/usr/bin/fish
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/fish
+{{ end }}
+
+echo aaaaa
+
+set -l fisherPlugins franciscolourenco/done \
+    edc/bass \
+    kristoffer-pbs/autols-fish \
+    nakulj/auto-venv
+
+{{ if ne .osid "android" }}
+set -a fisherPlugins jorgebucaran/nvm.fish
+{{ end }}
+
+echo $fisherPlugins
+
+if not functions -q fisher
+    curl -sL https://git.io/fisher | source
+    fisher install jorgebucaran/fisher
+end
+
+for plugin in $fisherPlugins
+    if not fisher list $plugin &>/dev/null
+        fisher install $plugin
+    end
+end
+
+if type -q autols
+    autols on &>/dev/null
+end

@@ -43,23 +43,6 @@ if type -q qtile
     set -x QT_QPA_PLATFORMTHEME qt5ct
 end
 
-if status --is-interactive && not functions -q fisher
-    curl -sL https://git.io/fisher | source
-    if grep -q fisher ~/.config/fish/fish_plugins
-        fisher update
-    else
-        fisher install jorgebucaran/fisher
-        fisher install franciscolourenco/done
-        fisher install edc/bass
-        fisher install Kristoffer-PBS/autols-fish
-        fisher install jorgebucaran/nvm.fish
-        fisher install nakulj/auto-venv
-    end
-    if type -q autols-toggle
-        autols-toggle on &>/dev/null
-    end
-end
-
 # Set settings for https://github.com/franciscolourenco/done
 set -x __done_min_cmd_duration 10000
 set -x __done_notification_urgency_level low
