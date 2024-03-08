@@ -65,7 +65,7 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
-command -v hw >/dev/null &&alias hw='hwinfo --short'
+command -v hw >/dev/null && alias hw='hwinfo --short'
 alias ct='bat --style full'
 command -v ip >/dev/null && alias ip="ip -color"
 alias jc="journalctl -rxb"
@@ -76,3 +76,4 @@ alias pm10='ps auxf | sort -nr -k 4 | head -10'
 alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
 command -v firefox >/dev/null && alias fp='firefox -P personal &>/dev/null & disown'
 command -v vivaldi >/dev/null && alias vp='vivaldi --profile-directory=personal &>/dev/null & disown'
+alias sudo='sudo --preserve-env=PATH'

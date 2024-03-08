@@ -58,6 +58,11 @@ if [ -d "${HOME}/.local/bin" ] && [[ ":$PATH:" != *":${HOME}/.local/bin:"* ]]; t
   PATH="${PATH:+"$PATH:"}${HOME}/.local/bin"
 fi
 
+# set PATH so it includes texlive bin if it exists
+if [ -d "/usr/local/texlive/bin/x86_64-linux" ] && [[ ":$PATH:" != *":/usr/local/texlive/bin/x86_64-linux:"* ]]; then
+  PATH="${PATH:+"$PATH:"}/usr/local/texlive/bin/x86_64-linux"
+fi
+
 # fzf
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 

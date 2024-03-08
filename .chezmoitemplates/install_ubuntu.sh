@@ -198,7 +198,6 @@ packageList=(
   aptitude
   bat
   bc
-  biber
   black
   btrfs-compsize
   build-essential
@@ -214,9 +213,10 @@ packageList=(
   fish
   git
   hwinfo
+  ghostscript
   jmtpfs
   jq
-  latexmk
+  libfontconfig1
   make
   micro
   mpv
@@ -225,6 +225,7 @@ packageList=(
   ninja-build
   numlockx
   openssh-server
+  perl
   python-is-python3
   python3
   python3-isort
@@ -236,17 +237,6 @@ packageList=(
   ripgrep
   shfmt
   sshfs
-  texlive-bibtex-extra
-  texlive-fonts-recommended
-  texlive-lang-portuguese
-  texlive-latex-base
-  texlive-latex-extra
-  texlive-latex-recommended
-  texlive-pictures
-  texlive-pstricks
-  texlive-publishers
-  texlive-science
-  texlive-xetex
   tmux
   ufw
   unzip
