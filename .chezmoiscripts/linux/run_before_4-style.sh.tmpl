@@ -119,6 +119,7 @@ fi
 {{ else if and (eq .osid "android") (.installDE) }}
 # wallpaper
 if ! [ -f "${PREFIX}/usr/share/wallpapers/Shani.png" ]; then
+  mkdir -p "${PREFIX}/usr/share/wallpapers"
   cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" "${PREFIX}/usr/share/wallpapers"
 fi
 {{ end }}

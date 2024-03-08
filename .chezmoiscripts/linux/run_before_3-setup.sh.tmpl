@@ -6,8 +6,8 @@
 
 set -eu
 
-{{ if ne .chezmoi.osRelease.id "archarm" }}
-{{  if and (ne .osid "android") (not .isWSL) }}
+{{ if and (ne .osid "android") (not .isWSL) }}
+{{   if ne .chezmoi.osRelease.id "archarm" }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
