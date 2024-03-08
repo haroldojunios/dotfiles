@@ -221,7 +221,6 @@ packageList=(
   jq
   lazydocker
   lazygit
-  lazynpm
   libjxl
   make
   mediainfo
@@ -280,6 +279,7 @@ packageList=(
   docker-compose
   hwinfo
   inetutils
+  lazynpm
   lm_sensors
   os-prober
   reflector
