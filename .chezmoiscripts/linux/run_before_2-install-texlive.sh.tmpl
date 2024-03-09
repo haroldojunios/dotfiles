@@ -14,16 +14,18 @@ PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 TEXDIR=/usr/local/texlive
 TEXMFDIST_ARCH=/usr/share/texmf-dist # texlive install dir on arch linux
 
-(
-  cd "${TEMP_FOLDER}"
-  wget --timeout=10 --tries=2 -q -O "install-tl-unx.tar.gz" "https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" || exit 0
-  mkdir install-tl
-  tar -xzf install-tl-unx.tar.gz -C install-tl --strip-components=1
-  TEXLIVE_MIRROR_VERSION="$(install-tl/install-tl --version | grep version | sed -n 's/.*version //p')"
-  if ! tex --version | grep -qi "tex \?live ${TEXLIVE_MIRROR_VERSION}"; then
-    echo "Texlive is outdated! Please update to latest version = ${TEXLIVE_MIRROR_VERSION}." >&2
-  fi
-)
+if [ -d "${TEXDIR}" ]; then
+  (
+    cd "${TEMP_FOLDER}"
+    wget --timeout=10 --tries=2 -q -O "install-tl-unx.tar.gz" "https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" || exit 0
+    mkdir install-tl
+    tar -xzf install-tl-unx.tar.gz -C install-tl --strip-components=1
+    TEXLIVE_MIRROR_VERSION="$(install-tl/install-tl --version | grep version | sed -n 's/.*version //p')"
+    if ! tex --version | grep -qi "tex \?live ${TEXLIVE_MIRROR_VERSION}"; then
+      echo "Texlive is outdated! Please update to latest version = ${TEXLIVE_MIRROR_VERSION}." >&2
+    fi
+  )
+fi
 
 if ! [ -d "${TEXDIR}" ] && ! [ -d "${TEXMFDIST_ARCH}" ] && [ -f "${TEMP_FOLDER}/install-tl/install-tl" ]; then
   (
@@ -34,7 +36,6 @@ fi
 
 if [ -f "${TEXMFDIST_ARCH}/scripts/texlive/tlmgr.pl" ]; then
   sudo sed -i 's/\$Master = "\$Master\/..\/..";/\$Master = "\$Master\/..\/..\/..";/' "${TEXMFDIST_ARCH}/scripts/texlive/tlmgr.pl"
-  sudo ln -s "${TEXMFDIST_ARCH}/scripts/texlive/tlmgr.pl" ${TEXDIR}/bin/x86_64-linux/tlmgr
 fi
 
 if ! [ -d "${HOME}/texmf" ]; then
@@ -60,7 +61,7 @@ packageList=(
 )
 
 for package in "${packageList[@]}"; do
-  if tlmgr list --only-installed "${package}" | grep installed | grep -qi no &>/dev/null; then
+  if tlmgr list --only-installed "${package}" 2>/dev/null | grep installed | grep -qi no &>/dev/null; then
     sudo /usr/local/texlive/bin/x86_64-linux/tlmgr install "${package}"
   fi
 done
