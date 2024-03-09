@@ -4,7 +4,6 @@
 #!/data/data/com.termux/files/usr/bin/fish
 {{ end }}
 
-echo aaaaa
 
 set -l fisherPlugins franciscolourenco/done \
     edc/bass \
@@ -14,8 +13,6 @@ set -l fisherPlugins franciscolourenco/done \
 {{ if ne .osid "android" }}
 set -a fisherPlugins jorgebucaran/nvm.fish
 {{ end }}
-
-echo $fisherPlugins
 
 if not functions -q fisher
     curl -sL https://git.io/fisher | source
