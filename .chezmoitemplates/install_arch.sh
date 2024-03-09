@@ -194,9 +194,9 @@ dePackageList=(
 
 # applets
 appletsPackageList=(
-  plasma5-applets-window-appmenu
-  plasma5-applets-window-buttons
-  plasma5-applets-window-title
+  plasma6-applets-window-appmenu
+  plasma6-applets-window-buttons
+  plasma6-applets-window-title
 )
 
 packageList=(
