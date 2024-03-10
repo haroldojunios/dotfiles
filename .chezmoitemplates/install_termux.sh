@@ -33,6 +33,7 @@ packageList=(
   ncdu
   net-tools
   ninja
+  nodejs-lts
   openssh
   python
   python-numpy
