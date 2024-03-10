@@ -3,6 +3,10 @@
 # {{ if ne .osid "android" }}
 import json
 from pathlib import Path
+from shutil import which
+
+if which("vivaldi-stable") is None:
+    exit()
 
 ignored_vivaldi_prefs = ("privacy", "startup", "vivaldi_account")
 
@@ -13,6 +17,10 @@ prefs_path = Path.home() / ".config/vivaldi/Default/Preferences"
 
 with default_prefs_path.open() as f:
     default_prefs = json.load(f)
+
+if not prefs_path.exists():
+    with prefs_path.open("w", encoding="utf-8") as f:
+        json.dump(default_prefs, f, ensure_ascii=False)
 
 with prefs_path.open() as f:
     prefs = json.load(f)
