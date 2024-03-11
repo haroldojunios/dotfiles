@@ -35,6 +35,7 @@ packageList=(
   ninja
   nodejs-lts
   openssh
+  proot-distro
   python
   python-numpy
   python-pandas
@@ -57,7 +58,6 @@ dePackageList=(
   # x11
   x11-repo
   termux-x11-nightly
-  proot-distro
   tigervnc
   # xfce
   xfce4
@@ -65,7 +65,6 @@ dePackageList=(
   xfce4-terminal
   xfce4-whiskermenu-plugin
   # other gui apps/plugins
-  firefox
   keepassxc
 )
 
@@ -89,7 +88,7 @@ if ! dpkg -s tsu &>/dev/null && su -c echo &>/dev/null; then
   apt-get install -y tsu
 fi
 
-if command -v proot-distro &>/dev/null; then
+if [ -n "${PROOT:-}" ] && command -v proot-distro &>/dev/null; then
   if ! [ -d "${PREFIX}/var/lib/proot-distro/installed-rootfs/archlinux" ] &>/dev/null; then
     proot-distro install archlinux
     timezone=$(getprop persist.sys.timezone)
