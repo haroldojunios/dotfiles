@@ -176,6 +176,7 @@ dePackageList=(
   inkscape
   keepassxc
   mpv
+  obsidian
   onlyoffice-bin
   qt5-imageformats
   qt5-jpegxl-image-plugin

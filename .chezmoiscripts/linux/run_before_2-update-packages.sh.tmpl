@@ -119,4 +119,12 @@ if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | g
     )
   fi
 fi
+
+OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | jq -r .tag_name | tr -d v)
+if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
+  if [ -n "${ARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/obsidian.deb"
+  fi
+fi
 {{ end }}
