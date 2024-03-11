@@ -104,6 +104,13 @@ if ! [ -f /etc/apt/sources.list.d/onlyoffice.list ]; then
   sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" > /etc/apt/sources.list.d/onlyoffice.list'
 fi
 
+# nodejs repo
+if ! [ -f /etc/apt/sources.list.d/nodesource.list ]; then
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+fi
+
 sudo apt-get update
 # sudo apt-get full-upgrade -y
 
@@ -223,6 +230,7 @@ packageList=(
   nano
   neovim
   ninja-build
+  nodejs
   numlockx
   openssh-server
   perl

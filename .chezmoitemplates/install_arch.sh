@@ -230,6 +230,7 @@ packageList=(
   neovim
   netcat
   ninja
+  nodejs-lts-iron
   numlockx
   p7zip
   pacman-contrib

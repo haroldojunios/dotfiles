@@ -6,6 +6,7 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x MICRO_TRUECOLOR 1
 set -U fish_features qmark-noglob
 set -x WINIT_X11_SCALE_FACTOR 1
+set -x npm_config_prefix "$HOME/.local"
 
 {{ if eq .osid "android" }}
 set -x USER haroldo
@@ -172,15 +173,6 @@ if test -f ~/.config/.env.local
     while read -la line
         set -x $(string split -m1 '=' "$line")
     end <~/.config/.env.local
-end
-
-## nvm
-if status --is-interactive && type -q nvm
-    if nvm list lts &>/dev/null
-        nvm use lts &>/dev/null
-    else
-        nvm install lts &>/dev/null
-    end
 end
 
 ## Mcfly history

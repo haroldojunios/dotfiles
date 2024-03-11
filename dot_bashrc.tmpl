@@ -13,6 +13,8 @@ shopt -s checkwinsize
 export PAGER="bat --plain"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MICRO_TRUECOLOR=1
+export WINIT_X11_SCALE_FACTOR=1
+export npm_config_prefix="$HOME/.local"
 
 {{ if eq .osid "android" }}
 export USER=haroldo
