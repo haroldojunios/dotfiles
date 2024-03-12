@@ -17,7 +17,10 @@ return {
       "onsails/lspkind.nvim",
     },
     config = function()
-      require("codeium").setup()
+      require("codeium").setup({
+        bin_path = vim.fn.stdpath("data") .. "/codeium/bin",
+        config_path = vim.fn.stdpath("data") .. "/codeium/config.json",
+      })
     end,
   },
   {
