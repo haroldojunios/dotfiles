@@ -1,6 +1,7 @@
 # shellcheck shell=bash
 # ls
-alias l='eza -a --color=always --group-directories-first --icons'                        # preferred listing
+alias ls='eza -a --color=always --group-directories-first --icons'                       # preferred listing
+alias l='ls'                                                                             # alternative
 alias la='eza -a --color=always --group-directories-first --icons'                       # all files and dirs
 alias ll='eza -a -l --total-size --color=always --group-directories-first --icons'       # long format
 alias lg='eza -a -l --git --total-size --color=always --group-directories-first --icons' # long format w/ gitignore
@@ -14,6 +15,10 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
+# cat
+alias cat='bat --style full'
+alias ct='cat'
+
 # compression
 alias 7zc='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -aoa'
 alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 -aoa'
@@ -23,6 +28,7 @@ alias ut='tar -xvf '
 
 # find
 alias red='find . -type d -empty -delete'
+alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
 
 # general
 alias ytd='youtube-dl -o "%(title)s.%(ext)s" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
@@ -66,14 +72,12 @@ alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
 command -v hw >/dev/null && alias hw='hwinfo --short'
-alias ct='bat --style full'
 command -v ip >/dev/null && alias ip="ip -color"
 alias jc="journalctl -rxb"
 alias ug="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias wget='wget -c '
 alias pm='ps auxf | sort -nr -k 4'
 alias pm10='ps auxf | sort -nr -k 4 | head -10'
-alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
 command -v firefox >/dev/null && alias fp='firefox -P personal &>/dev/null & disown'
 command -v vivaldi >/dev/null && alias vp='vivaldi --profile-directory=personal &>/dev/null & disown'
 alias sudo='sudo --preserve-env=PATH'
