@@ -1,6 +1,7 @@
 key.txt.age
 .ssh/*.id_rsa.age
 .local/share/fonts/**/.uuid
+.config/nvim/lazy-lock.json 
 assets
 setup.ps1
 setup.sh
