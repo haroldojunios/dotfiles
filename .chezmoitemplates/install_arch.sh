@@ -143,6 +143,7 @@ dePackageList=(
   bluez
   bluez-utils
   gtk3-nocsd
+  kwin-effects-forceblur
   pulseaudio-bluetooth
   {{ end }}
   # kde gui apps

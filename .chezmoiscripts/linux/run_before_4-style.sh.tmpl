@@ -50,14 +50,8 @@ if ! [ -d /usr/share/themes/sweet ] && command -v crudini &>/dev/null; then
   git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/EliverLara/sweet-kde
   sudo cp -r "${TEMP_FOLDER}/sweet-kde"/* /usr/share/plasma/desktoptheme/Sweet
 
-  # blur
-  git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/esjeon/kwin-forceblur
-  sudo mkdir -p /usr/share/kwin/scripts/forceblur
-  sudo cp -r "${TEMP_FOLDER}/kwin-forceblur/"{contents/,LICENSE,image.png,metadata.desktop} /usr/share/kwin/scripts/forceblur/
-  sudo install -Dm644 "${TEMP_FOLDER}/kwin-forceblur/metadata.desktop" /usr/share/kservices5/kwin-script-forceblur.desktop
-
   # apply config
-  if [ -f /etc/sddm.conf ];then
+  if [ -f /etc/sddm.conf ]; then
     sudo crudini --set /etc/sddm.conf Theme Current Sweet
   fi
   sudo mkdir -p /var/lib/AccountsService/icons
@@ -66,11 +60,20 @@ if ! [ -d /usr/share/themes/sweet ] && command -v crudini &>/dev/null; then
   # killall plasmashell && kstart plasmashell
 fi
 
+# blur
+if [ ! -d /usr/share/kwin/scripts/forceblur ]; then
+  git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/esjeon/kwin-forceblur
+  sudo mkdir -p /usr/share/kwin/scripts/forceblur
+  sudo cp -r "${TEMP_FOLDER}/kwin-forceblur/"{contents/,LICENSE,image.png,metadata.desktop} /usr/share/kwin/scripts/forceblur/
+  sudo install -Dm644 "${TEMP_FOLDER}/kwin-forceblur/metadata.desktop" /usr/share/kservices5/kwin-script-forceblur.desktop
+fi
+
 # icons
 # if ! [ -d /usr/share/icons/candy-icons ]; then
 #   sudo mkdir -p /usr/share/icons
 #   sudo git -C /usr/share/icons clone --depth 1 https://github.com/EliverLara/candy-icons.git
 # fi
+
 if ! [ -d /usr/share/icons/beautyline ]; then
   sudo mkdir -p /usr/share/icons
   sudo git -C /usr/share/icons clone --depth 1 https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline.git
