@@ -7,6 +7,25 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("trouble").setup()
+
+      vim.keymap.set("n", "<leader>xx", function()
+        require("trouble").toggle()
+      end)
+      vim.keymap.set("n", "<leader>xw", function()
+        require("trouble").toggle("workspace_diagnostics")
+      end)
+      vim.keymap.set("n", "<leader>xd", function()
+        require("trouble").toggle("document_diagnostics")
+      end)
+      vim.keymap.set("n", "<leader>xq", function()
+        require("trouble").toggle("quickfix")
+      end)
+      vim.keymap.set("n", "<leader>xl", function()
+        require("trouble").toggle("loclist")
+      end)
+      vim.keymap.set("n", "gR", function()
+        require("trouble").toggle("lsp_references")
+      end)
     end,
   },
   {
@@ -22,6 +41,18 @@ return {
           mappings = {
             i = { ["<c-t>"] = trouble.open_with_trouble },
             n = { ["<c-t>"] = trouble.open_with_trouble },
+          },
+        },
+        pickers = {
+          live_grep = {
+            file_ignore_patterns = { "node_modules", ".git", ".venv", "venv" },
+            additional_args = function(_)
+              return { "--hidden" }
+            end,
+          },
+          find_files = {
+            file_ignore_patterns = { "node_modules", ".git", ".venv", "venv" },
+            hidden = true,
           },
         },
         extensions = {
