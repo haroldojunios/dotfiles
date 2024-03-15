@@ -158,7 +158,7 @@ dePackageList=(
   kdenetwork-filesharing
   kdialog
   kfind
-  kimageformats5
+  kimageformats
   kjournald
   kmix
   kolourpaint
@@ -178,8 +178,7 @@ dePackageList=(
   mpv
   obsidian
   onlyoffice-bin
-  qt5-imageformats
-  qt5-jpegxl-image-plugin
+  qt6-imageformats
   qt6-jpegxl-image-plugin
   visual-studio-code-bin
   xournalpp
@@ -217,6 +216,7 @@ packageList=(
   fish
   fzf
   git
+  github-cli
   htop
   imagemagick
   jq
@@ -228,9 +228,10 @@ packageList=(
   micro
   nano
   neovim
+  neovim-remote
   netcat
   ninja
-  nodejs-lts-iron
+  nodejs
   numlockx
   p7zip
   pacman-contrib
@@ -278,6 +279,7 @@ packageList=(
   compsize
   cronie
   docker
+  docker-buildx
   docker-compose
   hwinfo
   inetutils
