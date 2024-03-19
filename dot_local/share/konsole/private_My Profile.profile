@@ -4,12 +4,12 @@ Font=FiraCode Nerd Font,9,-1,5,50,0,0,0,0,0
 UseFontLineChararacters=true
 
 [Cursor Options]
-CursorShape=2
-CustomCursorColor=255,0,0
+CursorShape=1
+CustomCursorColor=170,0,255
 UseCustomCursorColor=true
 
 [General]
-Command=/usr/bin/fish
+Command=/usr/bin/tmux
 Name=My Profile
 Parent=FALLBACK/
 TerminalColumns=500
@@ -17,6 +17,7 @@ TerminalRows=200
 
 [Interaction Options]
 AutoCopySelectedText=true
+MiddleClickPasteMode=1
 TrimLeadingSpacesInSelectedText=true
 TrimTrailingSpacesInSelectedText=true
 UnderlineFilesEnabled=true
@@ -26,6 +27,8 @@ KeyBindings=default
 
 [Scrolling]
 HistoryMode=2
+ScrollBarPosition=2
 
 [Terminal Features]
 BlinkingCursorEnabled=true
+UrlHintsModifiers=67108864

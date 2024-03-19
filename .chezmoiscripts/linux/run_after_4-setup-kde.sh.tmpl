@@ -25,6 +25,9 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # konsole
   kwriteconfig5 --file konsolerc --group "Desktop Entry" --key DefaultProfile "My profile.profile"
+  kwriteconfig5 --file konsolerc --group KonsoleWindow --key ShowMenuBarByDefault false
+  kwriteconfig5 --file konsolerc --group MainWindow --key MenuBar Disabled
+  kwriteconfig5 --file konsolerc --group MainWindow --key ToolBarsMovable Disabled
 
   # kcminputrc
   kwriteconfig5 --file kcminputrc --group Keyboard --key NumLock 0
