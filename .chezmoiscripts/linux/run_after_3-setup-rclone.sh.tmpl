@@ -11,61 +11,30 @@ if command -v crudini &>/dev/null && command -v rclone &>/dev/null; then
     mkdir -p "${HOME}/.config/rclone"
     touch "${HOME}/.config/rclone/rclone.conf"
   fi
+
+  source "${HOME}/.config/.env"
+
   # drive
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive type drive
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive scope drive
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive client_id \
-    $(
-      age --decrypt -i "${HOME}/.config/key.txt" <<EOF
------BEGIN AGE ENCRYPTED FILE-----
-YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0dFk4U2FmdEtYcW5oY2h6
-QWdkZVdmSGhxbUtsbEVRKy9MYTZDTWJiSFQ4CkVSclpsdUVHZnlMT01PelQvVXVC
-NmxrQnB6NGRBM0JhbmlSODNCMC90dmMKLS0tIGM3Y3BRZXczRGxHYW9rZE00Zlpu
-Y3A4bFFHck81M1ArdW9zZU41amh1QUEKaExOuvZsXtnj1RrDb8Wnpshz1WQ2mfuP
-1Z9qAnLbw/PKkN4xbgdQfnWlZBjX5VKQbV0V9LMQgrJFUKjnyTaBrUCliQEde7rq
-fo+ktp5/RznRaqRczqSTwZsrBhXWGkHS9hX/vyG7dCY=
------END AGE ENCRYPTED FILE-----
-EOF
-    )
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive client_secret \
-    $(
-      age --decrypt -i "${HOME}/.config/key.txt" <<EOF
------BEGIN AGE ENCRYPTED FILE-----
-YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsM0lVOWFIdUxjekNodmIr
-NkRHM21mYkN3c0VIdXpEVUJKR1d6c2FtMEVZCjBZRklOY0RpbkVHYWRDR25tcHdQ
-MW9aR3ZPWkdtejc2QTIzdU0xSk9ENUkKLS0tIE1YRXh4QmlDUWFwYStPcGVrYUxZ
-dERKQ2xJT0dMdVJQbmJMdHFuU20wMncKmX0rVpK/wBePuaFMQ5QtdMgRYaSi10sO
-Z2Na55zL63HjAONtLzYPZ3k3VbV9XIvxndHBu3nyAHTBppKzTz7zVpQ+rRA=
------END AGE ENCRYPTED FILE-----
-EOF
-    )
+  if ! crudini --get "${HOME}/.config/rclone/rclone.conf" drive &>/dev/null; then
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive type drive
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive scope drive
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive client_id "${DRIVE_CLIENT_ID}"
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive client_secret "${DRIVE_SECRET}"
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive token "${DRIVE_TOKEN}"
+  fi
 
   # drive-rt
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt type drive
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt scope drive
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt client_id \
-    $(
-      age --decrypt -i "${HOME}/.config/key.txt" <<EOF
------BEGIN AGE ENCRYPTED FILE-----
-YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxaW5UeEVsa2szbVJaNTgz
-NXVJYncwRnFlVjZzOFh6QStVOTUwZ05WdDBZClZQUlZMR3RFZzlWbTFOdW10RnFD
-SHI4WWZhU0FkcjVDUVNmMmFyeUpZY1UKLS0tIDh4QmxIemVBUmNuQWtNckthdW5y
-LzlLL1Z0anlYWTYwSHVJOFZSd3dVTkkKNCa9ifXMsYzEqDChJE2GAwfhYD5BYYmp
-yF6/YYyRiahM8xGbBZQXF8iBBXBN+cO+F+Gk+lrzVGTf60sWxYGTX7GR0jigtH2E
-gJ2jnRXw6LQceSGZ8xIV0hTnI4VQq62Wzi/H7ZYlaYCs
------END AGE ENCRYPTED FILE-----
-EOF
-    )
-  crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt client_secret \
-    $(
-      age --decrypt -i "${HOME}/.config/key.txt" <<EOF
------BEGIN AGE ENCRYPTED FILE-----
-YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKSUh1YjhMbjlWVHVBd2w5
-d1JudjMyNTkrWGJJOERjbmVqRGlicG9PNEIwClNTODJTRnAxYkZoUUpHYW5idUV2
-bFdsdWhHZjA2a3NhZ3ZWMEFUeng3bkEKLS0tIEtvU1NnOVJsR0RnMmpzY09ZM3Jl
-aGVMVnZCaXc2bDBYRjBSSlRpQnlLdk0KYuIGCGw/wJI0ktGrugDMwhUO9NTIxPB1
-y81qi/2BUkLuZwNMT5834zERtf90n7JSfUbYDrwq3GL6hfEpqOBFfmWq910=
------END AGE ENCRYPTED FILE-----
-EOF
-    )
+  if ! crudini --get "${HOME}/.config/rclone/rclone.conf" drive-rt &>/dev/null; then
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt client_id "${DRIVE_RT_CLIENT_ID}"
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt client_secret "${DRIVE_RT_SECRET}"
+    crudini --set "${HOME}/.config/rclone/rclone.conf" drive-rt token "${DRIVE_RT_TOKEN}"
+  fi
+
+  # onedrive
+  if ! crudini --get "${HOME}/.config/rclone/rclone.conf" onedrive &>/dev/null; then
+    crudini --set "${HOME}/.config/rclone/rclone.conf" onedrive type onedrive
+    crudini --set "${HOME}/.config/rclone/rclone.conf" onedrive drive_type personal
+    crudini --set "${HOME}/.config/rclone/rclone.conf" onedrive drive_id "${ONEDRIVE_DRIVE_ID}"
+    crudini --set "${HOME}/.config/rclone/rclone.conf" onedrive token "${ONEDRIVE_TOKEN}"
+  fi
 fi
