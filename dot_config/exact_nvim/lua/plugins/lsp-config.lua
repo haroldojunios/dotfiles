@@ -76,7 +76,6 @@ return {
           "stylua",
           "yamlfmt",
         },
-        automatic_installation = true,
       })
 
       local null_ls = require("null-ls")
