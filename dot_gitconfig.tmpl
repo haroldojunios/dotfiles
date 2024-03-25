@@ -1,17 +1,19 @@
 [user]
-	email = haroldojunios@gmail.com
-	name = Haroldo Júnio
+  email = haroldojunios@gmail.com
+  name = Haroldo Júnio
 [pull]
-	rebase = false
+  rebase = false
 [push]
   default = current
 [merge]
-	conflictStyle = diff3
+  conflictStyle = diff3
+[commit]
+  verbose = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [core]
-	autocrlf = input
-	editor = nvim
-	excludesFile = {{ .chezmoi.homeDir }}/.gitignore
+  autocrlf = input
+  editor = nvim
+  excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 [safe]
-	directory = *
+  directory = *
