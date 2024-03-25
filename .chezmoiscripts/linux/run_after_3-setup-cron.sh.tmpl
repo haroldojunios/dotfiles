@@ -29,6 +29,6 @@ EOF
   )
 
   if ! [ "$(crontab -l 2>/dev/null)" = "${CRONTAB}" ]; then
-    echo "${CRONTAB}" | crontab -
+    echo "${CRONTAB}" | crontab - || :
   fi
 fi
