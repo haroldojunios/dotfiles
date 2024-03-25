@@ -10,21 +10,11 @@ return {
     },
   },
   {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-      "onsails/lspkind.nvim",
-    },
-    config = function()
-      require("codeium").setup({
-        bin_path = vim.fn.stdpath("data") .. "/codeium/bin",
-        config_path = vim.fn.stdpath("data") .. "/codeium/config.json",
-      })
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
+    dependencies = {
+      "onsails/lspkind.nvim",
+      "kdheepak/cmp-latex-symbols",
+    },
     config = function()
       local cmp = require("cmp")
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -50,6 +40,12 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "codeium" },
+          {
+            name = "latex_symbols",
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
         }, {
           { name = "buffer" },
         }),
@@ -61,6 +57,19 @@ return {
             symbol_map = { Codeium = "" },
           }),
         },
+      })
+    end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+        bin_path = vim.fn.stdpath("data") .. "/codeium/bin",
+        config_path = vim.fn.stdpath("data") .. "/codeium/config.json",
       })
     end,
   },

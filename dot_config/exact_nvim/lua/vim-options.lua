@@ -7,7 +7,7 @@ vim.cmd("set nofoldenable")
 
 vim.g.mapleader = " "
 
--- disable netrw at the very start of your init.lua
+-- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -32,9 +32,38 @@ vim.keymap.set("i", "<C-Up>", "<Esc>:m-2<CR>==gi", { silent = true })
 
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { silent = true })
 vim.wo.number = true
+vim.wo.colorcolumn = "80"
 
 vim.keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
-vim.keymap.set("i", "<C-s>", ":w<CR>", { silent = true })
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>i", { silent = true })
+
+vim.keymap.set(
+  { "n", "v" },
+  "<space>a",
+  vim.lsp.buf.code_action,
+  { desc = "code action" }
+)
+vim.keymap.set(
+  "n",
+  "<space>n",
+  vim.diagnostic.goto_next,
+  { desc = "next diagnostic" }
+)
+vim.keymap.set(
+  "n",
+  "<space>p",
+  vim.diagnostic.goto_next,
+  { desc = "previous diagnostic" }
+)
+
+-- Disable swapfile and save undo files
+vim.cmd("set noswapfile")
+local undopath = vim.fn.stdpath("data") .. "/undo"
+vim.opt.undodir = undopath
+if vim.fn.isdirectory(undopath) == 0 then
+  vim.fn.mkdir(undopath)
+end
+vim.opt.undofile = true
 
 if vim.fn.has("unix") then
   local node_dir = vim.env.HOME .. ".local/share/nvm/lts/bin/"

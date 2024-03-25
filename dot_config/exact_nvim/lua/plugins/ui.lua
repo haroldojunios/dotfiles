@@ -24,6 +24,9 @@ return {
       })
     end,
   },
+  {
+    "xiyaowong/virtcolumn.nvim",
+  },
   -- {
   --   "lukas-reineke/indent-blankline.nvim",
   --   config = function()
