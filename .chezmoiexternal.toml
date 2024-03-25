@@ -92,6 +92,13 @@ exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
 
+[".local/share/fonts/Iosevka"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
+exact = true
+refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
+
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz"
@@ -102,6 +109,13 @@ include = ["**/*.otf", "**/*.ttf"]
 [".local/share/fonts/Tinos"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Tinos.tar.xz"
+exact = true
+refreshPeriod = "168h"
+include = ["**/*.otf", "**/*.ttf"]
+
+[".local/share/fonts/VictorMono"]
+type = "archive"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/VictorMono.tar.xz"
 exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
