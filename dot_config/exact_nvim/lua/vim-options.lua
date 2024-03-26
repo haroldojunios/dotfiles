@@ -35,7 +35,7 @@ vim.wo.number = true
 vim.wo.colorcolumn = "80"
 
 vim.keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>i", { silent = true })
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>gi", { silent = true })
 
 vim.keymap.set(
   { "n", "v" },

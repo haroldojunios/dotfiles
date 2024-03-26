@@ -31,7 +31,28 @@ return {
     "echasnovski/mini.sessions",
     version = false,
     config = function()
-      require("mini.sessions").setup({ autoread = true })
+      require("mini.sessions").setup({ autowrite = false })
+      if next(vim.fn.argv()) == nil then
+        local session_name = vim.loop.cwd():gsub("/", "_")
+        local session_file = vim.fn.stdpath("data")
+          .. "/session/"
+          .. session_name
+        if vim.loop.fs_stat(session_file) then
+          MiniSessions.read(session_name)
+        end
+
+        local autowrite = function()
+          -- -- write session with default name even if not currently in session
+          -- if vim.v.this_session == "" then
+          --   session_name = vim.loop.cwd():gsub("/", "_")
+          -- end
+          MiniSessions.write(session_name, { force = true })
+        end
+        vim.api.nvim_create_autocmd(
+          "VimLeavePre",
+          { callback = autowrite, desc = "Autowrite session" }
+        )
+      end
     end,
   },
   {
