@@ -176,6 +176,7 @@ dePackageList=(
   gimp
   inkscape
   keepassxc
+  kitty
   mpv
   obsidian
   onlyoffice-bin
