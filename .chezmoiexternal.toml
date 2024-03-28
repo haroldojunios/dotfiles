@@ -92,13 +92,6 @@ exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
 
-[".local/share/fonts/Iosevka"]
-type = "archive"
-url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
-exact = true
-refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
-
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz"
@@ -139,8 +132,8 @@ refreshPeriod = "168h"
 {{ if eq .osid "android" }}
 [".termux/font.ttf"]
 type = "archive-file"
-url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz"
-path = "FiraCodeNerdFont-Regular.ttf"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz"
+path = "IosevkaTermNerdFont-Regular.ttf"
 refreshPeriod = "168h"
 
 {{   if .installDE }}

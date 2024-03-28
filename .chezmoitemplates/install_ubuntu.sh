@@ -167,6 +167,7 @@ dePackageList=(
   calibre
   {{ end }}
   code
+  fontforge
   gimp
   gparted
   inkscape

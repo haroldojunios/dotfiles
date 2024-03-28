@@ -7,6 +7,19 @@
 set -eu
 
 {{ if ne .osid "android" }}
+IOSEVKA_VER=$(curl --silent "https://api.github.com/repos/be5invis/Iosevka/releases/latest" | jq -r .tag_name | tr -d v)
+if ! [ -f "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" ] ||
+  command -v fontforge &>/dev/null &&
+  ! fontforge -lang=ff -c 'Open($1);Print($fontversion)' "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" 2>/dev/null | grep -q "${IOSEVKA_VER}"; then
+  TMP_DIR=$(mktemp -d)
+  trap 'rm -rf "${TMP_DIR}"' EXIT
+
+  wget -O "${TMP_DIR}/iosevka.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-Iosevka-${IOSEVKA_VER}.zip"
+  wget -O "${TMP_DIR}/iosevka-term.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-IosevkaTerm-${IOSEVKA_VER}.zip"
+  unzip -o "${TMP_DIR}/iosevka.zip" -d "${HOME}/.local/share/fonts/Iosevka"
+  unzip -o "${TMP_DIR}/iosevka-term.zip" -d "${HOME}/.local/share/fonts/IosevkaTerm"
+fi
+
 sudo mkdir -p /usr/local/share/fonts
 
 find "${HOME}/.local/share/fonts" -mindepth 1 -maxdepth 1 -type d | while IFS= read -r d; do
