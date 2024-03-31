@@ -175,6 +175,19 @@ if test -f ~/.config/.env.local
     end <~/.config/.env.local
 end
 
+# fish theme
+if test -f ~/.config/fish/themes/catppuccin.theme
+    fish_config theme choose catppuccin
+end
+
+# lazygit theme
+if type -q lazygit
+    set -l lazygit_config_dir "$(lazygit --print-config-dir)"
+    set -l lazygit_config_path "$lazygit_config_dir/config.yml"
+    set -l lazygit_theme_path "$lazygit_config_dir/catppuccin.yml"
+    set -x LG_CONFIG_FILE "$lazygit_config_path,$lazygit_theme_path"
+end
+
 ## Mcfly history
 if status --is-interactive && type -q mcfly
     mcfly init fish | source

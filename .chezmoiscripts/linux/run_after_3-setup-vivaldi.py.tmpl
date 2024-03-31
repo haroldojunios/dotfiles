@@ -19,6 +19,7 @@ with default_prefs_path.open() as f:
     default_prefs = json.load(f)
 
 if not prefs_path.exists():
+    prefs_path.parent.mkdir(exist_ok=True, parents=True)
     with prefs_path.open("w", encoding="utf-8") as f:
         json.dump(default_prefs, f, ensure_ascii=False)
 

@@ -73,12 +73,13 @@ fi
 {{    end }}
 
 # sddm
-if [ -f /etc/sddm.conf ]; then
-  if ! grep Numlock /etc/sddm.conf | grep on &>/dev/null; then
-    if command -v crudini &>/dev/null; then
-      sudo crudini --set /etc/sddm.conf General Numlock on
-    fi
-  fi
+if ! [ -f /etc/sddm.conf ]; then
+  sudo touch /etc/sddm.conf
+fi
+
+if command -v crudini &>/dev/null; then
+  sudo crudini --set /etc/sddm.conf General Numlock on
+  sudo crudini --set /etc/sddm.conf General InputMethod ""
 fi
 
 if ! [ -f /usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf ] && [ -f /usr/share/alsa-card-profile/mixer/profile-sets/default.conf ]; then

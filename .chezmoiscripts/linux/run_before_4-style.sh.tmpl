@@ -11,8 +11,8 @@ trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
 {{ if and (not .isWSL) (ne .osid "android") (.installDE) }}
 # theme
-if ! [ -d /usr/share/themes/sweet ] && command -v crudini &>/dev/null; then
-  sudo mkdir -p /usr/share/icons
+if ! [ -d "${HOME}/.local/share/plasma/desktoptheme/Sweet" ]; then
+  mkdir -p "${HOME}/.local/share/icons"
   git -C "${TEMP_FOLDER}" clone --depth 1 -b nova https://github.com/EliverLara/sweet
   (
     cd "${TEMP_FOLDER}/sweet/kde"
@@ -28,36 +28,42 @@ if ! [ -d /usr/share/themes/sweet ] && command -v crudini &>/dev/null; then
     mv sddm-Sweet sddm/themes/Sweet
 
     # cursors
-    sudo rm -r /usr/share/icons/Sweet-cursors &>/dev/null || :
-    sudo mv cursors/Sweet-cursors /usr/share/icons
+    cp -af cursors/Sweet-cursors "${HOME}/.local/share/icons"
 
     # kvantum
-    sudo cp -r Kvantum /usr/share
-
-    # GTK
-    sudo mkdir -p /usr/share/themes/sweet
-    sudo cp -a * /usr/share/themes/sweet
+    cp -af Kvantum "${HOME}/.local/share"
 
     # KDE theme
-    sudo cp -r aurorae /usr/share
-    sudo cp -r color-schemes /usr/share
-    sudo cp -r konsole /usr/share
-    sudo cp -r plasma /usr/share
-    sudo cp -r sddm /usr/share
+    cp -af aurorae "${HOME}/.local/share"
+    cp -af color-schemes "${HOME}/.local/share"
+    cp -af konsole "${HOME}/.local/share"
+    cp -af plasma "${HOME}/.local/share"
+    sudo cp -af sddm /usr/share
   )
 
-  sudo mkdir -p /usr/share/plasma/desktoptheme/Sweet
+  sudo mkdir -p "${HOME}/.local/share/plasma/desktoptheme/Sweet"
   git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/EliverLara/sweet-kde
-  sudo cp -r "${TEMP_FOLDER}/sweet-kde"/* /usr/share/plasma/desktoptheme/Sweet
+  sudo cp -af "${TEMP_FOLDER}/sweet-kde"/* "${HOME}/.local/share/plasma/desktoptheme/Sweet"
+fi
 
-  # apply config
-  if [ -f /etc/sddm.conf ]; then
-    sudo crudini --set /etc/sddm.conf Theme Current Sweet
-  fi
-  sudo mkdir -p /var/lib/AccountsService/icons
-  # sudo cp "$SCRIPT_FOLDER/assets/avatar.png" "/var/lib/AccountsService/icons/$USER"
+if ! [ -d "${HOME}/.local/share/plasma/look-and-feel/Catppuccin-Mocha-Lavender" ]; then
+  git clone https://github.com/catppuccin/kde "${TEMP_FOLDER}/catppuccin-kde"
+  (
+    cd "${TEMP_FOLDER}/catppuccin-kde"
+    if command -v plasmashell &>/dev/null && plasmashell --version | grep -q "plasmashell 5"; then
+      git checkout v0.2.5 &>/dev/null
+    fi
+    yes | ./install.sh 1 14 1 || : # Catppuccin-Mocha-Lavender
+  )
+fi
 
-  # killall plasmashell && kstart plasmashell
+if ! [ -d /usr/share/sddm/themes/catppuccin-mocha ]; then
+  wget -O "${TEMP_FOLDER}/catppuccin-mocha.zip" https://github.com/catppuccin/sddm/releases/latest/download/catppuccin-mocha.zip
+  (
+    cd "${TEMP_FOLDER}"
+    unzip catppuccin-mocha.zip
+    sudo mv catppuccin-mocha /usr/share/sddm/themes
+  )
 fi
 
 # blur
@@ -104,25 +110,24 @@ if ! [ -d /usr/share/plasma/plasmoids/org.kde.windowtitle ]; then
   )
 fi
 
-# wallpaper
-if ! [ -f /usr/share/wallpapers/Shani.png ]; then
-  sudo cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" /usr/share/wallpapers
-fi
+# # wallpaper
+# if ! [ -f /usr/share/wallpapers/Shani.png ]; then
+#   sudo cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" /usr/share/wallpapers
+# fi
 
 # apply
 if [[ "$(tty)" == /dev/pts/* ]]; then
-  lookandfeeltool -a Sweet &>/dev/null || :
+  lookandfeeltool -a Catppuccin-Mocha-Lavender &>/dev/null || :
 
   { command -v plasma-changeicons &>/dev/null && plasma-changeicons beautyline &>/dev/null; } ||
     { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons beautyline &>/dev/null; } &>/dev/null ||
     { [ -x /usr/lib/plasma-changeicons ] && /usr/lib/plasma-changeicons beautyline &>/dev/null; } &>/dev/null || :
 
+  if ! [ -f /etc/sddm.conf ]; then
+    sudo touch /etc/sddm.conf
+  fi
+  sudo crudini --set /etc/sddm.conf Theme Current catppuccin-mocha
+
   plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null || :
-fi
-{{ else if and (eq .osid "android") (.installDE) }}
-# wallpaper
-if ! [ -f "${PREFIX}/usr/share/wallpapers/Shani.png" ]; then
-  mkdir -p "${PREFIX}/usr/share/wallpapers"
-  cp "{{ .chezmoi.sourceDir }}/assets/Shani.png" "${PREFIX}/usr/share/wallpapers"
 fi
 {{ end }}

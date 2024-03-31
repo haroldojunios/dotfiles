@@ -180,8 +180,10 @@ dePackageList=(
   mpv
   obsidian
   onlyoffice-bin
+  qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
+  qt6-svg
   visual-studio-code-bin
   xournalpp
   {{ if ne .chezmoi.osRelease.id "archarm" }}

@@ -3,20 +3,21 @@
     "retention_policy_last_version": 122
   },
   "autofill": {
-    "last_version_deduped": 122
+    "last_version_deduped": 120
   },
   "browser": {
     "has_seen_welcome_page": true,
+    "show_home_button": false,
     "window_placement": {
       "bottom": 1080,
       "left": 0,
       "maximized": true,
-      "right": 2560,
-      "top": 20,
+      "right": 1920,
+      "top": 27,
       "work_area_bottom": 1080,
       "work_area_left": 0,
-      "work_area_right": 2560,
-      "work_area_top": 20
+      "work_area_right": 1920,
+      "work_area_top": 27
     },
     "window_placement_popup": {
       "bottom": 812,
@@ -103,6 +104,12 @@
     },
     "bookmarks": {
       "language": "en-US",
+      "manager": {
+        "sorting": {
+          "sortField": "manually",
+          "sortOrder": 1
+        }
+      },
       "panel": {
         "sorting": {
           "sortField": "manually",
@@ -322,16 +329,12 @@
     },
     "theme": {
       "schedule": {
-        "enabled": 0,
-        "o_s": {
-          "dark": "46bbb90a-4962-4c13-b2e0-382078385f48",
-          "light": "46bbb90a-4962-4c13-b2e0-382078385f48"
-        }
+        "enabled": 0
       }
     },
     "themes": {
-      "current": "46bbb90a-4962-4c13-b2e0-382078385f48",
-      "current_private": "Vivaldi9",
+      "current": "e109156c-896a-481e-88bd-08d951528faf",
+      "current_private": "b4990849-09fc-42ae-9d3c-c6b7923ecab4",
       "system": [
         {
           "accentFromPage": true,
@@ -598,6 +601,107 @@
           "simpleScrollbar": false,
           "transparencyTabBar": true,
           "transparencyTabs": true,
+          "url": "",
+          "version": 1
+        },
+        {
+          "accentFromPage": false,
+          "accentOnWindow": true,
+          "accentSaturationLimit": 1,
+          "alpha": 0.92,
+          "backgroundImage": "",
+          "backgroundPosition": "stretch",
+          "blur": 5,
+          "colorAccentBg": "#B4BEFE",
+          "colorBg": "#1E1E2E",
+          "colorFg": "#CDD6F4",
+          "colorHighlightBg": "#B4BEFE",
+          "colorWindowBg": "#181825",
+          "contrast": 0,
+          "dimBlurred": false,
+          "engineVersion": 1,
+          "id": "e109156c-896a-481e-88bd-08d951528faf",
+          "name": "Catppuccin Mocha Lavender",
+          "preferSystemAccent": false,
+          "radius": 4,
+          "simpleScrollbar": false,
+          "transparencyTabBar": false,
+          "transparencyTabs": false,
+          "url": "",
+          "version": 1
+        },
+        {
+          "accentFromPage": false,
+          "accentOnWindow": true,
+          "accentSaturationLimit": 1,
+          "alpha": 0.92,
+          "backgroundPosition": "stretch",
+          "blur": 5,
+          "colorAccentBg": "#CBA6F7",
+          "colorBg": "#1E1E2E",
+          "colorFg": "#CDD6F4",
+          "colorHighlightBg": "#CBA6F7",
+          "colorWindowBg": "#181825",
+          "contrast": 0,
+          "dimBlurred": false,
+          "engineVersion": 1,
+          "id": "bc5eb187-13fd-493d-b1a2-372817b04a67",
+          "name": "Catppuccin Mocha Mauve",
+          "preferSystemAccent": false,
+          "radius": 4,
+          "simpleScrollbar": false,
+          "transparencyTabBar": false,
+          "transparencyTabs": false,
+          "url": "",
+          "version": 1
+        },
+        {
+          "accentFromPage": false,
+          "accentOnWindow": true,
+          "accentSaturationLimit": 1,
+          "alpha": 0.92,
+          "backgroundPosition": "stretch",
+          "blur": 5,
+          "colorAccentBg": "#FAB387",
+          "colorBg": "#1E1E2E",
+          "colorFg": "#CDD6F4",
+          "colorHighlightBg": "#FAB387",
+          "colorWindowBg": "#181825",
+          "contrast": 0,
+          "dimBlurred": false,
+          "engineVersion": 1,
+          "id": "bab8a05c-39af-43dd-9edc-01fd0dce3eb9",
+          "name": "Catppuccin Mocha Peach",
+          "preferSystemAccent": false,
+          "radius": 4,
+          "simpleScrollbar": false,
+          "transparencyTabBar": false,
+          "transparencyTabs": false,
+          "url": "",
+          "version": 1
+        },
+        {
+          "accentFromPage": false,
+          "accentOnWindow": true,
+          "accentSaturationLimit": 1,
+          "alpha": 0.92,
+          "backgroundPosition": "stretch",
+          "blur": 5,
+          "colorAccentBg": "#F38BA8",
+          "colorBg": "#1E1E2E",
+          "colorFg": "#CDD6F4",
+          "colorHighlightBg": "#F38BA8",
+          "colorWindowBg": "#181825",
+          "contrast": 0,
+          "dimBlurred": false,
+          "engineVersion": 1,
+          "id": "b4990849-09fc-42ae-9d3c-c6b7923ecab4",
+          "name": "Catppuccin Mocha Red",
+          "preferSystemAccent": false,
+          "radius": 4,
+          "simpleScrollbar": false,
+          "transparencyTabBar": false,
+          "transparencyTabs": false,
           "url": "",
           "version": 1
         }

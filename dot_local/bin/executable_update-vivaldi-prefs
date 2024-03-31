@@ -25,5 +25,5 @@ for pref in default_prefs:
         else:
             default_prefs[pref] = prefs[pref]
 
-with prefs_path.open("w", encoding="utf-8") as f:
-    json.dump(prefs, f, indent=2, ensure_ascii=False)
+with default_prefs_path.open("w", encoding="utf-8") as f:
+    json.dump(default_prefs, f, indent=2, ensure_ascii=False)

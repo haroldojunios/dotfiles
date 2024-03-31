@@ -1,61 +1,68 @@
-{{ if and (ne .osid "windows") (.installDE) }}
+{{ if ne .osid "windows" }}
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
 refreshPeriod = "168h"
 
-[".local/share/fonts/FiraSans"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Fira%20Sans"
-exact = true
-refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/Lato"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Lato"
-exact = true
-refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/Montserrat"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Montserrat"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/NotoColorEmoji"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
-exact = true
-refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/Nunito"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Nunito"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/Quicksand"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Quicksand"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-include = ["**/*.otf", "**/*.ttf"]
-
-[".local/share/fonts/Raleway"]
-type = "archive"
-url = "https://fonts.google.com/download?family=Raleway"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-include = ["**/*.otf", "**/*.ttf"]
+# [".local/share/fonts/FiraSans"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Fira%20Sans"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/Lato"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Lato"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/Montserrat"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Montserrat"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# stripComponents = 1
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/NotoColorEmoji"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Noto%20Color%20Emoji"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/Nunito"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Nunito"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# stripComponents = 1
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/Quicksand"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Quicksand"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# stripComponents = 1
+# include = ["**/*.otf", "**/*.ttf"]
+#
+# [".local/share/fonts/Raleway"]
+# type = "archive"
+# url = "https://fonts.google.com/download?family=Raleway"
+# exact = true
+# format = "zip"
+# refreshPeriod = "168h"
+# stripComponents = 1
+# include = ["**/*.otf", "**/*.ttf"]
 
 [".local/share/fonts/Arimo"]
 type = "archive"
@@ -112,6 +119,35 @@ url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/VictorMo
 exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
+
+{{   if .installDE }}
+[".local/share/icons/beautyline"]
+type = "archive"
+url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+
+[".config/fish/themes/catppuccin.theme"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/fish/main/themes/Catppuccin%20Mocha.theme"
+refreshPeriod = "168h"
+
+[".config/kitty/catppuccin.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
+refreshPeriod = "168h"
+
+[".config/lazygit/catppuccin.yml"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes-mergable/mocha/mauve.yml"
+refreshPeriod = "168h"
+
+[".config/bat/themes/Catppuccin Mocha.tmTheme"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin%20Mocha.tmTheme"
+refreshPeriod = "168h"
+{{   end }}
 {{ end }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
@@ -144,13 +180,5 @@ exact = true
 refreshPeriod = "168h"
 stripComponents = 1
 include = ["*/xfwm4/**", "*/gtk-*/**"]
-
-[".local/share/icons/beautyline"]
-type = "archive"
-url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
 {{   end }}
-
 {{ end }}

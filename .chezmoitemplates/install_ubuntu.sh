@@ -172,7 +172,10 @@ dePackageList=(
   gparted
   inkscape
   keepassxc
+  libqt6svg6
   onlyoffice-desktopeditors
+  qml-module-qtquick-controls2
+  qml-module-qtquick-layouts
   vivaldi-stable
   xournalpp
   xserver-xorg-video-dummy
