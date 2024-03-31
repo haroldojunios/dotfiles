@@ -65,6 +65,7 @@ return {
           "cmake_format",
           "codespell",
           "fixjson",
+          "hadolint",
           "isort",
           "latexindent",
           "markdownlint",
