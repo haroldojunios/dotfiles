@@ -1,58 +1,70 @@
 return {
   {
-    "olimorris/onedarkpro.nvim",
+    "catppuccin/nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("onedarkpro").setup({
-        -- highlights = {
-        --   Comment = { italic = true },
-        --   Directory = { bold = true },
-        --   ErrorMsg = { italic = true, bold = true },
-        -- },
-        highlights = {
-          Identifier = { fg = "${fg}" },
-        },
+      require("catppuccin").setup({
         styles = {
-          types = "NONE",
-          methods = "NONE",
-          numbers = "NONE",
-          strings = "NONE",
-          comments = "italic",
-          keywords = "bold,italic",
-          constants = "NONE",
-          functions = "italic",
-          operators = "NONE",
-          variables = "NONE",
-          parameters = "NONE",
-          conditionals = "italic",
-          virtual_text = "NONE",
+          functions = { "italic" },
         },
-        colors = {
-          bg = "#161926", -- add 1 to get opaque bg
-          fg = "#c3c7d1",
-          black = "#282c34",
-          blue = "#7cb7ff",
-          cyan = "#00c1e4",
-          gray = "#5c6370",
-          green = "#71f79f",
-          orange = "#ff6a00",
-          purple = "#c74ded",
-          red = "#ed254e",
-          white = "#dcdfe4",
-          yellow = "#f9dc5c",
-          comment = "#828997",
-          highlight = "#5c6370",
-        },
-        options = {
-          cursorline = true,
-          terminal_colors = false,
-          highlight_inactive_windows = true,
+        integrations = {
+          mason = true,
+          neotree = true,
+          noice = true,
+          lsp_trouble = true,
+          which_key = true,
         },
       })
-      vim.cmd.colorscheme("onedark")
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
+  -- {
+  --   "olimorris/onedarkpro.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("onedarkpro").setup({
+  --       styles = {
+  --         types = "NONE",
+  --         methods = "NONE",
+  --         numbers = "NONE",
+  --         strings = "NONE",
+  --         comments = "italic",
+  --         keywords = "bold,italic",
+  --         constants = "NONE",
+  --         functions = "italic",
+  --         operators = "NONE",
+  --         variables = "NONE",
+  --         parameters = "NONE",
+  --         conditionals = "italic",
+  --         virtual_text = "NONE",
+  --       },
+  --       colors = {
+  --         bg = "#161926", -- add 1 to get opaque bg
+  --         fg = "#c3c7d1",
+  --         black = "#282c34",
+  --         blue = "#7cb7ff",
+  --         cyan = "#00c1e4",
+  --         gray = "#5c6370",
+  --         green = "#71f79f",
+  --         orange = "#ff6a00",
+  --         purple = "#c74ded",
+  --         red = "#ed254e",
+  --         white = "#dcdfe4",
+  --         yellow = "#f9dc5c",
+  --         comment = "#828997",
+  --         highlight = "#5c6370",
+  --       },
+  --       options = {
+  --         cursorline = true,
+  --         terminal_colors = false,
+  --         highlight_inactive_windows = true,
+  --       },
+  --     })
+  --     vim.cmd.colorscheme("onedark")
+  --   end,
+  -- },
   -- {
   --   "svermeulen/text-to-colorscheme.nvim",
   --   lazy = false,
