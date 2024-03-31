@@ -16,8 +16,40 @@ if ! [ -f "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" ] ||
 
   wget -O "${TMP_DIR}/iosevka.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-Iosevka-${IOSEVKA_VER}.zip"
   wget -O "${TMP_DIR}/iosevka-term.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-IosevkaTerm-${IOSEVKA_VER}.zip"
+  mkdir -p "${HOME}/.local/share/fonts"
   unzip -o "${TMP_DIR}/iosevka.zip" -d "${HOME}/.local/share/fonts/Iosevka"
   unzip -o "${TMP_DIR}/iosevka-term.zip" -d "${HOME}/.local/share/fonts/IosevkaTerm"
+fi
+
+if command -v fnt &>/dev/null; then
+  sudo sed -i 's@target="$HOME/.fonts/"@target="$HOME/.local/share/fonts/fnt/"@' "$(command -v fnt)"
+  if ! [ -f "${HOME}/.fnt/Packages.xz" ]; then
+    fnt update &>/dev/null
+  fi
+
+  fonts_installed_list="$(ls -1 "${HOME}/.local/share/fonts/fnt" | tr '\n' ' ')"
+  font_list=(
+    arimo
+    cousine
+    firacode
+    firamono
+    firasans
+    hack
+    lato
+    montserrat
+    notocoloremoji
+    nunito
+    quicksand
+    raleway
+    tinos
+    victormono
+  )
+
+  for font in "${font_list[@]}"; do
+    if ! echo "${fonts_installed_list}" | grep -qi "${font}"; then
+      fnt install "${font}"
+    fi
+  done
 fi
 
 sudo mkdir -p /usr/local/share/fonts
@@ -28,4 +60,7 @@ find "${HOME}/.local/share/fonts" -mindepth 1 -maxdepth 1 -type d | while IFS= r
     sudo ln -s "${d}" "/usr/local/share/fonts/${font}"
   fi
 done
+
+# remove broken symlinks
+sudo find /usr/local/share/fonts -type l ! -exec test -e {} \; -delete
 {{ end }}

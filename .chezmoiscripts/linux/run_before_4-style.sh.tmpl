@@ -66,6 +66,11 @@ if ! [ -d /usr/share/sddm/themes/catppuccin-mocha ]; then
   )
 fi
 
+if command -v crudini &>/dev/null && ! [ -f /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user ]; then
+  sudo touch /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user
+  sudo crudini --set /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user General Font '"Iosevka"'
+fi
+
 # blur
 if [ ! -d /usr/share/kwin/scripts/forceblur ]; then
   git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/esjeon/kwin-forceblur

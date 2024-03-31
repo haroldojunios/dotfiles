@@ -102,6 +102,9 @@ if ! [ -f /etc/apt/sources.list.d/onlyoffice.list ]; then
   sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
 
   sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" > /etc/apt/sources.list.d/onlyoffice.list'
+
+  # remove prompt to accept licences
+  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 fi
 
 # nodejs repo
@@ -222,6 +225,7 @@ packageList=(
   eza
   ffmpeg
   fish
+  fnt
   git
   hwinfo
   ghostscript
