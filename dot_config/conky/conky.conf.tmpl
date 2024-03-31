@@ -22,7 +22,7 @@ conky.config = {
     draw_outline = false,
     draw_shades = false,
     extra_newline = false,
-    font = 'IosevkaTerm Nerd Font:size=9',
+    font = 'IosevkaTerm Nerd Font:size=10',
     gap_x = 20,
     gap_y = 0,
     minimum_height = 250,
@@ -54,6 +54,7 @@ conky.config = {
     use_xft = true,
 }
 
+{{- $symbols_font := "IosevkaTerm Nerd Font:size=20" }}
 {{- $interface := (output "ip" "-4" "route" "ls" | regexFind "^default.*" | split " ")._4 }}
 {{- $isWifi := stat (joinPath "/sys/class/net/" $interface "wireless") }}
 {{- $nproc := output "nproc" | trim | int }}
@@ -72,11 +73,11 @@ conky.config = {
 {{- end }}
 
 conky.text = [[
-${color1}${font IosevkaTerm Nerd Font:size=18}{{ $distroIcon }} ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}}{{ $distroIcon }} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}OS: ${goto 88}${color}${execi 86400 cat `ls -atr /etc/*-release | tail -2` | grep "PRETTY_NAME" | cut -d= -f2 |  sed 's/"//g'}
 ${color1}${goto 35}Kernel: ${goto 88}${color}$kernel on $machine
 
-${color1}${font IosevkaTerm Nerd Font:size=18}{{ $cpuIcon }} ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}}{{ $cpuIcon }} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU: ${goto 70}${color}${execi 86400 cat /proc/cpuinfo | grep 'model name' | head -n1 | awk '{gsub(/model.*: /,"");print}'}
 ${color1}${goto 35}GPU: ${goto 70}${color}${execi 86400 lspci | grep -i 'vga' | awk '{gsub(/.*\[/,"");print}' | awk '{gsub(/\].*/,"");print}'}
 
@@ -89,14 +90,14 @@ ${color1}${goto 35}CPU {{ add1 $i }}: ${goto 85}${color}${freq_g {{ add1 $i }}}G
 
 ${color1}${goto 35}Uptime: ${color}$uptime_short ${alignr}${color1}Load: ${color}${loadavg}
 
-${color1}${font IosevkaTerm Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU: ${color}${exec get-hardware-temp cpu} ${alignr}${color1}GPU: ${color}${exec get-hardware-temp gpu} ${alignr}
 
-${color1}${font IosevkaTerm Nerd Font:size=18}󰍛 ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}}󰍛 ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}RAM:  ${color}$mem/$memmax ${alignr}$memperc% ${membar 4,100}
 ${color1}${goto 35}SWAP: ${color}$swap/$swapmax ${alignr}$swapperc% ${swapbar 4,100}
 
-${color1}${font IosevkaTerm Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}} ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}CPU usage ${alignr}Memory Usage${color}
 ${color1}${goto 35}${stippled_hr}${color}
 {{- range $i := untilStep 1 11 1 }}
@@ -104,11 +105,11 @@ ${goto 35}${top name {{$i}}} ${color}${top cpu {{$i}}}% ${alignr}${top_mem name 
 {{- end }}
 ${color1}${goto 35}Processes: ${color}$processes ${color1}Running: ${color}$running_processes
 
-${color1}${font IosevkaTerm Nerd Font:size=18}󰋊 ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}}󰋊 ${font} ${voffset -22} $hr${color}
 ${color1}${goto 35}ROOT: ${color}${fs_used /}/${fs_size /} ${alignr}${fs_used_perc /}% ${fs_bar 4,100 /}
 # ${color1}${goto 35}HOME: ${color}${fs_used /home}/${fs_size /home} ${alignr}${fs_used_perc /home}% ${fs_bar 4,100 /home}
 
-${color1}${font IosevkaTerm Nerd Font:size=18}󰛳 ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}}󰛳 ${font} ${voffset -22} $hr${color}
 {{- if $isWifi }}
 ${color1}${goto 35}SSID: ${color}${wireless_essid {{ $interface }}} ${color1}${alignr}Bitrate: ${alignr}${color}${wireless_bitrate {{ $interface }}}
 ${color1}${goto 35}Signal: ${alignr}${color}${wireless_link_qual_perc {{ $interface }}}% ${wireless_link_bar 4,150 {{ $interface }}}
@@ -119,7 +120,7 @@ ${color1}${voffset 8}${goto 35}Speed Down: ${alignr}${color}${downspeed {{ $inte
 ${voffset -12}
 ${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}B/s${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 
-${color1}${font IosevkaTerm Nerd Font:size=18} ${font} ${voffset -22} $hr${color}
+${color1}${font {{ $symbols_font }}} ${font} ${voffset -22} $hr${color}
 #${voffset 70}
 ${execp jq -r '.weather_summary' ${HOME}/.cache/weather | tr ',' '\n' | tr ':' '\n' | sed 's/^/${goto 35}/'}
 ${voffset -45}
