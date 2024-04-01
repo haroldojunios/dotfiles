@@ -36,11 +36,9 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # kscreenlockerrc
   kwriteconfig5 --file kscreenlockerrc --group Daemon --key Autolock false
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kscreenlockerrc" --group Greeter --key Theme Catppuccin-Mocha-Lavender
 
   # ksplashrc
   kwriteconfig5 --file ksplashrc --group KSplash --key Theme Catppuccin-Mocha-Lavender
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/ksplashrc" --group KSplash --key Theme Catppuccin-Mocha-Lavender
 
   # okularpartrc
   kwriteconfig5 --file okularpartrc --group General --key ShellOpenFileInTabs true
@@ -48,7 +46,6 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
 
   # kwinrc
   kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kwinrc" --group org.kde.kdecoration2 --key theme __aurorae__svg__CatppuccinMocha-Modern
 
   # kdeglobals
   kwriteconfig5 --file kdeglobals --group General --key fixed "Iosevka Term,9.5,-1,5,50,0,0,0,0,0"
@@ -67,18 +64,12 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file kdeglobals --group Icons --key Theme beautyline
   kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage Catppuccin-Mocha-Lavender
   kwriteconfig5 --file kdeglobals --group KDE --key SingleClick false
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group General --key ColorScheme CatppuccinMochaLavender
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group Icons --key Theme beautyline
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/kdeglobals" --group KDE --key widgetStyle kvantum
 
   # ksplash
   kwriteconfig5 --file ksplashrc --group KSplash --key Theme Catppuccin-Mocha-Lavender-splash
 
   # ksmserverrc
   kwriteconfig5 --file ksmserverrc --group General --key loginMode emptySession
-
-  # plasmarc
-  kwriteconfig5 --file "${HOME}/.config/kdedefaults/plasmarc" --group Theme --key name lightly-plasma-git
 
   # gtk
   kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "Iosevka,  10"
