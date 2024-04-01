@@ -1,6 +1,6 @@
 [Appearance]
-ColorScheme=Sweet
-Font=FiraCode Nerd Font,9,-1,5,50,0,0,0,0,0
+ColorScheme=Catppuccin-Mocha
+Font=Iosevka Term,9.5,-1,5,50,0,0,0,0,0
 UseFontLineChararacters=true
 
 [Cursor Options]
