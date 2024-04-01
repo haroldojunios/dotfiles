@@ -27,7 +27,9 @@ if command -v fnt &>/dev/null; then
     fnt update &>/dev/null
   fi
 
+  mkdir -p "${HOME}/.local/share/fonts/fnt"
   fonts_installed_list="$(ls -1 "${HOME}/.local/share/fonts/fnt" | tr '\n' ' ')"
+
   font_list=(
     arimo
     cousine
