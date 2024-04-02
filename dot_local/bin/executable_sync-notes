@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# if ! [ -d "${HOME}/Documents/notes" ]; then
+#   git -C "${HOME}/Documents" clone git@github.com:haroldojunios/notes.git
+# else
+#   git -C "${HOME}/Documents" pull --rebase --autostash
+# fi
+
+rclone_bisync_cache_path="${HOME}/.cache/rclone/bisync"
+rclone_bisync_listing1="home_${USER}_Documents_notes..onedrive_Documents_notes.path1.lst"
+rclone_bisync_listing2="home_${USER}_Documents_notes..onedrive_Documents_notes.path2.lst"
+path1="${HOME}/Documents/notes"
+path2="onedrive:Documents/notes"
+
+resync_flag=
+if ! [ -f "${rclone_bisync_cache_path}/${rclone_bisync_listing1}" ] ||
+  ! [ -f "${rclone_bisync_cache_path}/${rclone_bisync_listing2}" ]; then
+  echo "resyncing..."
+  resync_flag="--resync"
+fi
+rclone bisync "${path1}" "${path2}" \
+  --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case ${resync_flag}
