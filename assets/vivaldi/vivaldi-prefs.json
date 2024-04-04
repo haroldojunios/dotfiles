@@ -13,11 +13,11 @@
       "left": 0,
       "maximized": true,
       "right": 1920,
-      "top": 27,
+      "top": 32,
       "work_area_bottom": 1080,
       "work_area_left": 0,
       "work_area_right": 1920,
-      "work_area_top": 27
+      "work_area_top": 20
     },
     "window_placement_popup": {
       "bottom": 812,
@@ -51,9 +51,6 @@
     "accept_languages": "en-US,en,pt-BR",
     "selected_languages": "en-US,en,pt-BR"
   },
-  "savefile": {
-    "default_directory": "/home/rt04/Downloads"
-  },
   "segmentation_platform": {
     "client_result_prefs": "CuUCChFjcm9zc19kZXZpY2VfdXNlchLPAgrDAg0AAIA/EO/kwOzlm9wXGrACCqcCGqQCChkNAACAPxISTm9Dcm9zc0RldmljZVVzYWdlChgNAAAAQBIRQ3Jvc3NEZXZpY2VNb2JpbGUKGQ0AAEBAEhJDcm9zc0RldmljZURlc2t0b3AKGA0AAIBAEhFDcm9zc0RldmljZVRhYmxldAoiDQAAoEASG0Nyb3NzRGV2aWNlTW9iaWxlQW5kRGVza3RvcAohDQAAwEASGkNyb3NzRGV2aWNlTW9iaWxlQW5kVGFibGV0CiINAADgQBIbQ3Jvc3NEZXZpY2VEZXNrdG9wQW5kVGFibGV0CiANAAAAQRIZQ3Jvc3NEZXZpY2VBbGxEZXZpY2VUeXBlcwoXDQAAEEESEENyb3NzRGV2aWNlT3RoZXISEk5vQ3Jvc3NEZXZpY2VVc2FnZRIEEAcYBCACEN3mwOzlm9wXClIKDXNob3BwaW5nX3VzZXISQQo2DQAAAAAQxuPA7OWb3BcaJAocChoNAAAAPxIMU2hvcHBpbmdVc2VyGgVPdGhlchIEEAcYBCACENTlwOzlm9wX",
     "device_switcher_util": {
@@ -86,6 +83,7 @@
         "render_in_dropdown": true,
         "show_all_toggle": true
       },
+      "highlight_base_domain": true,
       "inline_search": {
         "enabled": true,
         "suggest_enabled": true
@@ -96,13 +94,23 @@
         "show_favicon": true,
         "show_keyword": true
       },
-      "show_full_url": false,
-      "show_qr_generator": true
+      "show_full_url": true,
+      "show_qr_generator": true,
+      "url_open_shortcut": 1
     },
     "appearance": {
-      "disable_title_bar": true
+      "disable_title_bar": true,
+      "range_buttons": false
     },
     "bookmarks": {
+      "bar": {
+        "sorting": {
+          "sortField": "manually",
+          "sortOrder": 1
+        },
+        "visible": false
+      },
+      "confirm_adding": true,
       "language": "en-US",
       "manager": {
         "sorting": {
@@ -240,7 +248,7 @@
       "as_overlay": {
         "enabled": true
       },
-      "position": 1,
+      "position": 0,
       "show_close_button": true,
       "show_toggle": false,
       "web": {
@@ -273,7 +281,7 @@
         ]
       },
       "window_defaults": {
-        "barVisible": true,
+        "barVisible": false,
         "panelVisible": false,
         "selectedPanel": "PanelDownloads",
         "width": 400
@@ -284,6 +292,7 @@
     },
     "settings": {
       "in_tab": true,
+      "mono_icons": false,
       "size": {
         "height": 800,
         "left": 509,
@@ -311,6 +320,7 @@
       "close_button_left": false,
       "close_button_permanent": false,
       "counter_detection": true,
+      "cycle_by_recent_order": false,
       "defer_loading_after_restore": false,
       "dim_hibernated": false,
       "horizontal_scrolling": false,
@@ -325,12 +335,17 @@
         "open_accordions": [],
         "prefer_dotted": false
       },
-      "unread": true
+      "unread": true,
+      "visual_switch": {
+        "enable": false
+      }
     },
     "theme": {
       "schedule": {
         "enabled": 0
-      }
+      },
+      "simple_scrollbar": true,
+      "use_animation": true
     },
     "themes": {
       "current": "e109156c-896a-481e-88bd-08d951528faf",
