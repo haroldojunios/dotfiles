@@ -1,10 +1,3 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.cmd("set foldmethod=indent")
-vim.cmd("set nofoldenable")
-
 -- change leader key to space
 vim.g.mapleader = " "
 
@@ -15,14 +8,27 @@ vim.g.loaded_netrwPlugin = 1
 -- enable 24-bit colour
 vim.opt.termguicolors = true
 
+-- use 2 spaces instead of tabs
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+
 -- enable line numbers
 vim.wo.number = true
 
--- enable cursor line
+-- enable color column
 vim.wo.colorcolumn = "80"
 
+-- enable cursor line
+vim.opt.cursorline = true
+
+-- set folding
+vim.opt.foldmethod = "indent"
+vim.opt.foldenable = false
+
 -- disable swapfile and save undo files
-vim.cmd("set noswapfile")
+vim.opt.swapfile = false
 local undopath = vim.fn.stdpath("data") .. "/undo"
 vim.opt.undodir = undopath
 if vim.fn.isdirectory(undopath) == 0 then
