@@ -99,7 +99,9 @@
       "url_open_shortcut": 1
     },
     "appearance": {
+      "css_ui_mods_directory": "$HOME/.local/share/vivaldi/custom-css",
       "disable_title_bar": true,
+      "force_dark_mode_theme": true,
       "range_buttons": false
     },
     "bookmarks": {
@@ -217,6 +219,7 @@
     "downloads": {
       "start_automatically": false
     },
+    "experiments": ["css_mods"],
     "history": {
       "days_to_keep_visits": 3650
     },
@@ -803,15 +806,28 @@
   },
   "webkit": {
     "webprefs": {
+      "default_font_size": 14,
       "fonts": {
+        "cursive": {
+          "Zyyy": "Iosevka"
+        },
+        "fantasy": {
+          "Zyyy": "Iosevka"
+        },
+        "fixed": {
+          "Zyyy": "Iosevka"
+        },
         "sansserif": {
-          "Zyyy": "Fira Sans"
+          "Zyyy": "Iosevka"
+        },
+        "serif": {
+          "Zyyy": "Iosevka"
         },
         "standard": {
-          "Zyyy": "FiraCode Nerd Font"
+          "Zyyy": "Iosevka"
         }
       },
-      "force_dark_mode_enabled": false
+      "force_dark_mode_enabled": true
     }
   }
 }

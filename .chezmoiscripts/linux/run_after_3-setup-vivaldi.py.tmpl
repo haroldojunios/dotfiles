@@ -36,5 +36,7 @@ for pref in default_prefs:
             prefs[pref] = default_prefs[pref]
 
 with prefs_path.open("w", encoding="utf-8") as f:
-    json.dump(prefs, f, ensure_ascii=False)
+    prefs_str = json.dumps(prefs, ensure_ascii=False)
+    prefs_str = prefs_str.replace("$HOME", Path.home().as_posix())
+    f.write(prefs_str)
 # {{ end }}

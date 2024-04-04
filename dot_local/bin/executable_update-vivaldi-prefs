@@ -18,17 +18,19 @@ with default_prefs_path.open() as f:
 with prefs_path.open() as f:
     prefs = json.load(f)
 
-for pref in default_prefs:
-    if pref in prefs:
-        if pref == "vivaldi":
-            for key in default_prefs["vivaldi"]:
-                if key not in ignored_vivaldi_prefs:
-                    default_prefs["vivaldi"][key] = prefs["vivaldi"][key]
-        else:
-            default_prefs[pref] = prefs[pref]
+    for pref in default_prefs:
+        if pref in prefs:
+            if pref == "vivaldi":
+                for key in default_prefs["vivaldi"]:
+                    if key not in ignored_vivaldi_prefs:
+                        default_prefs["vivaldi"][key] = prefs["vivaldi"][key]
+            else:
+                default_prefs[pref] = prefs[pref]
 
 with default_prefs_path.open("w", encoding="utf-8") as f:
-    json.dump(default_prefs, f, indent=2, ensure_ascii=False)
+    prefs_str = json.dumps(default_prefs, indent=2, ensure_ascii=False)
+    prefs_str = prefs_str.replace(Path.home().as_posix(), "$HOME")
+    f.write(prefs_str)
 
 if which("prettier") is not None:
     subprocess.run(
