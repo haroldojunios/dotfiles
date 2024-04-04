@@ -212,6 +212,7 @@ packageList=(
   aptitude
   bat
   bc
+  bibtool
   black
   btrfs-compsize
   build-essential
@@ -226,12 +227,13 @@ packageList=(
   ffmpeg
   fish
   fnt
+  ghostscript
   git
   hwinfo
-  ghostscript
   jmtpfs
   jq
   libfontconfig1
+  libmupdf-dev
   make
   micro
   mpv

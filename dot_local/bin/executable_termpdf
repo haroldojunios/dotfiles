@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if command -v termux-setup-storage &>/dev/null; then
+  exit
+fi
+
+if ! [ -d "${HOME}/.local/share/termpdf.py" ]; then
+  (
+    cd "${HOME}/.local/share"
+    git clone --depth=1 https://github.com/dsanson/termpdf.py
+    cd termpdf.py
+    python3 -m venv venv
+    source ./venv/bin/activate
+    pip install -r requirements.txt
+  )
+fi
+
+"${HOME}/.local/share/termpdf.py/venv/bin/python" "${HOME}/.local/share/termpdf.py/termpdf.py" $@

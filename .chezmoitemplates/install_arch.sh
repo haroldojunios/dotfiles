@@ -207,6 +207,7 @@ packageList=(
   age
   bat
   bc
+  bibtool
   clang
   cmake
   curl
@@ -228,6 +229,7 @@ packageList=(
   lazydocker
   lazygit
   libjxl
+  libmupdf
   make
   mediainfo
   micro
