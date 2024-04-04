@@ -131,18 +131,18 @@ fi
 # fi
 
 # apply
-if [[ "$(tty)" == /dev/pts/* ]]; then
-  lookandfeeltool -a Catppuccin-Mocha-Lavender &>/dev/null || :
+# if [[ "$(tty)" == /dev/pts/* ]]; then
+#   lookandfeeltool -a Catppuccin-Mocha-Lavender &>/dev/null || :
 
-  { command -v plasma-changeicons &>/dev/null && plasma-changeicons beautyline &>/dev/null; } ||
-    { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons beautyline &>/dev/null; } &>/dev/null ||
-    { [ -x /usr/lib/plasma-changeicons ] && /usr/lib/plasma-changeicons beautyline &>/dev/null; } &>/dev/null || :
+#   { command -v plasma-changeicons &>/dev/null && plasma-changeicons beautyline &>/dev/null; } ||
+#     { [ -x /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons ] && /usr/lib/x86_64-linux-gnu/libexec/plasma-changeicons beautyline &>/dev/null; } &>/dev/null ||
+#     { [ -x /usr/lib/plasma-changeicons ] && /usr/lib/plasma-changeicons beautyline &>/dev/null; } &>/dev/null || :
 
-  if ! [ -f /etc/sddm.conf ]; then
-    sudo touch /etc/sddm.conf
-  fi
-  sudo crudini --set /etc/sddm.conf Theme Current catppuccin-mocha
+#   plasma-apply-wallpaperimage "${HOME}/.local/share/wallpapers/Shani.png" &>/dev/null || :
+# fi
 
-  plasma-apply-wallpaperimage /usr/share/wallpapers/Shani.png &>/dev/null || :
+if ! [ -f /etc/sddm.conf ]; then
+  sudo touch /etc/sddm.conf
 fi
+sudo crudini --set /etc/sddm.conf Theme Current catppuccin-mocha
 {{ end }}
