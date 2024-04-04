@@ -26,6 +26,7 @@ packageList=(
   imagemagick
   jq
   lazygit
+  lua-language-server
   make
   matplotlib
   micro
@@ -46,6 +47,7 @@ packageList=(
   ripgrep
   rsync
   starship
+  stylua
   termux-api
   tmux
   unzip

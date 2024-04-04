@@ -20,26 +20,31 @@ return {
       })
 
       require("mason-update-all").setup()
+      vim.cmd("MasonUpdateAll")
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     config = function()
+      local ensure_installed = {
+        "bashls",
+        "cssls",
+        "emmet_ls",
+        "eslint",
+        "html",
+        "jsonls",
+        "pyright",
+        "tailwindcss",
+        "tsserver",
+        "yamlls",
+      }
+      if os.getenv("PREFIX") == nil then
+        table.insert(ensure_installed, "lua_ls")
+      end
+
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "bashls",
-          "cssls",
-          "emmet_ls",
-          "eslint",
-          "html",
-          "jsonls",
-          "lua_ls",
-          "pyright",
-          "tailwindcss",
-          "tsserver",
-          "yamlls",
-        },
+        ensure_installed = ensure_installed,
         automatic_installation = true,
       })
 
@@ -58,47 +63,29 @@ return {
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      require("mason-null-ls").setup({
-        ensure_installed = {
-          "black",
-          "clang_format",
-          "cmake_format",
-          "codespell",
-          "fixjson",
-          "hadolint",
-          "isort",
-          "latexindent",
-          "markdownlint",
-          "mypy",
-          "prettierd",
-          "shellcheck",
-          "shfmt",
-          "sqlfmt",
-          "stylua",
-          "yamlfmt",
-        },
-      })
+      local ensure_installed = {
+        "black",
+        "clang_format",
+        "cmake_format",
+        "codespell",
+        "fixjson",
+        "hadolint",
+        "isort",
+        "markdownlint",
+        "mypy",
+        "prettierd",
+        "shellcheck",
+        "shfmt",
+        "sqlfmt",
+        "yamlfmt",
+      }
+      if os.getenv("PREFIX") == nil then
+        table.insert(ensure_installed, "latexindent")
+        table.insert(ensure_installed, "stylua")
+      end
 
-      local null_ls = require("null-ls")
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.shfmt.with({
-            extra_args = { "-i", "2", "-ci" },
-          }),
-        },
-        on_attach = function(client, bufnr)
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({ async = false })
-              end,
-            })
-          end
-        end,
+      require("mason-null-ls").setup({
+        ensure_installed = ensure_installed,
       })
 
       vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
@@ -111,12 +98,6 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
-      lspconfig.tsserver.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities,
-      })
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
       })

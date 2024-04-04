@@ -62,6 +62,7 @@ return {
   },
   {
     "Exafunction/codeium.nvim",
+    enabled = os.getenv("PREFIX") == nil,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
