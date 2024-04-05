@@ -68,6 +68,7 @@ return {
         "clang_format",
         "cmake_format",
         "codespell",
+        "fish",
         "fixjson",
         "hadolint",
         "isort",

@@ -49,23 +49,40 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          python = { "isort", "black" },
-          javascript = { "eslint_d", { "prettierd", "prettier" } },
-          bash = { "shfmt" },
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>ft",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        bash = { "shfmt" },
+        css = { { "prettierd", "prettier" } },
+        fish = { "fish_indent" },
+        html = { { "prettierd", "prettier" } },
+        javascript = { "eslint_d", { "prettierd", "prettier" } },
+        javascriptreact = { "eslint_d", { "prettierd", "prettier" } },
+        json = { { "prettierd", "prettier" } },
+        jsonc = { { "prettierd", "prettier" } },
+        lua = { "stylua" },
+        python = { "isort", "black" },
+        typescript = { "eslint_d", { "prettierd", "prettier" } },
+        typescriptreact = { "eslint_d", { "prettierd", "prettier" } },
+      },
+      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      formatters = {
+        shfmt = {
+          prepend_args = { "-i", "2" },
         },
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_fallback = true,
-        },
-      })
-      require("conform").formatters.shfmt = {
-        prepend_args = { "-i", "2" },
-      }
-    end,
+      },
+    },
   },
   {
     "windwp/nvim-ts-autotag",
