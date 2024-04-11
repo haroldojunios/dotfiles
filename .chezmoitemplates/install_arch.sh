@@ -173,6 +173,8 @@ dePackageList=(
   alacritty
   calibre
   conky
+  dex
+  feh
   gimp
   inkscape
   keepassxc
@@ -205,6 +207,7 @@ appletsPackageList=(
 
 packageList=(
   age
+  alsa-utils
   bat
   bc
   bibtool
@@ -253,6 +256,7 @@ packageList=(
   python-black
   python-isort
   python-pipx
+  python-psutil
   python-requests
   rclone
   ripgrep
