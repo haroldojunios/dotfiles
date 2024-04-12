@@ -1,9 +1,13 @@
+import os
+import subprocess
 from pathlib import Path
 
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+
+os.environ["XDG_CURRENT_DESKTOP"] = "KDE"
 
 mod = "mod4"
 terminal = guess_terminal(["kitty", "alacritty", "konsole"])
@@ -246,10 +250,10 @@ def power():
 ## bar
 
 widgets = [
-    # widget.Spacer(
-    #     length=15,
-    #     background="#181825",
-    # ),
+    widget.Spacer(
+        length=5,
+        background="#181825",
+    ),
     widget.Image(
         filename="~/.config/qtile/Assets/launch.svg",
         margin_y=4,
@@ -418,7 +422,6 @@ widgets.extend(
             filename="~/.config/qtile/Assets/Misc/bluetooth-on.svg",
             background="#1e1e2e",
             margin_y=6,
-            # margin_x=5,
         ),
         widget.Bluetooth(
             background="#1e1e2e",
@@ -439,10 +442,10 @@ widgets.extend(
             background="#181825",
             foreground="#b4befe",
         ),
-        # widget.Spacer(
-        #     length=18,
-        #     background="#181825",
-        # ),
+        widget.Spacer(
+            length=5,
+            background="#181825",
+        ),
     ]
 )
 
@@ -523,3 +526,8 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+
+@hook.subscribe.startup_once
+def autostart_once():
+    subprocess.run("~/.config/qtile/autostart_once.sh")

@@ -186,6 +186,7 @@ dePackageList=(
   qt6-imageformats
   qt6-jpegxl-image-plugin
   qt6-svg
+  rofi
   visual-studio-code-bin
   xournalpp
   {{ if ne .chezmoi.osRelease.id "archarm" }}
