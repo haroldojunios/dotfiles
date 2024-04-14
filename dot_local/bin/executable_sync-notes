@@ -30,11 +30,21 @@ fi
 resync_flag=
 if ! [ -f "${rclone_bisync_cache_path}/${rclone_bisync_listing}.path1.lst" ] ||
   ! [ -f "${rclone_bisync_cache_path}/${rclone_bisync_listing}.path2.lst" ]; then
-  echo "resyncing..."
+  echo "Resyncing..."
   resync_flag="--resync"
 fi
 rclone bisync "${path1}" "${path2}" \
-  --compare size,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case ${resync_flag}
+  --compare size,checksum \
+  --slow-hash-sync-only \
+  --conflict-resolve newer \
+  --check-access \
+  --max-lock 2m \
+  --resilient \
+  --recover \
+  -MvP \
+  --drive-skip-gdocs \
+  --fix-case \
+  ${resync_flag}
 
 if command -v termux-setup-storage &>/dev/null; then
   rsync -a --delete "${path1}/" "${path1_out}"
