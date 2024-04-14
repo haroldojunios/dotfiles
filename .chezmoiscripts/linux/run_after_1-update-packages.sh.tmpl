@@ -6,17 +6,35 @@
 
 set -eu
 
+if [ -f "${HOME}/.config/.env" ]; then source "${HOME}/.config/.env"; fi
+
+if ! [ -x "${HOME}/.local/bin/semver" ]; then
+  wget -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
+  chmod +x "${HOME}/.local/bin/semver"
+fi
+
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 case $(uname -m) in
-x86_64) ARCH=amd64; UARCH=x86_64 ;;
-i386 | i686) ARCH=i686; UARCH=32-bit ;;
-*) ARCH=; UARCH= ;;
+x86_64)
+  ARCH=amd64
+  UARCH=x86_64
+  ;;
+i386 | i686)
+  ARCH=i686
+  UARCH=32-bit
+  ;;
+*)
+  ARCH=
+  UARCH=
+  ;;
 esac
 
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
-BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | jq -r .tag_name | tr -d v)
+GH_AUTH="Authorization: Bearer ${GH_TOKEN}"
+
+BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
     wget -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
@@ -30,13 +48,13 @@ fi
 #   DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/hyper.deb"
 # fi
 
-LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" | jq -r .tag_name | tr -d v)
+LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
-{{   if eq .chezmoi.osRelease.id "ubuntu" }}
+  #{{   if eq .chezmoi.osRelease.id "ubuntu" }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-ubuntu-{{ .chezmoi.osRelease.versionID }}-v${LIBJXL_VER}.tar.gz"
-{{  else }}
+  #{{  else }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-debian-{{ .chezmoi.osRelease.versionCodename }}-v${LIBJXL_VER}.tar.gz"
-{{   end }}
+  #{{   end }}
   wget -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
   (
     cd "${TEMP_FOLDER}"
@@ -50,7 +68,7 @@ if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
   )
 fi
 
-ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" | jq -r .tag_name | tr -d v)
+ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s zoxide 2>&1 | grep "Version" | grep -q "${ZOXIDE_VER}"; then
   if [ -n "${ARCH}" ]; then
     wget -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}_${ARCH}.deb" ||
@@ -59,7 +77,7 @@ if ! dpkg -s zoxide 2>&1 | grep "Version" | grep -q "${ZOXIDE_VER}"; then
   fi
 fi
 
-FD_VER=$(curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" | jq -r .tag_name | tr -d v)
+FD_VER=$(curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s fd 2>&1 | grep "Version" | grep -q "${FD_VER}"; then
   if [ -n "${ARCH}" ]; then
     wget -O "${TEMP_FOLDER}/fd.deb" -q "https://github.com/sharkdp/fd/releases/download/v${FD_VER}/fd_${FD_VER}_${ARCH}.deb"
@@ -84,7 +102,7 @@ else
   "${HOME}/.pyenv/bin/pyenv" update
 fi
 
-LAZYGIT_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | jq -r .tag_name | tr -d v)
+LAZYGIT_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazygit" ] || ! "/usr/local/bin/lazygit" --version | grep -q "version=${LAZYGIT_VER}"; then
   if [ -n "${UARCH}" ]; then
     wget -O "${TEMP_FOLDER}/lazygit.tar.gz" -q "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VER}_Linux_${UARCH}.tar.gz"
@@ -96,7 +114,7 @@ if ! [ -x "/usr/local/bin/lazygit" ] || ! "/usr/local/bin/lazygit" --version | g
   fi
 fi
 
-LAZYDOCKER_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" | jq -r .tag_name | tr -d v)
+LAZYDOCKER_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --version | grep -q "version=${LAZYDOCKER_VER}"; then
   if [ -n "${UARCH}" ]; then
     wget -O "${TEMP_FOLDER}/lazydocker.tar.gz" -q "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${LAZYDOCKER_VER}_Linux_${UARCH}.tar.gz"
@@ -108,7 +126,7 @@ if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --versi
   fi
 fi
 
-LAZYNPM_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazynpm/releases/latest" | jq -r .tag_name | tr -d v)
+LAZYNPM_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazynpm/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | grep -q "version=${LAZYNPM_VER}"; then
   if [ -n "${UARCH}" ]; then
     wget -O "${TEMP_FOLDER}/lazynpm.tar.gz" -q "https://github.com/jesseduffield/lazynpm/releases/latest/download/lazynpm_${LAZYNPM_VER}_Linux_${UARCH}.tar.gz"
@@ -120,7 +138,7 @@ if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | g
   fi
 fi
 
-OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | jq -r .tag_name | tr -d v)
+OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
   if [ -n "${ARCH}" ]; then
     wget -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb"
@@ -128,7 +146,7 @@ if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
   fi
 fi
 
-KITTY_VER=$(curl --silent "https://api.github.com/repos/kovidgoyal/kitty/releases/latest" | jq -r .tag_name | tr -d v)
+KITTY_VER=$(curl --silent "https://api.github.com/repos/kovidgoyal/kitty/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "${HOME}/.local/bin/kitty" ] || ! "${HOME}/.local/bin/kitty" --version | grep -q "${KITTY_VER}"; then
   mkdir -p "${HOME}/.local/share/applications"
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="${HOME}/.local/share"
@@ -142,5 +160,14 @@ fi
 if ! command -v vmplayer &>/dev/null; then
   wget -O "${TEMP_FOLDER}/vmware.bundle" -q --user-agent="Mozilla" --content-disposition "https://www.vmware.com/go/getplayer-linux"
   sudo bash "${TEMP_FOLDER}/vmware.bundle"
+fi
+
+RCLONE_VER=$(curl --silent "https://api.github.com/repos/rclone/rclone/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
+if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}" &&
+  [ "$(semver compare $(rclone version | grep rclone | cut -d 'v' -f2) ${RCLONE_VER})" = -1 ]; then
+  if [ -n "${ARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/rclone.deb" -q "https://github.com/rclone/rclone/releases/download/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/rclone.deb"
+  fi
 fi
 {{ end }}
