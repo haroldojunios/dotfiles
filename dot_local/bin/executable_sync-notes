@@ -8,6 +8,11 @@ set -euo pipefail
 #   git -C "${HOME}/Documents" pull --rebase --autostash
 # fi
 
+if command -v termux-wifi-connectioninfo &>/dev/null && \
+  [ "$(termux-wifi-connectioninfo | jq -r '.supplicant_state')" != 'COMPLETED' ]; then
+  exit
+fi
+
 rclone_bisync_cache_path="${HOME}/.cache/rclone/bisync"
 rclone_bisync_listing="home_${USER}_Documents_notes..onedrive_Documents_notes"
 path1="${HOME}/Documents/notes"
@@ -19,7 +24,7 @@ if command -v termux-setup-storage &>/dev/null; then
   rclone_bisync_listing="data_data_com.termux_files_home_Documents_notes..onedrive_Documents_notes"
   path1_out="${HOME}/storage/shared/Documents/notes"
   mkdir -p "${path1_out}"
-  rsync -a --delete "${path1_out}/" ${path1}
+  rsync -a --delete "${path1_out}/" "${path1}"
 fi
 
 resync_flag=
@@ -32,5 +37,5 @@ rclone bisync "${path1}" "${path2}" \
   --compare size,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case ${resync_flag}
 
 if command -v termux-setup-storage &>/dev/null; then
-  rsync -a --delete "${path1}/" ${path1_out}
+  rsync -a --delete "${path1}/" "${path1_out}"
 fi
