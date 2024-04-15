@@ -20,12 +20,16 @@ return {
       })
 
       require("mason-update-all").setup()
-      vim.cmd("MasonUpdateAll")
+      -- vim.cmd("MasonUpdateAll")
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
     config = function()
       local ensure_installed = {
         "bashls",
@@ -53,6 +57,11 @@ return {
           require("lspconfig")[server_name].setup({})
         end,
       })
+
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
     end,
   },
   {
@@ -75,6 +84,7 @@ return {
         "markdownlint",
         "mypy",
         "prettierd",
+        "ruff",
         "shellcheck",
         "shfmt",
         "sqlfmt",
@@ -87,26 +97,46 @@ return {
 
       require("mason-null-ls").setup({
         ensure_installed = ensure_installed,
+        handlers = {},
       })
 
       vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
     end,
   },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   lazy = false,
+  --   config = function()
+  --     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+  --     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+  --     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+  --     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+  --   end,
+  -- },
   {
-    "neovim/nvim-lspconfig",
-    lazy = false,
+    "aznhe21/actions-preview.nvim",
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
+      require("actions-preview").setup({
+        telescope = {
+          sorting_strategy = "ascending",
+          layout_strategy = "vertical",
+          layout_config = {
+            width = 0.8,
+            height = 0.9,
+            prompt_position = "top",
+            preview_cutoff = 20,
+            preview_height = function(_, _, max_lines)
+              return max_lines - 15
+            end,
+          },
+        },
       })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set(
+        { "v", "n" },
+        "gf",
+        require("actions-preview").code_actions
+      )
     end,
   },
 }
