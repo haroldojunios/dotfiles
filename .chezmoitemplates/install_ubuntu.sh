@@ -331,7 +331,6 @@ if lspci | grep -i network | grep -iq bcm; then
   fi
 fi
 
-{{ if not .isWork }}
 if ! command -v fastfetch &>/dev/null; then
   TEMP_FOLDER=$(mktemp -d)
   git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/LinusDierheimer/fastfetch.git
@@ -345,7 +344,6 @@ if ! command -v fastfetch &>/dev/null; then
   )
   rm -rf "${TEMP_FOLDER}"
 fi
-{{ end }}
 
 if ! dpkg -s docker-ce &>/dev/null; then
   if command -v snap &>/dev/null; then
@@ -394,7 +392,7 @@ fi
 ## imagemagick
 TEMP_FILE=$(mktemp)
 wget 'https://dist.1-2.dev/imei.sh' -qO "${TEMP_FILE}"
-sudo bash "${TEMP_FILE}" || :
+sed 's/echo -ne "\\\ec"//g' "${TEMP_FILE}" | sed 's/echo -ne "\\\033c"//g' | sudo bash || :
 rm -f "${TEMP_FILE}"
 
 sudo aptitude safe-upgrade -o APT::Get::Fix-Missing=true -y
