@@ -1,10 +1,10 @@
 return {
-  {
-    "kaplanz/retrail.nvim",
-    config = function()
-      require("retrail").setup()
-    end,
-  },
+  -- {
+  --   "kaplanz/retrail.nvim",
+  --   config = function()
+  --     require("retrail").setup()
+  --   end,
+  -- },
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -75,7 +75,7 @@ return {
         python = { { "ruff_fix", "isort" }, { "ruff_format", "black" } },
         typescript = { "eslint_d", { "prettierd", "prettier" } },
         typescriptreact = { "eslint_d", { "prettierd", "prettier" } },
-        ["_"] = { "trim_newlines", "trim_whitespace" },
+        -- ["_"] = { "trim_newlines", "trim_whitespace" },
       },
       format_on_save = { timeout_ms = 500, lsp_fallback = true },
       formatters = {

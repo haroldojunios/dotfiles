@@ -77,6 +77,7 @@ return {
         "clang_format",
         "cmake_format",
         "codespell",
+        "eslint_d",
         "fish",
         "fixjson",
         "hadolint",
@@ -88,7 +89,7 @@ return {
         "shellcheck",
         "shfmt",
         "sqlfmt",
-        "yamlfmt",
+        -- "yamlfmt",
       }
       if os.getenv("PREFIX") == nil then
         table.insert(ensure_installed, "latexindent")
