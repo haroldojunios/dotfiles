@@ -175,6 +175,10 @@ if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" 
   mkdir -p "${HOME}/.config/rclone"
   sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
 fi
+
+if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
+  sudo rm -f /etc/xdg/autostart/org.kde.discover.notifier.desktop
+fi
 {{  else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
@@ -207,7 +211,7 @@ if grep "#dtparam=i2c1=on" /boot/cmdline.txt &>/dev/null; then
   sudo adduser pi i2c
 fi
 {{  end }}
-{{ end}}
+{{ end }}
 
 if command -v fish &>/dev/null; then
   fish -c 'command -v fisher &>/dev/null && fisher update || :' &>/dev/null
