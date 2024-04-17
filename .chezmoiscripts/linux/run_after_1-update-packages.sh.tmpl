@@ -170,4 +170,12 @@ if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}" &&
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/rclone.deb"
   fi
 fi
+
+DELTA_VER=$(curl --silent "https://api.github.com/repos/dandavison/delta/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
+if ! dpkg -s git-delta 2>&1 | grep "Version" | grep -q "${DELTA_VER}"; then
+  if [ -n "${ARCH}" ]; then
+    wget -O "${TEMP_FOLDER}/delta.deb" -q "https://github.com/dandavison/delta/releases/download/${DELTA_VER}/git-delta_${DELTA_VER}_${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/delta.deb"
+  fi
+fi
 {{ end }}

@@ -55,6 +55,11 @@ refreshPeriod = "168h"
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/konsole/main/Catppuccin-Mocha.colorscheme"
 refreshPeriod = "168h"
+
+[".local/share/git/catppuccin.gitconfig"]
+type = "file"
+url = "https://github.com/catppuccin/delta/raw/main/catppuccin.gitconfig"
+refreshPeriod = "168h"
 {{   end }}
 {{ end }}
 

@@ -226,6 +226,7 @@ packageList=(
   fnt
   fzf
   git
+  git-delta
   github-cli
   htop
   imagemagick
