@@ -216,3 +216,7 @@ fi
 if command -v fish &>/dev/null; then
   fish -c 'command -v fisher &>/dev/null && fisher update || :' &>/dev/null
 fi
+
+if command -v bat &>/dev/null;then
+  bat cache --build &>/dev/null
+fi
