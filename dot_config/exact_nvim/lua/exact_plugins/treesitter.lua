@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
     build = ":TSUpdate",
     config = function()
       local config = require("nvim-treesitter.configs")
@@ -13,6 +14,8 @@ return {
           "csv",
           "dockerfile",
           "fish",
+          "git_config",
+          "git_rebase",
           "gitignore",
           "html",
           "ini",
@@ -38,7 +41,35 @@ return {
         },
         highlight = { enable = true },
         indent = { enable = true },
+        -- refactor
+        refactor = {
+          highlight_definitions = {
+            enable = true,
+            clear_on_cursor_move = true,
+          },
+          smart_rename = {
+            enable = true,
+            keymaps = {
+              smart_rename = "grr",
+            },
+          },
+        },
       })
     end,
+  },
+  {
+    "nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    evert = "BufEnter",
+    keys = {
+      {
+        "n",
+        "[c",
+        function()
+          require("treesitter-context").go_to_context(vim.v.count1)
+        end,
+        { silent = true },
+      },
+    },
   },
 }
