@@ -36,6 +36,11 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
 refreshPeriod = "168h"
 
+[".config/kitty/diff.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/diff-mocha.conf"
+refreshPeriod = "168h"
+
 [".config/lazygit/catppuccin.yml"]
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes-mergable/mocha/mauve.yml"
