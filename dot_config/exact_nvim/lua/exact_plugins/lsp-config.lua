@@ -83,6 +83,7 @@ return {
         "hadolint",
         "isort",
         "markdownlint",
+        "mdformat",
         "mypy",
         "prettierd",
         "ruff",

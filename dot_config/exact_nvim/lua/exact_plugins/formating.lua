@@ -72,6 +72,7 @@ return {
         json = { { "prettierd", "prettier" } },
         jsonc = { { "prettierd", "prettier" } },
         lua = { "stylua" },
+        markdown = { "mdformat" },
         python = { { "ruff_fix", "isort" }, { "ruff_format", "black" } },
         typescript = { "eslint_d", { "prettierd", "prettier" } },
         typescriptreact = { "eslint_d", { "prettierd", "prettier" } },
@@ -79,6 +80,9 @@ return {
       },
       format_on_save = { timeout_ms = 500, lsp_fallback = true },
       formatters = {
+        mdformat = {
+          prepend_args = { "--number", "--wrap", "80" },
+        },
         shfmt = {
           prepend_args = { "-i", "2" },
         },
