@@ -1,3 +1,5 @@
+local opt = vim.opt
+
 -- change leader key to space
 vim.g.mapleader = " "
 
@@ -6,35 +8,48 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- enable 24-bit colour
-vim.opt.termguicolors = true
+opt.termguicolors = true
 
 -- use 2 spaces instead of tabs
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+opt.expandtab = true
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth = 2
 
 -- enable line numbers
-vim.wo.number = true
+opt.number = true
+opt.relativenumber = true
 
 -- enable color column
-vim.wo.colorcolumn = "80"
+opt.colorcolumn = "80"
 
 -- enable cursor line
-vim.opt.cursorline = true
+opt.cursorline = true
+
+-- set splitting mode
+opt.splitbelow = true
+opt.splitright = true
+
+-- set casing on search
+opt.ignorecase = true
+opt.smartcase = true
 
 -- set folding
-vim.opt.foldmethod = "indent"
-vim.opt.foldenable = false
+opt.foldmethod = "indent"
+opt.foldenable = false
+
+-- set conceal
+opt.conceallevel = 2
+opt.concealcursor = "nc"
 
 -- disable swapfile and save undo files
-vim.opt.swapfile = false
+opt.swapfile = false
 local undopath = vim.fn.stdpath("data") .. "/undo"
-vim.opt.undodir = undopath
+opt.undodir = undopath
 if vim.fn.isdirectory(undopath) == 0 then
   vim.fn.mkdir(undopath)
 end
-vim.opt.undofile = true
+opt.undofile = true
 
 if vim.fn.has("unix") then
   local node_dir = vim.env.HOME .. ".local/share/nvm/lts/bin/"
