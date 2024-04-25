@@ -253,6 +253,7 @@ packageList=(
   perl-yaml-tiny
   pkgfile
   plocate
+  prettier
   pyenv
   python
   python-black
@@ -325,9 +326,9 @@ packageList=(
 
 if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
   case $(uname -r) in
-    *arch*) nvidiaDriver=nvidia ;;
-    *lts*) nvidiaDriver=nvidia-lts ;;
-    *) nvidiaDriver=nvidia-dkms ;;
+  *arch*) nvidiaDriver=nvidia ;;
+  *lts*) nvidiaDriver=nvidia-lts ;;
+  *) nvidiaDriver=nvidia-dkms ;;
   esac
 
   packageList=(

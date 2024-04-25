@@ -1,33 +1,34 @@
 {
   "autocomplete": {
-    "retention_policy_last_version": 122
+    "retention_policy_last_version": 124
   },
   "autofill": {
-    "last_version_deduped": 120
+    "last_version_deduped": 124,
+    "upload_encoding_seed": "13A5C06DC2A2A78DCCA8707BBCCBD9A5"
   },
   "browser": {
     "has_seen_welcome_page": true,
     "show_home_button": false,
     "window_placement": {
-      "bottom": 1080,
-      "left": 0,
+      "bottom": 1076,
+      "left": 4,
       "maximized": true,
-      "right": 1920,
-      "top": 27,
+      "right": 1414,
+      "top": 49,
       "work_area_bottom": 1080,
       "work_area_left": 0,
       "work_area_right": 1920,
-      "work_area_top": 27
+      "work_area_top": 20
     },
     "window_placement_popup": {
-      "bottom": 812,
-      "left": 1017,
-      "maximized": false,
-      "right": 1542,
-      "top": 287,
+      "bottom": 800,
+      "left": 710,
+      "maximized": true,
+      "right": 1210,
+      "top": 300,
       "work_area_bottom": 1080,
       "work_area_left": 0,
-      "work_area_right": 2560,
+      "work_area_right": 1920,
       "work_area_top": 20
     }
   },
@@ -236,6 +237,7 @@
       "is_turned_off": true
     },
     "menu": {
+      "compact": true,
       "display": 0,
       "icon_type": 0
     },
@@ -832,4 +834,3 @@
     }
   }
 }
-
