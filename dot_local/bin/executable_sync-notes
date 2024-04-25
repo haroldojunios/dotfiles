@@ -8,7 +8,7 @@ set -euo pipefail
 #   git -C "${HOME}/Documents" pull --rebase --autostash
 # fi
 
-if command -v termux-wifi-connectioninfo &>/dev/null && \
+if command -v termux-wifi-connectioninfo &>/dev/null &&
   [ "$(termux-wifi-connectioninfo | jq -r '.supplicant_state')" != 'COMPLETED' ]; then
   exit
 fi
@@ -36,8 +36,6 @@ fi
 rclone bisync "${path1}" "${path2}" \
   --compare size,checksum \
   --slow-hash-sync-only \
-  --conflict-resolve newer \
-  --check-access \
   --max-lock 2m \
   --resilient \
   --recover \
