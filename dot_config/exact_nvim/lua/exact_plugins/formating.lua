@@ -64,6 +64,7 @@ return {
     opts = {
       formatters_by_ft = {
         bash = { "shfmt" },
+        sh = { "shfmt" },
         css = { { "prettierd", "prettier" } },
         fish = { "fish_indent" },
         html = { { "prettierd", "prettier" } },
