@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+import gi
+
+gi.require_version("Gdk", "3.0")
+from gi.repository import Gdk
+
+display = Gdk.Display.get_default()
+monitor = display.get_primary_monitor()
+w = monitor.get_width_mm() / 25.4
+h = monitor.get_height_mm() / 25.4
+d = ((w**2) + (h**2)) ** (0.5)
+print(d)
