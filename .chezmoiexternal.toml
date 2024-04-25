@@ -18,6 +18,11 @@ exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
 
+[".config/nvim/spell/pt.utf-8.spl"]
+type = "file"
+url = "http://ftp.vim.org/pub/vim/runtime/spell/pt.utf-8.spl"
+refreshPeriod = "168h"
+
 {{   if .installDE }}
 [".local/share/icons/beautyline"]
 type = "archive"

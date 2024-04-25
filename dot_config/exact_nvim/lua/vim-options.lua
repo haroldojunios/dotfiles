@@ -1,11 +1,12 @@
+local g = vim.g
 local opt = vim.opt
 
 -- change leader key to space
-vim.g.mapleader = " "
+g.mapleader = " "
 
 -- disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- enable 24-bit colour
 opt.termguicolors = true
@@ -33,6 +34,10 @@ opt.splitright = true
 -- set casing on search
 opt.ignorecase = true
 opt.smartcase = true
+
+-- set spellcheck
+opt.spelllang = { "en", "pt_br" }
+opt.spelloptions:append("camel")
 
 -- set folding
 opt.foldmethod = "indent"
