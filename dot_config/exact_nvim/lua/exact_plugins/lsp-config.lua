@@ -96,10 +96,10 @@ return {
         end,
       })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      -- vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+      -- vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+      -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
     end,
   },
   {
@@ -144,39 +144,56 @@ return {
     end,
   },
   -- {
-  --   "neovim/nvim-lspconfig",
-  --   lazy = false,
+  --   "aznhe21/actions-preview.nvim",
   --   config = function()
-  --     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-  --     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-  --     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-  --     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+  --     require("actions-preview").setup({
+  --       telescope = {
+  --         sorting_strategy = "ascending",
+  --         layout_strategy = "vertical",
+  --         layout_config = {
+  --           width = 0.8,
+  --           height = 0.9,
+  --           prompt_position = "top",
+  --           preview_cutoff = 20,
+  --           preview_height = function(_, _, max_lines)
+  --             return max_lines - 15
+  --           end,
+  --         },
+  --       },
+  --     })
+  --
+  --     vim.keymap.set(
+  --       { "v", "n" },
+  --       "gf",
+  --       require("actions-preview").code_actions
+  --     )
   --   end,
   -- },
   {
-    "aznhe21/actions-preview.nvim",
-    config = function()
-      require("actions-preview").setup({
-        telescope = {
-          sorting_strategy = "ascending",
-          layout_strategy = "vertical",
-          layout_config = {
-            width = 0.8,
-            height = 0.9,
-            prompt_position = "top",
-            preview_cutoff = 20,
-            preview_height = function(_, _, max_lines)
-              return max_lines - 15
-            end,
-          },
+    "ray-x/navigator.lua",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
+    },
+    opts = {
+      keymaps = {
+        {
+          key = "<Space>ft",
+          func = vim.lsp.buf.format,
+          mode = "n",
+          desc = "format",
         },
-      })
-
-      vim.keymap.set(
-        { "v", "n" },
-        "gf",
-        require("actions-preview").code_actions
-      )
-    end,
+        {
+          key = "<Space>ft",
+          func = vim.lsp.buf.range_formatting,
+          mode = "v",
+          desc = "range format",
+        },
+      },
+      mason = true,
+      lsp = {
+        format_on_save = false,
+      },
+    },
   },
 }
