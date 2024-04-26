@@ -60,7 +60,7 @@ return {
   {
     "nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    evert = "BufEnter",
+    event = "BufEnter",
     keys = {
       {
         "n",
