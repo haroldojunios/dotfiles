@@ -1,5 +1,4 @@
-# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
-# vim: ft=bash
+#!/bin/bash
 
 if [ -x "${HOME}/.local/bin/get-screen-size" ] &&
   [ -x "${HOME}/.local/bin/get-screen-width" ]; then
@@ -7,9 +6,6 @@ if [ -x "${HOME}/.local/bin/get-screen-size" ] &&
   screen_width=$("${HOME}/.local/bin/get-screen-width")
   if (($(echo "${screen_size} > 27" | bc -l))) &&
     (($(echo "${screen_width} <= 1920" | bc -l))); then
-    echo "font_size 8.5"
-    exit
+    exit 1
   fi
 fi
-
-echo "font_size 10"

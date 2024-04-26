@@ -7,11 +7,20 @@
 set -eu
 
 if command -v kwriteconfig5 &>/dev/null; then
+  font="IosevkaTerm Nerd Font"
+  font_size=9.5
+  if [ -x "${HOME}/.local/bin/get-screen-big" ]; then
+    if "${HOME}/.local/bin/get-screen-big"; then
+      font_size=8.5
+    fi
+  fi
   # dolphin
   kwriteconfig5 --file dolphinrc --group General --key AutoExpandFolders true
   kwriteconfig5 --file dolphinrc --group General --key BrowseThroughArchives false
   kwriteconfig5 --file dolphinrc --group General --key ConfirmClosingMultipleTabs false
+  kwriteconfig5 --file dolphinrc --group General --key GlobalViewProps false
   kwriteconfig5 --file dolphinrc --group General --key RememberOpenedTabs false
+  kwriteconfig5 --file dolphinrc --group General --key ShowSelectionToggle false
   kwriteconfig5 --file dolphinrc --group General --key ShowToolTips true
   kwriteconfig5 --file dolphinrc --group General --key ShowZoomSlider false
   kwriteconfig5 --file dolphinrc --group MainWindow --key MenuBar Disabled
@@ -48,12 +57,12 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file kwinrc --group PageView --key MouseMode RectSelect
 
   # kdeglobals
-  kwriteconfig5 --file kdeglobals --group General --key fixed "IosevkaTerm Nerd Font,9.5,-1,5,50,0,0,0,0,0"
-  kwriteconfig5 --file kdeglobals --group General --key font "IosevkaTerm Nerd Font,9.5,-1,5,50,0,0,0,0,0"
-  kwriteconfig5 --file kdeglobals --group General --key menuFont "IosevkaTerm Nerd Font,10,-1,5,50,0,0,0,0,0"
-  kwriteconfig5 --file kdeglobals --group General --key smallestReadableFont "IosevkaTerm Nerd Font,8,-1,5,50,0,0,0,0,0"
-  kwriteconfig5 --file kdeglobals --group General --key toolBarFont "IosevkaTerm Nerd Font,10,-1,5,50,0,0,0,0,0"
-  kwriteconfig5 --file kdeglobals --group WM --key activeFont "IosevkaTerm Nerd Font,10,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key fixed "${font},${font_size},-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key font "${font},${font_size},-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key menuFont "${font},${font_size},-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key smallestReadableFont "${font},7,-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group General --key toolBarFont "${font},${font_size},-1,5,50,0,0,0,0,0"
+  kwriteconfig5 --file kdeglobals --group WM --key activeFont "${font},${font_size},-1,5,50,0,0,0,0,0"
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Automatically select filename extension" true
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Show Inline Previews" true
   kwriteconfig5 --file kdeglobals --group "KFileDialog Settings" --key "Show hidden files" true
@@ -72,8 +81,8 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   kwriteconfig5 --file ksmserverrc --group General --key loginMode emptySession
 
   # gtk
-  kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "IosevkaTerm Nerd Font,  10"
-  kwriteconfig5 --file "${HOME}/.config/gtk-4.0/settings.ini" --group Settings --key gtk-font-name "IosevkaTerm Nerd Font,  10"
+  kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "${font},  ${font_size}"
+  kwriteconfig5 --file "${HOME}/.config/gtk-4.0/settings.ini" --group Settings --key gtk-font-name "${font},  ${font_size}"
 
   # touchpad
   for group in "DELL0AB0:00 04F3:3147 Touchpad" "Synaptics s3203"; do
@@ -89,7 +98,7 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
     if [ -f "${HOME}/.config/Trolltech.conf" ]; then
       touch "${HOME}/.config/Trolltech.conf"
     fi
-    crudini --set ${HOME}/.config/Trolltech.conf qt font "IosevkaTerm Nerd Font,9.5,-1,5,50,0,0,0,0,0"
+    crudini --set ${HOME}/.config/Trolltech.conf qt font "${font},9.5,-1,5,50,0,0,0,0,0"
   fi
 fi
 
