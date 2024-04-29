@@ -10,6 +10,7 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
+      "hrsh7th/nvim-cmp",
     },
     config = function()
       require("noice").setup({
@@ -21,6 +22,9 @@ return {
             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
           },
           hover = {
+            enabled = false,
+          },
+          progress = {
             enabled = false,
           },
         },
