@@ -3,6 +3,7 @@ return {
   version = "*",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    "catppuccin/nvim",
   },
   config = function()
     local groups = require("bufferline.groups")
@@ -42,6 +43,7 @@ return {
             separator = true,
           },
         },
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
       },
     })
 
