@@ -31,17 +31,8 @@ map("i", "<C-s>", "<Esc>:w<CR>gi")
 map("n", "<C-q>", ":qa<CR>")
 map("i", "<C-q>", "<Esc>:qa<CR>")
 
--- code action keymaps
-map(
-  { "n", "v" },
-  "<leader>a",
-  vim.lsp.buf.code_action,
-  { desc = "code action" }
-)
-map("n", "<leader>n", vim.diagnostic.goto_next, { desc = "next diagnostic" })
-map(
-  "n",
-  "<leader>p",
-  vim.diagnostic.goto_next,
-  { desc = "previous diagnostic" }
-)
+-- not remove indent when going to normal mode
+map("i", "<CR>", "<CR>.<BS>")
+
+-- delete without yanking
+map("n", "d", '"_d')

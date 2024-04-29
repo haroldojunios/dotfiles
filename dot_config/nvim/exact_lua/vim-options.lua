@@ -27,6 +27,9 @@ opt.colorcolumn = "80"
 -- enable cursor line
 opt.cursorline = true
 
+-- use system clipboard
+opt.clipboard = "unnamedplus"
+
 -- set splitting mode
 opt.splitbelow = true
 opt.splitright = true
@@ -46,6 +49,17 @@ opt.foldenable = false
 -- set conceal
 opt.conceallevel = 2
 opt.concealcursor = "nc"
+
+-- set listchars
+opt.list = true
+opt.listchars = {
+  tab = "▸-",
+  trail = "·",
+  lead = "·",
+  precedes = "«",
+  extends = "»",
+  nbsp = "␣",
+}
 
 -- disable swapfile and save undo files
 opt.swapfile = false
