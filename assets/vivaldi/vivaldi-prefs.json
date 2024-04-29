@@ -102,7 +102,7 @@
     "appearance": {
       "css_ui_mods_directory": "$HOME/.local/share/vivaldi/custom-css",
       "disable_title_bar": true,
-      "force_dark_mode_theme": true,
+      "force_dark_mode_theme": false,
       "range_buttons": false
     },
     "bookmarks": {
@@ -114,6 +114,7 @@
         "visible": false
       },
       "confirm_adding": true,
+      "deleted_partners": [],
       "language": "en-US",
       "manager": {
         "sorting": {
@@ -830,7 +831,7 @@
           "Zyyy": "IosevkaTerm Nerd Font"
         }
       },
-      "force_dark_mode_enabled": true
+      "force_dark_mode_enabled": false
     }
   }
 }
