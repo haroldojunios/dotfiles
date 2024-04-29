@@ -39,7 +39,10 @@ return {
           "xml",
           "yaml",
         },
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { "latex", "markdown" },
+        },
         indent = { enable = true },
         -- refactor
         refactor = {
