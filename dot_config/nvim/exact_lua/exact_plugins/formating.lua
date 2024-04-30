@@ -67,13 +67,15 @@ return {
         json = { { "prettierd", "prettier" } },
         jsonc = { { "prettierd", "prettier" } },
         lua = { "stylua" },
-        markdown = { "mdformat" },
+        markdown = { "mdformat", "injected" },
         python = { { "ruff_fix", "isort" }, { "ruff_format", "black" } },
+        -- tex = { "latexindent" },
         typescript = { "eslint_d", { "prettierd", "prettier" } },
         typescriptreact = { "eslint_d", { "prettierd", "prettier" } },
         ["_"] = { "trim_newlines", "trim_whitespace" },
       },
-      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      -- format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      format_after_save = { lsp_fallback = true },
       formatters = {
         mdformat = {
           prepend_args = { "--number", "--wrap", "80" },

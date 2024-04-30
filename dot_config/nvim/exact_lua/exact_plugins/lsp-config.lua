@@ -35,10 +35,13 @@ return {
           "mdformat-gfm",
           "mdformat-toc",
           "mdformat-myst",
+          "mdformat-admon",
+          "mdformat-frontmatter",
+          "mdformat-footnote",
         }
         mdformat:on("install:success", function()
           -- Create the installation command.
-          vim.notify("Installing mdformat extensions.")
+          vim.notify("Installing mdformat extensions.", vim.log.levels.INFO)
           local extensions = table.concat(mdformat_extensions, " ")
           local python = mdformat:get_install_path() .. "/venv/bin/python"
           local pip_cmd =
@@ -48,7 +51,7 @@ return {
           local handle = io.popen(pip_cmd)
           if not handle then
             vim.notify(
-              'Could not install "mdformat extensions".',
+              "Could not install mdformat extensions.",
               vim.log.levels.ERROR
             )
             return
@@ -56,7 +59,7 @@ return {
           local _ = handle:read("*a")
           handle:close()
 
-          vim.notify('"mdformat extensions" were successfully installed.')
+          vim.notify("Mdformat extensions were successfully installed.")
         end)
       end)
     end,
