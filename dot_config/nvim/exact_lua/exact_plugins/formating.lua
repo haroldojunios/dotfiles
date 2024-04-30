@@ -78,6 +78,31 @@ return {
         mdformat = {
           prepend_args = { "--number", "--wrap", "80" },
         },
+        ruff_fix = {
+          args = {
+            "check",
+            "--fix",
+            "--select",
+            "I",
+            "--force-exclude",
+            "--exit-zero",
+            "--no-cache",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
+        ruff_format = {
+          args = {
+            "format",
+            "--line-length",
+            "79",
+            "--force-exclude",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
         shfmt = {
           prepend_args = { "-i", "2" },
         },
