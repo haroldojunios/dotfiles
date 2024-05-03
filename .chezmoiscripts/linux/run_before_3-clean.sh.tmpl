@@ -1,0 +1,21 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if command -v pip &>/dev/null; then
+  pip cache purge
+fi
+
+if command -v npm &>/dev/null; then
+  npm cache clean --force
+  npm cache verify
+fi
+
+if command -v journalctl &>/dev/null; then
+  sudo journalctl --sync
+  sudo journalctl --vacuum-time=1w --vacuum-size=100M --rotate
+fi
