@@ -228,7 +228,9 @@ packageList=(
   fish
   fnt
   ghostscript
+  gir1.2-gtk-3.0 # gtk
   git
+  gobject-introspection # gtk
   hwinfo
   jmtpfs
   jq
@@ -247,6 +249,7 @@ packageList=(
   perl
   python-is-python3
   python3
+  python3-gi # gtk
   python3-isort
   python3-pip
   python3-psutil
