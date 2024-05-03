@@ -72,6 +72,12 @@ EOF
 fi
 {{    end }}
 
+if [ -f /swap.img ]; then
+  sudo sed -i "s_^/swap.img_#/swap.img_" /etc/fstab
+  sudo swapoff /swap.img
+  sudo rm -f /swap.img
+fi
+
 # sddm
 if ! [ -f /etc/sddm.conf ]; then
   sudo touch /etc/sddm.conf
