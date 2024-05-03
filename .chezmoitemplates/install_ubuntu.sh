@@ -238,6 +238,7 @@ packageList=(
   micro
   mpv
   nano
+  ncdu
   neovim
   ninja-build
   nodejs

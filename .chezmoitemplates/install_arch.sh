@@ -239,6 +239,7 @@ packageList=(
   mediainfo
   micro
   nano
+  ncdu
   neovim
   neovim-remote
   netcat
