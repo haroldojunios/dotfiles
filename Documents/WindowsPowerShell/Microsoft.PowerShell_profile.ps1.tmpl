@@ -20,6 +20,8 @@ Set-PSReadLineOption -Colors @{
 Set-PSReadlineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
 
 {{ template "shell/git.ps1" . }}
+{{ template "shell/python.ps1" . }}
+{{ template "shell/chezmoi.ps1" . }}
 
 if (Get-Command starship -errorAction SilentlyContinue) {
   Invoke-Expression (&starship init powershell)
