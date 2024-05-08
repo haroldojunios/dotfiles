@@ -25,7 +25,7 @@ SHELL=/bin/bash
 @reboot sleep 5; "${HOME}/.local/bin/get-weather" "${HOME}/.cache/weather" >/dev/null 2>&1
 */20 * * * * "${HOME}/.local/bin/get-weather" "${HOME}/.cache/weather" >/dev/null 2>&1
 {{- end }}
-* * * * * "${HOME}/.local/bin/sync-notes" >/dev/null 2>&1
+# * * * * * "${HOME}/.local/bin/sync-notes" >/dev/null 2>&1
 EOF
   )
 
