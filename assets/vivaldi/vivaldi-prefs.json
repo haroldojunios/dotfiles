@@ -6,32 +6,6 @@
     "last_version_deduped": 124,
     "upload_encoding_seed": "13A5C06DC2A2A78DCCA8707BBCCBD9A5"
   },
-  "browser": {
-    "has_seen_welcome_page": true,
-    "show_home_button": false,
-    "window_placement": {
-      "bottom": 1076,
-      "left": 4,
-      "maximized": true,
-      "right": 1414,
-      "top": 49,
-      "work_area_bottom": 1080,
-      "work_area_left": 0,
-      "work_area_right": 1920,
-      "work_area_top": 20
-    },
-    "window_placement_popup": {
-      "bottom": 800,
-      "left": 710,
-      "maximized": true,
-      "right": 1210,
-      "top": 300,
-      "work_area_bottom": 1080,
-      "work_area_left": 0,
-      "work_area_right": 1920,
-      "work_area_top": 20
-    }
-  },
   "default_apps_install_state": 3,
   "default_search_provider": {
     "synced_guid": "485bf7d3-0215-45af-87dc-538868000001",
@@ -778,6 +752,9 @@
           "themeStyle": "theme",
           "width": 64
         }
+      },
+      "tab_zoom": {
+        "enabled": true
       }
     },
     "welcome": {
