@@ -9,7 +9,7 @@ set -eu
 if [ -f "${HOME}/.config/.env" ]; then source "${HOME}/.config/.env"; fi
 
 if ! [ -x "${HOME}/.local/bin/semver" ]; then
-  wget --header "${WGET_GH_HEADER}" -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
+  wget --header "${WGET_GH_AUTH}" -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
   chmod +x "${HOME}/.local/bin/semver"
 fi
 
@@ -38,7 +38,7 @@ WGET_GH_AUTH="Authorization: token ${GH_TOKEN}"
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/bat.deb"
   fi
 fi
@@ -56,7 +56,7 @@ if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
   #{{  else }}
   URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-debian-{{ .chezmoi.osRelease.versionCodename }}-v${LIBJXL_VER}.tar.gz"
   #{{   end }}
-  wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
+  wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
   (
     cd "${TEMP_FOLDER}"
     tar -xzf libjxl.tar.gz
@@ -72,8 +72,8 @@ fi
 ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s zoxide 2>&1 | grep "Version" | grep -q "${ZOXIDE_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}_${ARCH}.deb" ||
-      wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}-1_${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}_${ARCH}.deb" ||
+      wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/zoxide.deb" -q "https://github.com/ajeetdsouza/zoxide/releases/download/v${ZOXIDE_VER}/zoxide_${ZOXIDE_VER}-1_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/zoxide.deb"
   fi
 fi
@@ -81,7 +81,7 @@ fi
 FD_VER=$(curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s fd 2>&1 | grep "Version" | grep -q "${FD_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/fd.deb" -q "https://github.com/sharkdp/fd/releases/download/v${FD_VER}/fd_${FD_VER}_${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/fd.deb" -q "https://github.com/sharkdp/fd/releases/download/v${FD_VER}/fd_${FD_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/fd.deb"
   fi
 fi
@@ -106,7 +106,7 @@ fi
 LAZYGIT_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazygit" ] || ! "/usr/local/bin/lazygit" --version | grep -q "version=${LAZYGIT_VER}"; then
   if [ -n "${UARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/lazygit.tar.gz" -q "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VER}_Linux_${UARCH}.tar.gz"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/lazygit.tar.gz" -q "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VER}_Linux_${UARCH}.tar.gz"
     (
       cd "${TEMP_FOLDER}"
       tar -xf lazygit.tar.gz
@@ -118,7 +118,7 @@ fi
 LAZYDOCKER_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --version | grep "version" | grep -q "${LAZYDOCKER_VER}"; then
   if [ -n "${UARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/lazydocker.tar.gz" -q "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${LAZYDOCKER_VER}_Linux_${UARCH}.tar.gz"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/lazydocker.tar.gz" -q "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${LAZYDOCKER_VER}_Linux_${UARCH}.tar.gz"
     (
       cd "${TEMP_FOLDER}"
       tar -xf lazydocker.tar.gz
@@ -130,7 +130,7 @@ fi
 LAZYNPM_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazynpm/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | grep -q "version=${LAZYNPM_VER}"; then
   if [ -n "${UARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/lazynpm.tar.gz" -q "https://github.com/jesseduffield/lazynpm/releases/latest/download/lazynpm_${LAZYNPM_VER}_Linux_${UARCH}.tar.gz"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/lazynpm.tar.gz" -q "https://github.com/jesseduffield/lazynpm/releases/latest/download/lazynpm_${LAZYNPM_VER}_Linux_${UARCH}.tar.gz"
     (
       cd "${TEMP_FOLDER}"
       tar -xf lazynpm.tar.gz
@@ -142,7 +142,7 @@ fi
 OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/obsidian.deb"
   fi
 fi
@@ -167,7 +167,7 @@ RCLONE_VER=$(curl --silent "https://api.github.com/repos/rclone/rclone/releases/
 if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}" &&
   [ "$(semver compare $(rclone version | grep rclone | cut -d 'v' -f2) ${RCLONE_VER})" = -1 ]; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/rclone.deb" -q "https://github.com/rclone/rclone/releases/download/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/rclone.deb" -q "https://github.com/rclone/rclone/releases/download/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/rclone.deb"
   fi
 fi
@@ -175,7 +175,7 @@ fi
 DELTA_VER=$(curl --silent "https://api.github.com/repos/dandavison/delta/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s git-delta 2>&1 | grep "Version" | grep -q "${DELTA_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/delta.deb" -q "https://github.com/dandavison/delta/releases/download/${DELTA_VER}/git-delta_${DELTA_VER}_${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/delta.deb" -q "https://github.com/dandavison/delta/releases/download/${DELTA_VER}/git-delta_${DELTA_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/delta.deb"
   fi
 fi
@@ -183,8 +183,8 @@ fi
 PANDOC_VER=$(curl --silent "https://api.github.com/repos/jgm/pandoc/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s pandoc 2>&1 | grep "Version" | grep -q "${PANDOC_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-${ARCH}.deb" || \
-      wget --header "${WGET_GH_HEADER}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-1-${ARCH}.deb"
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-${ARCH}.deb" || \
+      wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-1-${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/pandoc.deb"
   fi
 fi
