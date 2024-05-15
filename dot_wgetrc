@@ -1,0 +1,5 @@
+retry_connrefused = on
+read-timeout = 20
+timeout = 15
+tries = 0
+continue = on
