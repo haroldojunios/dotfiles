@@ -192,6 +192,12 @@ return {
           mode = "v",
           desc = "range format",
         },
+        {
+          key = "gK",
+          func = vim.lsp.buf.signature_help,
+          mode = "n",
+          desc = "signature_help",
+        },
       },
       mason = true,
       lsp = {
