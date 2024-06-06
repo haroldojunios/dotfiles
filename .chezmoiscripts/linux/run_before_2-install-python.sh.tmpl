@@ -1,0 +1,28 @@
+{{- if ne .osid "android" -}}
+#!/bin/bash
+{{- else -}}
+#!/data/data/com.termux/files/usr/bin/bash
+{{ end }}
+
+set -eu
+
+if ! command -v pipx &>/dev/null; then
+  python3 -m pip install --user pipx
+fi
+
+pipx ensurepath &>/dev/null
+
+packagesList=(
+  "mdformat;\
+--preinstall mdformat-frontmatter;\
+--preinstall mdformat-gfm;\
+--preinstall mdformat-myst;\
+--preinstall mdformat-tables"
+)
+
+for packages in "${packagesList[@]}"; do
+  IFS=';' read -ra packs <<<"${packages}"
+  if ! pipx list --short 2>/dev/null | grep -q "${packs[0]}"; then
+    pipx install ${packs[@]}
+  fi
+done
