@@ -9,7 +9,7 @@ CustomCursorColor=170,0,255
 UseCustomCursorColor=true
 
 [General]
-Command=/usr/bin/tmux
+Command=/usr/bin/fish
 Name=My Profile
 Parent=FALLBACK/
 TerminalColumns=500
