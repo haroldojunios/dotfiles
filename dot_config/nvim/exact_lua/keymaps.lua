@@ -35,4 +35,4 @@ map("i", "<C-q>", "<Esc>:qa<CR>")
 map("i", "<CR>", "<CR>.<BS>")
 
 -- delete without yanking
-map("n", "d", '"_d')
+map({ "n", "v" }, "d", '"_d')

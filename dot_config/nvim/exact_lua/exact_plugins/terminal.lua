@@ -10,6 +10,9 @@ return {
       },
       on_open = function(t)
         vim.wo[t.window].cc = ""
+        if package.loaded["virt-column"] then
+          require("virt-column").setup_buffer({ virtcolumn = "" })
+        end
       end,
     })
   end,

@@ -74,19 +74,19 @@ return {
       })
     end,
   },
-  {
-    "nvim-treesitter-context",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    event = "BufEnter",
-    keys = {
-      {
-        "n",
-        "[c",
-        function()
-          require("treesitter-context").go_to_context(vim.v.count1)
-        end,
-        { silent = true },
-      },
-    },
-  },
+  -- {
+  --   "nvim-treesitter-context",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   event = "BufEnter",
+  --   keys = {
+  --     {
+  --       "n",
+  --       "[c",
+  --       function()
+  --         require("treesitter-context").go_to_context(vim.v.count1)
+  --       end,
+  --       { silent = true },
+  --     },
+  --   },
+  -- },
 }

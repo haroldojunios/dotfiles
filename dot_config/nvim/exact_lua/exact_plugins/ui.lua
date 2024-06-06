@@ -32,12 +32,7 @@ return {
     end,
   },
   {
-    "xiyaowong/virtcolumn.nvim",
+    "lukas-reineke/virt-column.nvim",
+    opts = { char = "┊" },
   },
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   config = function()
-  --     require("ibl").setup()
-  --   end,
-  -- },
 }
