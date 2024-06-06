@@ -22,7 +22,7 @@ conky.config = {
     draw_outline = false,
     draw_shades = false,
     extra_newline = false,
-    font = 'IosevkaTerm Nerd Font:size=10',
+    font = 'Iosevka Nerd Font:size=10',
     gap_x = 20,
     gap_y = 0,
     minimum_height = 250,
@@ -54,7 +54,7 @@ conky.config = {
     use_xft = true,
 }
 
-{{- $symbols_font := "IosevkaTerm Nerd Font:size=20" }}
+{{- $symbols_font := "Iosevka Nerd Font:size=20" }}
 {{- $interface := (output "ip" "-4" "route" "ls" | regexFind "^default.*" | split " ")._4 }}
 {{- $isWifi := stat (joinPath "/sys/class/net/" $interface "wireless") }}
 {{- $nproc := output "nproc" | trim | int }}

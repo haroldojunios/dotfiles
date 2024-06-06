@@ -790,22 +790,22 @@
       "default_font_size": 14,
       "fonts": {
         "cursive": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         },
         "fantasy": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         },
         "fixed": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         },
         "sansserif": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         },
         "serif": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         },
         "standard": {
-          "Zyyy": "IosevkaTerm Nerd Font"
+          "Zyyy": "Iosevka Nerd Font"
         }
       },
       "force_dark_mode_enabled": false

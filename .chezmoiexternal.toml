@@ -4,12 +4,12 @@ type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
 refreshPeriod = "168h"
 
-[".local/share/fonts/IosevkaTermNerdFont"]
+[".local/share/fonts/IosevkaNerdFont"]
 type = "archive"
-url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
 exact = true
 refreshPeriod = "168h"
-include = ["**/*.otf", "**/*.ttf"]
+include = ["IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-Italic.ttf","IosevkaNerdFont-Regular.ttf"]
 
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
@@ -91,8 +91,8 @@ refreshPeriod = "168h"
 {{ if eq .osid "android" }}
 [".termux/font.ttf"]
 type = "archive-file"
-url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz"
-path = "IosevkaTermNerdFont-Regular.ttf"
+url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
+path = "IosevkaNerdFont-Regular.ttf"
 refreshPeriod = "168h"
 
 [".termux/colors.properties"]
