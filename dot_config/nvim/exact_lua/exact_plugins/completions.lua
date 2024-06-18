@@ -3,17 +3,14 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
-    },
-  },
-  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "onsails/lspkind.nvim",
+      "hrsh7th/cmp-calc",
       "kdheepak/cmp-latex-symbols",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip", --luasnip
+      "rafamadriz/friendly-snippets", --luasnip
     },
     config = function()
       local cmp = require("cmp")
@@ -33,13 +30,17 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Esc>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({
+            select = true,
+            behavior = cmp.ConfirmBehavior.Replace,
+          }),
         }),
         sources = cmp.config.sources({
+          { name = "calc" },
+          { name = "codeium" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
-          { name = "codeium" },
           {
             name = "latex_symbols",
             option = {
