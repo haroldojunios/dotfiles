@@ -7,70 +7,74 @@
 # Feel free to modity this script ;)
 ]]
 
+-- {{- $windowType := "dock" }}
+-- {{- if contains "plasmashell 6" (output "plasmashell" "--version") }}
+-- {{-   $windowType = "desktop" }}
+-- {{- end }}
+
 conky.config = {
-    alignment = 'middle_right',
-    background = true,
-    border_width = 1,
-    cpu_avg_samples = 2,
-    default_color = 'gray',
-    default_outline_color = 'white',
-    default_shade_color = 'white',
-    color1 = '1793d1',
-    double_buffer = true,
-    draw_borders = false,
-    draw_graph_borders = true,
-    draw_outline = false,
-    draw_shades = false,
-    extra_newline = false,
-    font = 'Iosevka Nerd Font:size=10',
-    gap_x = 20,
-    gap_y = 0,
-    minimum_height = 250,
-    minimum_width = 350,
-    net_avg_samples = 3,
-    no_buffers = true,
-    -- on_bottom = yes,
-    out_to_console = false,
-    out_to_ncurses = false,
-    out_to_stderr = false,
-    out_to_x = true,
-    own_window = true,
-    own_window_class = 'Conky',
-    --own_window_transparent = false,
-    own_window_argb_visual = true,
-    own_window_argb_value = 128,
-    own_window_colour = '000000',
-    own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
-    own_window_transparent = true,
-    own_window_type = 'dock',
-    show_graph_range = false,
-    show_graph_scale = false,
-    stippled_borders = 0,
-    short_units = true,
-    text_buffer_size = 10000,
-    update_interval = 2,
-    uppercase = false,
-    use_spacer = 'none',
-    use_xft = true,
+  alignment = "middle_right",
+  background = true,
+  border_width = 1,
+  cpu_avg_samples = 2,
+  default_color = "gray",
+  default_outline_color = "white",
+  default_shade_color = "white",
+  color1 = "1793d1",
+  double_buffer = true,
+  draw_borders = false,
+  draw_graph_borders = true,
+  draw_outline = false,
+  draw_shades = false,
+  extra_newline = false,
+  font = "IosevkaTerm Nerd Font:size=8",
+  gap_x = 20,
+  gap_y = 0,
+  minimum_height = 250,
+  minimum_width = 350,
+  net_avg_samples = 3,
+  no_buffers = true,
+  -- on_bottom = yes,
+  out_to_console = false,
+  out_to_ncurses = false,
+  out_to_stderr = false,
+  out_to_x = true,
+  own_window = true,
+  own_window_class = "Conky",
+  own_window_argb_visual = true,
+  own_window_argb_value = 128,
+  own_window_colour = "000000",
+  own_window_hints = "undecorated,sticky,skip_taskbar,skip_pager,below",
+  own_window_transparent = true,
+  own_window_type = "{{ $windowType }}",
+  show_graph_range = false,
+  show_graph_scale = false,
+  stippled_borders = 0,
+  short_units = true,
+  text_buffer_size = 10000,
+  update_interval = 2,
+  uppercase = false,
+  use_spacer = "none",
+  use_xft = true,
 }
 
-{{- $symbols_font := "Iosevka Nerd Font:size=20" }}
-{{- $interface := (output "ip" "-4" "route" "ls" | regexFind "^default.*" | split " ")._4 }}
-{{- $isWifi := stat (joinPath "/sys/class/net/" $interface "wireless") }}
-{{- $nproc := output "nproc" | trim | int }}
-{{- $nbits := output "getconf" "LONG_BIT" | trim | int }}
-{{- $cpuIcon := "󰻠" }}
-{{- if eq $nbits 32 }}
-{{-   $cpuIcon = "󰻟" }}
-{{- end }}
-{{- $distroIcon := "" }}
-{{ if .isRasp }}
-{{-   $distroIcon = "" }}
-{{- else if eq .osid "linux-ubuntu" }}
-{{-   $distroIcon = "" }}
-{{- else if eq .osid "linux-arch" }}
-{{-   $distroIcon = "" }}
-{{- end }}
+-- {{- $symbols_font := "IosevkaTerm Nerd Font:size=16" }}
+-- {{- $interface := (output "ip" "-4" "route" "ls" | regexFind "^default.*" | split " ")._4 }}
+-- {{- $isWifi := stat (joinPath "/sys/class/net/" $interface "wireless") }}
+-- {{- $nproc := output "nproc" | trim | int }}
+-- {{- $nbits := output "getconf" "LONG_BIT" | trim | int }}
+-- {{- $cpuIcon := "󰻠" }}
+-- {{- if eq $nbits 32 }}
+-- {{-   $cpuIcon = "󰻟" }}
+-- {{- end }}
+-- {{- $distroIcon := "" }}
+-- {{ if .isRasp }}
+-- {{-   $distroIcon = "" }}
+-- {{- else if eq .osid "linux-ubuntu" }}
+-- {{-   $distroIcon = "" }}
+-- {{- else if eq .osid "linux-arch" }}
+-- {{-   $distroIcon = "" }}
+-- {{- end }}
 
 conky.text = [[
 ${color1}${font {{ $symbols_font }}}{{ $distroIcon }} ${font} ${voffset -22} $hr${color}

@@ -33,20 +33,25 @@
 {{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
 {{- end -}}
 
+{{- $isBigScreen := false -}}
+{{- $checkSize := joinPath .chezmoi.homeDir ".local/bin/get-screen-size" -}}
+{{- $checkWidth := joinPath .chezmoi.homeDir ".local/bin/get-screen-width" -}}
+{{- if and (eq .chezmoi.os "linux") (isExecutable $checkSize) (isExecutable $checkWidth) -}}
+{{-   $isBigScreen = or (gt (output $checkSize | int) 28) (gt (output $checkWidth | int) 1920) -}}
+{{- end -}}
+
 encryption = "age"
 [age]
-    identity = "~/.config/key.txt"
-    recipient = "age1d04ej32j97pcsctxxcm475l5z5nttp6nzd4jr57ruj45qw8hqgwqtpsdzw"
+  identity = "~/.config/key.txt"
+  recipient = "age1d04ej32j97pcsctxxcm475l5z5nttp6nzd4jr57ruj45qw8hqgwqtpsdzw"
 [cd]
-    command = "fish"
+  command = "fish"
 [data]
-    osid = {{ $osid | quote }}
-    osidLike = {{ $osidLike | quote }}
-    isWork = {{ $isWork }}
-    isWSL = {{ $isWSL }}
-    isRasp = {{ $isRasp }}
-    isServer = {{ $isServer }}
-    installDE = {{ $installDE }}
-# [edit]
-#     command = {{ if $installDE -}} "code" {{ else -}} "micro" {{- end }}
-#     {{ if $installDE -}} args = "--wait" {{- end }}
+  isBigScreen = {{ $isBigScreen }}
+  installDE = {{ $installDE }}
+  isRasp = {{ $isRasp }}
+  isServer = {{ $isServer }}
+  isWSL = {{ $isWSL }}
+  isWork = {{ $isWork }}
+  osid = {{ $osid | quote }}
+  osidLike = {{ $osidLike | quote }}

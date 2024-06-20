@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf ${TEMP_FOLDER}' EXIT
 
-command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort delay --protocol "http,https" --save /etc/pacman.d/mirrorlist
+# command -v reflector &>/dev/null && sudo reflector --latest 50 --number 20 --sort delay --protocol "http,https" --save /etc/pacman.d/mirrorlist
 
 if grep -q "#" /etc/pacman.conf; then
   sudo bash -c "cat >/etc/pacman.conf" <<EOF

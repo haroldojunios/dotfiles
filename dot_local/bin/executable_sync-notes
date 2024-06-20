@@ -10,26 +10,21 @@ fi
 path="${HOME}/Documents/notes"
 
 if command -v termux-setup-storage &>/dev/null; then
-  path_out="${HOME}/storage/shared/Documents/notes"
-  if [ -d "${path}" ] && [ -d "${path_out}" ]; then
-    rsync -a --delete --exclude=".git" "${path_out}/" "${path}"
-  fi
+  path="${HOME}/storage/shared/Documents/notes"
 fi
 
-if ! [ -d "${HOME}/Documents/notes" ]; then
-  git -C "${HOME}/Documents" clone git@github.com:haroldojunios/notes.git
+if ! [ -d "${path}" ]; then
+  git -C "$(dirname ${path})" clone git@github.com:haroldojunios/notes.git
 else
-  cd "${HOME}/Documents/notes"
-  git pull --rebase --autostash
+  cd "${path}"
+  if git pull --rebase --autostash |& tee /dev/tty | grep -q 'Applying autostash resulted in conflicts'; then
+    echo "Git conflicts detected" >&2
+    exit 1
+  fi
   if [ -n "$(git status --porcelain)" ]; then
-    command -v prettier &>/dev/null && prettier **/*.md --write
+    command -v prettier &>/dev/null && prettier **/*.md --write &>/dev/null
     git add .
     git commit -m "$(date --utc -Iseconds)"
     git push
   fi
-fi
-
-if command -v termux-setup-storage &>/dev/null; then
-  mkdir -p "${path_out}"
-  rsync -a --delete --exclude=".git" "${path}/" "${path_out}"
 fi
