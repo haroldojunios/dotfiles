@@ -74,13 +74,6 @@ refreshPeriod = "168h"
 {{ end }}
 
 {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
-[".local/bin"]
-type = "archive"
-url = "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-{{ .chezmoi.arch }}-static.tar.xz"
-refreshPeriod = "168h"
-stripComponents = 1
-include = ["*/ff*"]
-
 [".local/bin/latexindent"]
 type = "file"
 url = "https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexindent-linux"
