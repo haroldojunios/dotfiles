@@ -15,9 +15,10 @@ if ! [ -f "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" ] ||
   trap 'rm -rf "${TMP_DIR}"' EXIT
 
   wget -O "${TMP_DIR}/iosevka.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-Iosevka-${IOSEVKA_VER}.zip"
-  mkdir -p "${HOME}/.local/share/fonts/Iosevka"
-  unzip -o "${TMP_DIR}/iosevka.zip" -d "${TMP_DIR}/iosevka"
-  mv "${TMP_DIR}/iosevka/Iosevka-"{Bold,BoldItalic,Italic,Regular}.ttf "${HOME}/.local/share/fonts/Iosevka"
+  unzip -j "${TMP_DIR}/iosevka.zip" Iosevka-{Bold,BoldItalic,Italic,Regular}.ttf -d "${HOME}/.local/share/fonts/Iosevka"
+
+  # wget -O "${TMP_DIR}/iosevkaterm.zip" "https://github.com/be5invis/Iosevka/releases/download/v${IOSEVKA_VER}/PkgTTF-IosevkaTerm-${IOSEVKA_VER}.zip"
+  # unzip -j "${TMP_DIR}/iosevkaterm.zip" IosevkaTerm-{Bold,BoldItalic,Italic,Regular}.ttf -d "${HOME}/.local/share/fonts/IosevkaTerm"
 fi
 
 if command -v fnt &>/dev/null; then
