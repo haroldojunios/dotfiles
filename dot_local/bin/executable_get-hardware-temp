@@ -1,30 +1,43 @@
-#!/bin/bash
+#!/usr/bin/python3
+import shutil
+import subprocess
+import sys
 
-if [[ "${1}" == 'gpu' ]]; then
-  gpu_temp='N/A'
-  if command -v nvidia-smi &>/dev/null; then
-    gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
-  fi
+import psutil
 
-  echo "${gpu_temp}°C"
-else
-  files=(/sys/class/thermal/thermal_zone*/type)
+is_gpu = True if len(sys.argv) > 1 and sys.argv[1] == "gpu" else False
 
-  cpu_temp='N/A'
+temp = 0
+if is_gpu:
+    if shutil.which("nvidia-smi") is not None:
+        proc = subprocess.run(
+            [
+                "nvidia-smi",
+                "--query-gpu=temperature.gpu",
+                "--format=csv,noheader",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        gpu_temp = proc.stdout.strip()
+        try:
+            temp = float(gpu_temp)
+        except ValueError:
+            pass
+else:
+    try:
+        coretemp = psutil.sensors_temperatures()["coretemp"]
+        cpu_temp = None
+        for t in coretemp:
+            if "id 0" in t.label:
+                temp = t.current
+                break
+        else:
+            temp = 0
+    except KeyError:
+        pass
 
-  for f in "${files[@]}"; do
-    if grep -q x86_pkg_temp "${f}"; then
-      cpu_temp=$(cat /sys/class/thermal/thermal_zone${i}/temp)
-      cpu_temp=$(echo "scale=1; ${cpu_temp}/1000" | bc -l)
-      break
-    fi
-    i=$((i + 1))
-  done
-
-  if [ "${cpu_temp}" = 'N/A' ] && [ -f /sys/class/hwmon/hwmon1/temp1_input ]; then
-    cpu_temp=$(cat /sys/class/hwmon/hwmon1/temp1_input)
-    cpu_temp=$(echo "scale=1; ${cpu_temp}/1000" | bc -l)
-  fi
-
-  echo "${cpu_temp}°C"
-fi
+if temp:
+    print(f"{round(temp)}°C")
+else:
+    print("N/A")
