@@ -122,7 +122,7 @@ ${color1}${goto 35}IP: ${goto 140}${color}${addr {{ $interface }}}
 ${color1}${goto 35}Total Down/Up: ${goto 140}${color}${totaldown {{ $interface }}}/${totalup {{ $interface }}}
 ${color1}${voffset 8}${goto 35}Speed Down: ${alignr}${color}${downspeed {{ $interface }}}B/s${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 ${voffset -12}
-${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}B/s${voffset -12} ${downspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
+${color1}${voffset 8}${goto 35}Speed Up: ${alignr}${color}${upspeed {{ $interface }}}B/s${voffset -12} ${upspeedgraph {{ $interface }} 25,150 1793d1 1793d1}
 
 ${color1}${font {{ $symbols_font }}} ${font} ${voffset -22} $hr${color}
 #${voffset 70}
