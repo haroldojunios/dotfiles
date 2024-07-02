@@ -8,6 +8,10 @@ set -U fish_features qmark-noglob
 set -x WINIT_X11_SCALE_FACTOR 1
 set -x npm_config_prefix "$HOME/.local"
 
+if set -q KITTY_WINDOW_ID && type -q kitten
+    alias ssh="kitten ssh"
+end
+
 {{ if eq .osid "android" }}
 set -x USER haroldo
 
