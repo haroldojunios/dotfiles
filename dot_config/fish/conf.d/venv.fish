@@ -8,7 +8,7 @@ function __auto_source_venv --on-variable PWD --description "Activate/Deactivate
         set dir (pwd)
     end
 
-    if not test -f "$dir/pyproject.toml" || not set venv_dir (poetrya env info --path 2>/dev/null)
+    if not test -f "$dir/pyproject.toml" || not set venv_dir (poetry env info --path 2>/dev/null)
         # Find a virtual environment in the directory
         set VENV_DIR_NAMES env .env venv .venv
         for venv_dir in $dir/$VENV_DIR_NAMES
