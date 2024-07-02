@@ -189,4 +189,16 @@ if ! dpkg -s pandoc 2>&1 | grep "Version" | grep -q "${PANDOC_VER}"; then
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/pandoc.deb"
   fi
 fi
+
+EXIFTOOL_VER=$(curl --silent "https://api.github.com/repos/exiftool/exiftool/tags" --header "${GH_AUTH}" | jq -r '.[0].name')
+if ! exiftool -ver 2>/dev/null | grep -q "${EXIFTOOL_VER}"; then
+  (
+    cd "${TEMP_FOLDER}"
+    git clone --depth 1 --branch "${EXIFTOOL_VER}" https://github.com/exiftool/exiftool.git
+    cd exiftool
+    perl Makefile.PL
+    make test >/dev/null
+    sudo make install
+  )
+fi
 {{ end }}
