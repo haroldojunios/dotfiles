@@ -9,7 +9,7 @@ type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
 exact = true
 refreshPeriod = "168h"
-include = ["IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-Italic.ttf","IosevkaNerdFont-Regular.ttf"]
+include = ["IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-BoldItalic.ttf","IosevkaNerdFont-Italic.ttf","IosevkaNerdFont-Regular.ttf"]
 
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
