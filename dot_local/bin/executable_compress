@@ -1,0 +1,379 @@
+#!/usr/bin/python3
+import json
+import logging
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+import click
+import humanize
+from exiftool import ExifToolHelper
+from ffmpeg import FFmpeg, FFmpegError
+from pypdf import PdfReader, PdfWriter
+from tqdm import tqdm
+
+IS_NVIDIA = shutil.which("nvidia-smi") is not None
+
+logger = logging.getLogger("pypdf")
+logger.setLevel(logging.ERROR)
+
+
+def touch(fname, mode=0o666, dir_fd=None, **kwargs):
+    flags = os.O_CREAT | os.O_APPEND
+    with os.fdopen(os.open(fname, flags=flags, mode=mode, dir_fd=dir_fd)) as f:
+        os.utime(
+            f.fileno() if os.utime in os.supports_fd else fname,
+            dir_fd=None if os.supports_fd else dir_fd,
+            **kwargs,
+        )
+
+
+def run_cmd(cmd):
+    try:
+        proc = subprocess.run(
+            shlex.split(cmd),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        return proc.returncode == 0
+    except Exception:
+        return False
+
+
+def compare_size(input_file, output_file):
+    tqdm.write(
+        f"    {natural_size(input_file.stat().st_size)} ->"
+        f" {natural_size(output_file.stat().st_size)}"
+    )
+
+
+def get_vid_metadata(filename):
+    ffprobe = FFmpeg(executable="ffprobe").input(
+        filename, print_format="json", show_streams=None
+    )
+
+    return json.loads(ffprobe.execute())
+
+
+def compress_vid(input_file, output_file, cq=32):
+    audio_codec = "copy" if is_vid_aac(input_file) else "aac"
+
+    if IS_NVIDIA:
+        options = {
+            "c:v": "hevc_nvenc",
+            "preset": "p7",
+            "pix_fmt": "p010le",
+            "tune": "hq",
+        }
+    else:
+        options = {
+            "c:v": "libx265",
+            "preset": "veryslow",
+            "pix_fmt": "yuv420p10le",
+            "vtag": "hvc1",
+        }
+
+    ffmpeg = (
+        FFmpeg()
+        .option("y")
+        .input(str(input_file), hwaccel="auto")
+        .output(
+            str(output_file),
+            {
+                **options,
+                "c:a": audio_codec,
+                "profile:v": "main10",
+                "rc-lookahead": 32,
+            },
+            strict=2,
+            rc="vbr",
+            vsync=2,
+            cq=cq,
+            qmin=max(1, round(0.75 * cq)),
+            qmax=min(99, 2 * cq),
+            bf=0,
+            metadata="comment=compressed",
+        )
+    )
+
+    # @ffmpeg.on("progress")
+    # def on_progress(progress: Progress):
+    #     tqdm.write(progress)
+    # subprocess.run(ffmpeg.arguments)
+    # exit()
+
+    try:
+        ffmpeg.execute()
+        return True
+    except FFmpegError as e:
+        tqdm.write(f'Failed to compress "{input_file}": {e}', file=sys.stderr)
+        return False
+
+
+def is_vid_compressed(filename):
+    with ExifToolHelper() as et:
+        tags = et.get_tags(filename, tags="comment")
+        return "compressed" in tags[0].get("QuickTime:Comment", "")
+
+
+def is_vid_codec_nvenc(filename):
+    with ExifToolHelper() as et:
+        tags = et.get_tags(filename, tags="CompressorName")
+        return "nvenc" in tags[0].get("QuickTime:CompressorName", "")
+
+
+def is_vid_aac(filename):
+    metadata = get_vid_metadata(filename)
+
+    for stream in metadata["streams"]:
+        if stream["codec_type"] == "audio":
+            return stream["codec_name"].lower() == "aac"
+
+    return False
+
+
+def set_vid_compressed(filename):
+    with ExifToolHelper() as et:
+        et.set_tags(
+            filename,
+            tags={"comment": "compressed"},
+            params=["-P", "-overwrite_original"],
+        )
+
+
+def convert2jxl(input_file, output_file, lossless=True):
+    if lossless:
+        lossless_arg = "--lossless_jpeg=1"
+    else:
+        lossless_arg = "--lossless_jpeg=0 -d 0.5"
+
+    cmd = f'cjxl {lossless_arg} "{input_file}" "{output_file}"'
+    return run_cmd(cmd)
+
+
+def convert2png(input_file, output_file):
+    cmd = f'magick convert -quality 0 "{input_file}" "{output_file}"'
+    return run_cmd(cmd)
+
+
+def convert_img(input_file, jxl_file, png_file, lossless=True):
+    if not convert2jxl(input_file, jxl_file, lossless=lossless):
+        jxl_file.unlink(missing_ok=True)
+        if png_file.exists() or convert2png(input_file, png_file):
+            if not convert2jxl(png_file, jxl_file, lossless=lossless):
+                jxl_file.unlink(missing_ok=True)
+        else:
+            png_file.unlink(missing_ok=True)
+
+    return jxl_file.exists()
+
+
+def compress_img(input_file, output_file):
+    input_file_path = Path(input_file)
+    output_file_path = Path(output_file)
+    if not output_file_path.suffix == ".jxl":
+        raise RuntimeError(f'"{output_file_path}" must be a ".jxl" file')
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp_dir_path = Path(temp_dir)
+
+        lossy_jxl = temp_dir_path / f"{input_file_path.stem}_lossy.jxl"
+        lossless_jxl = temp_dir_path / f"{input_file_path.stem}_lossless.jxl"
+        lossless_png = temp_dir_path / f"{input_file_path.stem}.png"
+
+        convert_img(input_file_path, lossy_jxl, lossless_png, lossless=True)
+        convert_img(
+            input_file_path, lossless_jxl, lossless_png, lossless=False
+        )
+
+        if not lossy_jxl.exists() and not lossless_jxl.exists():
+            return False
+
+        if lossy_jxl.exists() and lossless_jxl.exists():
+            if lossy_jxl.stat().st_size < lossless_jxl.stat().st_size:
+                jxl_file = lossy_jxl
+            else:
+                jxl_file = lossless_jxl
+        elif lossy_jxl.exists():
+            jxl_file = lossy_jxl
+        else:
+            jxl_file = lossless_jxl
+
+        shutil.move(jxl_file, output_file)
+        return True
+
+
+def compress_pdf(input_file, output_file):
+    try:
+        reader = PdfReader(input_file)
+        writer = PdfWriter()
+        metadata = reader.metadata
+
+        for page in reader.pages:
+            writer.add_page(page)
+
+        for page in writer.pages:
+            page.compress_content_streams(level=9)
+
+        if metadata is not None:
+            writer.add_metadata(metadata)
+
+        writer.add_metadata({"/Compressed": "yes"})
+
+        with open(output_file, "wb") as f:
+            writer.write(f)
+
+        return True
+    except Exception:
+        return False
+
+
+def is_pdf_compressed(input_file):
+    try:
+        reader = PdfReader(input_file)
+
+        metadata = reader.metadata or {}
+        return metadata.get("/Compressed", "no") == "yes"
+    except Exception:
+        return False
+
+
+def set_pdf_compressed(input_file):
+    try:
+        writer = PdfWriter(clone_from=input_file)
+        writer.add_metadata({"/Compressed": "yes"})
+
+        with open(input_file, "wb") as f:
+            writer.write(f)
+
+        return True
+    except Exception:
+        return False
+
+
+def natural_size(size: int) -> str:
+    return humanize.naturalsize(size, binary=True, format="%.2f")
+
+
+def compress_all_pdf(input_folder: Path, temp_dir_path: Path):
+    for f in tqdm(
+        sorted(input_folder.rglob("*.pdf")),
+        desc="Compressing PDFs",
+        unit="pdf",
+    ):
+        if is_pdf_compressed(f):
+            continue
+
+        tqdm.write(f'Compressing "{f}"')
+        temp_file = temp_dir_path / f.name
+
+        if not compress_pdf(f, temp_file):
+            tqdm.write(f'Failed to compress "{f}"', file=sys.stderr)
+            continue
+
+        if temp_file.exists():
+            touch(temp_file, times=(f.stat().st_atime, f.stat().st_mtime))
+            compare_size(f, temp_file)
+            if temp_file.stat().st_size < f.stat().st_size:
+                shutil.move(temp_file, f)
+            else:
+                set_pdf_compressed(f)
+
+
+def compress_all_img(input_folder: Path, temp_dir_path: Path):
+    for f in tqdm(
+        sorted(input_folder.rglob("*.jpg"))
+        + sorted(input_folder.rglob("*.heic"))
+        + sorted(input_folder.rglob("*.png"))
+        + sorted(input_folder.rglob("*.bmp")),
+        desc="Compressing images",
+        unit="img",
+    ):
+        tqdm.write(f'Compressing "{f}"')
+        temp_file = temp_dir_path / f"{f.stem}.jxl"
+
+        if not compress_img(f, temp_file):
+            tqdm.write(f'Failed to compress "{f}"', file=sys.stderr)
+            continue
+
+        if temp_file.exists():
+            touch(temp_file, times=(f.stat().st_atime, f.stat().st_mtime))
+            compare_size(f, temp_file)
+            if temp_file.stat().st_size < f.stat().st_size:
+                f.unlink()
+                shutil.move(temp_file, f.with_suffix(".jxl"))
+
+
+def compress_all_vid(input_folder: Path, temp_dir_path: Path):
+    for f in tqdm(
+        sorted(input_folder.rglob("*.mp4"))
+        + sorted(input_folder.rglob("*.mov"))
+        + sorted(input_folder.rglob("*.wmv"))
+        + sorted(input_folder.rglob("*.mkv"))
+        + sorted(input_folder.rglob("*.avi"))
+        + sorted(input_folder.rglob("*.webm")),
+        desc="Compressing videos",
+        unit="vid",
+    ):
+        if is_vid_compressed(f):
+            continue
+
+        tqdm.write(f'Compressing "{f}"')
+        temp_file = temp_dir_path / f"{f.stem}.mp4"
+
+        if not compress_vid(f, temp_file):
+            continue
+
+        if temp_file.exists():
+            touch(temp_file, times=(f.stat().st_atime, f.stat().st_mtime))
+            compare_size(f, temp_file)
+            if temp_file.stat().st_size < f.stat().st_size:
+                f.unlink()
+                shutil.move(temp_file, f.with_suffix(".mp4"))
+            else:
+                set_vid_compressed(f)
+
+
+@click.command()
+@click.argument(
+    "folders",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    nargs=-1,
+)
+@click.option("--pdfs/--no-pdfs", "-p/-P", default=True)
+@click.option("--images/--no-images", "-i/-I", default=True)
+@click.option("--videos/--no-videos", "-v/-V", default=True)
+def main(folders: tuple[Path], pdfs: bool, images: bool, videos: bool):
+    if not pdfs and not images and not videos:
+        raise RuntimeError("No compression options selected")
+
+    if not folders:
+        folders = (Path("."),)
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp_dir_path = Path(temp_dir)
+        for folder in folders:
+            folder_str = (
+                folder.resolve()
+                .as_posix()
+                .replace(Path.home().as_posix(), "~")
+            )
+            click.echo(f'Processing "{folder_str}"')
+            if pdfs:
+                compress_all_pdf(folder, temp_dir_path)
+            if images:
+                compress_all_img(folder, folder)
+            if videos:
+                compress_all_vid(folder, temp_dir_path)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass

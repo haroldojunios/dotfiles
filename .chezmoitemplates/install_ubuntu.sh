@@ -218,6 +218,7 @@ packageList=(
   build-essential
   clang
   cmake
+  codespell
   conky-all
   crudini
   curl
@@ -249,8 +250,10 @@ packageList=(
   perl
   python-is-python3
   python3
+  python3-click
   python3-gi # gtk
   python3-isort
+  python3-mypy
   python3-pip
   python3-psutil
   python3-requests
