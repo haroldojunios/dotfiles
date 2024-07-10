@@ -99,13 +99,14 @@ format = "@[$hostname]($style)"
 ssh_only = true
 style = "bold dimmed green"
 trim_at = "-"
+ssh_symbol = " "
 
 {{ if ne .osid "android" -}}
 [localip]
 disabled = false
 ssh_only = true
 format = '[\($localipv4\)]($style)'
-{{ end -}}
+{{- end }}
 
 [shlvl]
 disabled = true
@@ -127,6 +128,7 @@ style = "purple"
 truncate_to_repo = true
 truncation_length = 3
 truncation_symbol = "…/"
+read_only = " 󰌾"
 
 [os]
 disabled = false
@@ -176,10 +178,10 @@ time_format = "%T"
 
 [memory_usage]
 disabled = false
-format = '[$symbol ${ram} \(${ram_pct}\)( | ${swap})]($style) '
+format = '[$symbol${ram}\(${ram_pct}\)(|${swap})]($style) '
 style = "cyan"
 threshold = -1
-symbol = "󰍛"
+symbol = "󰍛 "
 
 # SYMBOLS
 [status]
@@ -210,9 +212,6 @@ symbol = " "
 
 [dart]
 symbol = " "
-
-[directory]
-read_only = " 󰌾"
 
 [docker_context]
 symbol = " "
@@ -247,9 +246,6 @@ symbol = " "
 [hg_branch]
 symbol = " "
 
-[hostname]
-ssh_symbol = " "
-
 [java]
 symbol = " "
 
@@ -261,9 +257,6 @@ symbol = " "
 
 [lua]
 symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
 
 [meson]
 symbol = "󰔷 "
