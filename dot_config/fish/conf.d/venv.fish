@@ -11,8 +11,9 @@ function __auto_source_venv --on-variable PWD --description "Activate/Deactivate
     if not test -f "$dir/pyproject.toml" || not set venv_dir (poetry env info --path 2>/dev/null)
         # Find a virtual environment in the directory
         set VENV_DIR_NAMES env .env venv .venv
-        for venv_dir in $dir/$VENV_DIR_NAMES
-            if test -e "$venv_dir/bin/activate.fish"
+        for venv in $dir/$VENV_DIR_NAMES
+            if test -e "$venv/bin/activate.fish"
+                set venv_dir $venv
                 break
             end
         end
