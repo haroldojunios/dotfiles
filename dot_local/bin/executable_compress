@@ -309,7 +309,9 @@ def compress_all_img(input_folder: Path, temp_dir_path: Path):
                 shutil.move(temp_file, f.with_suffix(".jxl"))
 
 
-def compress_all_vid(input_folder: Path, temp_dir_path: Path):
+def compress_all_vid(
+    input_folder: Path, temp_dir_path: Path, video_quality: int
+):
     for f in tqdm(
         sorted(input_folder.rglob("*.mp4"))
         + sorted(input_folder.rglob("*.mov"))
@@ -326,7 +328,7 @@ def compress_all_vid(input_folder: Path, temp_dir_path: Path):
         tqdm.write(f'Compressing "{f}"')
         temp_file = temp_dir_path / f"{f.stem}.mp4"
 
-        if not compress_vid(f, temp_file):
+        if not compress_vid(f, temp_file, video_quality):
             continue
 
         if temp_file.exists():
@@ -348,7 +350,14 @@ def compress_all_vid(input_folder: Path, temp_dir_path: Path):
 @click.option("--pdfs/--no-pdfs", "-p/-P", default=True)
 @click.option("--images/--no-images", "-i/-I", default=True)
 @click.option("--videos/--no-videos", "-v/-V", default=True)
-def main(folders: tuple[Path], pdfs: bool, images: bool, videos: bool):
+@click.option("--video-quality", "-q", type=int, default=25)
+def main(
+    folders: tuple[Path],
+    pdfs: bool,
+    images: bool,
+    videos: bool,
+    video_quality: int,
+):
     if not pdfs and not images and not videos:
         raise RuntimeError("No compression options selected")
 
@@ -369,7 +378,7 @@ def main(folders: tuple[Path], pdfs: bool, images: bool, videos: bool):
             if images:
                 compress_all_img(folder, folder)
             if videos:
-                compress_all_vid(folder, temp_dir_path)
+                compress_all_vid(folder, temp_dir_path, video_quality)
 
 
 if __name__ == "__main__":
