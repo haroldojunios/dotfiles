@@ -7,6 +7,27 @@ set -x MICRO_TRUECOLOR 1
 set -U fish_features qmark-noglob
 set -x WINIT_X11_SCALE_FACTOR 1
 set -x npm_config_prefix "$HOME/.local"
+set -x BAT_STYLE 'numbers,changes,grid,header-filename,header-filesize'
+set -x BAT_THEME 'Catppuccin Mocha'
+# nnn
+set BLK 03
+set CHR 03
+set DIR 04
+set EXE 02
+set REG 07
+set HARDLINK 05
+set SYMLINK 05
+set MISSING 08
+set ORPHAN 01
+set FIFO 06
+set SOCK 03
+set UNKNOWN 01
+set -x NNN_COLORS "#04020301;4231"
+set -x NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
+set -x NNN_PLUG 'f:finder;o:fzopen;p:preview-tui;d:diffs'
+set -x NNN_PREVIEWDIR "$HOME/.cache/nnn/previews"
+set -x NNN_BATTHEME $BAT_THEME
+set -x NNN_BATSTYLE $BAT_STYLE
 
 if set -q KITTY_WINDOW_ID && type -q kitten
     alias ssh="kitten ssh"

@@ -225,6 +225,7 @@ packageList=(
   jq
   lazydocker
   lazygit
+  libarchive
   libjxl
   libmupdf
   make
@@ -236,6 +237,7 @@ packageList=(
   neovim-remote
   netcat
   ninja
+  nnn
   nodejs
   numlockx
   p7zip

@@ -26,6 +26,7 @@ packageList=(
   imagemagick
   jq
   lazygit
+  libarchive
   lua-language-server
   make
   matplotlib
@@ -34,6 +35,7 @@ packageList=(
   ncdu
   net-tools
   ninja
+  nnn
   nodejs-lts
   openssh
   proot-distro

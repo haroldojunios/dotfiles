@@ -116,7 +116,7 @@ if ! [ -x "/usr/local/bin/lazygit" ] || ! "/usr/local/bin/lazygit" --version | g
 fi
 
 LAZYDOCKER_VER=$(curl --silent "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
-if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --version | grep "version" | grep -q "${LAZYDOCKER_VER}"; then
+if ! [ -x "/usr/local/bin/lazydocker" ] || ! "/usr/local/bin/lazydocker" --version | grep -i "version" | grep -q "${LAZYDOCKER_VER}"; then
   if [ -n "${UARCH}" ]; then
     wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/lazydocker.tar.gz" -q "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${LAZYDOCKER_VER}_Linux_${UARCH}.tar.gz"
     (
@@ -200,5 +200,16 @@ if ! exiftool -ver 2>/dev/null | grep -q "${EXIFTOOL_VER}"; then
     make test >/dev/null
     sudo make install
   )
+fi
+
+NNN_VER="$(curl --silent "https://api.github.com/repos/jarun/nnn/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)"
+if ! nnn -V 2>/dev/null | grep -q "${NNN_VER}"; then
+  wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/nnn.tar.gz" -q "https://github.com/jarun/nnn/releases/download/v${NNN_VER}/nnn-nerd-static-${NNN_VER}.${UARCH}.tar.gz"
+  (
+    cd "${TEMP_FOLDER}"
+    tar -xf "nnn.tar.gz"
+    mv "nnn-nerd-static" "${HOME}/.local/bin/nnn"
+  )
+  sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 fi
 {{ end }}

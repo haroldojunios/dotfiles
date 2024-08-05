@@ -235,6 +235,7 @@ packageList=(
   hwinfo
   jmtpfs
   jq
+  libarchive-tools
   libfontconfig1
   libmupdf-dev
   make

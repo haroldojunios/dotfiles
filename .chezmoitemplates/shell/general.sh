@@ -82,3 +82,4 @@ command -v firefox >/dev/null && alias fp='firefox -P personal &>/dev/null & dis
 command -v vivaldi >/dev/null && alias vp='vivaldi --profile-directory=personal &>/dev/null & disown'
 alias sudo='sudo --preserve-env=PATH'
 command -v nvim >/dev/null && alias n='nvim'
+alias nnn='nnn -aeP p'
