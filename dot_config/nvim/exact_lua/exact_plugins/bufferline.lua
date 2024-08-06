@@ -4,6 +4,15 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "catppuccin/nvim",
+    {
+      "ojroques/nvim-bufdel",
+      config = function()
+        require("bufdel").setup({
+          next = "tabs",
+          quit = false,
+        })
+      end,
+    },
   },
   config = function()
     local groups = require("bufferline.groups")
@@ -12,6 +21,8 @@ return {
       options = {
         separator_style = "slant",
         numbers = "ordinal",
+        close_command = "BufDel! %d",
+        right_mouse_command = "BufDel! %d",
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(
           count,
