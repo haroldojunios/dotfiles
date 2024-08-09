@@ -26,17 +26,20 @@ return {
     end,
   },
   {
-    {
-      "kdheepak/lazygit.nvim",
-      dependencies = {
-        "nvim-telescope/telescope.nvim",
-        "nvim-lua/plenary.nvim",
-      },
-      config = function()
-        require("telescope").load_extension("lazygit")
-
-        vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { silent = true })
-      end,
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
     },
+    config = function()
+      require("telescope").load_extension("lazygit")
+
+      vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { silent = true })
+    end,
+  },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true,
   },
 }
