@@ -1,13 +1,9 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" -}}!/bin/bash{{- else -}}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-{{ if and (ne .osid "android") (not .isWSL) }}
-{{   if ne .chezmoi.osRelease.id "archarm" }}
+# {{ if and (ne .osid "android") (not .isWSL) }}
+# {{   if ne .chezmoi.osRelease.id "archarm" }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
@@ -40,7 +36,7 @@ vm.page-cluster = 0
 EOF
 fi
 
-{{    if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+# {{    if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 if ! grep "16 * 1024 * 1024 * 1024" /usr/bin/init-zram-swapping &>/dev/null; then
   sudo bash -c "cat >/usr/bin/init-zram-swapping" <<'EOF'
 #!/bin/sh
@@ -61,7 +57,7 @@ mkswap /dev/zram0
 swapon -p 5 /dev/zram0
 EOF
 fi
-{{    else }}
+# {{    else }}
 if ! grep "zram-size = min(ram, 16384)" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
@@ -70,7 +66,7 @@ compression-algorithm = zstd
 host-memory-limit = none
 EOF
 fi
-{{    end }}
+# {{    end }}
 
 if [ -f /swap.img ]; then
   sudo sed -i "s_^/swap.img_#/swap.img_" /etc/fstab
@@ -88,7 +84,10 @@ if command -v crudini &>/dev/null; then
   sudo crudini --set /etc/sddm.conf General InputMethod ""
 fi
 
-if ! [ -f /usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf ] && [ -f /usr/share/alsa-card-profile/mixer/profile-sets/default.conf ]; then
+if
+  ! [ -f /usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf ] &&
+    [ -f /usr/share/alsa-card-profile/mixer/profile-sets/default.conf ]
+then
   sudo bash -c "cat >/usr/share/alsa-card-profile/mixer/paths/analog-output-fixed.conf" <<EOF
 [Element PCM]
 switch = mute
@@ -124,6 +123,8 @@ if command -v crudini &>/dev/null; then
   sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:15"
   sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
   sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
+
+  sudo crudini --set /etc/bluetooth/main.conf "General" "Experimental" "true"
 fi
 
 if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
@@ -156,12 +157,14 @@ if [ -f /etc/apt/apt.conf.d/20apt-esm-hook.conf ]; then
   sudo rm /etc/apt/apt.conf.d/20apt-esm-hook.conf
 fi
 
-if ! [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak ] && [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf ]; then
+if ! [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak ] &&
+  [ -f /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf ]; then
   sudo mv /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf.bak
   sudo touch /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf
   sudo systemctl restart NetworkManager
 fi
-if [ -f /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh ] && ! [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ]; then
+if [ -f /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh ] &&
+  ! [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ]; then
   sudo cp /usr/share/doc/gtk3-nocsd/etc/xinit/xinitrc.d/30-gtk3-nocsd.sh /etc/X11/xinit/xinitrc.d/
 fi
 
@@ -185,14 +188,14 @@ fi
 if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
   sudo rm -f /etc/xdg/autostart/org.kde.discover.notifier.desktop
 fi
-{{  else if .isWSL }}
+# {{   else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
 fi
 if service --status-all 2>/dev/null | grep "docker" | grep "-" &>/dev/null; then
   sudo service docker start &>/dev/null
 fi
-{{  else if .isRasp }}
+# {{   else if .isRasp }}
 if grep "#enable_uart=1" /boot/cmdline.txt &>/dev/null; then
   sudo sed -i 's/#enable_uart=1/enable_uart=1/g' /boot/cmdline.txt
   grep -q 'enable_uart=1' /boot/config.txt || echo 'enable_uart=1' | sudo tee -a /boot/config.txt
@@ -216,13 +219,13 @@ if grep "#dtparam=i2c1=on" /boot/cmdline.txt &>/dev/null; then
   grep -q 'i2c-dev' /etc/modules || echo 'i2c-dev' | sudo tee -a /etc/modules
   sudo adduser pi i2c
 fi
-{{  end }}
-{{ end }}
+# {{  end }}
+# {{ end }}
 
 if command -v fish &>/dev/null; then
   fish -c 'command -v fisher &>/dev/null && fisher update || :' &>/dev/null
 fi
 
-if command -v bat &>/dev/null;then
+if command -v bat &>/dev/null; then
   bat cache --build &>/dev/null
 fi
