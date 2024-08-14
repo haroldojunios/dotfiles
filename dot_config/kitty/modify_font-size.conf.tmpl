@@ -1,4 +1,14 @@
 # {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 # vim: ft=bash
 
-echo "font_size 9"
+font_size=9
+if command -v hwinfo >/dev/null; then
+  monitor=$(hwinfo --short --monitor | grep -v "monitor:")
+  case "$monitor" in
+  *27G2G4*)
+    font_size=10
+    ;;
+  esac
+fi
+
+echo "font_size ${font_size}"

@@ -9,10 +9,13 @@ set -eu
 if command -v kwriteconfig5 &>/dev/null; then
   font="Iosevka Nerd Font"
   font_size=9.5
-  if [ -x "${HOME}/.local/bin/get-screen-big" ]; then
-    if "${HOME}/.local/bin/get-screen-big"; then
+  if command -v hwinfo >/dev/null; then
+    monitor=$(hwinfo --short --monitor | grep -v "monitor:")
+    case "$monitor" in
+    *27G2G4*)
       font_size=8.5
-    fi
+      ;;
+    esac
   fi
   # dolphin
   kwriteconfig5 --file dolphinrc --group General --key AutoExpandFolders true
