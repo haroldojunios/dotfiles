@@ -10,6 +10,7 @@ return {
     },
     on_open = function(t)
       vim.wo[t.window].cc = ""
+      vim.b.miniindentscope_disable = true
       if package.loaded["virt-column"] then
         require("virt-column").setup_buffer({ virtcolumn = "" })
       end
