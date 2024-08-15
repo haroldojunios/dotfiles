@@ -57,8 +57,8 @@ return {
     },
     opts = {
       formatters_by_ft = {
-        bash = { "shfmt" },
-        sh = { "shfmt" },
+        bash = { "trim_whitespace", "shfmt" },
+        sh = { "trim_whitespace", "shfmt" },
         css = { { "prettierd", "prettier" } },
         fish = { "fish_indent" },
         html = { { "prettierd", "prettier" } },
