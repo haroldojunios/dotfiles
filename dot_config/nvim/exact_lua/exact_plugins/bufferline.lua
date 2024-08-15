@@ -6,12 +6,9 @@ return {
     "catppuccin/nvim",
     {
       "ojroques/nvim-bufdel",
-      config = function()
-        require("bufdel").setup({
-          next = "tabs",
-          quit = false,
-        })
-      end,
+      opts = {
+        quit = false,
+      },
     },
   },
   config = function()

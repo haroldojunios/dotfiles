@@ -60,23 +60,21 @@ return {
   {
     "echasnovski/mini.move",
     version = false,
-    config = function()
-      require("mini.move").setup({
-        mappings = {
-          -- Move visual selection in Visual mode
-          left = "<C-h>",
-          right = "<C-l>",
-          down = "<C-j>",
-          up = "<C-k>",
+    opts = {
+      mappings = {
+        -- Move visual selection in Visual mode
+        left = "<C-h>",
+        right = "<C-l>",
+        down = "<C-j>",
+        up = "<C-k>",
 
-          -- Move current line in Normal mode
-          line_left = "<C-h>",
-          line_right = "<C-l>",
-          line_down = "<C-j>",
-          line_up = "<C-k>",
-        },
-      })
-    end,
+        -- Move current line in Normal mode
+        line_left = "<C-h>",
+        line_right = "<C-l>",
+        line_down = "<C-j>",
+        line_up = "<C-k>",
+      },
+    },
   },
   {
     "echasnovski/mini.files",
@@ -97,13 +95,11 @@ return {
         desc = "Open mini.files (cwd)",
       },
     },
-    config = function()
-      require("mini.files").setup({
-        windows = {
-          preview = true,
-          width_preview = 100,
-        },
-      })
-    end,
+    opts = {
+      windows = {
+        preview = true,
+        width_preview = 100,
+      },
+    },
   },
 }
