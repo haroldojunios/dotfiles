@@ -264,6 +264,57 @@
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAHBAAABPAAAAyoAAAJ4AAABxgAAAVgAAAMlAAACcwAAAAEAAAAABQAAAAHGAAABWAAAAyUAAAJz"
   },
+  "geometry-of-calibre_main_window_geometry": {
+    "frame_geometry": {
+      "height": 1060,
+      "width": 1920,
+      "x": 0,
+      "y": 20
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 1060,
+      "width": 1920,
+      "x": 0,
+      "y": 20
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 1060,
+      "width": 1920,
+      "x": 0,
+      "y": 20
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAFAAAB38AAAQ3AAAAAAAAABQAAAd/AAAENwAAAAACAAAAB4AAAAAAAAAAFAAAB38AAAQ3"
+    },
+    "screen": {
+      "depth": 24,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-0",
+      "serial": "RFCN7XA002564",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
   "grid view visible": false,
   "jobs view column layout3": {
     "__class__": "bytearray",
@@ -274,7 +325,36 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 18
+    "/home/haroldo/calibre": 22
+  },
+  "main_window_central_widget_state": {
+    "layout": "wide",
+    "narrow_desires": {
+      "book_details_height": 0.23051224944320714,
+      "cover_browser_width": 0.35,
+      "quick_view_height": 0.2561247216035635,
+      "tag_browser_width": 0.25
+    },
+    "narrow_visibility": {
+      "book_details": true,
+      "book_list": true,
+      "cover_browser": false,
+      "quick_view": false,
+      "tag_browser": true
+    },
+    "wide_desires": {
+      "book_details_width": 0.1282051282051282,
+      "cover_browser_height": 0.30272452068617556,
+      "quick_view_height": 0.23208879919273462,
+      "tag_browser_width": 0.08717948717948718
+    },
+    "wide_visibility": {
+      "book_details": true,
+      "book_list": true,
+      "cover_browser": false,
+      "quick_view": false,
+      "tag_browser": true
+    }
   },
   "memory_view books view state": {
     "column_alignment": {

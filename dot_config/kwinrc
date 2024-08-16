@@ -100,14 +100,24 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][54d08a49-660f-5fbf-9f0f-7a88efccc7a0]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][af70776e-676e-5d0a-9586-acd1e3949805]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][c150ed1e-7250-5bae-bd9f-249aabad5090]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
-[Tiling][f7d6967b-f570-58f3-b81d-d700785a01d0]
+[Tiling][d02c035d-eef0-5c68-aa2f-2e83d0ba08b1]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][f7d6967b-f570-58f3-b81d-d700785a01d0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.375},{"width":0.375}]}
 
 [Windows]
 BorderlessMaximizedWindows=true
+RollOverDesktops=true
+
+[Xwayland]
+Scale=1
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=
