@@ -114,6 +114,11 @@ return {
         shfmt = {
           prepend_args = { "-i", "2" },
         },
+        prisma = {
+          command = "prisma",
+          args = { "format", "--schema", "$FILENAME" },
+          stdin = false,
+        },
       },
     },
   },

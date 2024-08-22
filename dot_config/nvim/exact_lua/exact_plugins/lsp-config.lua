@@ -79,6 +79,7 @@ return {
         "eslint",
         "html",
         "jsonls",
+        "prismals",
         "pyright",
         "tailwindcss",
         "tsserver",
