@@ -13,7 +13,7 @@ if ! [ -x "${HOME}/.local/bin/semver" ]; then
   chmod +x "${HOME}/.local/bin/semver"
 fi
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+# {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 case $(uname -m) in
 x86_64)
   ARCH=amd64
@@ -184,7 +184,7 @@ fi
 PANDOC_VER=$(curl --silent "https://api.github.com/repos/jgm/pandoc/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s pandoc 2>&1 | grep "Version" | grep -q "${PANDOC_VER}"; then
   if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-${ARCH}.deb" || \
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-${ARCH}.deb" ||
       wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/pandoc.deb" -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-1-${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/pandoc.deb"
   fi
@@ -210,6 +210,9 @@ if ! nnn -V 2>/dev/null | grep -q "${NNN_VER}"; then
     tar -xf "nnn.tar.gz"
     mv "nnn-nerd-static" "${HOME}/.local/bin/nnn"
   )
+  if [ -d "${HOME}/.config/nnn/plugins" ]; then
+    rm -rf "${HOME}/.config/nnn/plugins"
+  fi
   sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 fi
-{{ end }}
+# {{ end }}
