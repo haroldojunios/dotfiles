@@ -34,10 +34,11 @@ return {
         local mdformat_extensions = {
           "mdformat-gfm",
           "mdformat-toc",
-          "mdformat-myst",
+          -- "mdformat-myst",
           "mdformat-admon",
           "mdformat-frontmatter",
           "mdformat-footnote",
+          "mdformat-gfm-alerts",
         }
         mdformat:on("install:success", function()
           -- Create the installation command.
@@ -46,6 +47,8 @@ return {
           local python = mdformat:get_install_path() .. "/venv/bin/python"
           local pip_cmd =
             string.format("%s -m pip install %s", python, extensions)
+
+          vim.notify(pip_cmd, vim.log.levels.INFO)
 
           -- vim.fn.jobstart doesn't work in callback so use popen instead.
           local handle = io.popen(pip_cmd)
