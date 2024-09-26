@@ -255,6 +255,7 @@ packageList=(
   python-isort
   python-pipx
   python-psutil
+  python-pylatexenc
   python-requests
   rclone
   ripgrep

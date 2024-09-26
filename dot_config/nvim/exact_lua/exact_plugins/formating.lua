@@ -102,7 +102,7 @@ return {
       end,
       formatters = {
         mdformat = {
-          prepend_args = { "--number", "--wrap", "80" },
+          prepend_args = { "--number", "--wrap", "79" },
         },
         ruff_fix = {
           args = {

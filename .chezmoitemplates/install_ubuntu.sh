@@ -257,6 +257,7 @@ packageList=(
   python3-mypy
   python3-pip
   python3-psutil
+  python3-pylatexenc
   python3-requests
   python3-venv
   rclone
