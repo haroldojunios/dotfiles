@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 # python
 alias p='python3'
-alias pf='isort .; black .'
+# alias pf='isort .; black .'
 alias pye='source ./venv/Scripts/activate &>/dev/null || \
 source ./venv/bin/activate.fish &>/dev/null || \
 source ./venv/bin/activate &>/dev/null'

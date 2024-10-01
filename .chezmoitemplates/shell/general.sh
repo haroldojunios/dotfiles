@@ -49,6 +49,7 @@ alias cformat='clang-format -fallback-style="{BasedOnStyle: Google, AlignAfterOp
 alias fix_exec='chmod -R -x .; chmod -R +X .'
 alias sfix_exec='sudo chmod -R -x .; sudo chmod -R +X .'
 alias pf='peerflix --not-on-top --mpv --path ~/.cache/torrent-stream'
+alias pfc='pf $(xclip -o -selection clipboard)'
 alias ar='aria2c'
 alias arpc='aria2rpc'
 alias at='aria2c -d ~/Downloads/torrent'
