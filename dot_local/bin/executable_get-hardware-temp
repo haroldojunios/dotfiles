@@ -7,7 +7,7 @@ import psutil
 
 is_gpu = True if len(sys.argv) > 1 and sys.argv[1] == "gpu" else False
 
-temp = 0
+temp: float | int = 0
 if is_gpu:
     if shutil.which("nvidia-smi") is not None:
         proc = subprocess.run(
@@ -25,17 +25,19 @@ if is_gpu:
         except ValueError:
             pass
 else:
-    try:
-        coretemp = psutil.sensors_temperatures()["coretemp"]
+    sensor_temps = psutil.sensors_temperatures()
+    coretemp = sensor_temps.get("coretemp", sensor_temps.get("it8655"))
+    if coretemp is not None:
         cpu_temp = None
         for t in coretemp:
             if "id 0" in t.label:
                 temp = t.current
                 break
         else:
-            temp = 0
-    except KeyError:
-        pass
+            if len(coretemp):
+                temp = coretemp[0].current
+            else:
+                temp = 0
 
 if temp:
     print(f"{round(temp)}°C")
