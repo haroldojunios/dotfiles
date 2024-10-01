@@ -41,10 +41,11 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/fish/main/themes/Catppuccin%20Mocha.theme"
 refreshPeriod = "168h"
 
-[".config/kitty/catppuccin.conf"]
-type = "file"
-url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
-refreshPeriod = "168h"
+# use manual colors
+# [".config/kitty/catppuccin.conf"]
+# type = "file"
+# url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
+# refreshPeriod = "168h"
 
 [".config/kitty/diff.conf"]
 type = "file"
