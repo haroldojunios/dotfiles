@@ -99,6 +99,10 @@ EOF
 fi
 {{ end }}
 
+if ! pacman -Q pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber &>/dev/null; then
+  yes | sudo pacman -S pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber
+fi
+
 # desktop enviroment
 dePackageList=(
   # x11 / login manager
@@ -136,7 +140,7 @@ dePackageList=(
   bluez-utils
   gtk3-nocsd
   kwin-effects-forceblur
-  pulseaudio-bluetooth
+  # pulseaudio-bluetooth
   {{ end }}
   # kde gui apps
   ark
