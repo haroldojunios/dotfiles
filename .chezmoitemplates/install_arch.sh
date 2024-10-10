@@ -106,21 +106,24 @@ fi
 # desktop enviroment
 dePackageList=(
   # x11 / login manager
-  {{ if ne .chezmoi.osRelease.id "archarm" }}
   sddm
   sddm-kcm
-  xorg-server
+  xdotool
   xorg-apps
-  {{ else }}
-  x11vnc
-  {{ end }}
+  xorg-server
+  xorg-xwayland
   # plasma
+  bluedevil
+  bluez
+  bluez-utils
+  gtk3-nocsd
   kde-cli-tools
   kdeplasma-addons
   kgamma
   kio-admin
   kscreen
   kwallet-pam
+  kwin-effects-forceblur
   plasma-browser-integration
   plasma-desktop
   plasma-disks
@@ -134,32 +137,40 @@ dePackageList=(
   plasma-workspace
   powerdevil
   purpose5
-  {{ if ne .chezmoi.osRelease.id "archarm" }}
-  bluedevil
-  bluez
-  bluez-utils
-  gtk3-nocsd
-  kwin-effects-forceblur
-  # pulseaudio-bluetooth
-  {{ end }}
+  xdg-desktop-portal-gtk
+  xdg-desktop-portal-kde
+  # qtile
+  qtile-git
+  libinput
+  libpulse
+  python-dbus-next
+  python-iwlib
+  python-pywayland
+  python-pywlroots
+  python-xdg
+  python-xkbcommon
   # kde gui apps
   ark
   dolphin
+  dolphin-plugins
   ffmpegthumbs
   filelight
   gwenview
   kalgebra
   kate
   kcalc
+  kdeconnect
   kdegraphics-thumbnailers
   kdenetwork-filesharing
   kdialog
   kfind
   kimageformats
+  kimageformats5
   kjournald
   kmix
   kolourpaint
   konsole
+  krdc
   ksystemlog
   labplot
   okular
@@ -168,35 +179,42 @@ dePackageList=(
   # other gui apps/plugins
   alacritty
   calibre
+  chromium
   conky
   dex
   feh
+  filezilla
   gimp
+  gparted
   inkscape
+  jdownloader2
   keepassxc
   kitty
   mpv
+  obs-studio-git
   obsidian
   onlyoffice-bin
+  pdfarranger
+  qbittorrent
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
   qt6-svg
   rofi
-  visual-studio-code-bin
-  xournalpp
-  {{ if ne .chezmoi.osRelease.id "archarm" }}
-  gparted
+  stremio
+  tk
   ventoy-bin
   virtualbox
+  visual-studio-code-bin
   vivaldi
-  {{ else }}
-  vivaldi-multiarch-bin
-  {{ end }}
+  xournalpp
+  zathura-pdf-mupdf
+  zathura-ps
 )
 
 # applets
 appletsPackageList=(
+  plasma6-applets-netspeed
   plasma6-applets-window-appmenu
   plasma6-applets-window-buttons
   plasma6-applets-window-title
@@ -204,13 +222,25 @@ appletsPackageList=(
 
 packageList=(
   age
+  alsa-card-profiles
   alsa-utils
+  android-tools
   bat
   bc
+  biber
   bibtool
   clang
   cmake
+  compsize
+  cronie
+  crudini
   curl
+  ddcci-driver-linux-dkms
+  ddcutil
+  docker
+  docker-buildx
+  docker-compose
+  efibootmgr
   expac
   expect
   eza
@@ -219,53 +249,92 @@ packageList=(
   ffmpeg
   find-the-command
   fish
+  flatpak
   fnt
   fzf
+  gdown
   git
   git-delta
   github-cli
   htop
+  hwinfo
+  i2c-tools
   imagemagick
+  inetutils
+  inxi
   jq
   lazydocker
   lazygit
+  lazynpm
   libarchive
   libjxl
   libmupdf
+  libvncserver
+  lm_sensors
+  lshw
   make
   mediainfo
   micro
+  minidlna
+  mongosh
+  mypy
   nano
   ncdu
   neovim
   neovim-remote
+  net-tools
   netcat
   ninja
   nnn
   nodejs
+  noto-fonts
+  noto-fonts-cjk
+  noto-fonts-emoji
+  ntfs-3g
   numlockx
+  numlockx
+  nvme-cli
+  ookla-speedtest-bin
+  os-prober
   p7zip
   pacman-contrib
   pandoc
+  peerflix
   perl-file-homedir
   perl-image-exiftool
   perl-yaml-tiny
   pkgfile
+  playerctl
   plocate
   prettier
+  pulseaudio-ctl
   pyenv
   python
-  python-black
-  python-isort
+  python-beautifulsoup4
+  python-click
+  python-matplotlib
+  python-pandas
   python-pipx
+  python-poetry
+  python-poetry-plugin-export
   python-psutil
+  python-py7zr
+  python-pyexiftool
   python-pylatexenc
   python-requests
+  python-scipy
+  python-tqdm
   rclone
+  reflector
   ripgrep
+  ruff
   shfmt
+  simple-mtpfs
+  spotify-player-full-pipe
   sshfs
   starship
+  stderred-git
+  sysfsutils
   texlive-bibtexextra
   texlive-bin
   texlive-binextra
@@ -280,33 +349,23 @@ packageList=(
   texlive-science
   texlive-xetex
   tmux
+  tree-sitter-cli
+  ufw
   unrar
   unzip
+  usbutils
   wget
   which
+  wine-staging
+  wine-gecko
+  wine-mono
+  winetricks
+  wkhtmltopdf
   xclip
+  zerotier-one
   zip
   zoxide
-  {{ if ne .chezmoi.osRelease.id "archarm" }}
-  alsa-card-profiles
-  android-tools
-  compsize
-  cronie
-  docker
-  docker-buildx
-  docker-compose
-  hwinfo
-  inetutils
-  lazynpm
-  lm_sensors
-  os-prober
-  reflector
-  simple-mtpfs
-  stderred-git
-  ufw
-  usbutils
   zram-generator
-  {{ end }}
 )
 
 qgisPackageList=(
