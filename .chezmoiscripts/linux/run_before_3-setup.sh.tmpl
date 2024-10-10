@@ -188,6 +188,15 @@ fi
 if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
   sudo rm -f /etc/xdg/autostart/org.kde.discover.notifier.desktop
 fi
+
+# nvidia
+if command -v nvidia-smi &>/dev/null; then
+  sudo bash -c "cat >/etc/modprobe.d/nvidia-i2c.conf" <<EOF
+# modprobe.d file to set proprietary Nvidia driver options often needed for DDC/CI
+options nvidia NVreg_RegistryDwords=RMUseSwI2c=0x01;RMI2cSpeed=100;EnableBrightnessControl=1
+EOF
+fi
+
 # {{   else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
   echo "${USER} ALL=NOPASSWD:/usr/sbin/service" | (sudo su -c 'EDITOR="tee" visudo -f /etc/sudoers.d/service')
