@@ -46,7 +46,7 @@ modifyLineBreaks:
     renewcommand:
       CommandStartsOnOwnLine: 1
   items:
-    ItemStartsOnOwnLine: 3
+    ItemStartsOnOwnLine: 1
   mandatoryArguments:
     hypersetup:
       MandArgBodyStartsOnOwnLine: 1
