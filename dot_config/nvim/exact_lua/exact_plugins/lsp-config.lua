@@ -82,10 +82,12 @@ return {
         "eslint",
         "html",
         "jsonls",
+        "ltex",
         "prismals",
         "pyright",
-        "tailwindcss",
-        "tsserver",
+        -- "tailwindcss",
+        "ruff_lsp",
+        "ts_ls",
         "yamlls",
       }
       if os.getenv("PREFIX") == nil then
@@ -97,10 +99,36 @@ return {
         automatic_installation = true,
       })
 
+      local lspconfig = require("lspconfig")
+
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          require("lspconfig")[server_name].setup({})
+          lspconfig[server_name].setup({})
         end,
+        ["ltex"] = function()
+          lspconfig.ltex.setup({
+            settings = {
+              ltex = {
+                language = "auto",
+              },
+            },
+          })
+        end,
+        -- ["pyright"] = function()
+        --   lspconfig.pyright.setup({
+        --     settings = {
+        --       pyright = {
+        --         disableOrganizeImports = true, -- Using Ruff
+        --       },
+        --       python = {
+        --         analysis = {
+        --           ignore = { "*" }, -- Using Ruff
+        --           typeCheckingMode = "off", -- Using mypy
+        --         },
+        --       },
+        --     },
+        --   })
+        -- end,
       })
 
       -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
@@ -121,7 +149,7 @@ return {
         "black",
         "clang_format",
         "cmake_format",
-        "codespell",
+        -- "codespell",
         "eslint_d",
         "fish",
         "fixjson",
@@ -142,6 +170,20 @@ return {
         table.insert(ensure_installed, "stylua")
       end
 
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.mypy.with({
+            extra_args = function()
+              local virtual = os.getenv("VIRTUAL_ENV")
+                or os.getenv("CONDA_PREFIX")
+                or "/usr"
+              return { "--python-executable", virtual .. "/bin/python3" }
+            end,
+          }),
+        },
+      })
+
       require("mason-null-ls").setup({
         ensure_installed = ensure_installed,
         handlers = {},
@@ -150,32 +192,6 @@ return {
       vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
     end,
   },
-  -- {
-  --   "aznhe21/actions-preview.nvim",
-  --   config = function()
-  --     require("actions-preview").setup({
-  --       telescope = {
-  --         sorting_strategy = "ascending",
-  --         layout_strategy = "vertical",
-  --         layout_config = {
-  --           width = 0.8,
-  --           height = 0.9,
-  --           prompt_position = "top",
-  --           preview_cutoff = 20,
-  --           preview_height = function(_, _, max_lines)
-  --             return max_lines - 15
-  --           end,
-  --         },
-  --       },
-  --     })
-  --
-  --     vim.keymap.set(
-  --       { "v", "n" },
-  --       "gf",
-  --       require("actions-preview").code_actions
-  --     )
-  --   end,
-  -- },
   {
     "ray-x/navigator.lua",
     dependencies = {
@@ -206,7 +222,21 @@ return {
       mason = true,
       lsp = {
         format_on_save = false,
+        document_highlight = false,
       },
     },
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    dependencies = { "stevearc/dressing.nvim" },
+    config = function()
+      require("inc_rename").setup({
+        --input_buffer_type = "dressing",
+      })
+
+      vim.keymap.set("n", "<leader>rn", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, { expr = true })
+    end,
   },
 }

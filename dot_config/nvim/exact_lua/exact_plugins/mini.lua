@@ -4,11 +4,11 @@ return {
   --   version = false,
   --   config = true,
   -- },
-  {
-    "echasnovski/mini.pairs",
-    version = false,
-    config = true,
-  },
+  -- {
+  --   "echasnovski/mini.pairs",
+  --   version = false,
+  --   config = true,
+  -- },
   {
     "echasnovski/mini.comment",
     version = false,
@@ -30,11 +30,23 @@ return {
     config = true,
   },
   {
+    "echasnovski/mini.trailspace",
+    version = false,
+    config = true,
+  },
+  {
+    "echasnovski/mini.operators",
+    version = false,
+    config = true,
+  },
+  {
     "echasnovski/mini.sessions",
     version = false,
     config = function()
       require("mini.sessions").setup({ autowrite = false })
-      if next(vim.fn.argv()) == nil then
+      if
+        next(vim.fn.argv()) == nil and vim.env.KITTY_SCROLLBACK_NVIM == nil
+      then
         local session_name = vim.loop.cwd():gsub("/", "_")
         local session_file = vim.fn.stdpath("data")
           .. "/session/"

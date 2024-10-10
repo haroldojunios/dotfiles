@@ -69,7 +69,7 @@ return {
         json = { "prettierd" },
         jsonc = { "prettierd" },
         lua = { "stylua" },
-        markdown = { "mdformat", "injected" },
+        markdown = { "prettierd", "injected" },
         prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
         -- tex = { "latexindent" },
@@ -104,6 +104,9 @@ return {
         mdformat = {
           prepend_args = { "--number", "--wrap", "79" },
         },
+        -- prettierd = {
+        --   append_args = { "--print-width", "79", "--prose-wrap", "always" },
+        -- },
         ruff_fix = {
           args = {
             "check",
@@ -145,5 +148,10 @@ return {
     config = function()
       require("nvim-ts-autotag").setup()
     end,
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = { enable_check_bracket_line = false, fast_wrap = { map = "<M-s>" } },
   },
 }

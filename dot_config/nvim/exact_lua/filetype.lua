@@ -1,7 +1,6 @@
 vim.g.do_filetype_lua = 1
 
 vim.filetype.add({
-
   filename = {
     ["fish_variables"] = "fish",
   },
@@ -16,6 +15,7 @@ vim.filetype.add({
     [".*gitconfig%.tmpl"] = "gitconfig",
     [".*aliases%.tmpl"] = "sh",
     [".*profile"] = "sh",
+    [".*%.json"] = "jsonc",
     ["conky%.conf.*"] = "lua",
     [".*"] = function(_, bufnr) -- function(path, bufnr, ext)
       if

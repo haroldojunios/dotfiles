@@ -2,10 +2,17 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_auto_close = 1
+      vim.g.mkdp_open_to_the_world = 1
+      vim.g.mkdp_markdown_css =
+        vim.fn.expand("~/.local/share/markdown/mkdp/markdown.css")
+      vim.g.mkdp_highlight_css =
+        vim.fn.expand("~/.local/share/markdown/mkdp/highlight.css")
     end,
+    ft = { "markdown" },
   },
   {
     "epwalsh/obsidian.nvim",
@@ -26,6 +33,7 @@ return {
           path = "~/Documents/notes",
         },
       },
+      disable_frontmatter = true,
     },
   },
   {

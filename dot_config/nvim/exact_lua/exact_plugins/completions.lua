@@ -11,15 +11,21 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip", --luasnip
       "rafamadriz/friendly-snippets", --luasnip
+      "windwp/nvim-autopairs",
+      "f3fora/cmp-spell",
+      "brenoprata10/nvim-highlight-colors",
     },
     config = function()
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
       require("luasnip.loaders.from_vscode").lazy_load()
 
       cmp.setup({
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         window = {
@@ -33,14 +39,54 @@ return {
           ["<Esc>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({
             select = true,
-            behavior = cmp.ConfirmBehavior.Replace,
           }),
+          -- ["<CR>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     if luasnip.expandable() then
+          --       luasnip.expand()
+          --     else
+          --       cmp.confirm({
+          --         select = true,
+          --       })
+          --     end
+          --   else
+          --     fallback()
+          --   end
+          -- end),
+          -- ["<Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.locally_jumpable(1) then
+          --     luasnip.jump(1)
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+          -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_prev_item()
+          --   elseif luasnip.locally_jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "calc" },
           { name = "codeium" },
+          {
+            name = "spell",
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+              preselect_correct_word = true,
+            },
+          },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "calc" },
           {
             name = "latex_symbols",
             option = {
@@ -51,14 +97,27 @@ return {
           { name = "buffer" },
         }),
         formatting = {
-          format = require("lspkind").cmp_format({
-            mode = "symbol",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            symbol_map = { Codeium = "" },
-          }),
+          format = function(entry, item)
+            local color_item = require("nvim-highlight-colors").format(
+              entry,
+              { kind = item.kind }
+            )
+            item = require("lspkind").cmp_format({
+              mode = "symbol",
+              maxwidth = 50,
+              ellipsis_char = "...",
+              symbol_map = { Codeium = "" },
+            })(entry, item)
+            if color_item.abbr_hl_group then
+              item.kind_hl_group = color_item.abbr_hl_group
+              item.kind = color_item.abbr
+            end
+            return item
+          end,
         },
       })
+
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
   {

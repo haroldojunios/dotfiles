@@ -32,6 +32,15 @@ return {
           },
           opts = { skip = true },
         },
+        {
+          filter = {
+            find = "No code actions available",
+          },
+          opts = { skip = true },
+        },
+      },
+      presets = {
+        inc_rename = true,
       },
       -- views = {
       --   cmdline_popup = {

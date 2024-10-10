@@ -3,6 +3,7 @@ local opt = vim.opt
 
 -- change leader key to space
 g.mapleader = " "
+g.maplocalleader = " "
 
 -- disable netrw
 g.loaded_netrw = 1
@@ -39,6 +40,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- set spellcheck
+opt.spell = true
 opt.spelllang = { "en", "pt_br" }
 opt.spelloptions:append("camel")
 
@@ -60,6 +62,9 @@ opt.listchars = {
   extends = "»",
   nbsp = "␣",
 }
+
+-- set inccommand to split
+opt.inccommand = "split"
 
 -- disable swapfile and save undo files
 opt.swapfile = false
