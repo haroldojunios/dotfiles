@@ -91,6 +91,11 @@ refreshPeriod = "168h"
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/obs/refs/heads/main/themes/Catppuccin_Mocha.ovt"
 refreshPeriod = "168h"
+
+[".config/spotify-player/theme.toml"]
+type = "file"
+url = "https://github.com/catppuccin/spotify-player/raw/refs/heads/main/theme.toml"
+refreshPeriod = "168h"
 {{   end }}
 {{ end }}
 

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+song=$(playerctl metadata --format "Title: {{ title }}\nArtist: {{ artist }}\nAlbum: {{ album }}")
+echo "$song"
+
+notify-send "Music Player" "$song" --icon=/usr/share/icons/beautyline/apps/scalable/spotify.svg
