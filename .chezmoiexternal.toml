@@ -77,6 +77,10 @@ type = "file"
 url = "https://github.com/catppuccin/delta/raw/main/catppuccin.gitconfig"
 refreshPeriod = "168h"
 
+[".config/zathura/catppuccin-mocha"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/zathura/refs/heads/main/src/catppuccin-mocha"
+refreshPeriod = "168h"
 
 [".config/obs-studio/themes/Catppuccin.obt"]
 type = "file"

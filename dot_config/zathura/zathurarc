@@ -1,0 +1,7 @@
+include catppuccin-mocha
+
+set recolor "false"
+set recolor-keephue true
+
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
