@@ -2,9 +2,10 @@
 # python
 alias p='python3'
 # alias pf='isort .; black .'
-alias pye='source ./venv/Scripts/activate &>/dev/null || \
-source ./venv/bin/activate.fish &>/dev/null || \
-source ./venv/bin/activate &>/dev/null'
+alias pye='source $(poetry env info --path)/bin/activate.fish || \
+  source ./venv/Scripts/activate &>/dev/null || \
+  source ./venv/bin/activate.fish &>/dev/null || \
+  source ./venv/bin/activate &>/dev/null'
 alias pyv='python3 -m venv venv'
 alias pipf='pip freeze > requirements.txt'
 alias pipr='pip install -r requirements.txt'
