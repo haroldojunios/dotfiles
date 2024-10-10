@@ -100,6 +100,13 @@ if test -d ~/.local/bin
     end
 end
 
+# Add ~/.local/bin/lastools/bin to PATH
+if test -d ~/.local/bin/lastools/bin
+    if not contains -- ~/.local/bin/lastools/bin $PATH
+        set -pgx PATH ~/.local/bin/lastools/bin
+    end
+end
+
 # Add /usr/local/texlive/bin/x86_64-linux to PATH
 if test -d /usr/local/texlive/bin/x86_64-linux
     if not contains -- /usr/local/texlive/bin/x86_64-linux $PATH
