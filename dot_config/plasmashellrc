@@ -1,3 +1,13 @@
+[ActionsWidget]
+ColumnState=AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhMAAAACAQAAAQAAAAAAAAAAAAAAAFX/////AAAAgQAAAAAAAAACAAAA+gAAAAEAAAAAAAABGQAAAAEAAAAAAAAD6AAAAABVAAAAAA==
+
+[ConfigDialog]
+1920x1080 screen: Height=550
+1920x1080 screen: Width=640
+
+[General]
+Number of Actions=0
+
 [KPropertiesDialog]
 2 screens: Height=511
 2 screens: Width=419
@@ -60,6 +70,7 @@ thickness=24
 
 [PlasmaViews][Panel 97]
 floating=1
+panelOpacity=2
 
 [PlasmaViews][Panel 97][Defaults]
 thickness=20

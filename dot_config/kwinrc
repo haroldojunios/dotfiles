@@ -100,6 +100,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][54d08a49-660f-5fbf-9f0f-7a88efccc7a0]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][85621540-6fc3-553e-836d-cd39ceddc987]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][af70776e-676e-5d0a-9586-acd1e3949805]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -122,3 +125,4 @@ Scale=1
 [org.kde.kdecoration2]
 ButtonsOnLeft=
 ButtonsOnRight=IAX
+theme=__aurorae__svg__Sweet-Dark

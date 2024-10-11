@@ -49,14 +49,14 @@ immutability=1
 plugin=org.kde.plasma.clipboard
 
 [Containments][103][Applets][104][Configuration]
-PreloadWeight=15
+PreloadWeight=60
 
 [Containments][103][Applets][105]
 immutability=1
 plugin=org.kde.plasma.devicenotifier
 
 [Containments][103][Applets][105][Configuration]
-PreloadWeight=65
+PreloadWeight=90
 
 [Containments][103][Applets][106]
 immutability=1
@@ -70,7 +70,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][103][Applets][107][Configuration]
-PreloadWeight=5
+PreloadWeight=35
 
 [Containments][103][Applets][108]
 immutability=1
@@ -98,7 +98,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][103][Applets][111][Configuration]
-PreloadWeight=17
+PreloadWeight=32
 
 [Containments][103][Applets][111][Configuration][General]
 migrated=true
@@ -126,35 +126,38 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][103][Applets][116][Configuration]
-PreloadWeight=5
+PreloadWeight=10
 
 [Containments][103][Applets][117]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][103][Applets][117][Configuration]
-PreloadWeight=0
+PreloadWeight=37
 
 [Containments][103][Applets][118]
 immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][103][Applets][118][Configuration]
-PreloadWeight=15
+PreloadWeight=85
+
+[Containments][103][Applets][118][Configuration][General]
+currentDetailsTab=details
 
 [Containments][103][Applets][176]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][103][Applets][176][Configuration]
-PreloadWeight=61
+PreloadWeight=100
 
 [Containments][103][Applets][182]
 immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][103][Applets][182][Configuration]
-PreloadWeight=24
+PreloadWeight=0
 
 [Containments][103][Configuration]
 PreloadWeight=0
@@ -579,7 +582,7 @@ DialogWidth=1920
 
 [Containments][2][Applets][5][Configuration][General]
 groupedTaskVisualization=1
-launchers=applications:vivaldi-stable.desktop,preferred://filemanager,applications:kitty.desktop,applications:obsidian.desktop,applications:org.qgis.qgis.desktop
+launchers=applications:vivaldi-stable.desktop,preferred://filemanager,applications:kitty.desktop,applications:obsidian.desktop,applications:com.stremio.stremio.desktop
 maxStripes=1
 showOnlyCurrentScreen=true
 
@@ -1088,6 +1091,7 @@ dateDisplayFormat=BesideTime
 enabledCalendarPlugins=astronomicalevents,holidaysevents
 fontWeight=400
 showSeconds=Always
+showWeekNumbers=true
 
 [Containments][97][Applets][113][Configuration][ConfigDialog]
 DialogHeight=1060
@@ -1137,7 +1141,9 @@ immutability=1
 plugin=org.kde.windowappmenu
 
 [Containments][97][Applets][171][Configuration]
-PreloadWeight=0
+PreloadWeight=25
+popupHeight=432
+popupWidth=432
 
 [Containments][97][Applets][171][Configuration][ConfigDialog]
 DialogHeight=1060
@@ -1154,6 +1160,81 @@ plugin=org.kde.plasma.panelspacer
 
 [Containments][97][Applets][172][Configuration]
 PreloadWeight=0
+
+[Containments][97][Applets][184]
+immutability=1
+plugin=org.kde.plasma.systemmonitor.cpu
+
+[Containments][97][Applets][184][Configuration]
+CurrentPreset=org.kde.plasma.systemmonitor
+PreloadWeight=55
+popupHeight=192
+popupWidth=328
+
+[Containments][97][Applets][184][Configuration][Appearance]
+chartFace=org.kde.ksysguard.barchart
+showTitle=false
+title=CPU
+
+[Containments][97][Applets][184][Configuration][ConfigDialog]
+DialogHeight=1060
+DialogWidth=1920
+
+[Containments][97][Applets][184][Configuration][FaceGrid][Appearance]
+chartFace=org.kde.ksysguard.linechart
+showTitle=false
+
+[Containments][97][Applets][184][Configuration][FaceGrid][SensorColors]
+cpu/all/usage=180,190,254
+
+[Containments][97][Applets][184][Configuration][FaceGrid][SensorLabels]
+cpu/all/usage=CPU
+
+[Containments][97][Applets][184][Configuration][FaceGrid][Sensors]
+highPrioritySensorIds=["cpu/all/usage"]
+
+[Containments][97][Applets][184][Configuration][SensorColors]
+cpu/all/averageTemperature=180,254,181
+cpu/all/usage=180,190,254
+memory/physical/usedPercent=254,213,180
+network/all/download=180,254,231
+
+[Containments][97][Applets][184][Configuration][SensorLabels]
+cpu/all/usage=CPU
+
+[Containments][97][Applets][184][Configuration][Sensors]
+highPrioritySensorIds=["cpu/all/usage","memory/physical/usedPercent","cpu/all/averageTemperature"]
+lowPrioritySensorIds=["cpu/all/cpuCount","cpu/all/coreCount"]
+totalSensors=["cpu/all/usage"]
+
+[Containments][97][Applets][184][Configuration][org.kde.ksysguard.barchart][General]
+rangeFromMultiplier=1048576
+rangeFromUnit=202
+rangeToMultiplier=1048576
+rangeToUnit=202
+showLegend=false
+showYAxisLabels=false
+
+[Containments][97][Applets][184][Configuration][org.kde.ksysguard.textonly][General]
+groupByTotal=true
+
+[Containments][97][Applets][186]
+immutability=1
+plugin=org.kde.netspeedWidget
+
+[Containments][97][Applets][186][Configuration][ConfigDialog]
+DialogHeight=1060
+DialogWidth=1920
+
+[Containments][97][Applets][186][Configuration][General]
+byteColor=205,214,244
+customColors=true
+fontSize=110
+gigabyteColor=166,227,161
+kilobyteColor=180,190,254
+megabyteColor=137,220,235
+shortUnits=true
+speedLayout=rows
 
 [Containments][97][Applets][98]
 immutability=1
@@ -1178,7 +1259,7 @@ DialogWidth=1920
 PreloadWeight=0
 
 [Containments][97][General]
-AppletOrder=98;169;170;171;172;102;113;114
+AppletOrder=98;169;170;171;172;186;184;102;113;114
 
 [Containments124Appletsts][161][Configuration][General]
 containmentType=Plasma

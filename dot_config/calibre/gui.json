@@ -109,10 +109,21 @@
       "timestamp": 66,
       "title": 52
     },
+    "formats_injected": true,
     "hidden_columns": [],
+    "id_injected": true,
     "languages_injected": true,
     "last_modified_injected": true,
+    "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -140,10 +151,21 @@
       "timestamp": 66,
       "title": 52
     },
+    "formats_injected": true,
     "hidden_columns": [],
+    "id_injected": true,
     "languages_injected": true,
     "last_modified_injected": true,
+    "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -256,6 +278,7 @@
       255
     ]
   ],
+  "do_not_show_device_open_popup_message_KINDLE2": false,
   "duplicates-question-dialog-geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAF0AAAA7QAAA24AAAKJAAABeQAAAQkAAANpAAAChAAAAAEAAAAABQAAAAF5AAABCQAAA2kAAAKE"
@@ -263,6 +286,57 @@
   "epubmerge:update list dialog": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAHBAAABPAAAAyoAAAJ4AAABxgAAAVgAAAMlAAACcwAAAAEAAAAABQAAAAHGAAABWAAAAyUAAAJz"
+  },
+  "geometry-of-Plugin Updater plugin:plugin updater dialog": {
+    "frame_geometry": {
+      "height": 462,
+      "width": 791,
+      "x": 555,
+      "y": 279
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 462,
+      "width": 791,
+      "x": 555,
+      "y": 279
+    },
+    "maximized": false,
+    "normal_geometry": {
+      "height": 462,
+      "width": 791,
+      "x": 555,
+      "y": 279
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAIrAAABFwAABUEAAALkAAACKwAAARcAAAVBAAAC5AAAAAAAAAAAB4AAAAIrAAABFwAABUEAAALk"
+    },
+    "screen": {
+      "depth": 24,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-0",
+      "serial": "RFCN7XA002564",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
   },
   "geometry-of-calibre_main_window_geometry": {
     "frame_geometry": {
@@ -315,17 +389,68 @@
       }
     }
   },
+  "geometry-of-jobs_dialog_geometry": {
+    "frame_geometry": {
+      "height": 567,
+      "width": 1111,
+      "x": 200,
+      "y": 224
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 538,
+      "width": 1103,
+      "x": 204,
+      "y": 249
+    },
+    "maximized": false,
+    "normal_geometry": {
+      "height": 538,
+      "width": 1103,
+      "x": 204,
+      "y": 249
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAADIAAAA4AAABR4AAAMWAAAAzAAAAPkAAAUaAAADEgAAAAAAAAAAB4AAAADMAAAA+QAABRoAAAMS"
+    },
+    "screen": {
+      "depth": 24,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-0",
+      "serial": "RFCN7XA002564",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
   "grid view visible": false,
   "jobs view column layout3": {
     "__class__": "bytearray",
-    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA48AAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAABBQAAAAEAAAAAAAABXgAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAD6AAAAAAA"
+    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA0AAAAFAQEBAAAAAAAAAAAAAAAAAFX/////AAAAhAAAAAAAAAAFAAACawAAAAEAAAAAAAAAYAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAD6AAAAAAAAAAAAA=="
   },
   "jobs_dialog_geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 22
+    "/home/haroldo/calibre": 24
   },
   "main_window_central_widget_state": {
     "layout": "wide",
@@ -377,10 +502,21 @@
       "timestamp": 88,
       "title": 229
     },
+    "formats_injected": true,
     "hidden_columns": [],
+    "id_injected": true,
     "languages_injected": true,
     "last_modified_injected": true,
+    "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -411,6 +547,7 @@
   ],
   "quick_start_guide_added": true,
   "quickview visible": false,
+  "qv_open_at_shutdown": false,
   "recently_used_languages": [
     "Portuguese",
     "English"

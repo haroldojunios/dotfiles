@@ -1,3 +1,7 @@
+Host 192.168.196.129
+  HostName 192.168.196.129
+  User portela
+
 Host *
   UpdateHostKeys yes
 
@@ -6,11 +10,13 @@ Host celular
 
 Match host celular exec "nc -w 1 -z 192.168.1.122 %p"
   HostName 192.168.1.122
+Match host celular exec "nc -w 1 -z 192.168.0.22 %p"
+  HostName 192.168.0.22
 Match host celular exec "nc -w 1 -z 192.168.100.122 %p"
   HostName 192.168.100.122
 Match host celular exec "nc -w 1 -z 10.0.0.12 %p"
   HostName 10.0.0.22
-Match host celular exec "true"
+Match host celular exec true
   HostName 192.168.1.22
 
 Host rasp

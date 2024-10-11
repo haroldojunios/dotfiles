@@ -2,10 +2,6 @@
 
 case "${@}" in
 celular)
-  ssh celular "termux-wake-lock" || (
-    echo "error"
-    exit 1
-  )
   mkdir -p "${HOME}/Celular/"{sdcard,termux}
   sshfs celular:/sdcard/ "${HOME}/Celular/sdcard"
   sshfs celular:/data/data/com.termux/files/ "${HOME}/Celular/termux"

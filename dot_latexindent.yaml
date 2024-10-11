@@ -45,6 +45,10 @@ modifyLineBreaks:
       CommandStartsOnOwnLine: 1
     renewcommand:
       CommandStartsOnOwnLine: 1
+    node:
+      CommandStartsOnOwnLine: 1
+    draw:
+      CommandStartsOnOwnLine: 1
   items:
     ItemStartsOnOwnLine: 1
   mandatoryArguments:
