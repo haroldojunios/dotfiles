@@ -1,0 +1,9 @@
+#{{- if ne .osid "android" -}}!/bin/bash{{- else -}}!/data/data/com.termux/files/usr/bin/bash{{ end }}
+
+if command -v nvim &>/dev/null; then
+  nvim --headless \
+    -c 'autocmd User MasonUpdateAllComplete quitall' \
+    -c 'Lazy! sync' \
+    -c 'MasonUpdateAll' \
+    &>/dev/null || :
+fi
