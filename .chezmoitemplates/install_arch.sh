@@ -105,13 +105,14 @@ fi
 
 # desktop enviroment
 dePackageList=(
-  # x11 / login manager
+  # x11 / wayland / login manager
   sddm
   sddm-kcm
   xdotool
   xorg-apps
   xorg-server
   xorg-xwayland
+  wayland-protocols
   # plasma
   bluedevil
   bluez
@@ -139,16 +140,18 @@ dePackageList=(
   purpose5
   xdg-desktop-portal-gtk
   xdg-desktop-portal-kde
-  # qtile
-  qtile-git
-  libinput
-  libpulse
-  python-dbus-next
-  python-iwlib
-  python-pywayland
-  python-pywlroots
-  python-xdg
-  python-xkbcommon
+  # hyprland
+  hyprland-git
+  hyprpaper-git
+  hypridle-git
+  hyprpicker-git
+  hyprlock-git
+  hyprcursor-git
+  egl-wayland
+  polkit-kde-agent
+  qt5-wayland
+  qt6-wayland
+  xdg-desktop-portal-hyprland-git
   # kde gui apps
   ark
   dolphin
@@ -178,36 +181,54 @@ dePackageList=(
   spectacle
   # other gui apps/plugins
   alacritty
+  archlinux-xdg-menu
+  blueman
   calibre
   chromium
+  cliphist
   conky
   dex
   feh
   filezilla
+  fuzzel
   gimp
   gparted
+  grim
+  gvfs
   inkscape
   jdownloader2
   keepassxc
   kitty
+  mailcap
   mpv
   obs-studio-git
   obsidian
   onlyoffice-bin
+  opentabletdriver
+  pavucontrol
   pdfarranger
   qbittorrent
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
   qt6-svg
-  rofi
+  slurp
   stremio
+  swappy
+  swayosd-git
   tk
   ventoy-bin
   virtualbox
   visual-studio-code-bin
   vivaldi
+  waybar-cava
+  wl-clip-persist
+  wl-clipboard
+  wlogout
+  xclip
+  xdg-utils
   xournalpp
+  xwaylandvideobridge-git
   zathura-pdf-mupdf
   zathura-ps
 )
