@@ -52,7 +52,7 @@
     "__value__": "AdnQywADAAAAAAAAAAAAAAAABP8AAAP/AAAAAAAAABgAAAT/AAAC/wAAAAECAAAABQAAAAAAAAAAHAAABP8AAAP/"
   },
   "match_tags_type": "any",
-  "new_version_notification": true,
+  "new_version_notification": false,
   "oldest_news": 60,
   "overwrite_author_title_metadata": true,
   "plugin_search_history": [],

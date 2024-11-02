@@ -172,6 +172,7 @@
       ]
     ]
   },
+  "color_palette": "dark",
   "convert_single_dialog_geom": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAAAAAAAAQAABQkAAAK9AAAABQAAAB0AAAUEAAACuAAAAAEAAAAABQAAAAAFAAAAHQAABQQAAAK4"
@@ -180,6 +181,12 @@
     false,
     300
   ],
+  "cover_grid_color": [
+    80,
+    80,
+    80
+  ],
+  "cover_grid_texture": null,
   "custom_colors_for_color_dialog": [
     [
       255,
@@ -278,6 +285,34 @@
       255
     ]
   ],
+  "dark_palette_name": "__current__",
+  "dark_palettes": {
+    "__current__": {
+      "AlternateBase": "#1e1e2e",
+      "Base": "#181825",
+      "BrightText": "#cdd6f4",
+      "BrightText-disabled": "#cdd6f4",
+      "Button": "#1e1e2e",
+      "ButtonText": "#cdd6f4",
+      "ButtonText-disabled": "#585b70",
+      "Highlight": "#b4befe",
+      "HighlightedText": "#1e1e2e",
+      "HighlightedText-disabled": "#181825",
+      "Link": "#f5e0dc",
+      "LinkVisited": "#89b4fa",
+      "PlaceholderText": "#cdd6f4",
+      "PlaceholderText-disabled": "#cdd6f4",
+      "Text": "#cdd6f4",
+      "Text-disabled": "#585b70",
+      "ToolTipBase": "#11111b",
+      "ToolTipText": "#cdd6f4",
+      "ToolTipText-disabled": "#cdd6f4",
+      "Window": "#11111b",
+      "WindowText": "#cdd6f4",
+      "WindowText-disabled": "#585b70"
+    }
+  },
+  "default_author_link": null,
   "do_not_show_device_open_popup_message_KINDLE2": false,
   "duplicates-question-dialog-geometry": {
     "__class__": "bytearray",
@@ -291,29 +326,29 @@
     "frame_geometry": {
       "height": 462,
       "width": 791,
-      "x": 555,
-      "y": 279
+      "x": 0,
+      "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 462,
       "width": 791,
-      "x": 555,
-      "y": 279
+      "x": 0,
+      "y": 0
     },
-    "maximized": false,
+    "maximized": true,
     "normal_geometry": {
       "height": 462,
       "width": 791,
-      "x": 555,
-      "y": 279
+      "x": 0,
+      "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAIrAAABFwAABUEAAALkAAACKwAAARcAAAVBAAAC5AAAAAAAAAAAB4AAAAIrAAABFwAABUEAAALk"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAxYAAAHNAAAAAAAAAAAAAAMWAAABzQAAAAACAAAAB4AAAAAAAAAAAAAAAxYAAAHN"
     },
     "screen": {
-      "depth": 24,
+      "depth": 32,
       "device_pixel_ratio": 1.0,
       "geometry_in_logical_pixels": {
         "height": 1080,
@@ -324,8 +359,8 @@
       "index_in_screens_list": 0,
       "manufacturer": "AOC",
       "model": "27G2G4",
-      "name": "DP-0",
-      "serial": "RFCN7XA002564",
+      "name": "DP-1",
+      "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
         "width": 1920
@@ -340,31 +375,31 @@
   },
   "geometry-of-calibre_main_window_geometry": {
     "frame_geometry": {
-      "height": 1060,
-      "width": 1920,
+      "height": 1038,
+      "width": 1906,
       "x": 0,
-      "y": 20
+      "y": 0
     },
     "full_screened": false,
     "geometry": {
-      "height": 1060,
-      "width": 1920,
+      "height": 1038,
+      "width": 1906,
       "x": 0,
-      "y": 20
+      "y": 0
     },
     "maximized": true,
     "normal_geometry": {
-      "height": 1060,
-      "width": 1920,
+      "height": 1052,
+      "width": 960,
       "x": 0,
-      "y": 20
+      "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAFAAAB38AAAQ3AAAAAAAAABQAAAd/AAAENwAAAAACAAAAB4AAAAAAAAAAFAAAB38AAAQ3"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO/AAAEGwAAAAACAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
     },
     "screen": {
-      "depth": 24,
+      "depth": 32,
       "device_pixel_ratio": 1.0,
       "geometry_in_logical_pixels": {
         "height": 1080,
@@ -375,8 +410,59 @@
       "index_in_screens_list": 0,
       "manufacturer": "AOC",
       "model": "27G2G4",
-      "name": "DP-0",
-      "serial": "RFCN7XA002564",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-customize-palette-geometry": {
+    "frame_geometry": {
+      "height": 551,
+      "width": 826,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 551,
+      "width": 826,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 551,
+      "width": 826,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAzkAAAImAAAAAAAAAAAAAAM5AAACJgAAAAACAAAAB4AAAAAAAAAAAAAAAzkAAAIm"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
         "width": 1920
@@ -440,6 +526,57 @@
       }
     }
   },
+  "geometry-of-preferences dialog geometry": {
+    "frame_geometry": {
+      "height": 720,
+      "width": 930,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 720,
+      "width": 930,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 720,
+      "width": 930,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA6EAAALPAAAAAAAAAAAAAAOhAAACzwAAAAACAAAAB4AAAAAAAAAAAAAAA6EAAALP"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
   "grid view visible": false,
   "jobs view column layout3": {
     "__class__": "bytearray",
@@ -450,7 +587,34 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 24
+    "/home/haroldo/calibre": 28
+  },
+  "light_palette_name": "__current__",
+  "light_palettes": {
+    "__current__": {
+      "AlternateBase": "#eff1f5",
+      "Base": "#e6e9ef",
+      "BrightText": "#4c4f69",
+      "BrightText-disabled": "#4c4f69",
+      "Button": "#eff1f5",
+      "ButtonText": "#4c4f69",
+      "ButtonText-disabled": "#acb0be",
+      "Highlight": "#b2bcf0",
+      "HighlightedText": "#4c4f69",
+      "HighlightedText-disabled": "#e6e9ef",
+      "Link": "#dc8a78",
+      "LinkVisited": "#1e66f5",
+      "PlaceholderText": "#4c4f69",
+      "PlaceholderText-disabled": "#4c4f69",
+      "Text": "#4c4f69",
+      "Text-disabled": "#acb0be",
+      "ToolTipBase": "#dce0e8",
+      "ToolTipText": "#4c4f69",
+      "ToolTipText-disabled": "#4c4f69",
+      "Window": "#dce0e8",
+      "WindowText": "#4c4f69",
+      "WindowText-disabled": "#acb0be"
+    }
   },
   "main_window_central_widget_state": {
     "layout": "wide",
@@ -568,6 +732,7 @@
     "__value__": "AdnQywADAAAAAADhAAAAkAAABAoAAAMIAAAA5gAAAKwAAAQFAAADAwAAAAEAAAAABQAAAADmAAAArAAABAUAAAMD"
   },
   "search bar visible": true,
+  "show_emblems": false,
   "single-cover-fetch-dialog-geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAADDAAAAnwAABB4AAAMXAAAAyAAAALsAAAQZAAADEgAAAAEAAAAABQAAAADIAAAAuwAABBkAAAMS"
@@ -577,6 +742,13 @@
     true,
     136
   ],
+  "tb_search_order": {
+    "0": 1,
+    "1": 2,
+    "2": 3,
+    "3": 4,
+    "4": 0
+  },
   "viewer-edit-lookup-locations-geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAACtAAAA5AAAApYAAAITAAAAsgAAAQEAAAKRAAACDgAAAAAAAAAABVYAAACyAAABAQAAApEAAAIO"
