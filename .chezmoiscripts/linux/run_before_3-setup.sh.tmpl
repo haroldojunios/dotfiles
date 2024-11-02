@@ -193,8 +193,16 @@ fi
 if command -v nvidia-smi &>/dev/null; then
   sudo bash -c "cat >/etc/modprobe.d/nvidia-i2c.conf" <<EOF
 # modprobe.d file to set proprietary Nvidia driver options often needed for DDC/CI
-options nvidia NVreg_RegistryDwords=RMUseSwI2c=0x01;RMI2cSpeed=100;EnableBrightnessControl=1
+options nvidia NVreg_RegistryDwords=RMUseSwI2c=0x01;RMI2cSpeed=100;NVreg_PreserveVideoMemoryAllocations=1;EnableBrightnessControl=1
 EOF
+
+  sudo bash -c "cat >/etc/modprobe.d/nvidia.conf" <<EOF
+options nvidia_drm modeset=1 fbdev=1
+EOF
+
+  if ! grep -q nvidia "/etc/mkinitcpio.conf"; then
+    echo "MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)" | sudo tee -a "/etc/mkinitcpio.conf" &>/dev/null
+  fi
 fi
 
 # {{   else if .isWSL }}

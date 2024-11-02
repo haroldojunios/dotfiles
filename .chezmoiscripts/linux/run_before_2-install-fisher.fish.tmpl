@@ -24,6 +24,8 @@ for plugin in $fisherPlugins
     end
 end
 
+fisher update &>/dev/null
+
 if type -q autols
     autols on &>/dev/null
 end

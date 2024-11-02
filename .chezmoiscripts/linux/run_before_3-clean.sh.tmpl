@@ -10,6 +10,14 @@ if command -v pip &>/dev/null; then
   pip cache purge
 fi
 
+if command -v poetry &>/dev/null; then
+  poetry cache clear --all .
+fi
+
+if command -v pre-commit &>/dev/null; then
+  pre-commit gc
+fi
+
 if command -v npm &>/dev/null; then
   npm cache clean --force
   npm cache verify
@@ -22,4 +30,20 @@ fi
 if command -v journalctl &>/dev/null; then
   sudo journalctl --sync
   sudo journalctl --vacuum-time=1w --vacuum-size=100M --rotate
+fi
+
+rm -rf "${HOME}/.cache/paru/clone"
+rm -rf "${HOME}/.cache/wine"
+rm -rf "${HOME}/.cache/vmware"
+rm -rf "${HOME}/.cache/act"
+rm -rf "${HOME}/.cache/go-build"
+
+if ! [ "$(find "${HOME}/.cache/run-weekly" -mtime -7 2>/dev/null)" ]; then
+  rm -rf "${HOME}/.cache/chezmoi/httpcache"
+  rm -rf "${HOME}/.cache/pypoetry/artifacts"
+  rm -rf "${HOME}/.cache/thumbnails"
+  rm -rf "${HOME}/.cache/Smart Code ltd/Stremio/QtWebEngine/Default/Cache"
+  rm -rf "${HOME}/.cache/vivaldi"
+  find "${HOME}/.cache/mozilla" -name "cache2" -type d -prune -exec rm -rf '{}' '+' &>/dev/null || :
+  touch "${HOME}/.cache/run-weekly"
 fi

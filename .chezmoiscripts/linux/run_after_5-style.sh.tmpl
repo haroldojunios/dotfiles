@@ -6,17 +6,19 @@
 
 set -eu
 
+font="Iosevka Nerd Font"
+font_size=9
+
+# if command -v hwinfo >/dev/null; then
+#   monitor=$(hwinfo --short --monitor | grep -v "monitor:")
+#   case "$monitor" in
+#   *27G2G4*)
+#     font_size=8.5
+#     ;;
+#   esac
+# fi
+
 if command -v kwriteconfig5 &>/dev/null; then
-  font="Iosevka Nerd Font"
-  font_size=9.5
-  if command -v hwinfo >/dev/null; then
-    monitor=$(hwinfo --short --monitor | grep -v "monitor:")
-    case "$monitor" in
-    *27G2G4*)
-      font_size=8.5
-      ;;
-    esac
-  fi
   # dolphin
   kwriteconfig5 --file dolphinrc --group General --key AutoExpandFolders true
   kwriteconfig5 --file dolphinrc --group General --key BrowseThroughArchives false
@@ -83,10 +85,6 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   # ksmserverrc
   kwriteconfig5 --file ksmserverrc --group General --key loginMode emptySession
 
-  # gtk
-  kwriteconfig5 --file "${HOME}/.config/gtk-3.0/settings.ini" --group Settings --key gtk-font-name "${font},  ${font_size}"
-  kwriteconfig5 --file "${HOME}/.config/gtk-4.0/settings.ini" --group Settings --key gtk-font-name "${font},  ${font_size}"
-
   # touchpad
   for group in "DELL0AB0:00 04F3:3147 Touchpad" "Synaptics s3203"; do
     kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key clickMethodAreas false
@@ -95,26 +93,51 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
     kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key pointerAcceleration 0.4
     kwriteconfig5 --file touchpadxlibinputrc --group "${group}" --key tapToClick true
   done
-
-  # trolltech
-  if command -v crudini &>/dev/null; then
-    if [ -f "${HOME}/.config/Trolltech.conf" ]; then
-      touch "${HOME}/.config/Trolltech.conf"
-    fi
-    crudini --set ${HOME}/.config/Trolltech.conf qt font "${font},${font_size},-1,5,50,0,0,0,0,0"
-  fi
 fi
 
-# # https://www.reddit.com/r/kde/comments/g986ql/comment/fov5aql/
-# if command -v kbuildsycoca5 &>/dev/null && command -v dbus-send &>/dev/null; then
-#   rm -f "${HOME}/.cache/*.kcache"
-#   for i in $(seq 0 9); do
-#     dbus-send --session --type=signal /KGlobalSettings org.kde.KGlobalSettings.notifyChange int32:${i} int32:0
-#   done
-#   for i in $(seq 0 5); do
-#     dbus-send --session --type=signal /KIconLoader org.kde.KIconLoader.iconChanged int32:${i}
-#   done
-#   dbus-send --session --type=signal /KWin org.kde.KWin.reloadConfig
-#   kbuildsycoca5 &>/dev/null
-#   (kquitapp5 plasmashell || killall plasmashell && kstart5 plasmashell) &>/dev/null
-# fi
+if command -v crudini &>/dev/null; then
+  # trolltech
+  if ! [ -f "${HOME}/.config/Trolltech.conf" ]; then
+    touch "${HOME}/.config/Trolltech.conf"
+  fi
+  crudini --set ${HOME}/.config/Trolltech.conf qt font "${font},${font_size},-1,5,50,0,0,0,0,0"
+
+  # gtk
+  if ! [ -f "${HOME}/.config/gtk-3.0/settings.ini" ]; then
+    touch "${HOME}/.config/gtk-3.0/settings.ini"
+  fi
+  if ! [ -f "${HOME}/.config/gtk-4.0/settings.ini" ]; then
+    touch "${HOME}/.config/gtk-4.0/settings.ini"
+  fi
+  crudini --set ${HOME}/.config/gtk-3.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
+  crudini --set ${HOME}/.config/gtk-4.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
+
+  # qt 5
+  if ! [ -f "${HOME}/.config/qt5ct/qt5ct.conf" ]; then
+    touch "${HOME}/.config/qt5ct/qt5ct.conf"
+  fi
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/Catppuccin-Mocha.conf"
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance custom_palette true
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance icon_theme beautyline
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance standard_dialogs default
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance style kvantum-dark
+
+  # qt 6
+  if ! [ -f "${HOME}/.config/qt6ct/qt6ct.conf" ]; then
+    touch "${HOME}/.config/qt6ct/qt6ct.conf"
+  fi
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/Catppuccin-Mocha.conf"
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance custom_palette true
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance icon_theme beautyline
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance standard_dialogs default
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance style kvantum-dark
+fi
+
+if command -v gsettings &>/dev/null; then
+  gsettings set org.gnome.desktop.interface gtk-theme catppuccin-mocha-lavender
+  gsettings set org.gnome.desktop.interface icon-theme beautyline
+fi
