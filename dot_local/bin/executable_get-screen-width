@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import gi
 
-gi.require_version("Gdk", "3.0")
-from gi.repository import Gdk
+gi.require_version("Gtk", "4.0")
+gi.require_version("Gdk", "4.0")
+from gi.repository import Gdk, Gtk  # noqa: F401,E402
 
 display = Gdk.Display.get_default()
-monitor = display.get_primary_monitor()
+monitor = display.get_monitors()[0]
 geometry = monitor.get_geometry()
 print(geometry.width)

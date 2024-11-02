@@ -21,29 +21,43 @@ WEATHER_URL = (
 TEST_URL = "http://google.com/"
 TEST_TIMEOUT = 60
 
-# WIND_DIRECTIONS = ""
-WIND_DIRECTIONS = "󰁝󰁜󰁔󰁃󰁅󰁂󰁍󰁛"
+WIND_DIRECTIONS = [" ", " ", " ", " ", " ", " ", " ", " "]
+# WIND_DIRECTIONS = ["󰁝 ", "󰁜 ", "󰁔 ", "󰁃 ", "󰁅 ", "󰁂 ", "󰁍 ", "󰁛 "]
 WEATHER_ICONS = {
-    "01d": "",
-    "02d": "",
-    "03d": "",
-    "04d": "",
-    "09d": "",
-    "10d": "",
-    "11d": "",
-    "13d": "",
-    "50d": "󰖑",
-    "01n": "",
-    "02n": "",
-    "03n": "",
-    "04n": "",
-    "09n": "",
-    "10n": "",
-    "11n": "",
-    "13n": "",
-    "50n": "󰖑",
+    "01d": " ",
+    "02d": " ",
+    "03d": " ",
+    "04d": " ",
+    "09d": " ",
+    "10d": " ",
+    "11d": " ",
+    "13d": " ",
+    "50d": "󰖑 ",
+    "01n": " ",
+    "02n": " ",
+    "03n": " ",
+    "04n": " ",
+    "09n": " ",
+    "10n": " ",
+    "11n": " ",
+    "13n": " ",
+    "50n": "󰖑 ",
 }
-BEAUFORT_SCALE = ""
+BEAUFORT_SCALE = [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+]
 BEAUFORT_THRESHOLDS = (1, 3, 6, 10, 16, 21, 27, 33, 40, 47, 55, 63)
 
 if len(sys.argv) > 1 and sys.argv[1]:
@@ -67,7 +81,7 @@ while True:
     try:
         ok = requests.get(TEST_URL, timeout=5).ok
         if ((time.time() - start) > TEST_TIMEOUT) or not ok:
-            print("BO")
+            print("No connection with the internet!", file=sys.stderr)
             exit(1)
         elif ok:
             break
@@ -80,6 +94,7 @@ data = None
 
 with requests.get(IP_URL) as r:
     if r.status_code != 200:
+        print("Error fetching IP!", file=sys.stderr)
         exit(1)
     data = r.json()
 
@@ -89,6 +104,7 @@ if data and "latitude" in data and "longitude" in data:
 
     with requests.get(WEATHER_URL.format(lat=lat, lon=lon)) as r:
         if r.status_code != 200:
+            print("Error fetching weather!", file=sys.stderr)
             exit(1)
         data.update(r.json())
 
