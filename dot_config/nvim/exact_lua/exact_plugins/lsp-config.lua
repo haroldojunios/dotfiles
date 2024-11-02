@@ -81,6 +81,7 @@ return {
         "emmet_ls",
         "eslint",
         "html",
+        "hyprls",
         "jsonls",
         "ltex",
         "prismals",
@@ -114,21 +115,21 @@ return {
             },
           })
         end,
-        -- ["pyright"] = function()
-        --   lspconfig.pyright.setup({
-        --     settings = {
-        --       pyright = {
-        --         disableOrganizeImports = true, -- Using Ruff
-        --       },
-        --       python = {
-        --         analysis = {
-        --           ignore = { "*" }, -- Using Ruff
-        --           typeCheckingMode = "off", -- Using mypy
-        --         },
-        --       },
-        --     },
-        --   })
-        -- end,
+        ["pyright"] = function()
+          lspconfig.pyright.setup({
+            settings = {
+              pyright = {
+                disableOrganizeImports = true, -- Using Ruff
+              },
+              python = {
+                analysis = {
+                  ignore = { "*" }, -- Using Ruff
+                  typeCheckingMode = "off", -- Using mypy
+                },
+              },
+            },
+          })
+        end,
       })
 
       -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
@@ -163,7 +164,7 @@ return {
         "shellcheck",
         "shfmt",
         "sqlfmt",
-        -- "yamlfmt",
+        "yamlfmt",
       }
       if os.getenv("PREFIX") == nil then
         table.insert(ensure_installed, "latexindent")
@@ -188,8 +189,6 @@ return {
         ensure_installed = ensure_installed,
         handlers = {},
       })
-
-      vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
     end,
   },
   {

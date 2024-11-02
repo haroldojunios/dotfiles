@@ -25,6 +25,7 @@ return {
         "gotmpl",
         "html",
         "htmldjango",
+        "hyprlang",
         "ini",
         "javascript",
         "json",

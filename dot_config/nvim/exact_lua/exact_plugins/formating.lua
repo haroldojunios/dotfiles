@@ -75,6 +75,7 @@ return {
         -- tex = { "latexindent" },
         typescript = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
+        yaml = { "yamlfmt" },
         ["_"] = { "trim_newlines", "trim_whitespace" },
       },
       -- format_on_save = { timeout_ms = 500, lsp_fallback = true },
@@ -139,6 +140,14 @@ return {
           command = "prisma",
           args = { "format", "--schema", "$FILENAME" },
           stdin = false,
+        },
+        prettierd = {
+          args = function(self, ctx)
+            if vim.bo[ctx.buf].filetype == "jsonc" then
+              return { "$FILENAME.json" }
+            end
+            return { "$FILENAME" }
+          end,
         },
       },
     },
