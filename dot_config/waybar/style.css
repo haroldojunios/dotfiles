@@ -1,0 +1,263 @@
+@import "mocha.css";
+
+/* -----------------------------------------------------
+ * General
+ * ----------------------------------------------------- */
+
+* {
+  font-family: "Iosevka", "Fira Sans Semibold", "Font Awesome 6 Free",
+    FontAwesome, "Symbols Nerd", Roboto, Helvetica, Arial, sans-serif;
+  border: none;
+  border-radius: 0px;
+  font-size: 10pt;
+  margin: 0px 3px;
+}
+
+window#waybar {
+  background-color: alpha(@mantle, 0.8);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+.modules-left {
+  padding-left: 14px;
+}
+
+#workspaces {
+  background: @base;
+  margin: 1px;
+  padding: 0px 2px;
+  border-radius: 15px;
+  border: 0px;
+  font-weight: bold;
+  font-style: normal;
+  opacity: 0.8;
+  font-size: 1em;
+  color: @text;
+}
+
+#workspaces button {
+  margin: 1px 1px;
+  border-radius: 50%;
+  min-width: 20px;
+  padding: 0px 2px;
+  border: 0px;
+  color: @text;
+  background-color: @surface0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.4;
+}
+
+#workspaces button.active {
+  color: @base;
+  background: @lavender;
+  border-radius: 15px;
+  /* min-width: 30px; */
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+
+#workspaces button:hover {
+  color: @base;
+  background: @lavender;
+  border-radius: 15px;
+  opacity: 0.7;
+}
+
+tooltip {
+  border-radius: 10px;
+  background-color: @mantle;
+  opacity: 0.8;
+  padding: 20px;
+  margin: 0px;
+}
+
+tooltip label {
+  color: @subtext1;
+}
+
+#window {
+  background: @surface0;
+  margin: 0px 3px;
+  border-radius: 12px;
+  color: @subtext1;
+  font-size: 1em;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+#taskbar {
+  background: @base;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 15px;
+  font-weight: normal;
+  font-style: normal;
+  opacity: 0.8;
+}
+
+#taskbar button {
+  margin: 0;
+  border-radius: 15px;
+  padding: 0px;
+}
+
+#taskbar.empty {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+#custom-spacer {
+  margin: 0px;
+  padding: 0px;
+}
+
+#custom-browser,
+#custom-keybindings,
+#custom-filemanager,
+#custom-calculator,
+#custom-windowsvm,
+#custom-cliphist,
+#custom-system,
+#custom-hypridle,
+#custom-tools,
+#custom-audio_idle_inhibitor,
+#custom-quicklink1,
+#custom-quicklink2,
+#custom-quicklink3,
+#idle_inhibitor,
+#custom-quicklink4,
+#custom-quicklink5,
+#custom-quicklink6,
+#custom-quicklink7,
+#custom-quicklink8,
+#custom-quicklink9,
+#custom-quicklink10 {
+  margin: 0px 3px;
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0.8;
+  color: @lavender;
+}
+
+#custom-hypridle.active {
+  color: @lavender;
+}
+
+#custom-hypridle.notactive {
+  color: @red;
+}
+
+#idle_inhibitor.activated {
+  color: @red;
+}
+
+#clock,
+#audio,
+#network,
+#battery,
+#custom-appmenu,
+#custom-appmenuicon,
+#custom-ddcutil,
+#custom-notification {
+  background-color: @mantle;
+  color: @text;
+  border-radius: 15px;
+  opacity: 0.8;
+  padding: 0px 4px;
+}
+
+#custom-appmenuicon {
+  font-size: 1.3em;
+  color: @lavender;
+}
+
+#custom-ddcutil {
+  color: @lavender;
+}
+
+#custom-exit {
+  font-size: 1.2em;
+  color: @lavender;
+  opacity: 0.8;
+}
+
+#disk,
+#memory,
+#cpu,
+#language {
+  margin: 0px;
+  padding: 0px;
+  color: @lavender;
+}
+
+#cava,
+#pulseaudio,
+#bluetooth,
+#bluetooth.on,
+#bluetooth.connected {
+  margin: 0px 3px;
+}
+
+#language {
+  margin-right: 10px;
+}
+
+#pulseaudio.muted {
+  background-color: @mantle;
+  color: @text;
+}
+
+#bluetooth.off {
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px 3px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @subtext1;
+  background-color: @surface0;
+}
+
+@keyframes blink {
+  to {
+    background-color: @surface0;
+    color: @subtext1;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#tray {
+  color: @text;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}

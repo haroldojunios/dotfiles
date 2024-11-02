@@ -1,0 +1,33 @@
+{
+  "custom/quicklink1": {
+    "format": " ",
+    "on-click": "firefox",
+    "tooltip-format": "Open browser"
+  },
+  "custom/quicklink2": {
+    "format": " ",
+    "on-click": "kitty",
+    "tooltip-format": "Open terminal"
+  },
+  "custom/quicklink3": {
+    "format": " ",
+    "on-click": "dolphin",
+    "tooltip-format": "Open filemanager"
+  },
+  "custom/quicklink4": {
+    "format": " ",
+    "on-click": "vmrun -T ws start ~/vmware/Windows10Lite/Windows10Lite.vmx",
+    "tooltip-format": "Open Windows VM"
+  },
+  "custom/quicklinkempty": {},
+  "group/quicklinks": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/quicklink1",
+      "custom/quicklink2",
+      "custom/quicklink3",
+      "custom/quicklink4",
+      "custom/quicklinkempty"
+    ]
+  }
+}

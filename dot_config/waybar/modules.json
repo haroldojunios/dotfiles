@@ -1,0 +1,356 @@
+{
+  // Workspaces
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "on-click": "activate",
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "urgent": "",
+      // "active": "",
+      "default": ""
+    },
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  // Taskbar
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 16,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
+
+  // Hyprland Window
+  "hyprland/window": {
+    "rewrite": {
+      "(.*) — Mozilla Firefox": " $1",
+      "(.*)Mozilla Firefox": " $1",
+      "(.*) - Vivaldi": "$1",
+      "(.*) - Visual Studio Code": "󰨞 $1",
+      "(.*)Visual Studio Code": "󰨞 $1",
+      "(.*) — Dolphin": " $1",
+      "(.*)Steam": "󰓓 $1"
+    },
+    "separate-outputs": true
+  },
+
+  // Spacer
+  "custom/spacer": {
+    "format": " "
+  },
+
+  // Tools
+  "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools"
+  },
+
+  // Cliphist
+  "custom/cliphist": {
+    "format": "",
+    "on-click": "sleep 0.1 && cliphist list | fuzzel --dmenu | cliphist decode | wl-copy",
+    "tooltip-format": "Clipboard Manager"
+  },
+
+  // Calculator
+  "custom/calculator": {
+    "format": "",
+    "on-click": "kalk",
+    "tooltip-format": "Open calculator"
+  },
+
+  // Application Launcher
+  "custom/appmenu": {
+    "format": "Apps",
+    "on-click": "fuzzel --filter-desktop",
+    "tooltip-format": "Open the application launcher"
+  },
+
+  // Application Launcher
+  "custom/appmenuicon": {
+    "format": "",
+    "on-click": "fuzzel --filter-desktop",
+    "tooltip-format": "Open the application launcher"
+  },
+
+  // Power Menu
+  "custom/exit": {
+    "format": "",
+    "on-click": "wlogout",
+    "tooltip-format": "Power Menu"
+  },
+
+  // Keyboard State
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "locked": "",
+      "unlocked": ""
+    }
+  },
+
+  // System tray
+  "tray": {
+    "icon-size": 16,
+    "spacing": 3
+  },
+
+  // Clock
+  "clock": {
+    "format": "󰸘{0:%d/%m/%Y} {0:%H:%M:%S}",
+    "interval": 1,
+    "on-click": "kitty --class calendar -o confirm_os_window_close=0 calcure",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cba6f7'><b>{}</b></span>",
+        "days": "<span color='#b4befe'><b>{}</b></span>",
+        "weeks": "<span color='#89dceb'><b>{}</b></span>",
+        "weekdays": "<span color='#89b4fa'><b>{}</b></span>",
+        "today": "<span color='#a6e3a1'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  // System
+  "custom/system": {
+    "format": "",
+    "tooltip": false
+  },
+
+  // CPU
+  "cpu": {
+    "interval": 1,
+    "format": "󰻠{usage}% ",
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+  },
+
+  // Memory
+  "memory": {
+    "interval": 10,
+    "format": "󰍛{}% ",
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+  },
+
+  // Harddisc space used
+  "disk": {
+    "interval": 30,
+    "format": "󰋊{percentage_used}% ",
+    "path": "/",
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+  },
+
+  "hyprland/language": {
+    "format": "󰌌{short}"
+  },
+
+  // Idle inhibitor
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+
+  // Group Hardware
+  "group/hardware": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "transition-left-to-right": false
+    },
+    "modules": ["custom/system", "disk", "cpu", "memory", "hyprland/language"]
+  },
+
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}GHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+
+  // Battery
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon}  {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [" ", " ", " ", " ", " "]
+  },
+
+  // Pulseaudio
+  "pulseaudio": {
+    "scroll-step": 5,
+    "max-volume": 150,
+    "format": "{icon}{volume}% {format_source}",
+    "format-bluetooth": "{icon}{volume}% {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": [" ", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  // Cava
+  "cava": {
+    "method": "pulse",
+    "bars": 8,
+    "stereo": false,
+    "bar_delimiter": 0,
+    "hide_on_silence": true,
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "actions": {
+      "on-click-right": "mode"
+    }
+  },
+
+  // Bluetooth
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format-disabled": "",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "blueman-manager",
+    "format-no-controller": "",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  },
+
+  // Audio group
+  "group/audio": {
+    "orientation": "inherit",
+    "modules": ["cava", "pulseaudio"]
+  },
+
+  // Other
+  "user": {
+    "format": "{user}",
+    "interval": 60,
+    "icon": false
+  },
+
+  // Backlight:
+  "custom/ddcutil": {
+    "format": "{icon} {percentage}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "exec": "~/.config/waybar/scripts/ddcutil-daemon",
+    "return-type": "json",
+    "on-scroll-up": "~/.config/waybar/scripts/ddcutil-set -u",
+    "on-scroll-down": "~/.config/waybar/scripts/ddcutil-set -d"
+  },
+
+  // Notifications
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  // Idle inhibitor with audio
+  "custom/audio_idle_inhibitor": {
+    "format": "{icon}",
+    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar --ignore-source-outputs cava",
+    "exec-if": "which sway-audio-idle-inhibit",
+    "return-type": "json",
+    "format-icons": {
+      "output": "",
+      "input": "",
+      "output-input": "  ",
+      "none": ""
+    }
+  },
+
+  // Group Tools
+  "group/tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/tools",
+      "custom/cliphist",
+      "idle_inhibitor",
+      "custom/audio_idle_inhibitor"
+    ]
+  }
+}

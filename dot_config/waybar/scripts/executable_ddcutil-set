@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+
+import click
+
+CACHE_FILE = Path("/tmp/ddcutil-brightness-cache")
+STEP = 5
+
+
+def set_cache(percentage):
+    with open(CACHE_FILE, "w") as f:
+        f.write(f"{percentage}")
+
+
+def get_cache():
+    with open(CACHE_FILE) as f:
+        return int(f.read())
+
+
+@click.command()
+@click.option(
+    "--up", "-u", default=False, is_flag=True, help="Increase brightness"
+)
+@click.option(
+    "--down", "-d", default=False, is_flag=True, help="Decrease brightness"
+)
+def main(up, down):
+    if not up and not down:
+        return
+    percentage = get_cache()
+    percentage += STEP if up else -STEP
+    percentage = max(0, min(100, percentage))
+    set_cache(percentage)
+
+
+if __name__ == "__main__":
+    main()

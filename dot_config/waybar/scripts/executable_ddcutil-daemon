@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+
+import json
+import shlex
+import subprocess
+import time
+from pathlib import Path
+from typing import Any
+
+CACHE_FILE = Path("/tmp/ddcutil-brightness-cache")
+OLD_CACHE_FILE = Path("/tmp/ddcutil-brightness-cache-old")
+INFO_FILE = Path("/tmp/ddcutil-brightness-info.json")
+
+
+def run_cmd(cmd):
+    proc = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
+    return proc.stdout.strip()
+
+
+def get_display_info(display: int) -> dict[str, Any]:
+    info: dict[str, dict[str, Any]]
+    display_str = str(display)
+
+    if INFO_FILE.exists():
+        with INFO_FILE.open() as f:
+            info = json.load(f)
+
+        if display_str in info:
+            return info[display_str]
+
+    cmd = "ddcutil detect --brief"
+    result = run_cmd(cmd)
+
+    info = dict()
+    cur_display: str | None = None
+    for line in result.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("Display"):
+            cur_display = line.split(" ", 1)[1]
+            print(f"Found display {cur_display}", type(cur_display))
+        elif cur_display is not None:
+            if cur_display not in info:
+                info[cur_display] = dict()
+            key, value = line.split(":", 1)
+            key = key.strip()
+            value = value.strip()
+            if key == "I2C bus":
+                value = value.rsplit("-", 1)[-1]
+            info[cur_display][key] = value
+
+    with INFO_FILE.open("w", encoding="utf-8") as f:
+        json.dump(info, f, ensure_ascii=False)
+
+    return info.get(display_str, dict())
+
+
+def check_cache():
+    return (
+        CACHE_FILE.exists()
+        and CACHE_FILE.stat().st_size > 0
+        and OLD_CACHE_FILE.exists()
+        and OLD_CACHE_FILE.stat().st_size > 0
+    )
+
+
+def set_cache(percentage):
+    with open(CACHE_FILE, "w") as f:
+        f.write(f"{percentage}")
+    with open(OLD_CACHE_FILE, "w") as f:
+        f.write(f"{percentage}")
+
+
+def get_cache():
+    with open(CACHE_FILE) as f:
+        cache_value = int(f.read())
+    with open(OLD_CACHE_FILE) as f:
+        old_cache_value = int(f.read())
+
+    return cache_value, old_cache_value
+
+
+def set_brightness(percentage, display=1):
+    display_info = get_display_info(display)
+    bus = display_info.get("I2C bus")
+    if bus is not None:
+        cmd = f"ddcutil --bus {bus} setvcp 10 {percentage}"
+    else:
+        cmd = f"ddcutil setvcp 10 {percentage}"
+    run_cmd(cmd)
+
+
+def get_brightness():
+    try:
+        display_info = get_display_info(1)
+        bus = display_info.get("I2C bus")
+        if bus is not None:
+            cmd = f"ddcutil --bus {bus} getvcp 10"
+        else:
+            cmd = "ddcutil getvcp 10"
+        result = run_cmd(cmd)
+        percentage_str = (
+            result.split(":")[-1].split(",")[0].split("=")[1].strip()
+        )
+        percentage = int(percentage_str)
+    except IndexError:
+        percentage = -1
+
+    if check_cache():
+        set_percentage, old_percentage = get_cache()
+    else:
+        set_cache(percentage)
+        return percentage
+
+    if (
+        set_percentage == old_percentage
+        and set_percentage != percentage
+        and percentage != -1
+    ):
+        set_cache(percentage)
+    elif set_percentage != old_percentage:
+        percentage = set_percentage
+        set_cache(percentage)
+        set_brightness(percentage)
+    return percentage
+
+
+while True:
+    percentage = get_brightness()
+    print(json.dumps({"percentage": percentage}), flush=True)
+    time.sleep(0.25)
