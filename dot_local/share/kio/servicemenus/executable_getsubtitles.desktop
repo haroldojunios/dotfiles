@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+MimeType=video/*;
+Actions=getSubtitles
+
+[Desktop Action getSubtitles]
+Name=Get Subtitles
+Icon=add-subtitle
+Exec=kitty -e subliminal download -l en %U
