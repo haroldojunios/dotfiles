@@ -332,6 +332,7 @@ packageList=(
   pulseaudio-ctl
   pyenv
   python
+  python-aiohttp-oauthlib
   python-beautifulsoup4
   python-catppuccin
   python-click
@@ -380,6 +381,7 @@ packageList=(
   unrar
   unzip
   usbutils
+  vdirsyncer
   wget
   which
   wine-staging
