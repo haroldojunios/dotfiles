@@ -5,6 +5,7 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 GLCore=true
 LatencyPolicy=Low
 OpenGLIsUnsafe=false
+WindowsBlockCompositing=false
 
 [Desktops]
 Id_1=1a831ee1-83fa-455a-aa49-81ac9129a9e4
@@ -125,4 +126,4 @@ Scale=1
 [org.kde.kdecoration2]
 ButtonsOnLeft=
 ButtonsOnRight=IAX
-theme=__aurorae__svg__Sweet-Dark
+theme=__aurorae__svg__CatppuccinMocha-Modern
