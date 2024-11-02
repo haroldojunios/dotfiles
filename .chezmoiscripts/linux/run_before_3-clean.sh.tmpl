@@ -11,7 +11,7 @@ if command -v pip &>/dev/null; then
 fi
 
 if command -v poetry &>/dev/null; then
-  poetry cache clear --all .
+  yes | poetry cache clear --all .
 fi
 
 if command -v pre-commit &>/dev/null; then
