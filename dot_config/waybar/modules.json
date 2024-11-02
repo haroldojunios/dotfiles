@@ -110,7 +110,7 @@
   "clock": {
     "format": "󰸘{0:%d/%m/%Y} {0:%H:%M:%S}",
     "interval": 1,
-    "on-click": "kitty --class calendar -o confirm_os_window_close=0 calcure",
+    "on-click": "kitty --class calendar -o confirm_os_window_close=0 ikhal",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
