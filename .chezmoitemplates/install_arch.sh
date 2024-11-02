@@ -394,6 +394,17 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
     "${packageList[@]}"
     "${nvidiaDriver}"
     nvidia-utils
+    libva-nvidia-driver-git
+    lib32-nvidia-utils
+    libvdpau
+    opencl-nvidia
+    lib32-opencl-nvidia
+    libxnvctrl
+    mesa
+    lib32-mesa
+    libva-mesa-driver
+    mesa-vdpau
+    opencl-clover-mesa
   )
 fi
 
@@ -440,6 +451,12 @@ if ! systemctl list-unit-files --state=enabled | grep docker &>/dev/null; then
   sudo systemctl enable --now docker
   sudo groupadd docker &>/dev/null || true
   sudo usermod -aG docker "${USER}"
+fi
+
+if ! systemctl list-unit-files --state=enabled | grep nvidia-resume &>/dev/null; then
+  sudo systemctl enable --now nvidia-resume
+  sudo systemctl enable --now nvidia-suspend
+  sudo systemctl enable --now nvidia-hibernate
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/dev/null; then
