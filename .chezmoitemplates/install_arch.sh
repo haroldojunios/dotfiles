@@ -22,6 +22,7 @@ ILoveCandy
 VerbosePkgLists
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
+IgnorePkg = chaotic-mirrorlist
 {{ if eq .osid "linux-garuda" }}
 [garuda]
 Include = /etc/pacman.d/chaotic-mirrorlist
@@ -34,16 +35,9 @@ Include = /etc/pacman.d/mirrorlist
 
 [community]
 Include = /etc/pacman.d/mirrorlist
-{{ if eq .chezmoi.osRelease.id "archarm" }}
-[alarm]
-Include = /etc/pacman.d/mirrorlist
 
-[aur]
-Include = /etc/pacman.d/mirrorlist
-{{ else }}
 [multilib]
 Include = /etc/pacman.d/mirrorlist
-{{ end }}
 {{ if eq .osid "linux-garuda" }}
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
@@ -62,6 +56,10 @@ if ! command -v paru &>/dev/null; then
 else
   paru -Syu --noconfirm
   paru -Fy || :
+fi
+
+if ! [ -f "${HOME}/.local/state/paru/devel.toml" ]; then
+  paru --gendb
 fi
 
 if grep -q "#" /etc/paru.conf; then
@@ -246,6 +244,7 @@ packageList=(
   alsa-card-profiles
   alsa-utils
   android-tools
+  augeas
   bat
   bc
   biber
@@ -282,8 +281,10 @@ packageList=(
   i2c-tools
   imagemagick
   inetutils
+  iniparser
   inxi
   jq
+  khal
   lazydocker
   lazygit
   lazynpm
@@ -332,7 +333,9 @@ packageList=(
   pyenv
   python
   python-beautifulsoup4
+  python-catppuccin
   python-click
+  python-humanize
   python-matplotlib
   python-pandas
   python-pipx
@@ -342,6 +345,8 @@ packageList=(
   python-py7zr
   python-pyexiftool
   python-pylatexenc
+  python-pypdf
+  python-python-ffmpeg
   python-requests
   python-scipy
   python-tqdm
@@ -382,7 +387,6 @@ packageList=(
   wine-mono
   winetricks
   wkhtmltopdf
-  xclip
   zerotier-one
   zip
   zoxide
@@ -444,6 +448,10 @@ for package in "${packageList[@]}"; do
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
     paru -S --noconfirm --needed --skipreview --nouseask --sudoloop ${package} ||
       echo -e "${RED}Package(s) \"${BLUE}${package}${RED}\" not found!${NC}"
+    if [ "${package}" = "opentabletdriver" ]; then
+      sudo mkinitcpio -P
+      sudo rmmod wacom hid_uclogic || :
+    fi
   fi
 done
 
@@ -501,7 +509,8 @@ if ! pipx list --short | grep -q crudini; then
   pipx install crudini
 fi
 
-yes | paru -Scd
+yes | paru -Sc
 pacman -Qtdq | xargs -r -n 1 sudo pacman -Rns --noconfirm
+rm -rf ~/.cache/paru/clone/*
 
 echo
