@@ -73,6 +73,7 @@ return {
         prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
         -- tex = { "latexindent" },
+        toml = { "taplo" },
         typescript = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
         yaml = { "yamlfmt" },

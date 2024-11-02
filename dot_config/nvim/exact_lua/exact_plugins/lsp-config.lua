@@ -164,6 +164,7 @@ return {
         "shellcheck",
         "shfmt",
         "sqlfmt",
+        "taplo",
         "yamlfmt",
       }
       if os.getenv("PREFIX") == nil then
