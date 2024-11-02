@@ -31,6 +31,8 @@ set -x NNN_PLUG 'f:finder;o:fzopen;p:preview-tui;d:diffs'
 set -x NNN_PREVIEWDIR "$HOME/.cache/nnn/previews"
 set -x NNN_BATTHEME $BAT_THEME
 set -x NNN_BATSTYLE $BAT_STYLE
+set -x NNN_OPTS Hdir
+set -x NNN_ARCHIVE "\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)\$"
 
 if set -q KITTY_WINDOW_ID && type -q kitten
     alias ssh="kitten ssh"
