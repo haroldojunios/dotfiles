@@ -41,6 +41,22 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/fish/main/themes/Catppuccin%20Mocha.theme"
 refreshPeriod = "168h"
 
+[".config/hypr/hyprland/catppuccin.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/mocha.conf"
+refreshPeriod = "168h"
+
+[".config/waybar/mocha.css"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/waybar/refs/heads/main/themes/mocha.css"
+refreshPeriod = "168h"
+
+# Swaync also uses GTK3 CSS
+[".config/swaync/mocha.css"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/waybar/refs/heads/main/themes/mocha.css"
+refreshPeriod = "168h"
+
 # use manual colors
 # [".config/kitty/catppuccin.conf"]
 # type = "file"
