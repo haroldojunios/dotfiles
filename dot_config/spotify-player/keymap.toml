@@ -1,0 +1,13 @@
+[[actions]]
+action = "GoToArtist"
+key_sequence = "g A"
+[[actions]]
+action = "GoToAlbum"
+key_sequence = "g B"
+target = "PlayingTrack"
+[[actions]]
+action = "GoToRadio"
+key_sequence = "g R"
+[[actions]]
+action="ToggleLiked"
+key_sequence="C-l"
