@@ -6,6 +6,10 @@
 
 set -eu
 
+if command -v termux-setup-storage &>/dev/null; then
+  exit
+fi
+
 font="Iosevka Nerd Font"
 font_size=9
 
@@ -104,9 +108,11 @@ if command -v crudini &>/dev/null; then
 
   # gtk
   if ! [ -f "${HOME}/.config/gtk-3.0/settings.ini" ]; then
+    mkdir -p "${HOME}/.config/gtk-3.0"
     touch "${HOME}/.config/gtk-3.0/settings.ini"
   fi
   if ! [ -f "${HOME}/.config/gtk-4.0/settings.ini" ]; then
+    mkdir -p "${HOME}/.config/gtk-4.0"
     touch "${HOME}/.config/gtk-4.0/settings.ini"
   fi
   crudini --set ${HOME}/.config/gtk-3.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
@@ -114,6 +120,7 @@ if command -v crudini &>/dev/null; then
 
   # qt 5
   if ! [ -f "${HOME}/.config/qt5ct/qt5ct.conf" ]; then
+    mkdir -p "${HOME}/.config/qt5ct"
     touch "${HOME}/.config/qt5ct/qt5ct.conf"
   fi
   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
@@ -126,6 +133,7 @@ if command -v crudini &>/dev/null; then
 
   # qt 6
   if ! [ -f "${HOME}/.config/qt6ct/qt6ct.conf" ]; then
+    mkdir -p "${HOME}/.config/qt6ct"
     touch "${HOME}/.config/qt6ct/qt6ct.conf"
   fi
   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
