@@ -23,10 +23,7 @@ VerbosePkgLists
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
 IgnorePkg = chaotic-mirrorlist
-{{ if eq .osid "linux-garuda" }}
-[garuda]
-Include = /etc/pacman.d/chaotic-mirrorlist
-{{ end }}
+
 [core]
 Include = /etc/pacman.d/mirrorlist
 
@@ -38,10 +35,6 @@ Include = /etc/pacman.d/mirrorlist
 
 [multilib]
 Include = /etc/pacman.d/mirrorlist
-{{ if eq .osid "linux-garuda" }}
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist
-{{ end }}
 EOF
 fi
 
@@ -80,22 +73,6 @@ CompletionInterval = 1
 EOF
 fi
 
-{{ if ne .chezmoi.osRelease.id "archarm" }}
-if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
-  # chaotic-aur
-  sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-  sudo pacman-key --lsign-key 3056513887B78AEB
-  sudo pacman -U --noconfirm --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-
-  sudo tee -a /etc/pacman.conf >/dev/null <<'EOF'
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist
-
-EOF
-
-  sudo pacman -Syu --noconfirm
-fi
-{{ end }}
 
 if ! pacman -Q pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber &>/dev/null; then
   yes | sudo pacman -S pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber
