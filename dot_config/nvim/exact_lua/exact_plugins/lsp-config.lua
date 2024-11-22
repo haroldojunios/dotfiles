@@ -87,7 +87,6 @@ return {
         "prismals",
         "pyright",
         -- "tailwindcss",
-        "ruff_lsp",
         "ts_ls",
         "yamlls",
       }
@@ -221,6 +220,8 @@ return {
       },
       mason = true,
       lsp = {
+        enable = true,
+        disable_lsp = "all",
         format_on_save = false,
         document_highlight = false,
       },

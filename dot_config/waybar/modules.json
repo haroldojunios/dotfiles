@@ -1,10 +1,10 @@
 {
   // Workspaces
   "hyprland/workspaces": {
-    "on-scroll-up": "hyprctl dispatch workspace r-1",
-    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "on-scroll-up": "hyprctl dispatch workspace r+1",
+    "on-scroll-down": "hyprctl dispatch workspace r-1",
     "on-click": "activate",
-    "all-outputs": true,
+    "all-outputs": false,
     "format": "{icon}",
     "format-icons": {
       "1": "",
@@ -23,7 +23,7 @@
   // Taskbar
   "wlr/taskbar": {
     "format": "{icon}",
-    "icon-size": 16,
+    "icon-size": 14,
     "tooltip-format": "{title}",
     "on-click": "activate",
     "on-click-middle": "close"
@@ -32,9 +32,9 @@
   // Hyprland Window
   "hyprland/window": {
     "rewrite": {
+      "n (.*)": " $1",
       "(.*) — Mozilla Firefox": " $1",
       "(.*)Mozilla Firefox": " $1",
-      "(.*) - Vivaldi": "$1",
       "(.*) - Visual Studio Code": "󰨞 $1",
       "(.*)Visual Studio Code": "󰨞 $1",
       "(.*) — Dolphin": " $1",
@@ -102,8 +102,8 @@
 
   // System tray
   "tray": {
-    "icon-size": 16,
-    "spacing": 3
+    "icon-size": 15,
+    "spacing": 1
   },
 
   // Clock
@@ -142,14 +142,14 @@
   "cpu": {
     "interval": 1,
     "format": "󰻠{usage}% ",
-    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   // Memory
   "memory": {
     "interval": 10,
     "format": "󰍛{}% ",
-    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   // Harddisc space used
@@ -157,7 +157,7 @@
     "interval": 30,
     "format": "󰋊{percentage_used}% ",
     "path": "/",
-    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -e glances"
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   "hyprland/language": {
@@ -185,13 +185,14 @@
 
   // Network
   "network": {
-    "format": "{ifname}",
-    "format-wifi": " {essid}",
-    "format-ethernet": " {ifname}",
-    "format-disconnected": "Disconnected",
-    "tooltip-format": " {ifname} via {gwaddri}",
-    "tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}GHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "format": "<span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
+    "format-wifi": " <span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
+    "format-ethernet": " <span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
+    "format-disconnected": "󰞃 ",
+    "interval": 1,
+    "tooltip-format": " {ifname} 󱂇 {gwaddr}\nIP: {ipaddr}\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
+    "tooltip-format-wifi": " {ifname} 󱂇 {gwaddr}\n󰑩 {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}GHz\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
+    "tooltip-format-ethernet": " {ifname} 󱂇 {gwaddr}\nIP: {ipaddr}\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50
   },
@@ -234,6 +235,36 @@
     "on-click": "pavucontrol"
   },
 
+  // MPD
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} ",
+    "format-disconnected": "󰝛 ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} ",
+    "interval": 10,
+    "on-click": "mpc toggle",
+    "on-scroll-up": "mpc volume +5",
+    "on-scroll-down": "mpc volume -5",
+    "on-click-right": "kitty --class mpd-player -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e rmpc",
+    // "consume-icons": {
+    //   "on": " " // Icon shows only when "consume" is on
+    // },
+    "random-icons": {
+      "on": " "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "tooltip-format": " {artist}\n󰀥 {album}\n {title}\n {elapsedTime:%M:%S}/{totalTime:%M:%S}  {volume}% 󰌳 {songPosition}/{queueLength}",
+    "tooltip-format-disconnected": "MPD disconnected"
+  },
+
   // Cava
   "cava": {
     "method": "pulse",
@@ -266,7 +297,7 @@
   // Audio group
   "group/audio": {
     "orientation": "inherit",
-    "modules": ["cava", "pulseaudio"]
+    "modules": ["mpd", "cava", "pulseaudio"]
   },
 
   // Other

@@ -54,6 +54,7 @@ return {
       },
       highlight = {
         enable = true,
+        disable = { "csv" },
         additional_vim_regex_highlighting = { "latex", "markdown" },
       },
       indent = { enable = true },

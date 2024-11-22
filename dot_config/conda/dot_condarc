@@ -1,0 +1,16 @@
+auto_activate_base: false
+allow_conda_downgrades: true
+
+channels:
+  - defaults
+  - conda-forge
+
+# create_default_packages:
+#   - blas=*=openblas
+#   - numpy
+#   - nomkl
+
+# disallow:
+#   - mkl
+
+#pip_interop_enabled: true

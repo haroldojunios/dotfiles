@@ -7,7 +7,7 @@ return {
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      { "rcarriga/nvim-notify", opts = { background_colour = "#1e1e2e" } },
       "hrsh7th/nvim-cmp",
     },
     opts = {

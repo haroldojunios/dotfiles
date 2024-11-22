@@ -16,7 +16,7 @@ return {
 
     require("bufferline").setup({
       options = {
-        separator_style = "slant",
+        separator_style = "thin",
         numbers = "ordinal",
         close_command = "BufDel! %d",
         right_mouse_command = "BufDel! %d",

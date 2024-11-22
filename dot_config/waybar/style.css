@@ -5,31 +5,29 @@
  * ----------------------------------------------------- */
 
 * {
-  font-family: "Iosevka", "Fira Sans Semibold", "Font Awesome 6 Free",
-    FontAwesome, "Symbols Nerd", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Iosevka", "Font Awesome 6 Free", FontAwesome, "Symbols Nerd",
+    Roboto, sans-serif;
   border: none;
   border-radius: 0px;
-  font-size: 10pt;
+  font-size: 9.5pt;
   margin: 0px 3px;
 }
 
 window#waybar {
-  background-color: alpha(@mantle, 0.8);
+  /* background-color: alpha(@mantle, 0.2); */
+  background-color: transparent;
   transition-property: background-color;
   transition-duration: 0.5s;
-}
-
-.modules-left {
-  padding-left: 14px;
+  border-radius: 5px;
 }
 
 #workspaces {
   background: @base;
   margin: 1px;
-  padding: 0px 2px;
+  padding: 0px 1px;
   border-radius: 15px;
   border: 0px;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-style: normal;
   opacity: 0.8;
   font-size: 1em;
@@ -40,7 +38,7 @@ window#waybar {
   margin: 1px 1px;
   border-radius: 50%;
   min-width: 20px;
-  padding: 0px 2px;
+  padding: 0px 1px;
   border: 0px;
   color: @text;
   background-color: @surface0;
@@ -77,10 +75,10 @@ tooltip label {
 }
 
 #window {
-  background: @surface0;
+  background: @base;
   margin: 0px 3px;
   border-radius: 12px;
-  color: @subtext1;
+  color: @text;
   font-size: 1em;
   font-weight: normal;
   opacity: 0.8;
@@ -104,6 +102,7 @@ window#waybar.empty #window {
   margin: 0;
   border-radius: 15px;
   padding: 0px;
+  margin: 0px;
 }
 
 #taskbar.empty {
@@ -166,14 +165,13 @@ window#waybar.empty #window {
   color: @red;
 }
 
+/* #custom-appmenuicon, */
 #clock,
 #audio,
 #network,
 #battery,
 #custom-appmenu,
-#custom-appmenuicon,
-#custom-ddcutil,
-#custom-notification {
+#custom-ddcutil {
   background-color: @mantle;
   color: @text;
   border-radius: 15px;
@@ -190,10 +188,10 @@ window#waybar.empty #window {
   color: @lavender;
 }
 
+#custom-notification,
 #custom-exit {
   font-size: 1.2em;
   color: @lavender;
-  opacity: 0.8;
 }
 
 #disk,
@@ -219,7 +217,7 @@ window#waybar.empty #window {
 
 #pulseaudio.muted {
   background-color: @mantle;
-  color: @text;
+  color: @red;
 }
 
 #bluetooth.off {
