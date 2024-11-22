@@ -246,3 +246,14 @@ fi
 if command -v bat &>/dev/null; then
   bat cache --build &>/dev/null
 fi
+
+# MPD
+if command -v mpd &>/dev/null; then
+  mkdir -p ~/Music/playlists
+  mkdir -p ~/.local/state/mpd
+fi
+
+# beets
+if ! command -v beet &>/dev/null; then
+  beet fish -e genre -e albumartist 2>/dev/null || :
+fi

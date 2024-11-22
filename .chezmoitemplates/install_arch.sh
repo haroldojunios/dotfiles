@@ -39,7 +39,7 @@ EOF
 fi
 
 if ! command -v paru &>/dev/null; then
-  sudo pacman -Syu --noconfirm
+  sudo pacman -Syu --noconfirm || :
   sudo pacman -S --noconfirm --needed base-devel
   git -C "${TEMP_FOLDER}" clone --depth 1 https://aur.archlinux.org/paru.git
   (
@@ -47,7 +47,7 @@ if ! command -v paru &>/dev/null; then
     makepkg -si --noconfirm
   )
 else
-  paru -Syu --noconfirm
+  paru -Syu --noconfirm || :
   paru -Fy || :
 fi
 
@@ -72,7 +72,6 @@ Limit = 100
 CompletionInterval = 1
 EOF
 fi
-
 
 if ! pacman -Q pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber &>/dev/null; then
   yes | sudo pacman -S pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber
@@ -175,7 +174,6 @@ dePackageList=(
   keepassxc
   kitty
   mailcap
-  mpv
   obs-studio-git
   obsidian
   onlyoffice-bin
@@ -196,6 +194,7 @@ dePackageList=(
   virtualbox
   visual-studio-code-bin
   vivaldi
+  vlc
   waybar-cava
   wl-clip-persist
   wl-clipboard
@@ -211,21 +210,23 @@ dePackageList=(
 # applets
 appletsPackageList=(
   plasma6-applets-netspeed
-  plasma6-applets-window-appmenu
   plasma6-applets-window-buttons
   plasma6-applets-window-title
 )
 
 packageList=(
+  advcpmv
   age
   alsa-card-profiles
   alsa-utils
   android-tools
   augeas
   bat
+  beets
   bc
   biber
   bibtool
+  chromaprint # beets
   clang
   cmake
   compsize
@@ -275,6 +276,9 @@ packageList=(
   mediainfo
   micro
   minidlna
+  mpd
+  mpd-mpris
+  mpv
   mongosh
   mypy
   nano
@@ -303,6 +307,7 @@ packageList=(
   perl-image-exiftool
   perl-yaml-tiny
   pkgfile
+  pkgstats
   playerctl
   plocate
   prettier
@@ -310,11 +315,15 @@ packageList=(
   pyenv
   python
   python-aiohttp-oauthlib
+  python-pyacoustid # beets
   python-beautifulsoup4
   python-catppuccin
   python-click
+  python-discogs-client # beets
+  python-flask          # beets
   python-humanize
   python-matplotlib
+  python-mpd2 # beets
   python-pandas
   python-pipx
   python-poetry
@@ -322,12 +331,15 @@ packageList=(
   python-psutil
   python-py7zr
   python-pyexiftool
+  python-pylast # beets
   python-pylatexenc
   python-pypdf
   python-python-ffmpeg
   python-requests
   python-scipy
   python-tqdm
+  python-xdg  # beets
+  python-yams # mpd: last fm scrobbler
   rclone
   reflector
   ripgrep
@@ -434,7 +446,6 @@ for package in "${packageList[@]}"; do
   fi
 done
 
-{{ if ne .chezmoi.osRelease.id "archarm" }}
 if ! systemctl list-unit-files --state=enabled | grep lm_sensors &>/dev/null; then
   sudo systemctl enable --now lm_sensors
 fi
@@ -482,10 +493,17 @@ if [ -d "/proc/acpi/button/lid" ]; then
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
   fi
 fi
-{{ end }}
 
-if ! pipx list --short | grep -q crudini; then
-  pipx install crudini
+if ! systemctl list-unit-files --user --state=enabled | grep mpd.service &>/dev/null; then
+  systemctl enable --user --now mpd.service
+fi
+
+if ! systemctl list-unit-files --user --state=enabled | grep mpd-mpris.service &>/dev/null; then
+  systemctl enable --user --now mpd-mpris.service
+fi
+
+if ! systemctl list-unit-files --user --state=enabled | grep yams.service &>/dev/null; then
+  systemctl enable --user --now yams.service
 fi
 
 yes | paru -Sc

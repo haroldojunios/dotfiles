@@ -1,0 +1,9 @@
+disable_log: false
+mpd_host: 127.0.0.1
+mpd_port: '6600'
+no_daemon: false
+real_time: true
+scrobble_min_time: 30
+scrobble_threshold: 50
+update_interval: 10
+watch_threshold: 5
