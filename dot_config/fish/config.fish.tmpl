@@ -11,6 +11,7 @@ set -x npm_config_prefix "$HOME/.local"
 set -x BAT_STYLE 'numbers,changes,grid,header-filename,header-filesize'
 set -x BAT_THEME 'Catppuccin Mocha'
 set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
+set -x CRYPTOGRAPHY_OPENSSL_NO_LEGACY 1
 
 # nnn
 set -l BLK 03
@@ -89,31 +90,20 @@ if test -f ~/.aliases
     source ~/.aliases
 end
 
-# Add ~/bin to PATH
-if test -d ~/bin
-    if not contains -- ~/bin $PATH
-        set -pgx PATH ~/bin
-    end
-end
+set -l paths \
+    /usr/local/texlive/bin/x86_64-linux \
+    ~/bin \
+    ~/.cargo/bin \
+    ~/.local/bin \
+    ~/.local/share/python/bin \
+    ~/.local/bin/lastools/bin \
+    ~/.local/share/python/bin
 
-# Add ~/.local/bin to PATH
-if test -d ~/.local/bin
-    if not contains -- ~/.local/bin $PATH
-        set -pgx PATH ~/.local/bin
-    end
-end
-
-# Add ~/.local/bin/lastools/bin to PATH
-if test -d ~/.local/bin/lastools/bin
-    if not contains -- ~/.local/bin/lastools/bin $PATH
-        set -pgx PATH ~/.local/bin/lastools/bin
-    end
-end
-
-# Add /usr/local/texlive/bin/x86_64-linux to PATH
-if test -d /usr/local/texlive/bin/x86_64-linux
-    if not contains -- /usr/local/texlive/bin/x86_64-linux $PATH
-        set -pgx PATH /usr/local/texlive/bin/x86_64-linux
+for path in $paths
+    if test -d $path
+        if not contains -- $path $PATH
+            set -pgx PATH $path
+        end
     end
 end
 
@@ -244,6 +234,7 @@ end
 
 # stderred
 if test -f /usr/lib/libstderred.so
+    set -x STDERRED_BLACKLIST '^(wine)$'
     set -x LD_PRELOAD /usr/lib/libstderred.so
 end
 
