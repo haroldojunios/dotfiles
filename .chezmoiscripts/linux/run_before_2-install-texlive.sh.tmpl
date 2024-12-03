@@ -1,12 +1,8 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-{{ if ne .osid "android" }}
+# {{ if ne .osid "android" }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
@@ -67,4 +63,4 @@ if command -v tlmgr &>/dev/null; then
     fi
   done
 fi
-{{ end }}
+# {{ end }}

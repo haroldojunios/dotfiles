@@ -78,11 +78,13 @@ fi
 
 # applets
 if ! [ -d /usr/share/plasma/plasmoids/org.kde.windowbuttons ]; then
-  git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/psifidotos/applet-window-buttons.git
-  (
-    cd "${TEMP_FOLDER}/applet-window-buttons"
-    sh ./install.sh
-  )
+ # git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/psifidotos/applet-window-buttons.git
+ # https://github.com/psifidotos/applet-window-buttons/issues/194#issuecomment-1450813794
+ git -C "${TEMP_FOLDER}" clone --depth 1 --branch dumb_5.27_support https://github.com/chermnyx/applet-window-buttons.git
+ (
+   cd "${TEMP_FOLDER}/applet-window-buttons"
+   sh ./install.sh
+ )
 fi
 
 if ! [ -d /usr/share/plasma/plasmoids/org.kde.windowappmenu ]; then

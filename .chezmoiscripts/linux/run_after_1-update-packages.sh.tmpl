@@ -1,17 +1,8 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
 if [ -f "${HOME}/.config/.env" ]; then source "${HOME}/.config/.env"; fi
-
-if ! [ -x "${HOME}/.local/bin/semver" ]; then
-  wget --header "${WGET_GH_AUTH}" -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
-  chmod +x "${HOME}/.local/bin/semver"
-fi
 
 # {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 case $(uname -m) in
@@ -32,8 +23,13 @@ esac
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
-GH_AUTH="Authorization: Bearer ${GH_TOKEN}"
-WGET_GH_AUTH="Authorization: token ${GH_TOKEN}"
+GH_AUTH="Authorization: Bearer ${GH_AUTH_TOKEN}"
+WGET_GH_AUTH="Authorization: token ${GH_AUTH_TOKEN}"
+
+if ! [ -x "${HOME}/.local/bin/semver" ]; then
+  wget --header "${WGET_GH_AUTH}" -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
+  chmod +x "${HOME}/.local/bin/semver"
+fi
 
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
@@ -159,9 +155,15 @@ if ! [ -x "${HOME}/.local/bin/kitty" ] || ! "${HOME}/.local/bin/kitty" --version
   ln -sf "${HOME}/.local/share/kitty.app/bin/kitten" "${HOME}/.local/bin/"
 fi
 
-if ! command -v vmplayer &>/dev/null; then
-  wget -O "${TEMP_FOLDER}/vmware.bundle" -q --user-agent="Mozilla" --content-disposition "https://www.vmware.com/go/getplayer-linux"
-  sudo bash "${TEMP_FOLDER}/vmware.bundle"
+if ! command -v vmware &>/dev/null; then
+  # wget -O "${TEMP_FOLDER}/vmware.bundle" -q --user-agent="Mozilla" --content-disposition "https://www.vmware.com/go/getworkstation-linux" &&
+  # sudo bash "${TEMP_FOLDER}/vmware.bundle" || :
+  (
+    cd "${TEMP_FOLDER}"
+    wget -O vmware.bundle.tar -q --show-progress "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.6.1/24319023/linux/core/VMware-Workstation-17.6.1-24319023.x86_64.bundle.tar" &&
+      tar -xf vmware.bundle.tar &&
+      sudo bash VMware*.bundle || :
+  )
 fi
 
 RCLONE_VER=$(curl --silent "https://api.github.com/repos/rclone/rclone/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)

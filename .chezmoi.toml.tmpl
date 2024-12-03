@@ -33,13 +33,6 @@
 {{- $installDE = promptBoolOnce . "installDE" "Install DE" -}}
 {{- end -}}
 
-{{- $isBigScreen := false -}}
-{{- $checkSize := joinPath .chezmoi.homeDir ".local/bin/get-screen-size" -}}
-{{- $checkWidth := joinPath .chezmoi.homeDir ".local/bin/get-screen-width" -}}
-{{- if and (eq .chezmoi.os "linux") (isExecutable $checkSize) (isExecutable $checkWidth) -}}
-{{-   $isBigScreen = or (gt (output $checkSize | int) 28) (gt (output $checkWidth | int) 1920) -}}
-{{- end -}}
-
 encryption = "age"
 [age]
   identity = "~/.config/key.txt"
@@ -47,7 +40,6 @@ encryption = "age"
 [cd]
   command = "fish"
 [data]
-  isBigScreen = {{ $isBigScreen }}
   installDE = {{ $installDE }}
   isRasp = {{ $isRasp }}
   isServer = {{ $isServer }}

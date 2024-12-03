@@ -15,11 +15,14 @@ gpg --refresh-keys &>/dev/null || :
 
 # code repo
 if ! [ -f /etc/apt/sources.list.d/vscode.list ]; then
-  sudo apt-get install -y wget gpg apt-transport-https
-  wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-  sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-  sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-  rm -f packages.microsoft.gpg
+  echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
+  if ! [ -f /etc/apt/keyrings/packages.microsoft.gpg ]; then
+    sudo apt-get install wget gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    rm -f packages.microsoft.gpg
+  fi
+  echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list >/dev/null
 fi
 
 # remove snap
@@ -40,23 +43,23 @@ EOF
 fi
 
 # alacritty repo
-if ! grep -q "^deb .*aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+if ! grep -q "aslatter/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:aslatter/ppa -y
 fi
 
 # chromium repo
-if ! grep -q "^deb .*saiarcot895/chromium-beta" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  sudo add-apt-repository ppa:saiarcot895/chromium-beta -y
-fi
+#if ! grep -q "^deb .*saiarcot895/chromium-beta" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+#  sudo add-apt-repository ppa:saiarcot895/chromium-beta -y
+#fi
 
 # vivaldi repo
-if ! grep -q "^deb .*vivaldi" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
-  sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main' -y
-fi
+#if ! grep -q "^deb .*vivaldi" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+#  wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
+#  sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main' -y
+#fi
 
 # firefox repo
-if ! grep -q "^deb .*mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+if ! grep -q "mozillateam/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:mozillateam/ppa -y
   sudo bash -c "cat >/etc/apt/preferences.d/mozillateamppa" <<EOF
 Package: firefox*
@@ -66,24 +69,29 @@ EOF
 fi
 
 # kubuntu backports repo
-if ! grep -q "^deb .*kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+if ! grep -q "kubuntu-ppa/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:kubuntu-ppa/backports -y
 fi
 
 # fish repo
-if ! grep -q "^deb .*fish-shell/release-3" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+if ! grep -q "fish-shell/release-3" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:fish-shell/release-3 -y
 fi
 
+# golang repo
+if ! grep -q "longsleep/golang-backports" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  sudo add-apt-repository ppa:longsleep/golang-backports -y
+fi
+
 # neovim repo
-if ! grep -q "^deb .*neovim-ppa/unstable" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+if ! grep -q "neovim-ppa/unstable" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
   sudo add-apt-repository ppa:neovim-ppa/unstable -y
 fi
 
 # ubuntugis repo
-if ! grep -q "^deb .*ubuntugis/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  sudo add-apt-repository ppa:ubuntugis/ppa -y
-fi
+#if ! grep -q "^deb .*ubuntugis/ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+#  sudo add-apt-repository ppa:ubuntugis/ppa -y
+#fi
 
 # eza repo
 if ! [ -f /etc/apt/sources.list.d/gierens.list ]; then
@@ -122,6 +130,7 @@ dePackageList=(
   # x11 / login manager
   xorg
   sddm
+  sddm-theme-breeze
   # plasma
   gtk3-nocsd
   kde-config-screenlocker
@@ -157,7 +166,7 @@ dePackageList=(
   kdenetwork-filesharing
   kdialog
   kfind
-  kmix
+  # kmix
   kolourpaint
   konsole
   ksystemlog
@@ -170,6 +179,7 @@ dePackageList=(
   calibre
   {{ end }}
   code
+  firefox
   fontforge
   gimp
   gparted
@@ -179,7 +189,6 @@ dePackageList=(
   onlyoffice-desktopeditors
   qml-module-qtquick-controls2
   qml-module-qtquick-layouts
-  vivaldi-stable
   xournalpp
   xserver-xorg-video-dummy
 )
@@ -228,14 +237,18 @@ packageList=(
   ffmpeg
   fish
   fnt
+  gh
   ghostscript
   gir1.2-gtk-3.0 # gtk
+  gir1.2-gtk-4.0 # gtk
   git
   gobject-introspection # gtk
+  golang-go
   hwinfo
   jmtpfs
   jq
   libarchive-tools
+  libbrotli-dev # libjxl
   libfontconfig1
   libmupdf-dev
   make
@@ -265,6 +278,7 @@ packageList=(
   shfmt
   sshfs
   tmux
+  tree-sitter-cli
   ufw
   unzip
   wget
@@ -336,7 +350,7 @@ fi
 if lspci | grep -i network | grep -iq bcm; then
   if ! dpkg -s bcmwl-kernel-source &>/dev/null; then
     sudo apt install -y bcmwl-kernel-source
-    sudo systemctl restart network-manager
+    sudo systemctl restart NetworkManager.service
   fi
 fi
 

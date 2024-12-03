@@ -73,15 +73,12 @@ return {
   --     rocks = { "magick" },
   --   },
   -- },
-  -- {
-  --   "3rd/image.nvim",
-  --   dependencies = {
-  --     "luarocks.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   enabled = os.getenv("PREFIX") == nil,
-  --   config = function()
-  --     -- ...
-  --   end,
-  -- },
+  {
+    "3rd/image.nvim",
+    build = false,
+    enabled = os.getenv("PREFIX") == nil,
+    opts = {
+      processor = "magick_cli",
+    },
+  },
 }
