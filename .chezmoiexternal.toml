@@ -20,7 +20,7 @@ include = ["**/*.otf", "**/*.ttf"]
 
 [".config/nvim/spell/pt.utf-8.spl"]
 type = "file"
-url = "http://ftp.vim.org/pub/vim/runtime/spell/pt.utf-8.spl"
+url = "http://ftp.nluug.nl/pub/vim/runtime/spell/pt.utf-8.spl"
 refreshPeriod = "168h"
 
 [".config/fish/completions/nnn.fish"]
