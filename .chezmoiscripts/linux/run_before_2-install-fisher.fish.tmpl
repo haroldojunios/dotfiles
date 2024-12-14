@@ -5,9 +5,7 @@
 {{ end }}
 
 
-set -l fisherPlugins franciscolourenco/done \
-    edc/bass \
-    kristoffer-pbs/autols-fish
+set -l fisherPlugins franciscolourenco/done edc/bass
 
 {{ if ne .osid "android" }}
 set -a fisherPlugins jorgebucaran/nvm.fish
@@ -25,7 +23,3 @@ for plugin in $fisherPlugins
 end
 
 fisher update &>/dev/null
-
-if type -q autols
-    autols on &>/dev/null
-end
