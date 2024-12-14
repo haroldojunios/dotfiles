@@ -1,17 +1,25 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-{{ if ne .osid "android" }}
+# {{ if ne .osid "android" }}
 if command -v grub-mkconfig &>/dev/null; then
+  TEMP_FOLDER=$(mktemp -d)
+  trap 'rm -rf "${TEMP_FOLDER}"' EXIT
+
+  if ! [ -d /boot/grub/themes/vimix ]; then
+    (
+      cd "${TEMP_FOLDER}"
+      git clone --depth 1 https://github.com/vinceliuice/grub2-themes.git
+      cd grub2-themes
+      sudo ./install.sh --boot --theme vimix --screen 1080p --icon white
+    )
+  fi
+
   sudo "${HOME}/.local/bin/set-val" GRUB_DEFAULT 0 /etc/default/grub
   sudo "${HOME}/.local/bin/set-val" GRUB_TIMEOUT 3 /etc/default/grub
   sudo "${HOME}/.local/bin/set-val" GRUB_RECORDFAIL_TIMEOUT '${GRUB_TIMEOUT}' /etc/default/grub
 
   sudo grub-mkconfig -o /boot/grub/grub.cfg &>/dev/null
 fi
-{{ end }}
+# {{ end }}
