@@ -6,11 +6,15 @@
 
 set -eu
 
+{{ if eq .osid "android" }}
+export CFLAGS="-Wno-incompatible-function-pointer-types"
+{{ end }}
+
 if ! command -v pipx &>/dev/null; then
   python3 -m pip install --user pipx
 fi
 
-pipx ensurepath &>/dev/null
+pipx ensurepath &>/dev/null || :
 
 packagesList=(
   "mdformat;\
@@ -28,3 +32,13 @@ for packages in "${packagesList[@]}"; do
     pipx install ${packs[@]}
   fi
 done
+
+# if command -v pip &>/dev/null; then
+#   packagesList=(
+#     pymediainfo
+#   )
+#
+#   for package in "${packagesList[@]}"; do
+#     pip install --user -U "${package}"
+#   done
+# fi

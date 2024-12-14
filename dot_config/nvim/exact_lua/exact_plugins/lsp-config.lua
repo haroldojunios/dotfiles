@@ -86,7 +86,6 @@ return {
         "ltex",
         "prismals",
         "pyright",
-        -- "tailwindcss",
         "ts_ls",
         "yamlls",
       }
@@ -146,7 +145,6 @@ return {
     },
     config = function()
       local ensure_installed = {
-        "black",
         "clang_format",
         "cmake_format",
         -- "codespell",
@@ -154,7 +152,6 @@ return {
         "fish",
         "fixjson",
         "hadolint",
-        "isort",
         "markdownlint",
         "mdformat",
         "mypy",

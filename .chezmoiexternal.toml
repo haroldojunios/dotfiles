@@ -130,10 +130,10 @@ url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.
 path = "IosevkaNerdFont-Regular.ttf"
 refreshPeriod = "168h"
 
-[".termux/colors.properties"]
-type = "file"
-url = "https://raw.githubusercontent.com/catppuccin/termux/main/themes/catppuccin-mocha.properties"
-refreshPeriod = "168h"
+# [".termux/colors.properties"]
+# type = "file"
+# url = "https://raw.githubusercontent.com/catppuccin/termux/main/themes/catppuccin-mocha.properties"
+# refreshPeriod = "168h"
 
 {{   if .installDE }}
 [".local/share/themes/sweet"]
