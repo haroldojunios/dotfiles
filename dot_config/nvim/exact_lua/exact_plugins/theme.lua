@@ -6,7 +6,10 @@ return {
     priority = 1000,
     opts = {
       styles = {
+        comments = { "italic" },
         functions = { "italic" },
+        -- ["@markup.italic"] = { "italic" },
+        -- ["@markup.bold"] = { "bold" },
       },
       transparent_background = true,
       term_colors = true,
@@ -29,6 +32,12 @@ return {
         mocha = function(mocha)
           return {
             LineNr = { fg = mocha.overlay2 },
+            texStyleArgConcat = { fg = mocha.green },
+            ["@markup.italic"] = { fg = mocha.sapphire },
+            RenderMarkdownInlineHighlight = {
+              bg = mocha.red,
+              fg = mocha.base,
+            },
           }
         end,
       },

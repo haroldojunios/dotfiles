@@ -17,9 +17,6 @@ detailViewIconSize=16
 2 screens: Height=511
 2 screens: Width=419
 
-[PlasmaTransientsConfig]
-PreloadWeight=0
-
 [PlasmaViews][Panel 120]
 alignment=132
 panelOpacity=2

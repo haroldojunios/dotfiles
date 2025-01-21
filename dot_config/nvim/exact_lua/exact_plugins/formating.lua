@@ -72,7 +72,7 @@ return {
         markdown = { "prettierd", "injected" },
         prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
-        -- tex = { "latexindent" },
+        tex = { "latexindent" },
         toml = { "taplo" },
         typescript = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
@@ -136,6 +136,9 @@ return {
         },
         shfmt = {
           prepend_args = { "-i", "2" },
+        },
+        latexindent = {
+          prepend_args = { "-m" },
         },
         prisma = {
           command = "prisma",

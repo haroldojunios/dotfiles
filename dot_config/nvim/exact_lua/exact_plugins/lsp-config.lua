@@ -77,6 +77,7 @@ return {
     config = function()
       local ensure_installed = {
         "bashls",
+        "clangd",
         "cssls",
         "emmet_ls",
         "eslint",

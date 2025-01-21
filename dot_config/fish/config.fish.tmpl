@@ -61,7 +61,6 @@ end
 test -f /usr/share/xdg-desktop-portal/portals/kde.portal && set -x GTK_USE_PORTAL 1
 {{ end }}
 
-
 if test "$TERM" = linux
     if type -q yaft
         set -x FRAMEBUFFER /dev/fb0
@@ -130,8 +129,8 @@ function fish_user_key_bindings
     # ctrl-] (backspace)
     bind \cH backward-kill-word
 
-    # ctrl-u
-    bind \cu kill-whole-line
+    # ctrl-q
+    bind \cq kill-whole-line
 end
 
 # Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
@@ -202,6 +201,9 @@ if test -f ~/.config/.env.local
         set -x $(string split -m1 '=' "$line")
     end <~/.config/.env.local
 end
+
+# conda
+alias conda_source='eval /opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source'
 
 # fish theme
 if test -f ~/.config/fish/themes/catppuccin.theme

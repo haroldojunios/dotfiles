@@ -74,6 +74,8 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "codeium" },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
           {
             name = "spell",
             option = {
@@ -84,8 +86,6 @@ return {
               preselect_correct_word = true,
             },
           },
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "calc" },
           {
             name = "latex_symbols",

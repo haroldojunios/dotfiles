@@ -5,3 +5,9 @@ set recolor-keephue true
 
 set synctex true
 set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+
+# Do not raise window when synctex runs
+set dbus-raise-window false
+
+# Do not highlight when synctex runs
+set highlight-active-color rgba(255,255,255,0)

@@ -127,6 +127,30 @@
       [
         "timestamp",
         false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
       ]
     ]
   },
@@ -158,6 +182,30 @@
     "last_modified_injected": true,
     "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -313,7 +361,7 @@
     }
   },
   "default_author_link": null,
-  "do_not_show_device_open_popup_message_KINDLE2": false,
+  "do_not_show_device_open_popup_message_KINDLE2": true,
   "duplicates-question-dialog-geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAF0AAAA7QAAA24AAAKJAAABeQAAAQkAAANpAAAChAAAAAEAAAAABQAAAAF5AAABCQAAA2kAAAKE"
@@ -326,26 +374,26 @@
     "frame_geometry": {
       "height": 462,
       "width": 791,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 462,
       "width": 791,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 462,
       "width": 791,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAxYAAAHNAAAAAAAAAAAAAAMWAAABzQAAAAACAAAAB4AAAAAAAAAAAAAAAxYAAAHN"
+      "__value__": "AdnQywADAAAAAAeAAAAAAAAACpYAAAHNAAAHgAAAAAAAAAqWAAABzQAAAAECAAAAB4AAAAeAAAAAAAAACpYAAAHN"
     },
     "screen": {
       "depth": 32,
@@ -353,13 +401,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 0,
+        "x": 1920,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2G4",
-      "name": "DP-1",
+      "model": "27G2E1",
+      "name": "DP-2",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -367,7 +415,7 @@
       },
       "virtual_geometry": {
         "height": 1080,
-        "width": 1920,
+        "width": 3840,
         "x": 0,
         "y": 0
       }
@@ -377,26 +425,26 @@
     "frame_geometry": {
       "height": 1038,
       "width": 1906,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 1038,
       "width": 1906,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 1052,
       "width": 960,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO/AAAEGwAAAAACAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+      "__value__": "AdnQywADAAAAAAeAAAAAAAAADvEAAAQNAAAHgAAAAAAAAAs/AAAEGwAAAAECAAAAB4AAAAeAAAAAAAAADvEAAAQN"
     },
     "screen": {
       "depth": 32,
@@ -404,13 +452,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 0,
+        "x": 1920,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2G4",
-      "name": "DP-1",
+      "model": "27G2E1",
+      "name": "DP-2",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -418,7 +466,58 @@
       },
       "virtual_geometry": {
         "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-convert_single_dialog_geom": {
+    "frame_geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 1920,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 1920,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 1920,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAeAAAAAAAAADrkAAAPTAAAHgAAAAAAAAA65AAAD0wAAAAECAAAAB4AAAAeAAAAAAAAADrkAAAPT"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
         "width": 1920,
+        "x": 1920,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2E1",
+      "name": "DP-2",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
         "x": 0,
         "y": 0
       }
@@ -587,7 +686,7 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 28
+    "/home/haroldo/calibre": 36
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -684,6 +783,30 @@
       [
         "timestamp",
         false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
       ]
     ]
   },
@@ -704,6 +827,7 @@
     "__value__": "AdnQywADAAAAAACvAAAAigAABFoAAAN6AAAAtAAAAKYAAARVAAADdQAAAAEAAAAABQAAAAC0AAAApgAABFUAAAN1"
   },
   "previous_sort_order_BooksView": {
+    "timestamp": false,
     "title": true
   },
   "questions_to_auto_skip": [

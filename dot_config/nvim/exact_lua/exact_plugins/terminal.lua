@@ -50,6 +50,17 @@ return {
     end
 
     vim.api.nvim_create_user_command("LazyGitToggle", lg_toggle, {})
-    vim.keymap.set("n", "<leader>gg", "<cmd>LazyGitToggle<cr>", {})
+    vim.keymap.set(
+      "n",
+      "<leader>gg",
+      "<cmd>LazyGitToggle<cr>",
+      { silent = true }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>lg",
+      "<cmd>LazyGitToggle<cr>",
+      { silent = true }
+    )
   end,
 }

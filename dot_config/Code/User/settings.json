@@ -452,7 +452,6 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "custom",
-  "workbench.activityBar.location": "hidden",
   // "window.zoomLevel": -0.25,
   "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.empty.hint": "hidden",
