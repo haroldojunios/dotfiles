@@ -1,8 +1,4 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
@@ -37,6 +33,7 @@ rm -rf "${HOME}/.cache/wine"
 rm -rf "${HOME}/.cache/vmware"
 rm -rf "${HOME}/.cache/act"
 rm -rf "${HOME}/.cache/go-build"
+find "${HOME}" \( -name '.mypy_cache' -o -name '.ruff_cache' \) -type d -prune -exec rm -rf {} \; &>/dev/null || :
 
 if ! [ "$(find "${HOME}/.cache/run-weekly" -mtime -7 2>/dev/null)" ]; then
   rm -rf "${HOME}/.cache/chezmoi/httpcache"

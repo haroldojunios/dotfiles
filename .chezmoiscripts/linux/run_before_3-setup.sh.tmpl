@@ -1,6 +1,6 @@
 # {{- if ne .osid "android" -}}!/bin/bash{{- else -}}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
-set -eu
+set -u
 
 # {{ if and (ne .osid "android") (not .isWSL) }}
 # {{   if ne .chezmoi.osRelease.id "archarm" }}
@@ -118,11 +118,11 @@ fi
 
 if command -v crudini &>/dev/null; then
   sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress-force=zstd:15"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:15"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:15"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:15"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:15"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress=zstd:1"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:3"
 
   sudo crudini --set /etc/bluetooth/main.conf "General" "Experimental" "true"
 fi
