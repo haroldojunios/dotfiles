@@ -1,4 +1,4 @@
-{{ if ne .osid "windows" }}
+# {{ if ne .osid "windows" }}
 [".config/fontconfig/conf.d/10-nerd-font-symbols.conf"]
 type = "file"
 url = "https://github.com/ryanoasis/nerd-fonts/raw/master/10-nerd-font-symbols.conf"
@@ -9,7 +9,12 @@ type = "archive"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
 exact = true
 refreshPeriod = "168h"
-include = ["IosevkaNerdFont-Bold.ttf","IosevkaNerdFont-BoldItalic.ttf","IosevkaNerdFont-Italic.ttf","IosevkaNerdFont-Regular.ttf"]
+include = [
+  "IosevkaNerdFont-Bold.ttf",
+  "IosevkaNerdFont-BoldItalic.ttf",
+  "IosevkaNerdFont-Italic.ttf",
+  "IosevkaNerdFont-Regular.ttf",
+]
 
 [".local/share/fonts/NerdFontsSymbolsOnly"]
 type = "archive"
@@ -28,7 +33,7 @@ type = "file"
 url = "https://raw.githubusercontent.com/jarun/nnn/master/misc/auto-completion/fish/nnn.fish"
 refreshPeriod = "168h"
 
-{{   if .installDE }}
+# {{   if .installDE }}
 [".local/share/icons/beautyline"]
 type = "archive"
 url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
@@ -107,23 +112,18 @@ refreshPeriod = "168h"
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/obs/refs/heads/main/themes/Catppuccin_Mocha.ovt"
 refreshPeriod = "168h"
+# {{   end }}
+# {{ end }}
 
-[".config/spotify-player/theme.toml"]
-type = "file"
-url = "https://github.com/catppuccin/spotify-player/raw/refs/heads/main/theme.toml"
-refreshPeriod = "168h"
-{{   end }}
-{{ end }}
-
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+# {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 [".local/bin/latexindent"]
 type = "file"
 url = "https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexindent-linux"
 executable = true
 refreshPeriod = "168h"
-{{ end }}
+# {{ end }}
 
-{{ if eq .osid "android" }}
+# {{ if eq .osid "android" }}
 [".termux/font.ttf"]
 type = "archive-file"
 url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz"
@@ -135,7 +135,7 @@ refreshPeriod = "168h"
 # url = "https://raw.githubusercontent.com/catppuccin/termux/main/themes/catppuccin-mocha.properties"
 # refreshPeriod = "168h"
 
-{{   if .installDE }}
+# {{   if .installDE }}
 [".local/share/themes/sweet"]
 type = "archive"
 url = "https://github.com/EliverLara/Sweet/releases/latest/download/Sweet-Dark.tar.xz"
@@ -143,5 +143,5 @@ exact = true
 refreshPeriod = "168h"
 stripComponents = 1
 include = ["*/xfwm4/**", "*/gtk-*/**"]
-{{   end }}
-{{ end }}
+# {{   end }}
+# {{ end }}
