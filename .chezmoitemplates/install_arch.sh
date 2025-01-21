@@ -115,17 +115,18 @@ dePackageList=(
   xdg-desktop-portal-gtk
   xdg-desktop-portal-kde
   # hyprland
-  hyprland-git
-  hyprpaper-git
-  hypridle-git
-  hyprpicker-git
-  hyprlock-git
-  hyprcursor-git
+  hyprland
+  hyprpaper
+  hypridle
+  hyprpicker
+  hyprlock
+  hyprcursor
+  archlinux-xdg-menu
   egl-wayland
   polkit-kde-agent
   qt5-wayland
   qt6-wayland
-  xdg-desktop-portal-hyprland-git
+  xdg-desktop-portal-hyprland
   # kde gui apps
   ark
   dolphin
@@ -267,6 +268,7 @@ packageList=(
   lazygit
   lazynpm
   libarchive
+  libheif-highmem
   libjxl
   libmupdf
   libvncserver
@@ -295,15 +297,17 @@ packageList=(
   noto-fonts-emoji
   ntfs-3g
   numlockx
-  numlockx
   nvme-cli
   ookla-speedtest-bin
+  opus-tools
+  opustags
   os-prober
   p7zip
   pacman-contrib
   pandoc
   peerflix
   perl-file-homedir
+  perl-file-mimeinfo
   perl-image-exiftool
   perl-yaml-tiny
   pkgfile
@@ -322,6 +326,7 @@ packageList=(
   python-discogs-client # beets
   python-flask          # beets
   python-humanize
+  python-iniparse # crudini
   python-matplotlib
   python-mpd2 # beets
   python-pandas
@@ -397,6 +402,7 @@ packageList=(
   "${packageList[@]}"
   "${dePackageList[@]}"
   "${appletsPackageList[@]}"
+  "${qgisPackageList[@]}"
 )
 
 if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
