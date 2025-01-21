@@ -2,7 +2,7 @@
 
 set -u
 
-# {{ if and (ne .osid "android") (not .isWSL) }}
+# {{ if and (ne .osid "android") (not .isWSL) (not .isRasp) }}
 # {{   if ne .chezmoi.osRelease.id "archarm" }}
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
@@ -254,6 +254,6 @@ if command -v mpd &>/dev/null; then
 fi
 
 # beets
-if ! command -v beet &>/dev/null; then
+if command -v beet &>/dev/null; then
   beet fish -e genre -e albumartist 2>/dev/null || :
 fi

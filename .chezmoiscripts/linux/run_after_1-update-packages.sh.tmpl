@@ -4,7 +4,7 @@ set -eu
 
 if [ -f "${HOME}/.config/.env" ]; then source "${HOME}/.config/.env"; fi
 
-# {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
+# {{ if and (or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian")) (not .isRasp ) }}
 case $(uname -m) in
 x86_64)
   ARCH=amd64
@@ -38,12 +38,6 @@ if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/bat.deb"
   fi
 fi
-
-# HYPER_VER=$(curl --silent "https://api.github.com/repos/vercel/hyper/releases/latest" | jq -r .tag_name | tr -d v)
-# if ! dpkg -s hyper 2>&1 | grep "Version" | grep -q "${HYPER_VER}"; then
-#   wget -O "${TEMP_FOLDER}/hyper.deb" "https://releases.hyper.is/download/deb"
-#   DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/hyper.deb"
-# fi
 
 LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then

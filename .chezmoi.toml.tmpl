@@ -14,7 +14,10 @@
 {{-   $isWSL = contains "microsoft" (lower .chezmoi.kernel.osrelease) -}}
 {{- end -}}
 
-{{- $isRasp := eq .chezmoi.username "pi" -}}
+{{- $isRasp := false -}}
+{{- if hasKey .chezmoi.kernel "osrelease" -}}
+{{-   $isRasp = contains "rpi" (lower .chezmoi.kernel.osrelease) -}}
+{{- end -}}
 
 {{- $isWork := false -}}
 {{- if not $isRasp -}}
