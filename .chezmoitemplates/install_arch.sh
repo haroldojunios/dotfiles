@@ -316,7 +316,6 @@ packageList=(
   plocate
   prettier
   pulseaudio-ctl
-  pyenv
   python
   python-aiohttp-oauthlib
   python-pyacoustid # beets
