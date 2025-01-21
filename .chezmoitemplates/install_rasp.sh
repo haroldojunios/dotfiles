@@ -25,7 +25,6 @@ packageList=(
   cmake
   crudini
   curl
-  eza
   ffmpeg
   fish
   git
@@ -41,10 +40,10 @@ packageList=(
   openssh-server
   p7zip
   python-is-python3
-  python-smbus
   python3-dev
   python3-pip
-  python3-rpi.gpio
+  python3-rpi-lgpio
+  python3-smbus
   python3-venv
   shfmt
   sshfs

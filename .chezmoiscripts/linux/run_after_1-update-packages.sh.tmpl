@@ -4,7 +4,7 @@ set -eu
 
 if [ -f "${HOME}/.config/.env" ]; then source "${HOME}/.config/.env"; fi
 
-# {{ if and (or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian")) (not .isRasp ) }}
+# {{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 case $(uname -m) in
 x86_64)
   ARCH=amd64
@@ -37,26 +37,6 @@ if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
     wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/bat.deb" -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VER}/bat_${BAT_VER}_${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/bat.deb"
   fi
-fi
-
-LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
-if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
-  #{{   if eq .chezmoi.osRelease.id "ubuntu" }}
-  URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-ubuntu-{{ .chezmoi.osRelease.versionID }}-v${LIBJXL_VER}.tar.gz"
-  #{{  else }}
-  URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-debian-{{ .chezmoi.osRelease.versionCodename }}-v${LIBJXL_VER}.tar.gz"
-  #{{   end }}
-  wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
-  (
-    cd "${TEMP_FOLDER}"
-    tar -xzf libjxl.tar.gz
-    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y ./*.deb
-
-    git clone --depth 1 https://github.com/novomesk/qt-jpegxl-image-plugin
-    cd qt-jpegxl-image-plugin
-    ./build_libqjpegxl_dynamic.sh
-    sudo make install
-  )
 fi
 
 ZOXIDE_VER=$(curl --silent "https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
@@ -123,37 +103,6 @@ if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | g
   fi
 fi
 
-OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
-if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
-  if [ -n "${ARCH}" ]; then
-    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb" ||
-      wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian-${OBSIDIAN_VER}-${ARCH}.deb"
-    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/obsidian.deb"
-  fi
-fi
-
-KITTY_VER=$(curl --silent "https://api.github.com/repos/kovidgoyal/kitty/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
-if ! [ -x "${HOME}/.local/bin/kitty" ] || ! "${HOME}/.local/bin/kitty" --version | grep -q "${KITTY_VER}"; then
-  mkdir -p "${HOME}/.local/share/applications"
-  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="${HOME}/.local/share"
-  cp "${HOME}/.local/share/kitty.app/share/applications/kitty.desktop" "${HOME}/.local/share/applications/"
-  # sed -i "s|Icon=kitty|Icon=/home/$USER/.local/share/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" "${HOME}q"/.local/share/applications/kitty*.desktop
-  sed -i "s|Exec=kitty|Exec=/home/$USER/.local/share/kitty.app/bin/kitty|g" "${HOME}"/.local/share/applications/kitty*.desktop
-  ln -sf "${HOME}/.local/share/kitty.app/bin/kitty" "${HOME}/.local/bin/"
-  ln -sf "${HOME}/.local/share/kitty.app/bin/kitten" "${HOME}/.local/bin/"
-fi
-
-if ! command -v vmware &>/dev/null; then
-  # wget -O "${TEMP_FOLDER}/vmware.bundle" -q --user-agent="Mozilla" --content-disposition "https://www.vmware.com/go/getworkstation-linux" &&
-  # sudo bash "${TEMP_FOLDER}/vmware.bundle" || :
-  (
-    cd "${TEMP_FOLDER}"
-    wget -O vmware.bundle.tar -q --show-progress "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.6.1/24319023/linux/core/VMware-Workstation-17.6.1-24319023.x86_64.bundle.tar" &&
-      tar -xf vmware.bundle.tar &&
-      sudo bash VMware*.bundle || :
-  )
-fi
-
 RCLONE_VER=$(curl --silent "https://api.github.com/repos/rclone/rclone/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}" &&
   [ "$(semver compare $(rclone version | grep rclone | cut -d 'v' -f2) ${RCLONE_VER})" = -1 ]; then
@@ -205,4 +154,57 @@ if ! nnn -V 2>/dev/null | grep -q "${NNN_VER}"; then
   fi
   sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 fi
+
+# {{   if not .isRasp }}
+LIBJXL_VER=$(curl --silent "https://api.github.com/repos/libjxl/libjxl/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
+if ! dpkg -s jxl 2>&1 | grep "Version" | grep -q "${LIBJXL_VER}"; then
+  #{{   if eq .chezmoi.osRelease.id "ubuntu" }}
+  URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-ubuntu-{{ .chezmoi.osRelease.versionID }}-v${LIBJXL_VER}.tar.gz"
+  #{{  else }}
+  URL_LINK="https://github.com/libjxl/libjxl/releases/download/v${LIBJXL_VER}/jxl-debs-amd64-debian-{{ .chezmoi.osRelease.versionCodename }}-v${LIBJXL_VER}.tar.gz"
+  #{{   end }}
+  wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/libjxl.tar.gz" "${URL_LINK}"
+  (
+    cd "${TEMP_FOLDER}"
+    tar -xzf libjxl.tar.gz
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y ./*.deb
+
+    git clone --depth 1 https://github.com/novomesk/qt-jpegxl-image-plugin
+    cd qt-jpegxl-image-plugin
+    ./build_libqjpegxl_dynamic.sh
+    sudo make install
+  )
+fi
+
+OBSIDIAN_VER=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
+if ! dpkg -s obsidian 2>&1 | grep "Version" | grep -q "${OBSIDIAN_VER}"; then
+  if [ -n "${ARCH}" ]; then
+    wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian_${OBSIDIAN_VER}_${ARCH}.deb" ||
+      wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/obsidian.deb" -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/obsidian-${OBSIDIAN_VER}-${ARCH}.deb"
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/obsidian.deb"
+  fi
+fi
+
+KITTY_VER=$(curl --silent "https://api.github.com/repos/kovidgoyal/kitty/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
+if ! [ -x "${HOME}/.local/bin/kitty" ] || ! "${HOME}/.local/bin/kitty" --version | grep -q "${KITTY_VER}"; then
+  mkdir -p "${HOME}/.local/share/applications"
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n dest="${HOME}/.local/share"
+  cp "${HOME}/.local/share/kitty.app/share/applications/kitty.desktop" "${HOME}/.local/share/applications/"
+  # sed -i "s|Icon=kitty|Icon=/home/$USER/.local/share/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" "${HOME}q"/.local/share/applications/kitty*.desktop
+  sed -i "s|Exec=kitty|Exec=/home/$USER/.local/share/kitty.app/bin/kitty|g" "${HOME}"/.local/share/applications/kitty*.desktop
+  ln -sf "${HOME}/.local/share/kitty.app/bin/kitty" "${HOME}/.local/bin/"
+  ln -sf "${HOME}/.local/share/kitty.app/bin/kitten" "${HOME}/.local/bin/"
+fi
+
+if ! command -v vmware &>/dev/null; then
+  # wget -O "${TEMP_FOLDER}/vmware.bundle" -q --user-agent="Mozilla" --content-disposition "https://www.vmware.com/go/getworkstation-linux" &&
+  # sudo bash "${TEMP_FOLDER}/vmware.bundle" || :
+  (
+    cd "${TEMP_FOLDER}"
+    wget -O vmware.bundle.tar -q --show-progress "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.6.1/24319023/linux/core/VMware-Workstation-17.6.1-24319023.x86_64.bundle.tar" &&
+      tar -xf vmware.bundle.tar &&
+      sudo bash VMware*.bundle || :
+  )
+fi
+# {{   end }}
 # {{ end }}
