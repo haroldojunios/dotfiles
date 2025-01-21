@@ -30,6 +30,10 @@ alias ut='tar -xvf '
 alias red='find . -type d -empty -delete'
 alias li='fd -e tex -e bib -x latexindent -wd -m -g /dev/null {} >/dev/null'
 
+# ffmpeg
+alias ff='ffmpeg -hide_banner -y'
+alias ffp='ffprobe -v quiet -print_format json -show_format -show_streams'
+
 # general
 alias ytd='youtube-dl -o "%(title)s.%(ext)s" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 alias matlab='~/Programs/MATLAB/R2018a/bin/matlab'
@@ -84,3 +88,4 @@ command -v vivaldi >/dev/null && alias vp='vivaldi --profile-directory=personal 
 alias sudo='sudo --preserve-env=PATH'
 command -v nvim >/dev/null && alias n='nvim'
 alias nnn='nnn -aeP p'
+alias esp-idf='source /opt/esp-idf/export.fish'
