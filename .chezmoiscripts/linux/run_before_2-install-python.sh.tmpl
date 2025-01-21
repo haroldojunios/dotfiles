@@ -1,44 +1,34 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-{{ if eq .osid "android" }}
+# {{ if eq .osid "android" }}
 export CFLAGS="-Wno-incompatible-function-pointer-types"
-{{ end }}
+# {{ end }}
 
+# {{ if and (not (eq .osid "linux-arch")) (not .isRasp) }}
 if ! command -v pipx &>/dev/null; then
   python3 -m pip install --user pipx
 fi
+# {{ end }}
 
-pipx ensurepath &>/dev/null || :
+if command -v pipx &>/dev/null; then
+  pipx ensurepath &>/dev/null || :
 
-packagesList=(
-  "mdformat;\
+  packagesList=(
+    "mdformat;\
 --preinstall mdformat-frontmatter;\
 --preinstall mdformat-gfm;\
 --preinstall mdformat-admon;\
 --preinstall mdformat-myst;\
 --preinstall mdformat-gfm-alerts;\
 --preinstall mdformat-tables"
-)
+  )
 
-for packages in "${packagesList[@]}"; do
-  IFS=';' read -ra packs <<<"${packages}"
-  if ! pipx list --short 2>/dev/null | grep -q "${packs[0]}"; then
-    pipx install ${packs[@]}
-  fi
-done
-
-# if command -v pip &>/dev/null; then
-#   packagesList=(
-#     pymediainfo
-#   )
-#
-#   for package in "${packagesList[@]}"; do
-#     pip install --user -U "${package}"
-#   done
-# fi
+  for packages in "${packagesList[@]}"; do
+    IFS=';' read -ra packs <<<"${packages}"
+    if ! pipx list --short 2>/dev/null | grep -q "${packs[0]}"; then
+      pipx install ${packs[@]}
+    fi
+  done
+fi
