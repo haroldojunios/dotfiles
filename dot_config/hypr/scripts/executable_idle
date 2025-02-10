@@ -1,0 +1,122 @@
+#!/usr/bin/python3
+import json
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+BRIGHTNESS_CACHE = Path.home() / ".cache/bightness-cache.json"
+DEFAULT_BRIGHTNESS = 65
+SET_RGB_SCRIPT = Path.home() / ".local/bin/set-rgb"
+
+
+def run_cmd(cmd: str) -> str:
+    proc = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
+    return proc.stdout.strip()
+
+
+def get_display_info() -> dict[str, Any]:
+    info: dict[str, dict[str, Any]] = dict()
+
+    cmd = "ddcutil detect --brief"
+    result = ""
+    while not result.startswith("Display"):
+        result = run_cmd(cmd)
+
+    cur_display: str | None = None
+    for line in result.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("Display"):
+            cur_display = line.split(" ", 1)[1]
+        elif cur_display is not None:
+            if cur_display not in info:
+                info[cur_display] = dict()
+            key, value = line.split(":", 1)
+            key = key.strip()
+            value = value.strip()
+            if key == "I2C bus":
+                value = value.rsplit("-", 1)[-1]
+            info[cur_display][key] = value
+
+    # __import__("pprint").pprint(info)
+
+    return info
+
+
+def set_brightness(restore: bool = True):
+    if shutil.which("ddcutil") is None:
+        return
+
+    display_info = get_display_info()
+
+    if restore:
+        if BRIGHTNESS_CACHE.exists():
+            with BRIGHTNESS_CACHE.open() as f:
+                brightness_cache = json.load(f)
+        else:
+            brightness_cache = dict()
+
+        for display, info in display_info.items():
+            brightness = brightness_cache.get(display, DEFAULT_BRIGHTNESS)
+            bus = info.get("I2C bus")
+
+            if bus is not None:
+                cmd = f"ddcutil --bus {bus} setvcp 10 {brightness}"
+                run_cmd(cmd)
+    else:
+        brightness_cache = dict()
+        for display, info in display_info.items():
+            bus = info.get("I2C bus")
+            if bus is not None:
+                cmd = f"ddcutil --brief --bus {bus} getvcp 10"
+                result = ""
+                while not result.startswith("VCP 10"):
+                    result = run_cmd(cmd)
+                brightness = int(result.split()[3])
+                brightness_cache[display] = brightness
+                cmd = f"ddcutil --bus {bus} setvcp 10 0"
+                run_cmd(cmd)
+
+        if brightness_cache:
+            with BRIGHTNESS_CACHE.open("w", encoding="utf-8") as f:
+                json.dump(brightness_cache, f, ensure_ascii=False)
+
+
+def set_rgb(on: bool = True):
+    if not os.access(SET_RGB_SCRIPT, os.X_OK):
+        return
+
+    cmd = f"{SET_RGB_SCRIPT} {"on" if on else "off"}"
+    run_cmd(cmd)
+
+
+def turn_displays(on: bool = True):
+    cmd = f"hyprctl dispatch dpms {"on" if on else "off"}"
+    run_cmd(cmd)
+
+
+def send_notification(message: str):
+    cmd = f"notify-send -e '{message}'"
+    run_cmd(cmd)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        exit()
+
+    if sys.argv[1] == "dim":
+        send_notification("Turning off displays in 20s")
+        set_brightness(restore=False)
+    elif sys.argv[1] == "off":
+        turn_displays(on=False)
+        set_rgb(on=False)
+        set_brightness(restore=True)
+    elif sys.argv[1] == "on":
+        turn_displays(on=True)
+        set_rgb(on=True)
+        set_brightness(restore=True)
