@@ -36,3 +36,14 @@ map("i", "<CR>", "<CR>.<BS>")
 
 -- delete without yanking
 map({ "n", "v" }, "d", '"_d')
+
+-- move by visual lines
+map({ "n", "v" }, "j", "gj")
+map({ "n", "v" }, "k", "gk")
+
+-- exit insert mode with jk
+map("i", "jk", "<Esc>")
+
+-- paste on new line
+map("n", "<leader>p", ":pu<CR>", { silent = true })
+map("n", "<leader>P", ":pu!<CR>", { silent = true })

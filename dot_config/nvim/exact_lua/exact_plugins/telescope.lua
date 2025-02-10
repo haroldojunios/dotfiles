@@ -57,6 +57,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
+      "nvim-telescope/telescope-media-files.nvim",
     },
     config = function()
       local trouble = require("trouble.sources.telescope")
@@ -83,6 +84,10 @@ return {
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
+          },
+          media_files = {
+            filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm", "pdf" },
+            find_cmd = "fd",
           },
         },
       })

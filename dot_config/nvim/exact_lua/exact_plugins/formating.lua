@@ -70,7 +70,7 @@ return {
         jsonc = { "prettierd" },
         lua = { "stylua" },
         markdown = { "prettierd", "injected" },
-        prisma = { "prisma" },
+        -- prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
         tex = { "latexindent" },
         toml = { "taplo" },

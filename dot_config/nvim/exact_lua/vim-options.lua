@@ -9,6 +9,9 @@ g.maplocalleader = " "
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+-- disable markdown style recommendations
+g.markdown_recommended_style = 0
+
 -- enable 24-bit colour
 opt.termguicolors = true
 
@@ -17,6 +20,10 @@ opt.expandtab = true
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.shiftwidth = 2
+
+-- enable softwrap
+opt.wrap = true
+opt.linebreak = true
 
 -- enable line numbers
 opt.number = true
@@ -43,6 +50,10 @@ opt.smartcase = true
 opt.spell = true
 opt.spelllang = { "en", "pt_br" }
 opt.spelloptions:append("camel")
+opt.spellfile = {
+  vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+  vim.fn.stdpath("config") .. "/spell/pt.utf-8.add",
+}
 
 -- set folding
 opt.foldmethod = "indent"
@@ -51,6 +62,10 @@ opt.foldenable = false
 -- set conceal
 opt.conceallevel = 2
 opt.concealcursor = "nc"
+
+-- set scrolloff
+opt.scrolloff = 7
+opt.sidescrolloff = 7
 
 -- set listchars
 opt.list = true

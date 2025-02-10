@@ -20,51 +20,6 @@ return {
       })
 
       require("mason-update-all").setup()
-      -- vim.cmd("MasonUpdateAll")
-
-      -- install mdformat plugins
-      local registry_status_ok, mason_registry =
-        pcall(require, "mason-registry")
-      if not registry_status_ok then
-        return
-      end
-
-      mason_registry.refresh(function()
-        local mdformat = mason_registry.get_package("mdformat")
-        local mdformat_extensions = {
-          "mdformat-gfm",
-          "mdformat-toc",
-          -- "mdformat-myst",
-          "mdformat-admon",
-          "mdformat-frontmatter",
-          "mdformat-footnote",
-          "mdformat-gfm-alerts",
-        }
-        mdformat:on("install:success", function()
-          -- Create the installation command.
-          vim.notify("Installing mdformat extensions.", vim.log.levels.INFO)
-          local extensions = table.concat(mdformat_extensions, " ")
-          local python = mdformat:get_install_path() .. "/venv/bin/python"
-          local pip_cmd =
-            string.format("%s -m pip install %s", python, extensions)
-
-          vim.notify(pip_cmd, vim.log.levels.INFO)
-
-          -- vim.fn.jobstart doesn't work in callback so use popen instead.
-          local handle = io.popen(pip_cmd)
-          if not handle then
-            vim.notify(
-              "Could not install mdformat extensions.",
-              vim.log.levels.ERROR
-            )
-            return
-          end
-          local _ = handle:read("*a")
-          handle:close()
-
-          vim.notify("Mdformat extensions were successfully installed.")
-        end)
-      end)
     end,
   },
   {
@@ -85,7 +40,7 @@ return {
         "hyprls",
         "jsonls",
         "ltex",
-        "prismals",
+        -- "prismals",
         "pyright",
         "ts_ls",
         "yamlls",
@@ -130,11 +85,6 @@ return {
           })
         end,
       })
-
-      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      -- vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      -- vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
     end,
   },
   {
@@ -154,7 +104,7 @@ return {
         "fixjson",
         "hadolint",
         "markdownlint",
-        "mdformat",
+        -- "mdformat",
         "mypy",
         "prettierd",
         "ruff",
@@ -237,5 +187,20 @@ return {
         return ":IncRename " .. vim.fn.expand("<cword>")
       end, { expr = true })
     end,
+  },
+  {
+    -- for lsp features in code cells / embedded code
+    "jmbuhr/otter.nvim",
+    dependencies = {
+      {
+        "neovim/nvim-lspconfig",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    },
+    opts = {
+      verbose = {
+        no_code_found = false,
+      },
+    },
   },
 }

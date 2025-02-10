@@ -14,6 +14,7 @@ return {
       "windwp/nvim-autopairs",
       "f3fora/cmp-spell",
       "brenoprata10/nvim-highlight-colors",
+      "jmbuhr/otter.nvim",
     },
     config = function()
       local cmp = require("cmp")
@@ -36,44 +37,43 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<Esc>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({
-            select = true,
-          }),
-          -- ["<CR>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     if luasnip.expandable() then
-          --       luasnip.expand()
-          --     else
-          --       cmp.confirm({
-          --         select = true,
-          --       })
-          --     end
-          --   else
-          --     fallback()
-          --   end
-          -- end),
-          -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.locally_jumpable(1) then
-          --     luasnip.jump(1)
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
-          -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_prev_item()
-          --   elseif luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
+          ["<C-e>"] = cmp.mapping.abort(),
+          -- ["<CR>"] = cmp.mapping.confirm({
+          --   select = true,
+          -- }),
+          ["<CR>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              if luasnip.expandable() then
+                luasnip.expand()
+              else
+                cmp.confirm({ select = false })
+              end
+            else
+              fallback()
+            end
+          end),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "codeium" },
+          { name = "otter" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           {
@@ -106,7 +106,7 @@ return {
               mode = "symbol",
               maxwidth = 50,
               ellipsis_char = "...",
-              symbol_map = { Codeium = "" },
+              symbol_map = { Codeium = "", otter = "[🦦]" },
             })(entry, item)
             if color_item.abbr_hl_group then
               item.kind_hl_group = color_item.abbr_hl_group

@@ -30,12 +30,22 @@ return {
     config = true,
   },
   {
+    "echasnovski/mini.ai",
+    version = false,
+    config = true,
+  },
+  {
     "echasnovski/mini.trailspace",
     version = false,
     config = true,
   },
   {
     "echasnovski/mini.operators",
+    version = false,
+    config = true,
+  },
+  {
+    "echasnovski/mini.splitjoin",
     version = false,
     config = true,
   },

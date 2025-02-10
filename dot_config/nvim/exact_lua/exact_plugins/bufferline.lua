@@ -123,5 +123,11 @@ return {
       ":BufferLineGoToBuffer -1<CR>",
       { silent = true }
     )
+    vim.keymap.set(
+      "n",
+      "<leader>q",
+      ":BufDel<CR>",
+      { silent = true, desc = "Close current buffer" }
+    )
   end,
 }

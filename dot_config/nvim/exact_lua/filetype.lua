@@ -28,10 +28,22 @@ vim.filetype.add({
   },
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "md",
-  callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "markdown",
+--   callback = function(ev)
+--     print(string.format("event fired: %s", vim.inspect(ev)))
+--
+--     vim.opt_local.shiftwidth = 2
+--     vim.opt_local.tabstop = 2
+--     vim.opt_local.colorcolumn = 81
+--
+--     vim.b.minisurround_config = {
+--       custom_surroundings = {
+--         h = {
+--           input = { "%=%=().-()%=%=" },
+--           output = { left = "==", right = "==" },
+--         },
+--       },
+--     }
+--   end,
+-- })

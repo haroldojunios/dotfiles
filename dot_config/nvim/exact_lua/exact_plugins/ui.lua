@@ -83,18 +83,30 @@ return {
   },
   {
     "petertriho/nvim-scrollbar",
-    config = true,
-  },
-  {
-    "kevinhwang91/nvim-hlslens",
     dependencies = {
-      "petertriho/nvim-scrollbar",
+      "kevinhwang91/nvim-hlslens",
+      {
+        "lewis6991/gitsigns.nvim",
+        opts = { current_line_blame = true },
+      },
     },
     config = function()
-      -- require('hlslens').setup() is not required
-      require("scrollbar.handlers.search").setup({
-        -- hlslens config overrides
-      })
+      require("scrollbar").setup()
+      require("scrollbar.handlers.search").setup()
+      require("scrollbar.handlers.gitsigns").setup()
+
+      vim.keymap.set(
+        "n",
+        "<leader>gp",
+        ":Gitsigns preview_hunk<CR>",
+        { silent = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>gt",
+        ":Gitsigns toggle_current_line_blame<CR>",
+        { silent = true }
+      )
     end,
   },
 }

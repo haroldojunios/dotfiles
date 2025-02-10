@@ -11,6 +11,7 @@ return {
         vim.fn.expand("~/.local/share/markdown/mkdp/markdown.css")
       vim.g.mkdp_highlight_css =
         vim.fn.expand("~/.local/share/markdown/mkdp/highlight.css")
+      vim.g.mkdp_browser = "qutebrowser"
     end,
     ft = { "markdown" },
   },
@@ -82,8 +83,11 @@ return {
           .. string.sub(utc_offset, 1, -3)
           .. ":"
           .. string.sub(utc_offset, -2, -1)
+        local title = note.metadata and note.metadata.title
+          or note.title
+          or note.path.stem
         local out =
-          { id = note.id, title = note.path.stem, ["date created"] = date_time }
+          { id = note.id, title = title, ["date created"] = date_time }
 
         -- `note.metadata` contains any manually added fields in the frontmatter.
         -- So here we just make sure those fields are kept in the frontmatter.
@@ -94,8 +98,15 @@ return {
         end
         return out
       end,
+      note_id_func = function(title)
+        if title ~= nil then
+          return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+        else
+          return tostring(os.time())
+        end
+      end,
       note_path_func = function(spec)
-        local path = spec.dir / tostring(spec.title)
+        local path = spec.dir / tostring(spec.id)
         return path:with_suffix(".md")
       end,
       follow_url_func = function(url)
@@ -109,11 +120,24 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = "markdown",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {
-      render_modes = { "n", "c" },
-      pipe_table = { preset = "round" },
-      bullet = { left_pad = 2 },
-      link = { image = "󰋵 ", email = " ", hyperlink = "󰌷 " },
+      render_modes = { "n", "c", "t" },
+      pipe_table = { preset = "round", cell = "trimmed" },
+      bullet = {
+        icons = { "●", "◼", "⧫", "○", "◻", "◊" },
+      },
+      link = {
+        image = "󰋵 ",
+        email = " ",
+        hyperlink = "󰌷 ",
+        custom = {
+          python = { pattern = "%.py$", icon = "󰌠 " },
+        },
+      },
       checkbox = {
         unchecked = { icon = "🗴 " },
         checked = { icon = "🗸 " },
@@ -127,12 +151,20 @@ return {
       },
       heading = {
         width = "block",
-        min_width = 60,
+        min_width = 80,
       },
-    },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      dash = { width = 80 },
+      quote = { repeat_linebreak = true },
+      latex = { enabled = false },
+      win_options = {
+        conceallevel = {
+          default = vim.api.nvim_get_option_value("conceallevel", {}),
+          rendered = 2,
+        },
+        showbreak = { default = "", rendered = "  " },
+        breakindent = { default = false, rendered = true },
+        breakindentopt = { default = "", rendered = "" },
+      },
     },
   },
   {
@@ -144,21 +176,16 @@ return {
     },
   },
   {
-    "tadmccorkle/markdown.nvim",
+    "Thiago4532/mdmath.nvim",
     ft = "markdown",
-    opts = {
-      on_attach = function(bufnr)
-        local function toggle(key)
-          return "<Esc>gv<Cmd>lua require'markdown.inline'"
-            .. ".toggle_emphasis_visual'"
-            .. key
-            .. "'<CR>"
-        end
-
-        vim.keymap.set("v", "<C-b>", toggle("b"), { buffer = bufnr })
-        vim.keymap.set("v", "<C-i>", toggle("i"), { buffer = bufnr })
-        vim.keymap.set("v", "<C-_>", toggle("s"), { buffer = bufnr })
-      end,
+    enabled = os.getenv("PREFIX") == nil,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
     },
+  },
+  {
+    "jannis-baum/vivify.vim",
+    ft = "markdown",
+    enabled = os.getenv("PREFIX") == nil,
   },
 }
