@@ -116,17 +116,17 @@ dePackageList=(
   xdg-desktop-portal-kde
   # hyprland
   hyprland
-  hyprpaper
-  hypridle
-  hyprpicker
-  hyprlock
   hyprcursor
-  archlinux-xdg-menu
+  hypridle
+  hyprlock
+  hyprpaper
+  hyprpicker
   egl-wayland
   polkit-kde-agent
   qt5-wayland
   qt6-wayland
   xdg-desktop-portal-hyprland
+  xwaylandvideobridge
   # kde gui apps
   ark
   dolphin
@@ -150,7 +150,6 @@ dePackageList=(
   konsole
   krdc
   ksystemlog
-  labplot
   okular
   partitionmanager
   spectacle
@@ -161,9 +160,7 @@ dePackageList=(
   calibre
   chromium
   cliphist
-  conky
   dex
-  feh
   filezilla
   fuzzel
   gimp
@@ -175,13 +172,12 @@ dePackageList=(
   keepassxc
   kitty
   mailcap
-  obs-studio-git
+  obs-studio
   obsidian
   onlyoffice-bin
   opentabletdriver
   pavucontrol
   pdfarranger
-  qbittorrent
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
@@ -194,7 +190,6 @@ dePackageList=(
   ventoy-bin
   virtualbox
   visual-studio-code-bin
-  vivaldi
   vlc
   waybar-cava
   wl-clip-persist
@@ -203,7 +198,6 @@ dePackageList=(
   xclip
   xdg-utils
   xournalpp
-  xwaylandvideobridge-git
   zathura-pdf-mupdf
   zathura-ps
 )
@@ -221,7 +215,6 @@ packageList=(
   alsa-card-profiles
   alsa-utils
   android-tools
-  augeas
   bat
   beets
   bc
@@ -260,7 +253,6 @@ packageList=(
   i2c-tools
   imagemagick
   inetutils
-  iniparser
   inxi
   jq
   khal
@@ -295,6 +287,7 @@ packageList=(
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
+  nss-mdns
   ntfs-3g
   numlockx
   nvme-cli
@@ -350,7 +343,6 @@ packageList=(
   ruff
   shfmt
   simple-mtpfs
-  spotify-player-full-pipe
   sshfs
   starship
   stderred-git
@@ -491,6 +483,10 @@ if ! systemctl list-unit-files --state=enabled | grep plocate-updatedb.timer &>/
   sudo systemctl enable --now plocate-updatedb.timer
 fi
 
+if ! systemctl list-unit-files --state=enabled | grep avahi-daemon.service &>/dev/null; then
+  sudo systemctl enable --now avahi-daemon.service
+fi
+
 if [ -d "/proc/acpi/button/lid" ]; then
   if pacman -Q tlp &>/dev/null && ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
     sudo systemctl enable --now tlp
@@ -512,7 +508,7 @@ if ! systemctl list-unit-files --user --state=enabled | grep yams.service &>/dev
 fi
 
 yes | paru -Sc
-pacman -Qtdq | xargs -r -n 1 sudo pacman -Rns --noconfirm
+pacman -Qtdq | xargs -r sudo pacman -Rns --noconfirm
 rm -rf ~/.cache/paru/clone/*
 
 echo
