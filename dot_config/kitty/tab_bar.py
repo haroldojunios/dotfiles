@@ -5,7 +5,6 @@ from collections import defaultdict
 
 import humanize
 import psutil
-
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer, get_options
 from kitty.tab_bar import (
@@ -100,7 +99,7 @@ def create_cells() -> list[str]:
     now = datetime.datetime.now()
 
     cells = [
-        f"󰋊 {round(psutil.disk_usage("/").percent)}%",
+        f"󰋊 {round(psutil.disk_usage('/').percent)}%",
         f"󰻠 {round(psutil.cpu_percent(0.01))}%",
     ]
     mem_str = f" {mem_used_str}/{mem_total_str}"
@@ -109,7 +108,7 @@ def create_cells() -> list[str]:
     cells.append(mem_str)
     # if cpu_temp is not None:
     #     cells.append(f" {round(cpu_temp)}°C")
-    cells.append(f"󰸘 {now.strftime("%d/%m %H:%M:%S")}")
+    cells.append(f"󰸘 {now.strftime('%d/%m %H:%M:%S')}")
     return cells
 
 
