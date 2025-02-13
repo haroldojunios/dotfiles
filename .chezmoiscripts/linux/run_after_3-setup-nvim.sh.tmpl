@@ -7,3 +7,7 @@ if command -v nvim &>/dev/null; then
     -c 'MasonUpdateAll' \
     &>/dev/null || :
 fi
+
+if command -v termux-fix-shebang &>/dev/null; then
+  termux-fix-shebang ~/.local/share/nvim/mason/bin/*
+fi

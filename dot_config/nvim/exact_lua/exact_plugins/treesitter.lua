@@ -3,9 +3,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
     build = ":TSUpdate",
-    opts = {
-      auto_install = true,
-      ensure_installed = {
+    config = function()
+      local ensure_installed = {
         "bash",
         "bibtex",
         "c",
@@ -31,7 +30,6 @@ return {
         "json",
         "json5",
         "jsonc",
-        "latex",
         "lua",
         "make",
         "markdown",
@@ -51,23 +49,33 @@ return {
         "vimdoc",
         "xml",
         "yaml",
-      },
-      highlight = {
-        enable = true,
-        disable = { "csv" },
-        additional_vim_regex_highlighting = { "latex", "markdown" },
-      },
-      indent = { enable = true },
-      -- refactor
-      refactor = {
-        highlight_definitions = {
+      }
+      local ignore_installed = {}
+
+      if os.getenv("PREFIX") == nil then
+        table.insert(ensure_installed, "latex")
+      else
+        table.insert(ignore_installed, "latex")
+      end
+
+      require("nvim-treesitter.configs").setup({
+        auto_install = true,
+        ensure_installed = ensure_installed,
+        ignore_installed = ignore_installed,
+        highlight = {
           enable = true,
-          clear_on_cursor_move = true,
+          disable = { "csv" },
+          -- additional_vim_regex_highlighting = { "latex", "markdown" },
         },
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+        indent = { enable = true },
+        -- refactor
+        refactor = {
+          highlight_definitions = {
+            enable = true,
+            clear_on_cursor_move = true,
+          },
+        },
+      })
     end,
   },
   {

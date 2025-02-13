@@ -32,7 +32,6 @@ return {
     config = function()
       local ensure_installed = {
         "bashls",
-        "clangd",
         "cssls",
         "emmet_ls",
         "eslint",
@@ -46,6 +45,7 @@ return {
         "yamlls",
       }
       if os.getenv("PREFIX") == nil then
+        table.insert(ensure_installed, "clangd")
         table.insert(ensure_installed, "lua_ls")
       end
 
