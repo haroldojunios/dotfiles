@@ -38,11 +38,12 @@ return {
             texStyleArgConcat = { fg = colors.green },
             ["@markup.italic"] = { fg = colors.sapphire },
             ["@markup.strong"] = { fg = colors.lavender },
+            ["@markup.strikethrough"] = { fg = colors.red },
             ["@markup.quote.markdown"] = { fg = colors.mauve },
             RenderMarkdownQuote = { fg = colors.mauve },
             RenderMarkdownBullet = { fg = colors.pink },
             RenderMarkdownInlineHighlight = {
-              bg = colors.red,
+              bg = colors.lavender,
               fg = colors.base,
             },
             ["@markup.heading.1.markdown"] = { fg = colors.mauve },

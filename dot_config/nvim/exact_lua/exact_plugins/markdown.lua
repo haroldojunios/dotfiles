@@ -19,7 +19,7 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
-    ft = "markdown",
+    ft = { "markdown", "quarto" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
@@ -31,14 +31,13 @@ return {
       workspaces = {
         {
           name = "notes",
-          path = "~/Documents/notes",
+          path = os.getenv("PREFIX") == nil and "~/Documents/notes"
+            or "/storage/emulated/0/Documents/notes",
         },
         {
           name = "no-vault",
           path = function()
-            -- alternatively use the CWD:
-            -- return assert(vim.fn.getcwd())
-            return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+            return assert(vim.fn.getcwd())
           end,
           overrides = {
             notes_subdir = vim.NIL,
@@ -56,6 +55,12 @@ return {
       },
       new_notes_location = "current_dir",
       preferred_link_style = "markdown",
+      attachments = {
+        img_folder = "attachments",
+        img_name_func = function()
+          return string.format("%s-", os.time())
+        end,
+      },
       mappings = {
         ["gf"] = {
           action = function()
@@ -119,13 +124,14 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = "markdown",
+    ft = { "markdown", "quarto" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
       render_modes = { "n", "c", "t" },
+      file_types = { "markdown", "quarto" },
       pipe_table = { preset = "round", cell = "trimmed" },
       bullet = {
         icons = { "●", "◼", "⧫", "○", "◻", "◊" },
@@ -170,22 +176,42 @@ return {
   {
     "3rd/image.nvim",
     build = false,
+    ft = { "markdown", "quarto" },
     enabled = os.getenv("PREFIX") == nil,
     opts = {
       processor = "magick_cli",
+      integrations = {
+        markdown = {
+          filetypes = { "markdown", "quarto", "vimwiki" },
+          only_render_image_at_cursor = true,
+        },
+      },
+      max_width = 50,
+      window_overlap_clear_enabled = true,
     },
   },
   {
     "Thiago4532/mdmath.nvim",
-    ft = "markdown",
+    ft = { "markdown", "quarto" },
     enabled = os.getenv("PREFIX") == nil,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
+    opts = {
+      filetypes = { "markdown", "quarto" },
+    },
   },
   {
     "jannis-baum/vivify.vim",
-    ft = "markdown",
+    ft = { "markdown", "quarto" },
     enabled = os.getenv("PREFIX") == nil,
+  },
+  {
+    "quarto-dev/quarto-nvim",
+    ft = { "quarto" },
+    dependencies = {
+      "jmbuhr/otter.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
 }

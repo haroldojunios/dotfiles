@@ -43,11 +43,11 @@ return {
           -- }),
           ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              if luasnip.expandable() then
-                luasnip.expand()
-              else
-                cmp.confirm({ select = false })
-              end
+              -- if luasnip.expandable() then
+              --   luasnip.expand()
+              -- else
+              cmp.confirm({ select = true })
+              -- end
             else
               fallback()
             end

@@ -38,12 +38,15 @@ map("i", "<CR>", "<CR>.<BS>")
 map({ "n", "v" }, "d", '"_d')
 
 -- move by visual lines
-map({ "n", "v" }, "j", "gj")
-map({ "n", "v" }, "k", "gk")
+map({ "n", "v" }, "<M-j>", "gj")
+map({ "n", "v" }, "<M-k>", "gk")
 
 -- exit insert mode with jk
 map("i", "jk", "<Esc>")
 
+-- remove s keymap
+map({ "n", "v" }, "s", "<Nop>")
+
 -- paste on new line
-map("n", "<leader>p", ":pu<CR>", { silent = true })
-map("n", "<leader>P", ":pu!<CR>", { silent = true })
+map("n", "<leader>p", ":pu<CR>")
+map("n", "<leader>P", ":pu!<CR>")

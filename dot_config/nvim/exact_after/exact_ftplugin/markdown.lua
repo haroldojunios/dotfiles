@@ -79,3 +79,24 @@ if has_mini_surround then
     { remap = true, desc = "Surround with italic" }
   )
 end
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  buffer = 0,
+  callback = function()
+    if vim.fn.executable("pandoc") == 1 then
+      local cur_cwd = vim.fn.getcwd()
+
+      if cur_cwd:match("Documents/notes") then
+        local filename = vim.fn.expand("%:p")
+        local path, _ = filename:match("^(.+)%.(.+)$")
+        local folder, _ = filename:match("^(.+)/(.+)$")
+        local output = path .. ".html"
+
+        vim.fn.jobstart(
+          { "pandoc", filename, "-d", "notes-html", "-o", output },
+          { cdw = folder }
+        )
+      end
+    end
+  end,
+})

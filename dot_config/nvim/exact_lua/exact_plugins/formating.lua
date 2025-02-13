@@ -1,48 +1,7 @@
 local slow_format_filetypes = {}
 
 return {
-  -- {
-  --   "smoka7/multicursors.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "smoka7/hydra.nvim",
-  --   },
-  --   opts = {},
-  --   cmd = {
-  --     "MCstart",
-  --     "MCvisual",
-  --     "MCclear",
-  --     "MCpattern",
-  --     "MCvisualPattern",
-  --     "MCunderCursor",
-  --   },
-  --   keys = {
-  --     {
-  --       mode = { "v", "n" },
-  --       "<Leader>mm",
-  --       "<cmd>MCstart<CR>",
-  --       desc = "Create a selection for selected text or word under the cursor",
-  --     },
-  --     {
-  --       mode = { "n" },
-  --       "<Leader>mv",
-  --       "<cmd>MCvisual<CR>",
-  --       desc = "Create a selection for last visual mode selection",
-  --     },
-  --     {
-  --       mode = { "n" },
-  --       "<Leader>mp",
-  --       "<cmd>MCpattern<CR>",
-  --       desc = "Create a selection for a prompted pattern",
-  --     },
-  --     {
-  --       mode = { "v", "n" },
-  --       "<Leader>mc",
-  --       "<cmd>MCclear<CR>",
-  --       desc = "Clears all the selections",
-  --     },
-  --   },
-  -- },
+
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
@@ -72,6 +31,7 @@ return {
         markdown = { "prettierd", "injected" },
         -- prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
+        quarto = { "prettierd", "injected" },
         tex = { "latexindent" },
         toml = { "taplo" },
         typescript = { "eslint_d", "prettierd" },
