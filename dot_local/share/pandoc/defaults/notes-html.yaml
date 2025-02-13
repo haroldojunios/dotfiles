@@ -1,0 +1,15 @@
+from: markdown+mark
+standalone: true
+toc: true
+number-sections: true
+listings: true
+highlight-style: ${.}/mocha.theme
+include-in-header:
+  - ${.}/style.html
+variables:
+  fontsize: 12pt
+  maxwidth: 80%
+  mainfont: Iosevka
+  monofont: Iosevka
+  toc-title: Sumário
+  lang: pt-BR

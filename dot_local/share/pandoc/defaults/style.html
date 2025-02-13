@@ -1,0 +1,141 @@
+<style>
+  :root {
+    --surface1: #45475a;
+    --surface0: #313244;
+    --rosewater: #f5e0dc;
+    --flamingo: #f2cdcd;
+    --pink: #f5c2e7;
+    --mauve: #cba6f7;
+    --red: #f38ba8;
+    --maroon: #eba0ac;
+    --peach: #fab387;
+    --yellow: #f9e2af;
+    --green: #a6e3a1;
+    --teal: #94e2d5;
+    --sky: #89dceb;
+    --sapphire: #74c7ec;
+    --blue: #89b4fa;
+    --lavender: #b4befe;
+    --text: #cdd6f4;
+    --subtext0: #a6adc8;
+    --base: #1e1e2e;
+
+    --bg-primary: var(--base);
+    --bg-secondary: var(--surface0);
+    --bg-code: var(--surface1);
+    --bg-mark: rgba(243, 139, 168, 0.8);
+
+    --text-primary: var(--text);
+    --text-secondary: var(--subtext0);
+    --text-link: var(--sky);
+    --text-mark: var(--base);
+
+    --border-regular: #353535;
+    --border-muted: #303030;
+
+    --icon-directory: var(--text-secondary);
+    --icon-file: var(--text-secondary);
+    --icon-back: var(--text-secondary);
+
+    --syntax-text: var(--text-primary);
+    --syntax-keyword: #aed7ff;
+    --syntax-entity: #aeafff;
+    --syntax-constant: #d1b0fa;
+    --syntax-string: #d787af;
+    --syntax-symbol: var(--syntax-constant);
+    --syntax-comment: #949494;
+    --syntax-entity-tag: #d7afd7;
+    --syntax-storage-modifier-import: var(--syntax-text);
+
+    --syntax-markup-heading: var(--syntax-text);
+    --syntax-markup-list: var(--syntax-text);
+    --syntax-markup-italic: var(--sapphire);
+    --syntax-markup-bold: var(--lavender);
+    --syntax-markup-inserted-fg: #aff5b4;
+    --syntax-markup-inserted-bg: #033a16;
+    --syntax-markup-deleted-fg: #ffdcd7;
+    --syntax-markup-deleted-bg: #67060c;
+
+    --alert-note: var(--blue);
+    --alert-tip: var(--green);
+    --alert-important: var(--mauve);
+    --alert-warning: var(--yellow);
+    --alert-caution: var(--red);
+
+    --ipynb-bg-error: rgba(255, 0, 0, 0.1);
+  }
+
+  html {
+    font-size: 14pt;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  h1 {
+    color: var(--mauve);
+  }
+
+  h2 {
+    color: var(--blue);
+  }
+
+  h3 {
+    color: var(--green);
+  }
+
+  h4 {
+    color: var(--peach);
+  }
+
+  h5 {
+    color: var(--yellow);
+  }
+
+  h6 {
+    color: var(--pink);
+  }
+
+  strong {
+    color: var(--lavender);
+  }
+
+  em {
+    color: var(--sapphire);
+  }
+
+  #TOC a,
+  #TOC a:visited {
+    color: var(--text-normal);
+  }
+
+  a,
+  a:visited {
+    color: var(--text-link);
+  }
+
+  blockquote {
+    color: var(--mauve);
+    border-left: 0.33em solid var(--mauve);
+  }
+
+  table {
+    display: revert;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-bottom: 2em; */
+    width: fit-content;
+  }
+
+  img {
+    display: block;
+    margin: auto;
+  }
+
+  table caption,
+  figure figcaption {
+    font-size: 0.85em;
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+</style>

@@ -1,0 +1,17 @@
+from: markdown+mark
+pdf-engine: xelatex
+toc: true
+number-sections: true
+listings: true
+include-in-header:
+  - ${.}/header.tex
+variables:
+  fontsize: 12pt
+  classoption:
+    - oneside
+    - titlepage
+  geometry: "a4paper,left=2cm,right=1cm,top=2cm,bottom=2cm"
+  mainfont: Iosevka
+  monofont: Iosevka
+  toc-title: Sumário
+  lang: pt-BR

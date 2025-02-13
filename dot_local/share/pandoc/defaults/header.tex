@@ -1,0 +1,94 @@
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{placeins} % keeps floats in place
+\usepackage{tcolorbox}
+% \usepackage{tocloft}
+
+\usepackage[immediate]{silence}
+\WarningFilter[temp]{latex}{Command} % silence the warning
+\usepackage{sectsty} % color headings
+\DeactivateWarningFilters[temp] % So nothing unrelated gets silenced
+
+\definecolor{rosewater}{HTML}{f5e0dc}
+\definecolor{flamingo}{HTML}{f2cdcd}
+\definecolor{pink}{HTML}{f5c2e7}
+\definecolor{mauve}{HTML}{cba6f7}
+\definecolor{red}{HTML}{f38ba8}
+\definecolor{peach}{HTML}{fab387}
+\definecolor{yellow}{HTML}{f9e2af}
+\definecolor{green}{HTML}{a6e3a1}
+\definecolor{teal}{HTML}{94e2d5}
+\definecolor{sky}{HTML}{89dceb}
+\definecolor{sapphire}{HTML}{74c7ec}
+\definecolor{blue}{HTML}{89b4fa}
+\definecolor{lavender}{HTML}{b4befe}
+\definecolor{text}{HTML}{cdd6f4}
+\definecolor{subtext0}{HTML}{a6adc8}
+\definecolor{surface1}{HTML}{45475a}
+\definecolor{surface0}{HTML}{313244}
+\definecolor{base}{HTML}{1e1e2e}
+
+\makeatletter
+\@ifclassloaded{book}{%
+  \chapterfont{\centering\color{mauve}} \sectionfont{\color{blue}}
+  \subsectionfont{\color{green}} \subsubsectionfont{\color{peach}}
+  \subsubsectionfont{\color{yellow}} \paragraphfont{\color{pink}}
+}{%
+  \sectionfont{\centering\color{mauve}} \subsectionfont{\color{blue}}
+  \subsubsectionfont{\color{green}} \subsubsectionfont{\color{peach}}
+  \paragraphfont{\color{yellow}} \subparagraphfont{\color{pink}}
+}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}
+\fancyhead[L]{\textcolor{mauve}{\nouppercase{\leftmark}}}
+\fancyhead[R]{\textcolor{blue}{\nouppercase{\rightmark}}}
+\fancyfoot{}
+\fancyfoot[R]{\textcolor{text}{\thepage}}
+
+\pagecolor{base}
+
+\ifdefined\hl
+  \let\oldhl\hl
+  \renewcommand{\hl}[1]{\sethlcolor{red}\textcolor{base}{\oldhl{#1}}}
+\fi
+
+\let\oldheadrule\headrule% Copy \headrule into \oldheadrule
+\renewcommand{\headrule}{\color{text}\oldheadrule}
+\renewcommand{\footrule}{\headrule}
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\textcolor{lavender}{\oldtextbf{#1}}}
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{sapphire}{\oldemph{#1}}}
+
+\ifdefined\tableofcontents
+  \let\oldtableofcontents\tableofcontents
+  \renewcommand{\tableofcontents}{\oldtableofcontents\clearpage}
+\fi
+
+\let\oldsection\section
+\renewcommand{\section}{\FloatBarrier\oldsection}
+
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\FloatBarrier\oldsubsection}
+
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\FloatBarrier\oldsubsubsection}
+
+\newtcolorbox{myquote}{colback=surface0, colframe=mauve!75!base}
+\renewenvironment{quote}{
+  \begin{myquote}
+    \color{mauve}
+    }{
+  \end{myquote}
+}
+
+% \renewcommand\cftchappagefont{\color{text}}
+% \renewcommand\cftsecpagefont{\color{text}}
+% \renewcommand\cftsubsecpagefont{\color{text}}
+
+\setlength{\parindent}{1cm}
+
+\color{text}
