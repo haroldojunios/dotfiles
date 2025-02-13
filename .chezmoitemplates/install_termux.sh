@@ -37,6 +37,7 @@ packageList=(
   ninja
   nnn
   nodejs-lts
+  openjdk-21
   openssh
   proot-distro
   python
@@ -48,6 +49,7 @@ packageList=(
   rclone
   ripgrep
   rsync
+  rust
   starship
   stylua
   termux-api
@@ -56,6 +58,7 @@ packageList=(
   wget
   which
   zip
+  zoxide
 )
 # desktop enviroment
 dePackageList=(
