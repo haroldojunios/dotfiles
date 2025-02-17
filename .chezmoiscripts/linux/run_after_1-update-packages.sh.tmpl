@@ -26,11 +26,6 @@ trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 GH_AUTH="Authorization: Bearer ${GH_AUTH_TOKEN}"
 WGET_GH_AUTH="Authorization: token ${GH_AUTH_TOKEN}"
 
-if ! [ -x "${HOME}/.local/bin/semver" ]; then
-  wget --header "${WGET_GH_AUTH}" -O "${HOME}/.local/bin/semver" -q "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver"
-  chmod +x "${HOME}/.local/bin/semver"
-fi
-
 BAT_VER=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
 if ! dpkg -s bat 2>&1 | grep "Version" | grep -q "${BAT_VER}"; then
   if [ -n "${ARCH}" ]; then
@@ -104,8 +99,7 @@ if ! [ -x "/usr/local/bin/lazynpm" ] || ! "/usr/local/bin/lazynpm" --version | g
 fi
 
 RCLONE_VER=$(curl --silent "https://api.github.com/repos/rclone/rclone/releases/latest" --header "${GH_AUTH}" | jq -r .tag_name | tr -d v)
-if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}" &&
-  [ "$(semver compare $(rclone version | grep rclone | cut -d 'v' -f2) ${RCLONE_VER})" = -1 ]; then
+if ! dpkg -s rclone 2>&1 | grep "Version" | grep -q "${RCLONE_VER}"; then
   if [ -n "${ARCH}" ]; then
     wget --header "${WGET_GH_AUTH}" -O "${TEMP_FOLDER}/rclone.deb" -q "https://github.com/rclone/rclone/releases/download/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-${ARCH}.deb"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y "${TEMP_FOLDER}/rclone.deb"

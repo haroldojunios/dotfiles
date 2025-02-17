@@ -1,12 +1,8 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-{{ if ne .osid "android" }}
+# {{ if ne .osid "android" }}
 IOSEVKA_VER=$(curl --silent "https://api.github.com/repos/be5invis/Iosevka/releases/latest" | jq -r .tag_name | tr -d v)
 if ! [ -f "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" ] ||
   command -v fontforge &>/dev/null &&
@@ -65,4 +61,4 @@ done
 
 # remove broken symlinks
 sudo find /usr/local/share/fonts -type l ! -exec test -e {} \; -delete
-{{ end }}
+# {{ end }}

@@ -1,12 +1,8 @@
-{{- if ne .osid "android" -}}
-#!/bin/bash
-{{- else -}}
-#!/data/data/com.termux/files/usr/bin/bash
-{{ end }}
+# {{- if ne .osid "android" }}!/bin/bash{{ else }}!/data/data/com.termux/files/usr/bin/bash{{ end }}
 
 set -eu
 
-if command -v crontab &>/dev/null; then
+if command -v crontab &>/dev/null && [ -z "$(crontab -l 2>/dev/null)" ]; then
   CRONTAB=$(head -n 3 ${HOME}/.config/.env)
   CRONTAB+=$(
     cat <<'EOF'
