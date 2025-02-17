@@ -170,14 +170,15 @@ dePackageList=(
   inkscape
   jdownloader2
   keepassxc
+  keyd
   kitty
   mailcap
   obs-studio
-  obsidian
   onlyoffice-bin
   opentabletdriver
   pavucontrol
   pdfarranger
+  pomodorolm-bin
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
@@ -216,10 +217,12 @@ packageList=(
   alsa-utils
   android-tools
   bat
-  beets
   bc
+  beets
   biber
   bibtool
+  bpython # python repl
+  chafa
   chromaprint # beets
   clang
   cmake
@@ -233,6 +236,7 @@ packageList=(
   docker-buildx
   docker-compose
   efibootmgr
+  exfatprogs
   expac
   expect
   eza
@@ -264,16 +268,17 @@ packageList=(
   libjxl
   libmupdf
   libvncserver
+  litecli # sqlite cli browser
   lm_sensors
   lshw
   make
   mediainfo
   micro
   minidlna
+  mongosh
   mpd
   mpd-mpris
   mpv
-  mongosh
   mypy
   nano
   ncdu
@@ -298,10 +303,13 @@ packageList=(
   p7zip
   pacman-contrib
   pandoc
+  pdfjs # qutebrowser
   peerflix
+  perl-archive-zip # exiftool
   perl-file-homedir
   perl-file-mimeinfo
   perl-image-exiftool
+  perl-io-compress-brotli # exiftool
   perl-yaml-tiny
   pkgfile
   pkgstats
@@ -310,8 +318,8 @@ packageList=(
   prettier
   pulseaudio-ctl
   python
+  python-adblock # qutebrowser
   python-aiohttp-oauthlib
-  python-pyacoustid # beets
   python-beautifulsoup4
   python-catppuccin
   python-click
@@ -327,6 +335,7 @@ packageList=(
   python-poetry-plugin-export
   python-psutil
   python-py7zr
+  python-pyacoustid # beets
   python-pyexiftool
   python-pylast # beets
   python-pylatexenc
@@ -337,6 +346,8 @@ packageList=(
   python-tqdm
   python-xdg  # beets
   python-yams # mpd: last fm scrobbler
+  qbittorrent-nox
+  qutebrowser
   rclone
   reflector
   ripgrep
@@ -360,13 +371,17 @@ packageList=(
   texlive-publishers
   texlive-science
   texlive-xetex
+  tinymist # typst lsp
   tmux
   tree-sitter-cli
+  typst
+  typstyle-bin # typst formatter
   ufw
   unrar
   unzip
   usbutils
   vdirsyncer
+  vivify-bin
   wget
   which
   wine-staging
@@ -374,8 +389,10 @@ packageList=(
   wine-mono
   winetricks
   wkhtmltopdf
+  yazi
   zerotier-one
   zip
+  zk
   zoxide
   zram-generator
 )
@@ -406,18 +423,18 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
   packageList=(
     "${packageList[@]}"
     "${nvidiaDriver}"
-    nvidia-utils
-    libva-nvidia-driver-git
+    lib32-mesa
     lib32-nvidia-utils
-    libvdpau
-    opencl-nvidia
     lib32-opencl-nvidia
+    libva-mesa-driver
+    libva-nvidia-driver-git
+    libvdpau
     libxnvctrl
     mesa
-    lib32-mesa
-    libva-mesa-driver
     mesa-vdpau
+    nvidia-utils
     opencl-clover-mesa
+    opencl-nvidia
   )
 fi
 
@@ -432,9 +449,9 @@ if [ -d "/proc/acpi/button/lid" ]; then
 fi
 
 for package in "${packageList[@]}"; do
-  if ! pacman -Q ${package} &>/dev/null && ! [ "$(pacman -Sg ${package})" = "$(pacman -Qg ${package} 2>&1)" ]; then
+  if ! pacman -Q "${package}" &>/dev/null && ! [ "$(pacman -Sg "${package}")" = "$(pacman -Qg "${package}" 2>&1)" ]; then
     echo -e "${GREEN}Installing package ${BLUE}${package}${GREEN}...${NC}"
-    paru -S --noconfirm --needed --skipreview --nouseask --sudoloop ${package} ||
+    paru -S --noconfirm --needed --skipreview --nouseask --sudoloop "${package}" ||
       echo -e "${RED}Package(s) \"${BLUE}${package}${RED}\" not found!${NC}"
     if [ "${package}" = "opentabletdriver" ]; then
       sudo mkinitcpio -P
