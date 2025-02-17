@@ -80,6 +80,21 @@ if has_mini_surround then
   )
 end
 
+-- use latex symbol on markdown
+local has_cmp, cmp = pcall(require, "cmp")
+if has_cmp then
+  local sources = cmp.get_config().sources
+  for i = #sources, 1, -1 do
+    if sources[i].name == "latex_symbols" then
+      sources[i].option = {
+        strategy = 2, -- latex
+      }
+    end
+  end
+  cmp.setup.buffer({ sources = sources })
+end
+
+-- render markdown on save
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   buffer = 0,
   callback = function()

@@ -16,6 +16,14 @@ return {
     ft = { "markdown" },
   },
   {
+    "zk-org/zk-nvim",
+    config = function()
+      require("zk").setup({
+        picker = "telescope",
+      })
+    end,
+  },
+  {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
@@ -81,18 +89,18 @@ return {
           opts = { buffer = true, expr = true },
         },
       },
+      disable_frontmatter = function(filename)
+        if filename:match("templates/") then
+          return true
+        end
+        return false
+      end,
       note_frontmatter_func = function(note)
-        local date_time = os.date("%Y-%m-%dT%T")
-        local utc_offset = tostring(os.date("%z"))
-        date_time = date_time
-          .. string.sub(utc_offset, 1, -3)
-          .. ":"
-          .. string.sub(utc_offset, -2, -1)
+        local date_time = os.date("%Y-%m-%dT%T%z")
         local title = note.metadata and note.metadata.title
           or note.title
           or note.path.stem
-        local out =
-          { id = note.id, title = title, ["date created"] = date_time }
+        local out = { id = note.id, title = title, date = date_time }
 
         -- `note.metadata` contains any manually added fields in the frontmatter.
         -- So here we just make sure those fields are kept in the frontmatter.
@@ -104,10 +112,9 @@ return {
         return out
       end,
       note_id_func = function(title)
-        if title ~= nil then
-          return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-        else
-          return tostring(os.time())
+        local id = ""
+        for _ = 1, 6 do
+          id = id .. string.char(math.random(97, 122))
         end
       end,
       note_path_func = function(spec)

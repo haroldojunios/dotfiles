@@ -4,7 +4,6 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
-    -- opts = ,
     config = function()
       local utils = require("catppuccin.utils.colors")
 

@@ -7,6 +7,7 @@ return {
     dependencies = {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-path",
       "kdheepak/cmp-latex-symbols",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip", --luasnip
@@ -33,6 +34,7 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+        preselect = cmp.PreselectMode.None,
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -41,17 +43,7 @@ return {
           -- ["<CR>"] = cmp.mapping.confirm({
           --   select = true,
           -- }),
-          ["<CR>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              -- if luasnip.expandable() then
-              --   luasnip.expand()
-              -- else
-              cmp.confirm({ select = true })
-              -- end
-            else
-              fallback()
-            end
-          end),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -76,6 +68,7 @@ return {
           { name = "otter" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "path" },
           {
             name = "spell",
             option = {

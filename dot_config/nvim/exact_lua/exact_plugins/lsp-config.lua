@@ -39,7 +39,6 @@ return {
         "hyprls",
         "jsonls",
         "ltex",
-        -- "prismals",
         "pyright",
         "ts_ls",
         "yamlls",
@@ -81,6 +80,15 @@ return {
                   typeCheckingMode = "off", -- Using mypy
                 },
               },
+            },
+          })
+        end,
+        ["tinymist"] = function()
+          lspconfig.tinymist.setup({
+            settings = {
+              formatterMode = "typstyle",
+              exportPdf = "onType",
+              semanticTokens = "disable",
             },
           })
         end,
