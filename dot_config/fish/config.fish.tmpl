@@ -41,6 +41,7 @@ end
 
 {{ if eq .osid "android" }}
 set -x USER haroldo
+set -x ZK_NOTEBOOK_DIR ~/storage/shared/Documents/notes
 
 if not pgrep -f crond >/dev/null && type -q crond
     crond
@@ -54,6 +55,8 @@ end
 set -x DISPLAY ":1"
 {{   end }}
 {{ else }}
+set -x ZK_NOTEBOOK_DIR ~/Documents/notes
+
 if not test -f ~/.cache/weather && type -q get-weather
     get-weather ~/.cache/weather &>/dev/null &
     disown
@@ -95,9 +98,7 @@ set -l paths \
     ~/bin \
     ~/.cargo/bin \
     ~/.local/bin \
-    ~/.local/share/python/bin \
-    ~/.local/bin/lastools/bin \
-    ~/.local/share/python/bin
+    ~/.local/bin/lastools/bin
 
 for path in $paths
     if test -d $path
