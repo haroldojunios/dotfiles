@@ -1,3 +1,11 @@
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap = true, silent = true, buffer = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
+end
+
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 vim.opt_local.wrap = true
@@ -42,42 +50,12 @@ if has_mini_surround then
     },
   }
 
-  vim.keymap.set(
-    "n",
-    "<M-b>",
-    "saiwb",
-    { remap = true, desc = "Surround with bold" }
-  )
-  vim.keymap.set(
-    "v",
-    "<M-b>",
-    "sab",
-    { remap = true, desc = "Surround with bold" }
-  )
-  vim.keymap.set(
-    "i",
-    "<M-b>",
-    "<Esc>lsaiwbgi",
-    { remap = true, desc = "Surround with bold" }
-  )
-  vim.keymap.set(
-    "n",
-    "<M-i>",
-    "saiwi",
-    { remap = true, desc = "Surround with italic" }
-  )
-  vim.keymap.set(
-    "v",
-    "<M-i>",
-    "sai",
-    { remap = true, desc = "Surround with italic" }
-  )
-  vim.keymap.set(
-    "i",
-    "<M-i>",
-    "<Esc>lsaiwigi",
-    { remap = true, desc = "Surround with italic" }
-  )
+  map("n", "<M-b>", "saiwb", { desc = "Surround with bold" })
+  map("v", "<M-b>", "sab", { desc = "Surround with bold" })
+  map("i", "<M-b>", "<Esc>lsaiwbgi", { desc = "Surround with bold" })
+  map("n", "<M-i>", "saiwi", { desc = "Surround with italic" })
+  map("v", "<M-i>", "sai", { desc = "Surround with italic" })
+  map("i", "<M-i>", "<Esc>lsaiwigi", { desc = "Surround with italic" })
 end
 
 -- use latex symbol on markdown
@@ -115,3 +93,34 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     end
   end,
 })
+
+local has_zk, _ = pcall(require, "zk")
+if has_zk then
+  if require("zk.util").notebook_root(vim.fn.expand("%:p")) ~= nil then
+    -- open the link at the cursor
+    map(
+      "n",
+      "<CR>",
+      "<Cmd>lua vim.lsp.buf.definition()<CR>",
+      { desc = "Open link" }
+    )
+    -- create the note in the same directory as the current buffer
+    map(
+      "n",
+      "<leader>zn",
+      "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>",
+      { desc = "Create new note" }
+    )
+    -- Open notes linking to the current buffer.
+    map("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", { desc = "Open backlinks" })
+    -- Open notes linked by the current buffer.
+    map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", { desc = "Open links" })
+    -- Open the code actions for a visual selection.
+    map(
+      "v",
+      "<leader>za",
+      ":'<,'>lua vim.lsp.buf.range_code_action()<CR>",
+      { desc = "Open code actions" }
+    )
+  end
+end
