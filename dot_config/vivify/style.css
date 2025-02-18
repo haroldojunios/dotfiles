@@ -1,0 +1,46 @@
+html {
+  font-size: 14pt;
+  text-align: justify;
+}
+
+h1 {
+  color: var(--mauve);
+}
+
+h2 {
+  color: var(--blue);
+}
+
+h3 {
+  color: var(--green);
+}
+
+h4 {
+  color: var(--peach);
+}
+
+h5 {
+  color: var(--yellow);
+}
+
+h6 {
+  color: var(--pink);
+}
+
+strong {
+  color: var(--lavender);
+}
+
+em {
+  color: var(--sapphire);
+}
+
+blockquote {
+  color: var(--mauve);
+  border-left: 0.33em solid var(--mauve);
+}
+
+img {
+  display: block;
+  margin: auto;
+}
