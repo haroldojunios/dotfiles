@@ -83,6 +83,11 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin%20Mocha.tmTheme"
 refreshPeriod = "168h"
 
+[".config/yazi/Catppuccin-mocha.tmTheme"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin%20Mocha.tmTheme"
+refreshPeriod = "168h"
+
 [".config/alacritty/catppuccin-mocha.toml"]
 type = "file"
 url = "https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml"
@@ -111,6 +116,11 @@ refreshPeriod = "168h"
 [".config/obs-studio/themes/Catppuccin_Mocha.ovt"]
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/obs/refs/heads/main/themes/Catppuccin_Mocha.ovt"
+refreshPeriod = "168h"
+
+[".config/yazi/theme.toml"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/yazi/refs/heads/main/themes/mocha/catppuccin-mocha-lavender.toml"
 refreshPeriod = "168h"
 # {{   end }}
 # {{ end }}
