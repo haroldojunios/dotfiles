@@ -150,21 +150,33 @@
   "cpu": {
     "interval": 1,
     "format": "󰻠{usage}% ",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
     "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   // Memory
   "memory": {
-    "interval": 10,
+    "interval": 1,
     "format": "󰍛{}% ",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
     "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   // Harddisc space used
   "disk": {
-    "interval": 30,
+    "interval": 1,
     "format": "󰋊{percentage_used}% ",
     "path": "/",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
     "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
@@ -184,11 +196,17 @@
   // Group Hardware
   "group/hardware": {
     "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-      "transition-left-to-right": false
-    },
-    "modules": ["custom/system", "disk", "cpu", "memory", "hyprland/language"]
+    // "drawer": {
+    //   "transition-duration": 300,
+    //   "transition-left-to-right": false
+    // },
+    "modules": [
+      // "custom/system",
+      "disk",
+      "cpu",
+      "memory"
+      // "hyprland/language"
+    ]
   },
 
   // Network

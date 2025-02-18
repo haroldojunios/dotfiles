@@ -28,10 +28,10 @@
   // Modules Right
   "modules-right": [
     "group/audio",
-    "battery",
     "network",
     "group/hardware",
-    "group/tools",
+    "battery",
+    // "group/tools",
     "tray",
     // "custom/ddcutil",
     "custom/notification",

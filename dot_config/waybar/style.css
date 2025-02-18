@@ -168,6 +168,7 @@ window#waybar.empty #window {
 /* #custom-appmenuicon, */
 #clock,
 #audio,
+#hardware,
 #network,
 #battery,
 #custom-appmenu,
@@ -201,6 +202,18 @@ window#waybar.empty #window {
   margin: 0px;
   padding: 0px;
   color: @lavender;
+}
+
+#disk.warning,
+#memory.warning,
+#cpu.warning {
+  color: @peach;
+}
+
+#disk.critical,
+#memory.critical,
+#cpu.critical {
+  color: @red;
 }
 
 #cava,
