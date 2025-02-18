@@ -1,5 +1,7 @@
 include catppuccin-mocha
 
+set default-bg rgba(24,24,37,1)
+
 set recolor "false"
 set recolor-keephue true
 
