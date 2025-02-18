@@ -36,7 +36,7 @@ return {
         toml = { "taplo" },
         typescript = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
-        yaml = { "yamlfmt" },
+        yaml = { "prettierd" },
         ["_"] = { "trim_newlines", "trim_whitespace" },
       },
       -- format_on_save = { timeout_ms = 500, lsp_fallback = true },

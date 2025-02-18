@@ -1,3 +1,5 @@
+os.setlocale("C")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -13,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("filetype")
+require("lazy").setup("plugins")
 require("keymaps")
 require("autocmds")
 require("user-commands")
-require("lazy").setup("plugins")
