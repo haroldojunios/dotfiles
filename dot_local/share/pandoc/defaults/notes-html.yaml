@@ -4,6 +4,8 @@ toc: true
 number-sections: true
 listings: true
 highlight-style: ${.}/mocha.theme
+html-math-method:
+  method: mathjax
 include-in-header:
   - ${.}/style.html
 variables:
