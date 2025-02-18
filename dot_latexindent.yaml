@@ -41,6 +41,8 @@ modifyLineBreaks:
       CommandStartsOnOwnLine: 3
     subsubsection:
       CommandStartsOnOwnLine: 3
+    input:
+      CommandStartsOnOwnLine: 1
     label:
       CommandStartsOnOwnLine: 1
     renewcommand:
