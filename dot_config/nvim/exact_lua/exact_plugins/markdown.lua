@@ -75,6 +75,22 @@ return {
     },
   },
   {
+    "jakewvincent/mkdnflow.nvim",
+    opts = {
+      to_do = {
+        symbols = { " ", "-", "x" },
+        update_parents = false,
+        not_started = " ",
+        in_progress = "-",
+        complete = "x",
+      },
+      mappings = {
+        MkdnEnter = { { "i", "v" }, "<CR>" },
+        MkdnCreateLinkFromClipboard = { { "n", "v" }, "<M-p>" },
+      },
+    },
+  },
+  {
     "3rd/image.nvim",
     build = false,
     ft = { "markdown", "quarto" },
