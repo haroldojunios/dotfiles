@@ -46,9 +46,9 @@ return {
         },
       },
       checkbox = {
-        unchecked = { icon = "🗴 " },
-        checked = { icon = "🗸 " },
-        -- custom = { todo = { rendered = "◯ " } },
+        unchecked = { icon = "󰄱 " },
+        checked = { icon = "󰄵 " },
+        custom = { todo = { rendered = "󰃰 " } },
       },
       code = {
         width = "block",
@@ -110,6 +110,7 @@ return {
   {
     "quarto-dev/quarto-nvim",
     ft = { "quarto" },
+    enabled = os.getenv("PREFIX") == nil,
     dependencies = {
       "jmbuhr/otter.nvim",
       "nvim-treesitter/nvim-treesitter",
