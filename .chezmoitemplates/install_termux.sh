@@ -23,6 +23,7 @@ packageList=(
   ffmpeg
   fish
   git
+  git-delta
   imagemagick
   jq
   lazygit
@@ -39,6 +40,7 @@ packageList=(
   nodejs-lts
   openjdk-21
   openssh
+  pandoc
   proot-distro
   python
   python-numpy
@@ -49,17 +51,23 @@ packageList=(
   rclone
   ripgrep
   rsync
+  ruff
   rust
   starship
   stylua
   termux-api
+  tinymist
   tmux
+  typst
   unzip
   wget
   which
+  yazi
   zip
+  zk
   zoxide
 )
+
 # desktop enviroment
 dePackageList=(
   # x11
