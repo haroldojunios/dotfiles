@@ -82,6 +82,8 @@ return {
               bg = utils.darken(colors.pink, 0.33),
             },
             RenderMarkdownDash = { fg = colors.lavender },
+            RenderMarkdownCancelled = { fg = colors.red },
+            RenderMarkdownInProgress = { fg = colors.blue },
           }
         end,
       })

@@ -69,12 +69,12 @@ if has_zk then
     "<Cmd>ZkNew { group = 'daily' }<CR>",
     { desc = "Create a new daily note" }
   )
-  -- Create a new daily note for tomorrow.
+  -- Create a new daily note for any date.
   map(
     "n",
     "<leader>zD",
-    "<Cmd>ZkNew { group = 'daily-tomorrow' }<CR>",
-    { desc = "Create a new daily note for tomorrow" }
+    "<Cmd>ZkNew { group = 'daily', date = vim.fn.input('Date: ') }<CR>",
+    { desc = "Create a new daily note for any date" }
   )
   -- Open notes.
   map(

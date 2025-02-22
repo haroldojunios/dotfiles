@@ -48,7 +48,19 @@ return {
       checkbox = {
         unchecked = { icon = "󰄱 " },
         checked = { icon = "󰄵 " },
-        custom = { todo = { rendered = "󰃰 " } },
+        custom = {
+          cancelled = {
+            raw = "[-]",
+            rendered = "󱋭 ",
+            highlight = "RenderMarkdownCancelled",
+            scope_highlight = "RenderMarkdownCancelledItem",
+          },
+          in_progress = {
+            raw = "[/]",
+            rendered = "󰃰 ",
+            highlight = "RenderMarkdownInProgress",
+          },
+        },
       },
       code = {
         width = "block",
@@ -78,10 +90,10 @@ return {
     "jakewvincent/mkdnflow.nvim",
     opts = {
       to_do = {
-        symbols = { " ", "-", "x" },
+        symbols = { " ", "/", "x" },
         update_parents = false,
         not_started = " ",
-        in_progress = "-",
+        in_progress = "/",
         complete = "x",
       },
       mappings = {
