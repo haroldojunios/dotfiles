@@ -50,6 +50,20 @@ return {
     config = true,
   },
   {
+    "echasnovski/mini.jump",
+    version = false,
+    config = true,
+  },
+  {
+    "echasnovski/mini.jump2d",
+    version = false,
+    opts = {
+      mappings = {
+        start_jumping = "<leader>fs",
+      },
+    },
+  },
+  {
     "echasnovski/mini.sessions",
     version = false,
     config = function()

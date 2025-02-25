@@ -36,7 +36,7 @@ opt.colorcolumn = "80"
 opt.cursorline = true
 
 -- use system clipboard
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 
 -- set splitting mode
 opt.splitbelow = true

@@ -92,9 +92,55 @@ return {
         },
       })
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+      vim.keymap.set(
+        "n",
+        "<C-p>",
+        builtin.find_files,
+        { desc = "Search files" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>ff",
+        builtin.find_files,
+        { desc = "Search files" }
+      )
+      vim.keymap.set(
+        "n",
+        "<C-f>",
+        builtin.live_grep,
+        { desc = "Search in files" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>fg",
+        builtin.live_grep,
+        { desc = "Search in files" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>fb",
+        builtin.buffers,
+        { desc = "Search buffers" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>fd",
+        builtin.lsp_document_symbols,
+        { desc = "Search document symbols" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>fw",
+        builtin.lsp_workspace_symbols,
+        { desc = "Search workspace symbols" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>fq",
+        builtin.quickfix,
+        { desc = "Open quickfix" }
+      )
+
       vim.api.nvim_create_autocmd(
         "FileType",
         { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] }
@@ -102,6 +148,7 @@ return {
 
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("notify")
+      require("telescope").load_extension("media_files")
     end,
   },
 }

@@ -105,12 +105,31 @@ if has_zk then
       { desc = "Open link" }
     )
     -- create the note in the same directory as the current buffer
-    map(
-      "n",
-      "<leader>zn",
-      "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>",
-      { desc = "Create new note" }
-    )
+    map("n", "<leader>zn", function()
+      local title = vim.fn.input("Title: ")
+      if title then
+        require("zk.commands").get("ZkNew")({
+          dir = vim.fn.expand("%:p:h"),
+          title = title,
+        })
+      end
+    end, { desc = "Create new note" })
+    -- create the note in the chosen directory as the current buffer
+    map("n", "<leader>zN", function()
+      vim.ui.input({
+        prompt = "Dir: ",
+        completion = "dir",
+      }, function(input)
+        local dir = input or vim.fn.expand("%:p:h")
+        local title = vim.fn.input("Title: ")
+        if title then
+          require("zk.commands").get("ZkNew")({
+            dir = dir,
+            title = title,
+          })
+        end
+      end)
+    end, { desc = "Create new note on chosen dir" })
     -- Open notes linking to the current buffer.
     map("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", { desc = "Open backlinks" })
     -- Open notes linked by the current buffer.

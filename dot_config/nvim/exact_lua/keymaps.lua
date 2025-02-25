@@ -44,12 +44,38 @@ map({ "n", "v" }, "<M-k>", "gk")
 -- exit insert mode with jk
 map("i", "jk", "<Esc>")
 
--- remove s keymap
+-- remove "s" keymap
 map({ "n", "v" }, "s", "<Nop>")
 
 -- paste on new line
-map("n", "<leader>p", ":pu<CR>")
-map("n", "<leader>P", ":pu!<CR>")
+map("n", "<leader>np", ":pu<CR>")
+map("n", "<leader>nP", ":pu!<CR>")
+map("n", "<leader>Np", ":pu +<CR>")
+map("n", "<leader>NP", ":pu! +<CR>")
+
+-- code actions
+map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>")
+
+-- center screen on motion
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-f>", "<C-f>zz")
+map("n", "<C-b>", "<C-b>zz")
+
+-- copy line with Y
+map("n", "Y", "yy")
+
+-- interact with system clipboard
+map({ "n", "v" }, "<leader>y", '"+y')
+map({ "n", "v" }, "<leader>Y", '"+yy')
+map({ "n", "v" }, "<leader>p", '"+p')
+map({ "n", "v" }, "<leader>P", '"+P')
+
+-- sync nvim clipboard with system clipboard
+map("n", "<leader>sy", ':let @+=@"<CR>')
+
+-- sync system clipboard with nvim clipboard
+map("n", "<leader>sp", ':let @"=@+<CR>')
 
 local has_wk, wk = pcall(require, "which-key")
 

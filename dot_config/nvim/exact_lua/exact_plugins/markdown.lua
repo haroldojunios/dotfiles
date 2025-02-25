@@ -99,6 +99,8 @@ return {
       mappings = {
         MkdnEnter = { { "i", "v" }, "<CR>" },
         MkdnCreateLinkFromClipboard = { { "n", "v" }, "<M-p>" },
+        MkdnFoldSection = { "n", "<leader>fo" },
+        MkdnUnfoldSection = { "n", "<leader>Fo" },
       },
     },
   },

@@ -7,5 +7,7 @@ return {
   },
   opts = {
     enabled = false,
+    noautocmd = true,
+    lockmarks = true,
   },
 }
