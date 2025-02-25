@@ -1,4 +1,4 @@
-from: markdown+mark+wikilinks_title_after_pipe+task_lists
+from: markdown+mark
 standalone: true
 toc: true
 number-sections: true
