@@ -74,13 +74,24 @@ dePackageList=(
   x11-repo
   termux-x11-nightly
   tigervnc
-  # xfce
-  xfce4
-  xfce4-screenshooter
-  xfce4-terminal
-  xfce4-whiskermenu-plugin
-  # other gui apps/plugins
+  # lxqt
+  lximage-qt
+  lxqt-archiver
+  lxqt-config
+  lxqt-globalkeys
+  lxqt-notificationd
+  lxqt-openssh-askpass
+  lxqt-panel
+  lxqt-qtplugin
+  lxqt-runner
+  lxqt-session
+  lxqt-themes
+  obconf-qt
+  pavucontrol-qt
+  # gui apps/plugins
   keepassxc
+  pcmanfm-qt
+  qterminal
 )
 
 {{ if .installDE }}
