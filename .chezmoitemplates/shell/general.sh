@@ -89,4 +89,6 @@ alias sudo='sudo --preserve-env=PATH'
 command -v nvim >/dev/null && alias n='nvim'
 alias nnn='nnn -aeP p'
 alias esp-idf='source /opt/esp-idf/export.fish'
-alias t='tmux at &>/dev/null || tmux'
+alias tm='tmux at &>/dev/null || tmux'
+alias t=task
+alias tt="taskwarrior-tui"

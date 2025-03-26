@@ -355,6 +355,9 @@ packageList=(
   starship
   stderred-git
   sysfsutils
+  task
+  taskchampion-sync-server
+  taskwarrior-tui
   texlive-bibtexextra
   texlive-bin
   texlive-binextra

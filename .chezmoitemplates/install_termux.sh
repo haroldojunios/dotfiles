@@ -55,6 +55,7 @@ packageList=(
   rust
   starship
   stylua
+  taskwarrior
   termux-api
   tinymist
   tmux
