@@ -90,5 +90,5 @@ command -v nvim >/dev/null && alias n='nvim'
 alias nnn='nnn -aeP p'
 alias esp-idf='source /opt/esp-idf/export.fish'
 alias tm='tmux at &>/dev/null || tmux'
-alias t='task sync >/dev/null; task'
+alias t='task rc.gc=off sync >/dev/null; task'
 alias tt="taskwarrior-tui"
