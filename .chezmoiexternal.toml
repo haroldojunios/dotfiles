@@ -105,7 +105,7 @@ refreshPeriod = "168h"
 
 [".config/zathura/catppuccin-mocha"]
 type = "file"
-url = "https://raw.githubusercontent.com/catppuccin/zathura/refs/heads/main/src/catppuccin-mocha"
+url = "https://raw.githubusercontent.com/catppuccin/zathura/refs/heads/main/themes/catppuccin-mocha"
 refreshPeriod = "168h"
 
 [".config/obs-studio/themes/Catppuccin.obt"]
@@ -121,7 +121,7 @@ refreshPeriod = "168h"
 [".config/yazi/theme.toml"]
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/yazi/refs/heads/main/themes/mocha/catppuccin-mocha-lavender.toml"
-refreshPeriod = "168h"
+refreshPeriod = "1h"
 # {{   end }}
 # {{ end }}
 

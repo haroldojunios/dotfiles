@@ -38,5 +38,5 @@ fi
 if ! [ -f /etc/sddm.conf ]; then
   sudo touch /etc/sddm.conf
 fi
-# sudo crudini --set /etc/sddm.conf Theme Current catppuccin-mocha
+# sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
 {{ end }}

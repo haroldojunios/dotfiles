@@ -189,6 +189,32 @@ if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
   sudo rm -f /etc/xdg/autostart/org.kde.discover.notifier.desktop
 fi
 
+if ! [ -f /etc/polkit-1/rules.d/10-udisks2.rules ]; then
+  sudo bash -c "cat >/etc/polkit-1/rules.d/10-udisks2.rules" <<EOF
+// See the polkit(8) man page for more information
+// about configuring polkit.
+
+// Allow udisks2 to mount devices without authentication
+// for users in the "wheel" group.
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+         action.id == "org.freedesktop.udisks2.filesystem-mount") &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+fi
+
+if ! [ -f /usr/share/thumbnailers/imagemagick-pdf.thumbnailer ]; then
+  sudo bash -c "cat >/usr/share/thumbnailers/imagemagick-pdf.thumbnailer" <<EOF
+[Thumbnailer Entry]
+TryExec=convert
+Exec=convert %i[0] -background "#FFFFFF" -flatten -thumbnail %s %o
+MimeType=application/pdf;application/x-pdf;image/pdf;
+EOF
+fi
+
 # nvidia
 if command -v nvidia-smi &>/dev/null; then
   sudo bash -c "cat >/etc/modprobe.d/nvidia-i2c.conf" <<EOF

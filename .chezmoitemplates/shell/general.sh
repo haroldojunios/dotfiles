@@ -19,11 +19,15 @@ alias ......='cd ../../../../..'
 alias cat='bat --style full'
 alias ct='cat'
 
+# cp mv
+command -v advcp >/dev/null && alias cp='advcp -g'
+command -v advmv >/dev/null && alias mv='advmv -g'
+
 # compression
 alias 7zc='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -aoa'
 alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 -aoa'
 alias gz='gzip -kv'
-alias t='tar -acf '
+alias ta='tar -acf '
 alias ut='tar -xvf '
 
 # find
@@ -90,5 +94,3 @@ command -v nvim >/dev/null && alias n='nvim'
 alias nnn='nnn -aeP p'
 alias esp-idf='source /opt/esp-idf/export.fish'
 alias tm='tmux at &>/dev/null || tmux'
-alias t='task rc.gc=off sync >/dev/null; task'
-alias tt="taskwarrior-tui"
