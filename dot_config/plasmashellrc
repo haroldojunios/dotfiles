@@ -17,6 +17,46 @@ detailViewIconSize=16
 2 screens: Height=511
 2 screens: Width=419
 
+[PlasmaTransientsConfig][Applets][143]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[PlasmaTransientsConfig][Applets][157]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[PlasmaTransientsConfig][Applets][177]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[PlasmaTransientsConfig][Applets][178]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[PlasmaTransientsConfig][Applets][179]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[PlasmaTransientsConfig][Applets][180]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[PlasmaTransientsConfig][Applets][181]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[PlasmaTransientsConfig][Applets][22]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[PlasmaTransientsConfig][Applets][57]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[PlasmaTransientsConfig][Applets][93]
+immutability=1
+plugin=org.kde.plasma.battery
+
 [PlasmaViews][Panel 120]
 alignment=132
 panelOpacity=2

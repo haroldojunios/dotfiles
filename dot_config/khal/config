@@ -1,16 +1,16 @@
 [calendars]
 
 [[personal]]
-path = ~/.calendars/Personal/haroldojunios@gmail.com
+path = ~/.calendars/personal/haroldojunios@gmail.com
 color = dark blue
 
 [[holidays]]
-path = ~/.calendars/Personal/e1q2sojic5t6ir39c5n26q3fdhkm8obp81jn4rrle0n7cbj3c5m6arj4c5p2sprfdtjmop9ecdnmq@virtual
+path = ~/.calendars/personal/e1q2sojic5t6ir39c5n26q3fdhkm8obp81jn4rrle0n7cbj3c5m6arj4c5p2sprfdtjmop9ecdnmq@virtual
 color = dark red
 readonly = True
 
 [[birthdays]]
-path = ~/.calendars/Personal/c5i68sj5edpm4rrfdchm6rreehgm6t3j81jn4rrle0n7cbj3c5m6arj4c5p2sprfdtjmop9ecdnmq@virtual
+path = ~/.calendars/personal/c5i68sj5edpm4rrfdchm6rreehgm6t3j81jn4rrle0n7cbj3c5m6arj4c5p2sprfdtjmop9ecdnmq@virtual
 color = yellow
 type = birthdays
 readonly = True

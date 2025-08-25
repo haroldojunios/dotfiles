@@ -1,4 +1,5 @@
 from: markdown+mark
+to: pdf
 pdf-engine: xelatex
 toc: true
 number-sections: true

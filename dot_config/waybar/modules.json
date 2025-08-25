@@ -24,7 +24,7 @@
     "sort-by-number": true,
     "persistent-workspaces": {
       "DP-1": [1, 4, 5],
-      "DP-2": [2, 3, 6]
+      "HDMI-A-1": [2, 3, 6]
     }
   },
 
@@ -181,7 +181,8 @@
   },
 
   "hyprland/language": {
-    "format": "󰌌{short}"
+    "format": "󰌌{short}({variant})",
+    "keyboard-name": "sino-wealth-gaming-keyboard"
   },
 
   // Idle inhibitor

@@ -1,6 +1,4 @@
 #!/bin/bash
 
-rm -rf /tmp/*
-
-tmux kill-server
+tmux kill-server &>/dev/null
 systemctl poweroff

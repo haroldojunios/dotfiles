@@ -127,6 +127,16 @@ refreshPeriod = "168h"
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/mangohud/refs/heads/main/themes/mocha/MangoHud.conf"
 refreshPeriod = "168h"
+
+[".config/joplin-desktop/userchrome.css"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/joplin/refs/heads/main/src/mocha/userchrome.css"
+refreshPeriod = "168h"
+
+[".config/joplin-desktop/userstyle.css"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/joplin/refs/heads/main/src/mocha/userstyle.css"
+refreshPeriod = "168h"
 # {{   end }}
 # {{ end }}
 

@@ -5,12 +5,11 @@
 # <(printf "%s" "$inputData")
 #- /TWRP
 RSYNC_FILTERS="
+- .Trash
 - .thumbnails
 - .tmfs
-- .Trash
 - .trashed*
 - /.*
-- /amap
 - /AmazFit_WF
 - /Android/*
 - /Android/media/*
@@ -19,6 +18,24 @@ RSYNC_FILTERS="
 - /Android/media/com.whatsapp/WhatsApp/.Thumbs
 - /Android/media/com.whatsapp/WhatsApp/.trash
 - /Android/media/com.whatsapp/WhatsApp/Media/.Statuses
+- /DCIM/Cam/
+- /Documents/PC
+- /Documents/books
+- /Download/Flash
+- /Download/PC
+- /Download/torrent
+- /MIUI/*
+- /MiVideoGlobal
+- /Music
+- /Pictures/Cam
+- /ReadChan
+- /Tencent
+- /WhatsApp/.Shared
+- /WhatsApp/.StickerThumbs
+- /WhatsApp/.Thumbs
+- /WhatsApp/.trash
+- /WhatsApp/Media/.Statuses
+- /amap
 - /aray
 - /backups
 - /browser
@@ -27,31 +44,14 @@ RSYNC_FILTERS="
 - /com.mercadolibre
 - /com.mercadopagowallet
 - /com.northpark.drinkwater
-- /DCIM/Cam/
 - /dctp
 - /did
-- /documents/books
-- /Documents/books
 - /documents/PC
-- /Documents/PC
-- /Download/Flash
-- /Download/PC
-- /Download/PC
-- /Download/torrent
+- /documents/books
 - /iciba
-- /MIUI/*
-- /MiVideoGlobal
-- /Music
-- /ReadChan
 - /systemui
 - /tencent
-- /Tencent
 - /voip-data
-- /WhatsApp/.Shared
-- /WhatsApp/.StickerThumbs
-- /WhatsApp/.Thumbs
-- /WhatsApp/.trash
-- /WhatsApp/Media/.Statuses
 - /zman
 + /Android/media/
 + /Android/media/com.whatsapp/
@@ -60,19 +60,22 @@ RSYNC_FILTERS="
 # - /Tachiyomi
 
 rsync_all() {
-  RS_OPTS="-amyvhPL --inplace --info=progress2,name --no-inc-recursive"
+  RS_OPTS=("-amyvhPL" "--omit-dir-times" "--inplace" "--info=progress2,name" "--no-inc-recursive")
   ssh celular "termux-wake-lock" || completed
   # ssh -t celular "sudo ~/bin/rsync_dbs"
   # ssh celular "remove_wpp_dbs"
   # ssh celular "remove_old_bak"
   # ssh celular "rsync_ig"
 
-  rsync ${RS_OPTS} --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /media/data/Android/
+  [ -d /media/data/Android/ ] &&
+    rsync "${RS_OPTS[@]}" --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /media/data/Android/
+  rsync "${RS_OPTS[@]}" --delete-after --exclude={"*.ini",".thumbnails","Playlists","Zotify Music"} ~/Music/ celular:/sdcard/Music # music
+  fix-mpd-playlists && rsync "${RS_OPTS[@]}" ~/.local/share/playlists/ celular:/sdcard/Music/Playlists                             # playlists
+  ssh celular "termux-media-scan -r storage/music"                                                                                 # rescan music
   # [ ! -e ~/Downloads/Celular/ ] ||
   #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
   #   rsync $RS_OPTS --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
   #   rsync $RS_OPTS --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                            # books
-  #   rsync $RS_OPTS --exclude={"*.ini",".thumbnails"} ~/Music/ celular:/sdcard/Music/                                              # music
   # # rsync $RS_OPTS --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                   # pictures
   # # rsync $RS_OPTS --include={"*/","*.mp4","*.mkv"} --exclude="*" ~/Downloads/irc/ celular:/sdcard/Movies &&  # episodes
   completed

@@ -12,6 +12,7 @@ set -x BAT_STYLE 'numbers,changes,grid,header-filename,header-filesize'
 set -x BAT_THEME 'Catppuccin Mocha'
 set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
 set -x CRYPTOGRAPHY_OPENSSL_NO_LEGACY 1
+set -x GEM_HOME ~/.local/share/gems
 
 # nnn
 set -l BLK 03
@@ -72,11 +73,6 @@ if test "$TERM" = linux
     end
 end
 
-## Export variable need for qt-theme
-if type -q qtile
-    set -x QT_QPA_PLATFORMTHEME qt5ct
-end
-
 # Set settings for https://github.com/franciscolourenco/done
 set -x __done_min_cmd_duration 10000
 set -x __done_notification_urgency_level low
@@ -98,7 +94,10 @@ set -l paths \
     ~/bin \
     ~/.cargo/bin \
     ~/.local/bin \
-    ~/.local/bin/lastools/bin
+    ~/.local/bin/lastools/bin \
+    ~/.cabal/bin \
+    ~/.ghcup/bin \
+    $GEM_HOME/bin
 
 for path in $paths
     if test -d $path
@@ -181,7 +180,7 @@ if status --is-interactive && test -z "$VSCODE" && begin
         test -z "$TMUX" || test $(tmux display -p '#{pane_index}') -eq 1
     end
     if type -q fastfetch
-        fastfetch --load-config neofetch
+        fastfetch --config neofetch
     else if type -q neofetch
         neofetch
     else if type -q wslfetch

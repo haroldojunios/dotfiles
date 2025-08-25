@@ -24,11 +24,11 @@
     --bg-primary: var(--base);
     --bg-secondary: var(--surface0);
     --bg-code: var(--surface1);
-    --bg-mark: rgba(243, 139, 168, 0.8);
+    --bg-mark: var(--lavender);
 
     --text-primary: var(--text);
-    --text-secondary: var(--subtext0);
-    --text-link: var(--sky);
+    --text-secondary: var(--subtext0); /* #7d7d7d from foot notes */
+    --text-link: var(--blue);
     --text-mark: var(--base);
 
     --border-regular: #353535;
@@ -103,6 +103,15 @@
 
   em {
     color: var(--sapphire);
+  }
+
+  mark {
+    background-color: var(--bg-mark);
+    color: var(--text-mark);
+  }
+
+  mark em {
+    color: var(--bg-primary);
   }
 
   #TOC a,

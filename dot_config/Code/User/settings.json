@@ -35,7 +35,7 @@
     "editor.formatOnType": false
   },
   "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[matlab]": {
     "files.encoding": "windows1252"

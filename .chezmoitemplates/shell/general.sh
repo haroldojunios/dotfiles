@@ -1,12 +1,12 @@
 # shellcheck shell=bash
 # ls
-alias ls='eza -a --color=always --group-directories-first --icons'                       # preferred listing
-alias l='ls'                                                                             # alternative
-alias la='eza -a --color=always --group-directories-first --icons'                       # all files and dirs
-alias ll='eza -a -l --total-size --color=always --group-directories-first --icons'       # long format
-alias lg='eza -a -l --git --total-size --color=always --group-directories-first --icons' # long format w/ gitignore
-alias lt='eza -aT -I .git --color=always --group-directories-first --icons'              # tree listing
-alias l.="eza -a | egrep '^\.'"                                                          # show only dotfiles
+alias ls='eza -a --color=always --group-directories-first --icons'                     # preferred listing
+alias l='ls'                                                                           # alternative
+alias la='eza -a --color=always --group-directories-first --icons'                     # all files and dirs
+alias ll='eza -alb --total-size --color=always --group-directories-first --icons'      # long format
+alias lg='eza -al --git --total-size --color=always --group-directories-first --icons' # long format w/ gitignore
+alias lt='eza -aTI .git --color=always --group-directories-first --icons'              # tree listing
+alias l.="eza -a | egrep '^\.'"                                                        # show only dotfiles
 
 # cd
 alias ..='cd ..'
@@ -20,8 +20,8 @@ alias cat='bat --style full'
 alias ct='cat'
 
 # cp mv
-command -v advcp >/dev/null && alias cp='advcp -g'
-command -v advmv >/dev/null && alias mv='advmv -g'
+command -v advcp >/dev/null && alias cp='advcp -gr'
+command -v advmv >/dev/null && alias mv='advmv -gr'
 
 # compression
 alias 7zc='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -aoa'
@@ -50,7 +50,6 @@ alias fc='fc-cache -f -v'
 alias search_text='sudo grep -i -a -B1000 -A1000'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection c -o'
-alias cp='cp -r'
 alias datenow='date "+%Y%m%d%H%M%S"'
 alias now='date "+%s"'
 alias cformat='clang-format -fallback-style="{BasedOnStyle: Google, AlignAfterOpenBracket: DontAlign,SpacesBeforeTrailingComments: 1,BreakBeforeBraces: Allman,BreakStringLiterals: true,ColumnLimit: 80, MaxEmptyLinesToKeep: 1,ContinuationIndentWidth: 2,AlwaysBreakBeforeMultilineStrings: false,AlignEscapedNewlines: Left,AlignConsecutiveMacros: AcrossComments,AllowAllParametersOfDeclarationOnNextLine: false,AllowShortLambdasOnASingleLine: true,BinPackArguments: true,BinPackParameters: true,BreakConstructorInitializers: AfterColon,IncludeBlocks: Regroup,AllowShortFunctionsOnASingleLine: None}" -i **/*.{c,h}'

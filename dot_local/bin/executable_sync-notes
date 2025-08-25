@@ -14,17 +14,20 @@ if command -v termux-setup-storage &>/dev/null; then
 fi
 
 if ! [ -d "${path}" ]; then
-  git -C "$(dirname ${path})" clone git@github.com:haroldojunios/notes.git
+  git -C "$(dirname "${path}")" clone git@github.com:haroldojunios/notes.git
 else
   cd "${path}"
-  if git pull --rebase --autostash |& tee /dev/tty | grep -q 'Applying autostash resulted in conflicts'; then
+  if git pull --rebase --autostash |& tee /dev/tty |
+    grep -q -e 'Applying autostash resulted in conflicts' \
+      -e 'files would be overwritten by merge'; then
     echo "Git conflicts detected" >&2
     exit 1
   fi
   if [ -n "$(git status --porcelain)" ]; then
-    command -v prettier &>/dev/null && prettier **/*.md --write &>/dev/null
+    command -v prettier &>/dev/null && prettier ./**/*.md --write &>/dev/null
     git add .
     git commit -m "$(date --utc -Iseconds)"
+    git maintenance run &>/dev/null
     git push
   fi
 fi

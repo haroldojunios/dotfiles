@@ -22,7 +22,7 @@
   --bg-primary: var(--base);
   --bg-secondary: var(--surface0);
   --bg-code: var(--surface1);
-  --bg-mark: rgba(243, 139, 168, 0.8);
+  --bg-mark: var(--lavender);
 
   --text-primary: var(--text);
   --text-secondary: var(--subtext0); /* #7d7d7d from foot notes */

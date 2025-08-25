@@ -1,10 +1,12 @@
 original_date: yes
 paths:
   singleton: Non-Album/$artist%if{$singleton_path,/, - }$title
-  default: $albumartist/$year - $album%aunique{} $atypes/%if{$multidisc,$disc_name/}$track
-    - $title
-  comp: $albumartist/$year - $album%aunique{} $atypes/%if{$multidisc,$disc_name/}$track
-    - $title
+  default:
+    $albumartist/$year - $album%aunique{}
+    $atypes/%if{$multidisc,$disc_name/}$track - $title
+  comp:
+    $albumartist/$year - $album%aunique{}
+    $atypes/%if{$multidisc,$disc_name/}$track - $title
   # comp: Various Artists/$year - $album%aunique{} $atypes/$track - $title
   albumtype:soundtrack: Soundtracks/$year - $album $atypes/$track $title
 import:
@@ -16,8 +18,9 @@ ui:
   color: yes
 item_fields:
   multidisc: 1 if disctotal > 1 else 0
-  disc_name: "u'Disc %02i - %s' % (disc, disctitle) if disctitle else u'Disc %02i'
-    % (disc)"
+  disc_name:
+    "u'Disc %02i - %s' % (disc, disctitle) if disctitle else u'Disc %02i' %
+    (disc)"
 musicbrainz:
   genres: yes
   external_ids:
@@ -36,7 +39,6 @@ plugins:
   - fetchart
   - fish
   - fromfilename
-  - ftintitle
   - fuzzy
   - ihate
   - info
@@ -129,15 +131,15 @@ smartplaylist:
     - name: Pagode.m3u
       query: genre:pagode
     - name: Samba e pagode.m3u
-      query: ['genre:samba', 'genre:pagode']
+      query: ["genre:samba", "genre:pagode"]
     - name: Academia.m3u
-      query: 'bpm:160.. mood_aggressive:0.6..'
+      query: "bpm:160.. mood_aggressive:0.6.."
     - name: Happy.m3u
-      query: 'mood_happy:0.8..'
+      query: "mood_happy:0.8.."
     - name: Sad.m3u
-      query: 'mood_sad:0.8..'
+      query: "mood_sad:0.8.."
     - name: Relaxed.m3u
-      query: 'mood_relaxed:0.8..'
+      query: "mood_relaxed:0.8.."
 lyrics:
   auto: no
   synced: yes

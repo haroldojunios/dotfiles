@@ -3,7 +3,9 @@ data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
 include dark-256.theme
 uda.priority.values=H,M,,L
-rc.dateformat=Y-M-DTH:N:S
+dateformat=Y-M-DTH:N:S
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due,until.remaining,description,urgency
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 sync.server.client_id=1ac7e8ad-7e8d-4823-bcfe-23ed1faa9492
 sync.encryption_secret=Dyw3lQd2596Z8cb7MHRmNxCCRSkt0Enw
 sync.server.url=http:\/\/192.168.0.21:53589
