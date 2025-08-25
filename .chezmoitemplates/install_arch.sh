@@ -79,38 +79,15 @@ dePackageList=(
   # x11 / wayland / login manager
   sddm
   sddm-kcm
+  sddm-astronaut-theme
   xdotool
   xorg-apps
   xorg-server
   xorg-xwayland
   wayland-protocols
-  # plasma
-  bluedevil
+  # bluetooth
   bluez
   bluez-utils
-  gtk3-nocsd
-  kde-cli-tools
-  kdeplasma-addons
-  kgamma
-  kio-admin
-  kscreen
-  kwallet-pam
-  kwin-effects-forceblur
-  plasma-browser-integration
-  plasma-desktop
-  plasma-disks
-  plasma-firewall
-  plasma-framework5
-  plasma-integration
-  plasma-nm
-  plasma-pa
-  plasma-systemmonitor
-  plasma-thunderbolt
-  plasma-workspace
-  powerdevil
-  purpose5
-  xdg-desktop-portal-gtk
-  xdg-desktop-portal-kde
   # hyprland
   hyprland
   hyprcursor
@@ -123,34 +100,24 @@ dePackageList=(
   qt5-wayland
   qt6-wayland
   xdg-desktop-portal-hyprland
+  xdg-desktop-portal-gtk
   xwaylandvideobridge
-  # kde gui apps
-  ark
-  dolphin
-  dolphin-plugins
-  ffmpegthumbs
-  filelight
-  gwenview
-  kalgebra
-  kate
-  kcalc
-  kdeconnect
-  kdegraphics-thumbnailers
-  kdenetwork-filesharing
-  kdialog
-  kfind
-  kimageformats
-  kimageformats5
-  kjournald
-  kmix
-  kolourpaint
-  konsole
-  krdc
-  ksystemlog
-  okular
-  partitionmanager
-  spectacle
-  # other gui apps/plugins
+  # lxqt
+  lxqt-admin
+  lxqt-config
+  lxqt-globalkeys
+  lxqt-notificationd
+  lxqt-panel
+  lxqt-policykit
+  lxqt-powermanagement
+  lxqt-qtplugin
+  lxqt-runner
+  lxqt-session
+  lxqt-sudo
+  obconf-qt
+  openbox
+  xdg-desktop-portal-lxqt
+  # gui apps/plugins
   alacritty
   archlinux-xdg-menu
   blueman
@@ -158,28 +125,54 @@ dePackageList=(
   chromium
   cliphist
   dex
+  dolphin
+  dolphin-plugins
+  ffmpegthumbs
+  filelight
   filezilla
   fuzzel
   gimp
+  gnome-keyring
   gparted
   grim
+  gtk3-nocsd
   gvfs
+  gvfs-mtp
+  gvfs-smb
+  gvfs-wsdd
+  gwenview
   inkscape
   jdownloader2
+  kcalc
+  kdeconnect
+  kdegraphics-thumbnailers # dolphin
+  kdenetwork-filesharing   # dolphin
   keepassxc
   keyd
+  kfind
+  kimageformats
+  kimageformats5
   kitty
+  kjournald
+  krdc
+  ksystemlog
+  lxqt-archiver
   mailcap
   obs-studio
+  okular
   onlyoffice-bin
   opentabletdriver
+  partitionmanager
   pavucontrol
+  pcmanfm-qt
   pdfarranger
   pomodorolm-bin
+  purpose5 # sharing to smartphone via KDE Connect
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
   qt6-svg
+  screengrab
   slurp
   stremio
   swappy
@@ -198,13 +191,6 @@ dePackageList=(
   xournalpp
   zathura-pdf-mupdf
   zathura-ps
-)
-
-# applets
-appletsPackageList=(
-  plasma6-applets-netspeed
-  plasma6-applets-window-buttons
-  plasma6-applets-window-title
 )
 
 packageList=(
@@ -227,7 +213,6 @@ packageList=(
   cronie
   crudini
   curl
-  ddcci-driver-linux-dkms
   ddcutil
   docker
   docker-buildx
@@ -297,6 +282,7 @@ packageList=(
   opus-tools
   opustags
   os-prober
+  otf-latinmodern-math
   p7zip
   pacman-contrib
   pandoc
@@ -341,43 +327,20 @@ packageList=(
   python-requests
   python-scipy
   python-tqdm
-  python-xdg  # beets
+  python-xdg  # beets / WM
   python-yams # mpd: last fm scrobbler
-  qbittorrent-nox
   qutebrowser
+  rar
   rclone
   reflector
   ripgrep
-  ruff
-  shfmt
   simple-mtpfs
   sshfs
   starship
   stderred-git
   sysfsutils
-  task
-  taskchampion-sync-server
-  taskwarrior-tui
-  texlive-bibtexextra
-  texlive-bin
-  texlive-binextra
-  texlive-fontutils
-  texlive-langportuguese
-  texlive-latexextra
-  texlive-mathscience
-  texlive-pictures
-  texlive-plaingeneric
-  texlive-pstricks
-  texlive-publishers
-  texlive-science
-  texlive-xetex
-  tinymist # typst lsp
   tmux
-  tree-sitter-cli
-  typst
-  typstyle-bin # typst formatter
   ufw
-  unrar
   unzip
   usbutils
   vdirsyncer
@@ -395,6 +358,43 @@ packageList=(
   zk
   zoxide
   zram-generator
+  # language servers and tools
+  clang
+  cmake-format
+  eslint_d
+  fixjson
+  hadolint-bin
+  ltex-ls-plus-bin
+  lua-language-server
+  markdownlint
+  markdownlint-cli2
+  mypy
+  prettierd
+  ruff
+  shellcheck
+  shfmt
+  sqlfmt-bin
+  stylua
+  taplo-cli
+  texlive-bibtexextra
+  texlive-bin
+  texlive-binextra
+  texlive-fontutils
+  texlive-langportuguese
+  texlive-latexextra
+  texlive-mathscience
+  texlive-pictures
+  texlive-plaingeneric
+  texlive-pstricks
+  texlive-publishers
+  texlive-science
+  texlive-xetex
+  tinymist # typst lsp
+  tree-sitter-cli
+  typst
+  typstyle-bin # typst formatter
+  yaml-language-server
+  yamlfmt
 )
 
 qgisPackageList=(
@@ -409,7 +409,6 @@ qgisPackageList=(
 packageList=(
   "${packageList[@]}"
   "${dePackageList[@]}"
-  "${appletsPackageList[@]}"
   "${qgisPackageList[@]}"
 )
 
@@ -432,8 +431,9 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
     libxnvctrl
     mesa
     mesa-vdpau
+    nvidia-container-toolkit
     nvidia-utils
-    opencl-clover-mesa
+    opencl-mesa
     opencl-nvidia
   )
 fi
