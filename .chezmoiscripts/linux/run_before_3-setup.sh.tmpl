@@ -104,29 +104,6 @@ EOF
   fi
 fi
 
-if ! grep -q 'ENV{UDISKS_FILESYSTEM_SHARED}="1"' /etc/udev/rules.d/99-udisks2.rules; then
-  sudo bash -c "cat >/etc/udev/rules.d/99-udisks2.rules" <<EOF
-ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
-EOF
-fi
-
-if ! [ -f /etc/tmpfiles.d/media.conf ]; then
-  sudo bash -c "cat >/etc/tmpfiles.d/media.conf" <<EOF
-D /media 0755 root root 0 -
-EOF
-fi
-
-if command -v crudini &>/dev/null; then
-  sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress=zstd:1"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:3"
-
-  sudo crudini --set /etc/bluetooth/main.conf "General" "Experimental" "true"
-fi
-
 if command -v sensors-detect &>/dev/null && grep -qi 'amd' /proc/cpuinfo && ! [ -f "/etc/modprobe.d/it87.conf" ]; then
   if ! [ -d "/var/lib/dkms/it87" ]; then
     git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/frankcrawford/it87.git
@@ -180,6 +157,23 @@ D /media 0755 root root 0 -
 EOF
 fi
 
+if ! grep -q 'ENV{UDISKS_FILESYSTEM_SHARED}="1"' /etc/udev/rules.d/99-udisks2.rules; then
+  sudo bash -c "cat >/etc/udev/rules.d/99-udisks2.rules" <<EOF
+ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+EOF
+fi
+
+if command -v crudini &>/dev/null; then
+  sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:3"
+
+  sudo crudini --set /etc/bluetooth/main.conf "General" "Experimental" "true"
+fi
+
 if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" ]; then
   mkdir -p "${HOME}/.config/rclone"
   sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
@@ -202,6 +196,36 @@ polkit.addRule(function(action, subject) {
         subject.isInGroup("wheel")) {
         return polkit.Result.YES;
     }
+});
+EOF
+fi
+
+if ! [ -f /etc/polkit-1/rules.d/50-udiskie.rules ]; then
+  sudo bash -c "cat >/etc/polkit-1/rules.d/50-udiskie.rules" <<EOF
+polkit.addRule(function(action, subject) {
+  var YES = polkit.Result.YES;
+  var permission = {
+    // required for udisks1:
+    "org.freedesktop.udisks.filesystem-mount": YES,
+    "org.freedesktop.udisks.luks-unlock": YES,
+    "org.freedesktop.udisks.drive-eject": YES,
+    "org.freedesktop.udisks.drive-detach": YES,
+    // required for udisks2:
+    "org.freedesktop.udisks2.filesystem-mount": YES,
+    "org.freedesktop.udisks2.encrypted-unlock": YES,
+    "org.freedesktop.udisks2.eject-media": YES,
+    "org.freedesktop.udisks2.power-off-drive": YES,
+    // required for udisks2 if using udiskie from another seat (e.g. systemd):
+    "org.freedesktop.udisks2.filesystem-mount-other-seat": YES,
+    "org.freedesktop.udisks2.filesystem-unmount-others": YES,
+    "org.freedesktop.udisks2.encrypted-unlock-other-seat": YES,
+    "org.freedesktop.udisks2.encrypted-unlock-system": YES,
+    "org.freedesktop.udisks2.eject-media-other-seat": YES,
+    "org.freedesktop.udisks2.power-off-drive-other-seat": YES
+  };
+  if (subject.isInGroup("storage")) {
+    return permission[action.id];
+  }
 });
 EOF
 fi
@@ -230,6 +254,18 @@ EOF
     echo "MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)" | sudo tee -a "/etc/mkinitcpio.conf" &>/dev/null
   fi
 fi
+
+if command -v nvidia-ctk &>/dev/null && command -v docker &>/dev/null && ! [ -f /etc/docker/daemon.json ]; then
+  sudo nvidia-ctk runtime configure --runtime=docker
+  sudo systemctl restart docker
+fi
+
+# groups
+for group in adm log storage i2c audio; do
+  if id -nG "$USER" | grep -qvw "$group"; then
+    sudo usermod -aG "$group" "$USER"
+  fi
+done
 
 # {{   else if .isWSL }}
 if ! [ -f "/etc/sudoers.d/service" ]; then
