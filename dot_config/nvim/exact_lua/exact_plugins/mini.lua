@@ -27,7 +27,14 @@ return {
   {
     "echasnovski/mini.surround",
     version = false,
-    config = true,
+    opts = {
+      custom_surroundings = {
+        ["“"] = {
+          input = { "%“().-()%”" },
+          output = { left = "“", right = "”" },
+        },
+      },
+    },
   },
   {
     "echasnovski/mini.ai",

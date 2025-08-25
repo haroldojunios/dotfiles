@@ -32,6 +32,9 @@ opt.relativenumber = true
 -- enable color column
 opt.colorcolumn = "80"
 
+-- increase scrollback
+opt.scrollback = 20000
+
 -- enable cursor line
 opt.cursorline = true
 
@@ -80,6 +83,9 @@ opt.listchars = {
 
 -- set inccommand to split
 opt.inccommand = "split"
+
+-- set Mouse Event for bufferline hover
+opt.mousemoveevent = true
 
 -- disable swapfile and save undo files
 opt.swapfile = false

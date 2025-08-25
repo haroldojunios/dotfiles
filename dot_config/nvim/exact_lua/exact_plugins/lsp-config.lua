@@ -38,61 +38,57 @@ return {
         "html",
         "hyprls",
         "jsonls",
-        "ltex",
         "pyright",
         "ts_ls",
         "yamlls",
       }
-      if os.getenv("PREFIX") == nil then
-        table.insert(ensure_installed, "clangd")
-        table.insert(ensure_installed, "lua_ls")
-      end
 
       require("mason-lspconfig").setup({
         ensure_installed = ensure_installed,
         automatic_installation = true,
+        automatic_enable = true,
       })
 
-      local lspconfig = require("lspconfig")
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({})
-        end,
-        ["ltex"] = function()
-          lspconfig.ltex.setup({
-            settings = {
-              ltex = {
-                language = "auto",
-              },
-            },
-          })
-        end,
-        ["pyright"] = function()
-          lspconfig.pyright.setup({
-            settings = {
-              pyright = {
-                disableOrganizeImports = true, -- Using Ruff
-              },
-              python = {
-                analysis = {
-                  ignore = { "*" }, -- Using Ruff
-                  typeCheckingMode = "off", -- Using mypy
-                },
-              },
-            },
-          })
-        end,
-        ["tinymist"] = function()
-          lspconfig.tinymist.setup({
-            settings = {
-              formatterMode = "typstyle",
-              exportPdf = "onType",
-              semanticTokens = "disable",
-            },
-          })
-        end,
-      })
+      -- local lspconfig = require("lspconfig")
+      --
+      -- require("mason-lspconfig").setup_handlers({
+      --   function(server_name)
+      --     lspconfig[server_name].setup({})
+      --   end,
+      --   ["ltex"] = function()
+      --     lspconfig.ltex.setup({
+      --       settings = {
+      --         ltex = {
+      --           language = "auto",
+      --         },
+      --       },
+      --     })
+      --   end,
+      --   ["pyright"] = function()
+      --     lspconfig.pyright.setup({
+      --       settings = {
+      --         pyright = {
+      --           disableOrganizeImports = true, -- Using Ruff
+      --         },
+      --         python = {
+      --           analysis = {
+      --             ignore = { "*" }, -- Using Ruff
+      --             typeCheckingMode = "off", -- Using mypy
+      --           },
+      --         },
+      --       },
+      --     })
+      --   end,
+      --   ["tinymist"] = function()
+      --     lspconfig.tinymist.setup({
+      --       settings = {
+      --         formatterMode = "typstyle",
+      --         exportPdf = "onType",
+      --         semanticTokens = "disable",
+      --       },
+      --     })
+      --   end,
+      -- })
     end,
   },
   {
@@ -103,30 +99,6 @@ return {
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      local ensure_installed = {
-        "clang_format",
-        "cmake_format",
-        -- "codespell",
-        "eslint_d",
-        "fish",
-        "fixjson",
-        "hadolint",
-        "markdownlint",
-        -- "mdformat",
-        "mypy",
-        "prettierd",
-        "ruff",
-        "shellcheck",
-        "shfmt",
-        "sqlfmt",
-        "taplo",
-        "yamlfmt",
-      }
-      if os.getenv("PREFIX") == nil then
-        table.insert(ensure_installed, "latexindent")
-        table.insert(ensure_installed, "stylua")
-      end
-
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
@@ -142,7 +114,6 @@ return {
       })
 
       require("mason-null-ls").setup({
-        ensure_installed = ensure_installed,
         handlers = {},
       })
     end,

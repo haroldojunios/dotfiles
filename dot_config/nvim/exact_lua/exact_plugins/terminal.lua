@@ -3,7 +3,7 @@ return {
   version = "*",
   opts = {
     direction = "float",
-    open_mapping = [[<C-'>]],
+    open_mapping = [[<C-`>]],
     auto_scroll = false,
     float_opts = {
       border = "curved",
@@ -40,7 +40,7 @@ return {
           term:toggle(size, direction)
 
           vim.cmd("set ft=lazygit")
-          vim.keymap.set("t", "<C-'>", function()
+          vim.keymap.set("t", "<C-`>", function()
             term:toggle(size, direction)
           end, { buffer = true })
         end
