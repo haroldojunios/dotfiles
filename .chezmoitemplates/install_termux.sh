@@ -5,7 +5,7 @@ BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 apt-get update
-apt-get upgrade -y --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef
+apt-get dist-upgrade -y --fix-missing --option Dpkg::Options::=--force-confold --option Dpkg::Options::=--force-confdef || :
 
 packageList=(
   tur-repo # Termux User Repository

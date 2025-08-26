@@ -44,14 +44,6 @@ end
 set -x USER haroldo
 set -x ZK_NOTEBOOK_DIR ~/storage/shared/Documents/notes
 
-if not pgrep -f crond >/dev/null && type -q crond
-    crond
-end
-
-if not pgrep -f sshd >/dev/null && type -q sshd
-    sshd
-end
-
 {{   if .installDE }}
 set -x DISPLAY ":1"
 {{   end }}

@@ -40,6 +40,14 @@ scoop
 
 {{ if eq .chezmoi.os "android" }}
 !.config/nvim
+!.config/task
+!.config/keepassxc
+!.config/nanorc
+!.config/pypoetry
+!.config/qt5ct
+!.config/qt6ct
+!.config/xournalpp
+!.config/yazi
 !.local/bin/executable_start-proot
 !.local/share/pandoc
 {{ end }}

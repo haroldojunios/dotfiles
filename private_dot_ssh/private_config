@@ -8,16 +8,16 @@ Host *
 Host celular
   Port 8022
 
-Match host celular exec "nc -w 1 -z 192.168.1.122 %p"
-  HostName 192.168.1.122
 Match host celular exec "nc -w 1 -z 192.168.0.22 %p"
   HostName 192.168.0.22
+Match host celular exec "nc -w 1 -z 192.168.1.22 %p"
+  HostName 192.168.1.22
 Match host celular exec "nc -w 1 -z 192.168.100.122 %p"
   HostName 192.168.100.122
-Match host celular exec "nc -w 1 -z 10.0.0.12 %p"
+Match host celular exec "nc -w 1 -z 10.0.0.22 %p"
   HostName 10.0.0.22
 Match host celular exec true
-  HostName 192.168.1.22
+  HostName 192.168.1.122
 
 Host rasp
   HostName rasp.local
@@ -28,7 +28,7 @@ Host rasp-ubuntu
   User haroldo
 
 Host pc
-  HostName 192.168.1.15
+  HostName 192.168.0.21
   User haroldo
 
 Host raspap
