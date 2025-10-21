@@ -5,18 +5,30 @@ Host 192.168.196.129
 Host *
   UpdateHostKeys yes
 
-Host celular
+Host android
+  Port 2222
+
+Host termux
   Port 8022
 
-Match host celular exec "nc -w 1 -z 192.168.0.22 %p"
+Match host android,termux exec "nc -w 1 -z 192.168.0.22 %p"
   HostName 192.168.0.22
-Match host celular exec "nc -w 1 -z 192.168.1.22 %p"
+Match host android,termux exec "nc -w 1 -z 192.168.1.22 %p"
   HostName 192.168.1.22
-Match host celular exec "nc -w 1 -z 192.168.100.122 %p"
+# tailscale
+Match host android,termux exec "nc -w 1 -z 100.115.199.96 %p"
+  HostName 100.115.199.96
+# zerotier personal
+Match host android,termux exec "nc -w 1 -z 201.75.187.238 %p"
+  HostName 201.75.187.238
+# zerotier company
+Match host android,termux exec "nc -w 1 -z 192.168.196.220 %p"
+  HostName 192.168.196.220
+Match host android,termux exec "nc -w 1 -z 192.168.100.122 %p"
   HostName 192.168.100.122
-Match host celular exec "nc -w 1 -z 10.0.0.22 %p"
+Match host android,termux exec "nc -w 1 -z 10.0.0.22 %p"
   HostName 10.0.0.22
-Match host celular exec true
+Match host android,termux exec true
   HostName 192.168.1.122
 
 Host rasp
@@ -30,6 +42,14 @@ Host rasp-ubuntu
 Host pc
   HostName 192.168.0.21
   User haroldo
+
+Match host pc exec "nc -w 1 -z 192.168.0.20 %p"
+  HostName 192.168.0.20
+Match host pc exec "nc -w 1 -z 192.168.0.21 %p"
+  HostName 192.168.0.21
+# tailscale
+Match host pc exec "nc -w 1 -z 100.74.134.112 %p"
+  HostName 100.74.134.112
 
 Host raspap
   HostName 10.3.141.1
