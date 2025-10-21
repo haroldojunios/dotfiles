@@ -180,6 +180,14 @@
     "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
+  // CPU temperature
+  "custom/cpu_temp": {
+    "interval": 1,
+    "format": "{}",
+    "exec": "get-hardware-temp",
+    "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
+  },
+
   "hyprland/language": {
     "format": "󰌌{short}({variant})",
     "keyboard-name": "sino-wealth-gaming-keyboard"
@@ -205,7 +213,8 @@
       // "custom/system",
       "disk",
       "cpu",
-      "memory"
+      "memory",
+      "custom/cpu_temp"
       // "hyprland/language"
     ]
   },

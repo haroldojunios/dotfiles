@@ -5,8 +5,9 @@
  * ----------------------------------------------------- */
 
 * {
-  font-family: "Iosevka", "Font Awesome 6 Free", FontAwesome, "Symbols Nerd",
-    Roboto, sans-serif;
+  font-family:
+    "Iosevka", "Font Awesome 6 Free", FontAwesome, "Symbols Nerd", Roboto,
+    sans-serif;
   border: none;
   border-radius: 0px;
   font-size: 9.5pt;
@@ -198,7 +199,8 @@ window#waybar.empty #window {
 #disk,
 #memory,
 #cpu,
-#language {
+#language,
+#custom-cpu_temp {
   margin: 0px;
   padding: 0px;
   color: @lavender;
