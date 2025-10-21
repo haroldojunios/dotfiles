@@ -3,95 +3,72 @@
 # <(echo "$inputData")
 # <(cat <<< "$inputData")
 # <(printf "%s" "$inputData")
-#- /TWRP
-RSYNC_FILTERS="
-- .Trash
-- .thumbnails
-- .tmfs
-- .trashed*
-- /.*
-- /AmazFit_WF
-- /Android/*
-- /Android/media/*
-- /Android/media/com.whatsapp/WhatsApp/.Shared
-- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs
-- /Android/media/com.whatsapp/WhatsApp/.Thumbs
-- /Android/media/com.whatsapp/WhatsApp/.trash
-- /Android/media/com.whatsapp/WhatsApp/Media/.Statuses
-- /DCIM/Cam/
-- /Documents/PC
-- /Documents/books
-- /Download/Flash
-- /Download/PC
-- /Download/torrent
-- /MIUI/*
-- /MiVideoGlobal
-- /Music
-- /Pictures/Cam
-- /ReadChan
-- /Tencent
-- /WhatsApp/.Shared
-- /WhatsApp/.StickerThumbs
-- /WhatsApp/.Thumbs
-- /WhatsApp/.trash
-- /WhatsApp/Media/.Statuses
-- /amap
-- /aray
-- /backups
-- /browser
-- /camera_events
-- /com.fanglz.android.filemanager
-- /com.mercadolibre
-- /com.mercadopagowallet
-- /com.northpark.drinkwater
-- /dctp
-- /did
-- /documents/PC
-- /documents/books
-- /iciba
-- /systemui
-- /tencent
-- /voip-data
-- /zman
-+ /Android/media/
-+ /Android/media/com.whatsapp/
-+ /MIUI/backup/
+
+trap "exit 0" INT
+
+if ! command -v termux-setup-storage &>/dev/null; then
+  ssh -o LogLevel=ERROR -o StrictHostKeyChecking=no -t termux rsync_celular
+  exit $?
+fi
+
+RCLONE_FILTERS="
+- /Android/media/com.whatsapp/WhatsApp/.Shared/**
+- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs/**
+- /Android/media/com.whatsapp/WhatsApp/.Thumbs/**
+- /Android/media/com.whatsapp/WhatsApp/.trash/**
+- /Android/media/com.whatsapp/WhatsApp/Media/.**
++ /Android/media/com.whatsapp/**
+- **/.Trash/**
+- **/.thumbnails/**
+- **/.tmfs/**
+- **/.trashed*
+- /.**
+- /Android/**
+- /Documents/PC/**
+- /Documents/Books/**
+- /Download/Flash/**
+- /Download/PC/**
+- /Download/log/**
+- /Download/.PluginApp/**
+- /Download/torrent/**
+- /Download/.exmu-cfg1
+- /Music/**
+- /Pictures/Cam/**
+- /documents/PC/**
+- /documents/books/**
+- /Tachiyomi/**tmp**
 "
-# - /Tachiyomi
 
-rsync_all() {
-  RS_OPTS=("-amyvhPL" "--omit-dir-times" "--inplace" "--info=progress2,name" "--no-inc-recursive")
-  ssh celular "termux-wake-lock" || completed
-  # ssh -t celular "sudo ~/bin/rsync_dbs"
-  # ssh celular "remove_wpp_dbs"
-  # ssh celular "remove_old_bak"
-  # ssh celular "rsync_ig"
+RC_OPTS=(
+  --progress
+  --transfers=16
+  --checkers=32
+  --inplace
+  --retries=10
+  --low-level-retries=20
+  --check-first
+)
 
-  [ -d /media/data/Android/ ] &&
-    rsync "${RS_OPTS[@]}" --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /media/data/Android/
-  rsync "${RS_OPTS[@]}" --delete-after --exclude={"*.ini",".thumbnails","Playlists","Zotify Music"} ~/Music/ celular:/sdcard/Music # music
-  fix-mpd-playlists && rsync "${RS_OPTS[@]}" ~/.local/share/playlists/ celular:/sdcard/Music/Playlists                             # playlists
-  ssh celular "termux-media-scan -r storage/music"                                                                                 # rescan music
-  # [ ! -e ~/Downloads/Celular/ ] ||
-  #   rsync $RS_OPTS --remove-source-files ~/Downloads/Celular/ celular:/sdcard/Download/PC/ &&                                     # files from PC
-  #   rsync $RS_OPTS --include-from <(printf "%s" "${RSYNC_FILTERS}") celular:/sdcard/ /run/media/haroldo/data/home/Backup/android/ && # all
-  #   rsync $RS_OPTS --exclude="Engenharia" ~/Books/ celular:/sdcard/documents/books/ &&                                            # books
-  # # rsync $RS_OPTS --exclude={.tmfs,.inflight_lowres} celular:/sdcard/DCIM/ ~/Pictures/DCIM/ &&                                   # pictures
-  # # rsync $RS_OPTS --include={"*/","*.mp4","*.mkv"} --exclude="*" ~/Downloads/irc/ celular:/sdcard/Movies &&  # episodes
-  completed
-}
+# if command -v termux-setup-storage &>/dev/null; then
+#   android_remote=
+#   pc_remote=pc:
+# else
+#   android_remote=android:
+#   pc_remote=
+# fi
 
-completed() {
-  ssh celular "termux-wake-unlock"
-  exit
-}
+rclone lsd "pc:/media/data/Android/" &>/dev/null &&
+  rclone "${RC_OPTS[@]}" \
+    --filter-from <(printf "%s" "${RCLONE_FILTERS}") \
+    copy "/sdcard/" "pc:/media/data/Android/"
+rclone "${RC_OPTS[@]}" --track-renames \
+  --exclude={"*.ini",".thumbnails/**","Playlists/**","Zotify Music/**"} \
+  sync "pc:Music/" "/sdcard/Music/"
 
-trap completed INT
-
-# for folder in ~/Pictures/DCIM/ ~/Backup/android/; do
-#   mkdir -p $folder
-# done
-
-until rsync_all; do
-  sleep 10
-done
+if command -v termux-setup-storage &>/dev/null; then
+  ssh pc fix-mpd-playlists
+else
+  fix-mpd-playlists
+fi &&
+  rclone "${RC_OPTS[@]}" --track-renames \
+    sync "pc:.local/share/playlists/" "/sdcard/Music/Playlists"
