@@ -1,6 +1,6 @@
 #{{- if ne .osid "android" -}}!/bin/bash{{- else -}}!/data/data/com.termux/files/usr/bin/bash{{ end }}
-
-if command -v nvim &>/dev/null; then
+exit
+if command -v nvim &>/dev/null && [ -d "$HOME/.local/share/nvim/mason/bin" ] ; then
   nvim --headless \
     -c 'autocmd User MasonUpdateAllComplete quitall' \
     -c 'Lazy! sync' \

@@ -307,9 +307,9 @@ if command -v bat &>/dev/null; then
   bat cache --build &>/dev/null
 fi
 
-if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" ]; then
-  mkdir -p "${HOME}/.config/rclone"
-  sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
+if command -v rclone &>/dev/null; then
+  mkdir -p "${HOME}/.config/fish/completions"
+  rclone genautocomplete fish "${HOME}/.config/fish/completions/rclone.fish"
 fi
 
 # MPD

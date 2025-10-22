@@ -40,7 +40,7 @@ Host rasp-ubuntu
   User haroldo
 
 Host pc
-  HostName 192.168.0.21
+  HostName 192.168.0.20
   User haroldo
 
 Match host pc exec "nc -w 1 -z 192.168.0.20 %p"

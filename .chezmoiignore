@@ -48,6 +48,8 @@ scoop
 !.config/qt6ct
 !.config/xournalpp
 !.config/yazi
+!.config/lazygit
+!.config/rclone
 !.local/bin/executable_start-proot
 !.local/share/pandoc
 {{ end }}
