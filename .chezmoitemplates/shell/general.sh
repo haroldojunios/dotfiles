@@ -20,12 +20,12 @@ alias cat='bat --style full'
 alias ct='cat'
 
 # cp mv
-command -v advcp >/dev/null && alias cp='advcp -gr'
-command -v advmv >/dev/null && alias mv='advmv -gr'
+command -v advcp &>/dev/null && alias cp='advcp -gr'
+command -v advmv &>/dev/null && alias mv='advmv -g'
 
 # compression
-alias 7zc='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -aoa'
-alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 -aoa'
+command -v 7z &>/dev/null && alias 7zc='7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=64m -ms=on -mmt=on -aoa'
+command -v 7z &>/dev/null && alias 7zx='7z a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 -aoa'
 alias gz='gzip -kv'
 alias ta='tar -acf '
 alias ut='tar -xvf '

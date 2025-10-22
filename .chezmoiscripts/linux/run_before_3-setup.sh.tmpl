@@ -27,8 +27,8 @@ EOF
 # memory
 # TOTAL_MEM=$(grep MemTotal /proc/meminfo | LC_ALL=C awk '{print $2/1024^2}')
 # if [ $(echo "$TOTAL_MEM>15" | bc) -eq 1 ]; then
-if ! grep -q "vm.swappiness = 180" /etc/sysctl.conf; then
-  sudo bash -c "cat >/etc/sysctl.conf" <<EOF
+if ! grep -q "vm.swappiness = 180" /etc/sysctl.d/99-vm-zram-parameters.conf; then
+  sudo bash -c "cat >/etc/sysctl.d/99-vm-zram-parameters.conf" <<EOF
 vm.swappiness = 180
 vm.watermark_boost_factor = 0
 vm.watermark_scale_factor = 125
@@ -80,8 +80,8 @@ if ! [ -f /etc/sddm.conf ]; then
 fi
 
 if command -v crudini &>/dev/null; then
-  sudo crudini --set /etc/sddm.conf General Numlock on
-  sudo crudini --set /etc/sddm.conf General InputMethod ""
+  sudo crudini --ini-options=nospace --set /etc/sddm.conf General Numlock on
+  sudo crudini --ini-options=nospace --set /etc/sddm.conf General InputMethod ""
 fi
 
 if
@@ -100,7 +100,7 @@ EOF
   sudo cp /usr/share/alsa-card-profile/mixer/profile-sets/default.conf /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf
 
   if command -v crudini &>/dev/null; then
-    sudo crudini --set /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf "Mapping analog-stereo" "paths-output" "analog-output-fixed"
+    sudo crudini --ini-options=nospace --set /usr/share/alsa-card-profile/mixer/profile-sets/profile-for-bad-soundcards.conf "Mapping analog-stereo" "paths-output" "analog-output-fixed"
   fi
 fi
 
@@ -164,19 +164,17 @@ EOF
 fi
 
 if command -v crudini &>/dev/null; then
-  sudo crudini --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:3"
-  sudo crudini --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "defaults" btrfs_defaults "compress-force=zstd"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data" btrfs_defaults "compress=zstd:3"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data2" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/data3" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-linux" btrfs_defaults "compress-force=zstd:3"
+  sudo crudini --ini-options=nospace --set /etc/udisks2/mount_options.conf "/dev/disk/by-label/backup-windows" btrfs_defaults "compress-force=zstd:3"
 
-  sudo crudini --set /etc/bluetooth/main.conf "General" "Experimental" "true"
-fi
+  sudo crudini --ini-options=nospace --set /etc/bluetooth/main.conf "General" "Experimental" "true"
 
-if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" ]; then
-  mkdir -p "${HOME}/.config/rclone"
-  sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
+  sudo crudini --ini-options=nospace --set /etc/systemd/journald.conf "Journal" "SystemMaxUse" 2G
+  sudo crudini --ini-options=nospace --set /etc/systemd/journald.conf "Journal" "SystemKeepFree" 50G
 fi
 
 if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
@@ -307,6 +305,11 @@ fi
 
 if command -v bat &>/dev/null; then
   bat cache --build &>/dev/null
+fi
+
+if command -v rclone &>/dev/null && ! [ -f "${HOME}/.config/rclone/rclone.fish" ]; then
+  mkdir -p "${HOME}/.config/rclone"
+  sudo rclone genautocomplete fish "${HOME}/.config/rclone/rclone.fish"
 fi
 
 # MPD

@@ -114,7 +114,7 @@ return {
     end,
   },
   {
-    "Exafunction/codeium.nvim",
+    "Exafunction/windsurf.nvim",
     enabled = os.getenv("PREFIX") == nil,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -124,6 +124,7 @@ return {
       require("codeium").setup({
         bin_path = vim.fn.stdpath("data") .. "/codeium/bin",
         config_path = vim.fn.stdpath("data") .. "/codeium/config.json",
+        quiet = true,
       })
     end,
   },

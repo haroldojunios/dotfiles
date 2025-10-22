@@ -3,8 +3,9 @@
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 alias i='paru -S --noconfirm --needed'
+alias ii='paru -S --needed'
 alias r='paru -Rns --noconfirm'
-alias u='sudo reflector --latest 50 --number 20 --sort score --protocol "http,https" --save /etc/pacman.d/mirrorlist && paru -Syu --noconfirm'
+alias u='paru -Syu --noconfirm'
 alias s='paru -Ss'
 alias si='paru -Qi'
 alias cl='yes | paru -Sc && pacman -Qtdq | xargs -r -n 1 sudo pacman -Rns --noconfirm && test -f ~/.cache/paru/clone && rm -rf ~/.cache/paru/clone || :'
@@ -17,7 +18,7 @@ alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'                              
 alias ripkg="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl" # Recent installed packages
 
 # Get fastest mirrors
-alias mirror='sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist'
+alias mirror='sudo reflector --latest 10 --sort rate --fastest 5 --protocol https --verbose --save /etc/pacman.d/mirrorlist'
 alias mirrord='sudo reflector --latest 50 --number 20 --sort delay --protocol "http,https" --save /etc/pacman.d/mirrorlist'
 alias mirrors='sudo reflector --latest 50 --number 20 --sort score --protocol "http,https" --save /etc/pacman.d/mirrorlist'
 alias mirrora='sudo reflector --latest 50 --number 20 --sort age --protocol "http,https" --save /etc/pacman.d/mirrorlist'

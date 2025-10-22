@@ -463,5 +463,6 @@
     "*.svg": "default"
   },
   "workbench.startupEditor": "none",
-  "workbench.tree.renderIndentGuides": "always"
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.activityBar.location": "hidden"
 }

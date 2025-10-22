@@ -39,4 +39,18 @@ if ! [ -f /etc/sddm.conf ]; then
   sudo touch /etc/sddm.conf
 fi
 # sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
+
+# if command -v libreoffice &>/dev/null; then
+#   fname="${XDG_CONFIG_HOME:-$HOME/.config}"/libreoffice/*/user/registrymodifications.xcu
+#   fname="$(realpath $fname)"
+#
+#   if  tail -n1 "$fname" | grep -E -q '^</oor:items>$'; then
+#     git -C "${TEMP_FOLDER}" clone --depth 1 https://github.com/catppuccin/libreoffice.git
+#     (
+#       cd "${TEMP_FOLDER}/libreoffice/scripts"
+#       chmod +x ./install_theme.sh
+#       ./install_theme.sh mocha lavender
+#     )
+#   fi
+# fi
 {{ end }}

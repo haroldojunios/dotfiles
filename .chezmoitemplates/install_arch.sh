@@ -46,6 +46,7 @@ if ! command -v paru &>/dev/null; then
 else
   paru -Syu --noconfirm || :
   paru -Fy || :
+  command -v pkgfile &>/dev/null && sudo pkgfile --update
 fi
 
 if ! [ -f "${HOME}/.local/state/paru/devel.toml" ]; then
@@ -125,8 +126,6 @@ dePackageList=(
   chromium
   cliphist
   dex
-  dolphin
-  dolphin-plugins
   ffmpegthumbs
   filelight
   filezilla
@@ -140,13 +139,10 @@ dePackageList=(
   gvfs-mtp
   gvfs-smb
   gvfs-wsdd
-  gwenview
   inkscape
   jdownloader2
   kcalc
   kdeconnect
-  kdegraphics-thumbnailers # dolphin
-  kdenetwork-filesharing   # dolphin
   keepassxc
   keyd
   kfind
@@ -160,7 +156,6 @@ dePackageList=(
   mailcap
   obs-studio
   okular
-  onlyoffice-bin
   opentabletdriver
   partitionmanager
   pavucontrol
@@ -181,8 +176,7 @@ dePackageList=(
   ventoy-bin
   virtualbox
   visual-studio-code-bin
-  vlc
-  waybar-cava
+  waybar
   wl-clip-persist
   wl-clipboard
   wlogout
@@ -402,6 +396,7 @@ qgisPackageList=(
   python-jinja
   python-owslib
   python-psycopg2
+  python-pyproj
   python-yaml
   qgis
 )
