@@ -7,7 +7,7 @@
 trap "exit 0" INT
 
 if ! command -v termux-setup-storage &>/dev/null; then
-  ssh -o LogLevel=ERROR -o StrictHostKeyChecking=no -t termux rsync_celular
+  ssh -o LogLevel=ERROR -o StrictHostKeyChecking=no -t termux sync-celular
   exit $?
 fi
 
@@ -20,13 +20,11 @@ RCLONE_FILTERS="
 + /Android/media/com.whatsapp/**
 - **/.Trash/**
 - **/.thumbnails/**
-- **/.tmfs/**
 - **/.trashed*
 - /.**
 - /Android/**
 - /Documents/PC/**
 - /Documents/Books/**
-- /Download/Flash/**
 - /Download/PC/**
 - /Download/log/**
 - /Download/.PluginApp/**
@@ -36,7 +34,7 @@ RCLONE_FILTERS="
 - /Pictures/Cam/**
 - /documents/PC/**
 - /documents/books/**
-- /Tachiyomi/**tmp**
+- /Tachiyomi/**
 "
 
 RC_OPTS=(
@@ -46,21 +44,21 @@ RC_OPTS=(
   --inplace
   --retries=10
   --low-level-retries=20
+  --stats-file-name-length=60
   --check-first
+  --verbose
 )
 
-# if command -v termux-setup-storage &>/dev/null; then
-#   android_remote=
-#   pc_remote=pc:
-# else
-#   android_remote=android:
-#   pc_remote=
-# fi
 
-rclone lsd "pc:/media/data/Android/" &>/dev/null &&
+if rclone lsd "pc:/media/data/Android/" &>/dev/null;then
   rclone "${RC_OPTS[@]}" \
     --filter-from <(printf "%s" "${RCLONE_FILTERS}") \
     copy "/sdcard/" "pc:/media/data/Android/"
+  rclone "${RC_OPTS[@]}" --track-renames \
+    --exclude='**tmp**' \
+    sync "/sdcard/Tachiyomi/" "pc:/media/data/Android/Tachiyomi/"
+fi
+
 rclone "${RC_OPTS[@]}" --track-renames \
   --exclude={"*.ini",".thumbnails/**","Playlists/**","Zotify Music/**"} \
   sync "pc:Music/" "/sdcard/Music/"

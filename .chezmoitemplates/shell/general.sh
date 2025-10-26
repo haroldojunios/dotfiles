@@ -60,7 +60,7 @@ alias pfc='pf $(xclip -o -selection clipboard)'
 alias ar='aria2c'
 alias arpc='aria2rpc'
 alias at='aria2c -d ~/Downloads/torrent'
-alias rc=rsync_celular
+alias sc=sync-celular
 alias rs='rsync --archive --human-readable --partial --progress --fuzzy --inplace --prune-empty-dirs --hard-links --info=progress2,name --no-inc-recursive --no-whole-file'
 alias rsl='rsync --archive --human-readable --whole-file --no-compress --hard-links --fuzzy --inplace --info=progress2,name --no-inc-recursive'
 alias rsd='rs --delete-after'
