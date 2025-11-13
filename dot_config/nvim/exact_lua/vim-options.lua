@@ -5,6 +5,11 @@ local opt = vim.opt
 g.mapleader = " "
 g.maplocalleader = " "
 
+-- encodings
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+opt.fileencodings = { "ucs-bom", "utf-8", "default", "latin1", "cp1252" }
+
 -- disable netrw
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1

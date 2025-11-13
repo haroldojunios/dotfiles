@@ -4,6 +4,6 @@ os:
   edit: '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "<CMD>LazyGitToggle<CR>" && nvim --server "$NVIM" --remote-tab {{filename}})'
   editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "<CMD>LazyGitToggle<CR>" &&  nvim --server "$NVIM" --remote-tab {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")'
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --line-numbers --side-by-side
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --line-numbers --side-by-side

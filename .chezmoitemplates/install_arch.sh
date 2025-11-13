@@ -318,6 +318,7 @@ packageList=(
   python-pylatexenc
   python-pypdf
   python-python-ffmpeg
+  python-yaml
   python-requests
   python-scipy
   python-tqdm
@@ -334,6 +335,7 @@ packageList=(
   stderred-git
   sysfsutils
   tmux
+  udiskie
   ufw
   unzip
   usbutils
