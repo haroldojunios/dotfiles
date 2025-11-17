@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import time
+from datetime import timedelta
 from pathlib import Path
 from threading import Thread
 
@@ -41,6 +42,7 @@ MIN_VID_QUALITY = 48
 MAX_VID_QUALITY = 32
 VID_AUD_BR = 96  # general
 # VID_AUD_BR = 32  # voice
+VID_AUD_SUR_BR = 128
 AUD_BR = 192  # music
 # AUD_BR = 32  # voice
 COPY_AUD_COVER = True
@@ -218,6 +220,23 @@ def get_vid_fps(input_file):
     return None
 
 
+def get_vid_frames(input_file):
+    data = get_vid_metadata(input_file)
+    for stream in data["streams"]:
+        if stream.get("codec_type") == "video":
+            if "tags" in stream:
+                frames = stream["tags"].get(
+                    "NUMBER_OF_FRAMES", stream["tags"].get("number_of_frames")
+                )
+                if frames is not None:
+                    return int(frames)
+
+    fps = get_vid_fps(input_file)
+    if fps is None:
+        return None
+    return round(get_vid_duration(input_file) * fps)
+
+
 def get_vid_bitrate(input_file):
     data = get_vid_metadata(input_file)
     return int(data["format"].get("bit_rate", 0))
@@ -245,6 +264,13 @@ def get_aud_bitrate(input_file: Path):
     return round(bitrate)
 
 
+def get_aud_channels(input_file):
+    metadata = get_vid_metadata(input_file)
+    for stream in metadata["streams"]:
+        if stream.get("codec_type") == "audio":
+            return int(stream.get("channels", 0))
+
+
 def set_file_metadata(filename, reference_file):
     ExifTool.execute(
         "-tagsfromfile",
@@ -255,15 +281,9 @@ def set_file_metadata(filename, reference_file):
     )
 
 
-def calculate_metrics(reference_file, distorted_file, t: float = 0):
-    # reference_file_name = (
-    #     Path(reference_file)
-    #     .stem.replace(" ", "_")
-    #     .replace("[", "_")
-    #     .replace("]", "_")
-    #     .replace("(", "_")
-    #     .replace(")", "_")
-    # )
+def calculate_metrics(
+    reference_file, distorted_file, t: float = 0, ss: float = 0
+):
     reference_file_name = time.time_ns()
     vmaf_log_file = (
         Path(tempfile.gettempdir()) / f"{reference_file_name}_vmaf.json"
@@ -311,30 +331,28 @@ def calculate_metrics(reference_file, distorted_file, t: float = 0):
     try:
         if is_vid:
             if t:
-                duration = t
+                t_param = {"t": t}
+                if ss:
+                    t_param["ss"] = ss
             else:
                 duration_ref = get_vid_duration(reference_file)
                 duration_dis = get_vid_duration(distorted_file)
-                duration = (
-                    duration_ref
-                    if duration_ref < duration_dis
-                    else duration_dis
-                )
-            t_param = {"t": duration}
+                duration = min(duration_ref, duration_dis)
+                t_param = {"t": duration}
 
             ffmpeg_vmaf = (
                 FFmpeg()
                 .option("hide_banner")
                 .option("y")
                 .input(str(distorted_file))
-                .input(str(reference_file))
+                .input(str(reference_file), t_param)
                 .output("-", lavfi=filter_vmaf, f="null")
             )
             ffmpeg_ssim = (
                 FFmpeg()
                 .option("hide_banner")
                 .option("y")
-                .input(str(distorted_file), t_param)
+                .input(str(distorted_file))
                 .input(str(reference_file), t_param)
                 .output("-", lavfi=filter_ssim, f="null")
             )
@@ -459,15 +477,36 @@ def extract_cover_img(input_file, output_file):
 
 
 def convert_vid(
-    input_file, output_file, quality: int = 0, preset: int = 5, t: float = 0
+    input_file,
+    output_file,
+    quality: int = 0,
+    preset: int = 5,
+    t: float = 0,
+    ss: float = 0,
+    show_progress: bool = False,
 ):
     audio_codec = (
         {"c:a": "copy"}
         if get_aud_codec(input_file) in ("ogg", "opus")
-        else {"c:a": "libopus", "b:a": f"{VID_AUD_BR}k", "frame_duration": 60}
+        else {
+            "c:a": "libopus",
+            "b:a": f"{VID_AUD_BR}k",
+            "compression_level": 10,
+            "vbr": "on",
+        }
     )
+    channels = get_aud_channels(input_file) or 2
+    if channels > 2 and audio_codec["c:a"] != "copy":
+        audio_codec["ac"] = channels
+        audio_codec["mapping_family:a"] = 1
+        audio_codec["b:a"] = f"{VID_AUD_SUR_BR}k"
 
-    t_param = {"t": t} if t else {}
+    t_param = {}
+    if t:
+        t_param["t"] = t
+        if ss:
+            t_param["ss"] = ss
+
     svtav1_params = "tune=2:fast-decode=1"
     if SVT_AV1_PSY:
         svtav1_params = (
@@ -502,10 +541,28 @@ def convert_vid(
         )
     )
     try:
+        if show_progress:
+            total_frames = get_vid_frames(input_file)
+            pbar = tqdm(
+                total=total_frames,
+                desc=str(input_file)[:40],
+                unit="frames",
+            )
+
+            @ffmpeg.on("progress")
+            def progress_func(progress):
+                cur_frame = progress.frame
+                pbar.update(cur_frame - pbar.n)
+
+            @ffmpeg.on("completed")
+            def completed_func():
+                pbar.close()
+
+        # print(" ".join(ffmpeg.arguments))
         ffmpeg.execute()
         # subprocess.run(ffmpeg.arguments, check=True)
         return True
-    except Exception:
+    except FileNotFoundError:  # Exception:
         return False
 
 
@@ -518,8 +575,22 @@ def find_vid_quality(input_file, preset=4):
         else VID_QUALITY_DURATION
     )
     vid_quality_duration = max(vid_quality_duration, MIN_VID_QUALITY_DURATION)
+    t = vid_quality_duration if duration > vid_quality_duration else 0
+
+    for div in range(5, 1, -1):
+        if duration > vid_quality_duration * div:
+            ss = round((duration - vid_quality_duration) / div, 1)
+            break
+    else:
+        ss = 0
+
+    start_time = str(timedelta(seconds=ss))
+    if "." in start_time:
+        start_time = (
+            start_time.split(".")[0] + "." + start_time.split(".")[1][:1]
+        )
     logger.debug(
-        f"  Video quality test duration: {vid_quality_duration} seconds"
+        f"  Video quality test duration: {t} seconds, start: {start_time}"
     )
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_dir_path = Path(temp_dir)
@@ -527,15 +598,15 @@ def find_vid_quality(input_file, preset=4):
         # temp_dir_path.mkdir(parents=True, exist_ok=True)
         compare_file = input_file
 
-        t = vid_quality_duration if duration > vid_quality_duration else 0
-
         # qualities = list(reversed(range(12, 42 + 1)))
         quality = MIN_VID_QUALITY
         while quality >= MAX_VID_QUALITY:
             temp_file = temp_dir_path / f"{input_file.stem}_{quality}.mkv"
-            if convert_vid(compare_file, temp_file, quality, preset=4, t=t):
+            if convert_vid(
+                compare_file, temp_file, quality, preset=4, t=t, ss=ss
+            ):
                 ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = (
-                    calculate_metrics(input_file, temp_file, t=t)
+                    calculate_metrics(input_file, temp_file, t=t, ss=ss)
                 )
                 logger.debug(
                     f"  {Path(input_file).name}: "
@@ -586,7 +657,13 @@ def compress_vid(input_file, output_file, quality=0):
         # temp_dir_path.mkdir(parents=True, exist_ok=True)
         temp_file = temp_dir_path / f"{input_file.stem}_{quality}.mkv"
 
-        if not convert_vid(input_file, temp_file, quality, preset=VID_PRESET):
+        if not convert_vid(
+            input_file,
+            temp_file,
+            quality,
+            preset=VID_PRESET,
+            show_progress=True,
+        ):
             return COMPRESS_RESULT.ERROR
 
         ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = calculate_metrics(
@@ -1087,7 +1164,7 @@ def compress_all_vid(
                 else:
                     set_vid_compressed(f)
                     temp_file.unlink(missing_ok=True)
-        except Exception as e:
+        except FileNotFoundError as e:
             logger.error(f"Error on file {f}: {e}")
 
 
