@@ -1,72 +1,157 @@
-#!/bin/bash
+#!/usr/bin/python
 
-# <(echo "$inputData")
-# <(cat <<< "$inputData")
-# <(printf "%s" "$inputData")
-
-trap "exit 0" INT
-
-if ! command -v termux-setup-storage &>/dev/null; then
-  ssh -o LogLevel=ERROR -o StrictHostKeyChecking=no -t termux sync-celular
-  exit $?
-fi
-
-RCLONE_FILTERS="
-- /Android/media/com.whatsapp/WhatsApp/.Shared/**
-- /Android/media/com.whatsapp/WhatsApp/.StickerThumbs/**
-- /Android/media/com.whatsapp/WhatsApp/.Thumbs/**
-- /Android/media/com.whatsapp/WhatsApp/.trash/**
-- /Android/media/com.whatsapp/WhatsApp/Media/.**
-+ /Android/media/com.whatsapp/**
-- **/.Trash/**
-- **/.thumbnails/**
-- **/.trashed*
-- /.**
-- /Android/**
-- /Documents/PC/**
-- /Documents/Books/**
-- /Download/PC/**
-- /Download/log/**
-- /Download/.PluginApp/**
-- /Download/torrent/**
-- /Download/.exmu-cfg1
-- /Music/**
-- /Pictures/Cam/**
-- /documents/PC/**
-- /documents/books/**
-- /Tachiyomi/**
-"
-
-RC_OPTS=(
-  --progress
-  --transfers=16
-  --checkers=32
-  --inplace
-  --retries=10
-  --low-level-retries=20
-  --stats-file-name-length=60
-  --check-first
-  --verbose
-)
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
 
 
-if rclone lsd "pc:/media/data/Android/" &>/dev/null;then
-  rclone "${RC_OPTS[@]}" \
-    --filter-from <(printf "%s" "${RCLONE_FILTERS}") \
-    copy "/sdcard/" "pc:/media/data/Android/"
-  rclone "${RC_OPTS[@]}" --track-renames \
-    --exclude='**tmp**' \
-    sync "/sdcard/Tachiyomi/" "pc:/media/data/Android/Tachiyomi/"
-fi
+def main():
+    android = ""
+    pc = "pc:"
+    home = f"{Path.home()}/"
 
-rclone "${RC_OPTS[@]}" --track-renames \
-  --exclude={"*.ini",".thumbnails/**","Playlists/**","Zotify Music/**"} \
-  sync "pc:Music/" "/sdcard/Music/"
+    if shutil.which("termux-setup-storage") is None:
+        proc = subprocess.run(
+            [
+                "ssh",
+                "-o",
+                "LogLevel=ERROR",
+                "-o",
+                "StrictHostKeyChecking=no",
+                "-t",
+                "termux",
+                "sync-celular",
+            ]
+        )
+        if not proc.returncode:
+            exit(0)
 
-if command -v termux-setup-storage &>/dev/null; then
-  ssh pc fix-mpd-playlists
-else
-  fix-mpd-playlists
-fi &&
-  rclone "${RC_OPTS[@]}" --track-renames \
-    sync "pc:.local/share/playlists/" "/sdcard/Music/Playlists"
+        android = "android-tailscale:"
+        pc = ""
+
+        try:
+            proc = subprocess.run(
+                ["rclone", "--contimeout=5s", "lsd", android],
+                timeout=10,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            if proc.returncode:
+                exit(1)
+        except subprocess.TimeoutExpired:
+            exit(1)
+
+    RCLONE_FILTERS = """
+    - /Android/media/com.whatsapp/WhatsApp/.Shared/**
+    - /Android/media/com.whatsapp/WhatsApp/.StickerThumbs/**
+    - /Android/media/com.whatsapp/WhatsApp/.Thumbs/**
+    - /Android/media/com.whatsapp/WhatsApp/.trash/**
+    - /Android/media/com.whatsapp/WhatsApp/Media/.**
+    + /Android/media/com.whatsapp/**
+    - **/.Trash/**
+    - **/.thumbnails/**
+    - **/.trashed*
+    - /.**
+    - /Android/**
+    - /Documents/PC/**
+    - /Documents/Books/**
+    - /Download/PC/**
+    - /Download/log/**
+    - /Download/.PluginApp/**
+    - /Download/torrent/**
+    - /Download/.exmu-cfg1
+    - /Music/**
+    - /Pictures/Cam/**
+    - /documents/PC/**
+    - /documents/books/**
+    - /Tachiyomi/**
+    """
+
+    RC_OPTS = (
+        "--progress",
+        f"--transfers={16 if not android else 2}",
+        f"--checkers={32 if not android else 4}",
+        "--inplace",
+        "--retries=10",
+        "--low-level-retries=20",
+        f"--stats-file-name-length={shutil.get_terminal_size().columns - 40}",
+        "--check-first",
+        "--verbose",
+    )
+
+    try:
+        if not subprocess.run(
+            ["rclone", "lsd", f"{pc}/media/data/Android/"],
+            timeout=10,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode:
+            with tempfile.NamedTemporaryFile("w") as filter_file:
+                filter_file.write(RCLONE_FILTERS)
+                filter_file.flush()
+                subprocess.run(
+                    [
+                        "rclone",
+                        *RC_OPTS,
+                        "--filter-from",
+                        filter_file.name,
+                        "copy",
+                        f"{android}/sdcard/",
+                        f"{pc}/media/data/Android/",
+                    ]
+                )
+                subprocess.run(
+                    [
+                        "rclone",
+                        *RC_OPTS,
+                        "--track-renames",
+                        "--exclude=**tmp**",
+                        "sync",
+                        f"{android}/sdcard/Tachiyomi/",
+                        f"{pc}/media/data/Android/Tachiyomi/",
+                    ]
+                )
+    except subprocess.TimeoutExpired:
+        pass
+
+    subprocess.run(
+        [
+            "rclone",
+            *RC_OPTS,
+            "--track-renames",
+            "--exclude=*.ini",
+            "--exclude=.thumbnails/**",
+            "--exclude=Playlists/**",
+            "--exclude=Zotify Music/**",
+            "sync",
+            f"{pc or home}Music/",
+            f"{android}/sdcard/Music/",
+        ]
+    )
+
+    if shutil.which("termux-setup-storage") is not None:
+        subprocess.run(["ssh", "pc", "fix-mpd-playlists"])
+    elif shutil.which("fix-mpd-playlists") is not None:
+        subprocess.run(["fix-mpd-playlists"])
+
+    subprocess.run(
+        [
+            "rclone",
+            *RC_OPTS,
+            "--track-renames",
+            "sync",
+            f"{pc or home}.local/share/playlists/",
+            f"{android}/sdcard/Music/Playlists",
+        ]
+    )
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit()
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        exit(1)

@@ -70,6 +70,10 @@ alias rsh='bash -c "(cd; rsync -amyvhPl --inplace --relative --info=progress2,na
   Desktop Documents Downloads Music Pictures Videos \
   /media/data/home)"'
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
+alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --check-first --links --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
+alias rcc='rc copy'
+alias rcs='rc --track-renames sync'
+alias rcm='rc move'
 alias c='TMUX= code'
 alias c.='TMUX= code .'
 alias tkill='tmux list-sessions | grep -v attached | cut -d: -f1 | xargs -r -t -n1 tmux kill-session -t'

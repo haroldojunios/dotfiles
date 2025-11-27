@@ -297,7 +297,7 @@ def calculate_metrics(
         ref_fps = get_vid_fps(reference_file) or 30
         dis_fps = get_vid_fps(distorted_file) or 30
         fps = round(ref_fps if ref_fps <= dis_fps else dis_fps, 2)
-        ref_width, ref_height = get_vid_resolution(reference_file)
+        ref_width, ref_height = get_vid_resolution(reference_file) or (0, 0)
         vmaf_model = (
             VMAF_4K_MODEL
             if min(ref_width, ref_height) > 1080 * 1.25
@@ -480,7 +480,8 @@ def convert_vid(
     input_file,
     output_file,
     quality: int = 0,
-    preset: int = 5,
+    preset: int = VID_PRESET,
+    animation: bool = False,
     t: float = 0,
     ss: float = 0,
     show_progress: bool = False,
@@ -507,7 +508,8 @@ def convert_vid(
         if ss:
             t_param["ss"] = ss
 
-    svtav1_params = "tune=2:fast-decode=1"
+    keyint = "15s" if animation else "10s"
+    svtav1_params = f"tune=2:fast-decode=1:keyint={keyint}"
     if SVT_AV1_PSY:
         svtav1_params = (
             "sharpness=1:qm-min=2:chroma-qm-max=15:"
@@ -525,6 +527,7 @@ def convert_vid(
                 "c:v": "libsvtav1",
                 "svtav1-params": svtav1_params,
                 **audio_codec,
+                "c:s": "copy",
             },
             preset=preset,
             pix_fmt="yuv420p10le",
@@ -540,13 +543,16 @@ def convert_vid(
             metadata="comment=compressed",
         )
     )
+    pbar = None
     try:
         if show_progress:
             total_frames = get_vid_frames(input_file)
             pbar = tqdm(
                 total=total_frames,
-                desc=str(input_file)[:40],
+                desc=Path(input_file).name[:50].strip(),
                 unit="frames",
+                mininterval=1,
+                smoothing=0.1,
             )
 
             @ffmpeg.on("progress")
@@ -558,15 +564,16 @@ def convert_vid(
             def completed_func():
                 pbar.close()
 
-        # print(" ".join(ffmpeg.arguments))
         ffmpeg.execute()
         # subprocess.run(ffmpeg.arguments, check=True)
         return True
-    except FileNotFoundError:  # Exception:
+    except Exception:
+        if pbar is not None:
+            pbar.close()
         return False
 
 
-def find_vid_quality(input_file, preset=4):
+def find_vid_quality(input_file, preset=VID_PRESET, animation=False):
     duration = get_vid_duration(input_file)
     fps = get_vid_fps(input_file)
     vid_quality_duration = (
@@ -603,7 +610,13 @@ def find_vid_quality(input_file, preset=4):
         while quality >= MAX_VID_QUALITY:
             temp_file = temp_dir_path / f"{input_file.stem}_{quality}.mkv"
             if convert_vid(
-                compare_file, temp_file, quality, preset=4, t=t, ss=ss
+                compare_file,
+                temp_file,
+                quality,
+                preset=preset,
+                animation=animation,
+                t=t,
+                ss=ss,
             ):
                 ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = (
                     calculate_metrics(input_file, temp_file, t=t, ss=ss)
@@ -645,11 +658,25 @@ def find_vid_quality(input_file, preset=4):
             temp_file.unlink(missing_ok=True)
 
 
-def compress_vid(input_file, output_file, quality=0):
+def compress_vid(
+    input_file,
+    output_file,
+    quality=0,
+    preset=0,
+    animation=False,
+    summary=False,
+):
+    if animation and not quality and not preset:
+        quality = 38
+        preset = 7
     if not quality:
-        quality = find_vid_quality(input_file, preset=VID_PRESET)
+        quality = find_vid_quality(
+            input_file, preset=preset, animation=animation
+        )
         if not quality:
             return COMPRESS_RESULT.NO_QUALITY
+    if not preset:
+        preset = VID_PRESET
 
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_dir_path = Path(temp_dir)
@@ -661,27 +688,29 @@ def compress_vid(input_file, output_file, quality=0):
             input_file,
             temp_file,
             quality,
-            preset=VID_PRESET,
+            preset=preset,
+            animation=animation,
             show_progress=True,
         ):
             return COMPRESS_RESULT.ERROR
 
-        ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = calculate_metrics(
-            input_file, temp_file
-        )
-        logger.info(
-            f"  {Path(input_file).name} final quality: "
-            + " - ".join(
-                str(v)
-                for v in (
-                    quality,
-                    ssim,
-                    ssim_1_percentile,
-                    vmaf,
-                    vmaf_1_percentile,
+        if summary:
+            ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = (
+                calculate_metrics(input_file, temp_file)
+            )
+            logger.info(
+                f"  {Path(input_file).name} final quality: "
+                + " - ".join(
+                    str(v)
+                    for v in (
+                        quality,
+                        ssim,
+                        ssim_1_percentile,
+                        vmaf,
+                        vmaf_1_percentile,
+                    )
                 )
             )
-        )
         shutil.move(temp_file, output_file)
 
         if output_file.stat().st_size > Path(input_file).stat().st_size:
@@ -825,7 +854,7 @@ def convert2jxl(input_file, output_file, lossless=True):
     return run_cmd(cmd)
 
 
-def compress_img(input_file, output_file):
+def compress_img(input_file, output_file, quality: float = MIN_SSIM_IMG):
     input_file_path = Path(input_file)
 
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -846,19 +875,19 @@ def compress_img(input_file, output_file):
         # quality = (
         #     50 if input_file_path.suffix.lower() in (".heic", ".jpg") else 60
         # )
-        quality = AVIF_QUALITIES[MIN_IMG_QUALITY]
-        while quality < 100:
+        cur_quality = AVIF_QUALITIES[MIN_IMG_QUALITY]
+        while cur_quality < 100:
             temp_file = (
-                temp_dir_path / f"{input_file_path.stem}_{quality}.avif"
+                temp_dir_path / f"{input_file_path.stem}_{cur_quality}.avif"
             )
-            if convert2avif(png_file, temp_file, quality):
+            if convert2avif(png_file, temp_file, cur_quality):
                 ssim, _, _, _ = calculate_metrics(input_file, temp_file)
                 logger.debug(
                     f"  {Path(input_file).name}: "
                     + " - ".join(
                         str(v)
                         for v in (
-                            quality,
+                            cur_quality,
                             ssim,
                             natural_size(temp_file.stat().st_size),
                         )
@@ -868,24 +897,23 @@ def compress_img(input_file, output_file):
                 if temp_file.stat().st_size > input_file_path.stat().st_size:
                     return COMPRESS_RESULT.LARGER
 
-                # quality += max(1, round((MIN_VMAF - vmaf) * 0.5))
-                if ssim >= MIN_SSIM_IMG:
+                if ssim >= quality:
                     shutil.move(temp_file, output_file)
                     return COMPRESS_RESULT.SUCCESS
-                if quality == 100:
+                if cur_quality == 100:
                     return COMPRESS_RESULT.ERROR
 
-                quality_inc = round((MIN_SSIM_IMG - ssim) * multiplier)
+                quality_inc = round((quality - ssim) * multiplier)
                 quality_inc = max(quality_inc, 1)
                 quality_inc = min(quality_inc, 10)
-                new_quality = min(quality + quality_inc, 100)
+                new_quality = min(cur_quality + quality_inc, 100)
                 if new_quality != 100:
                     new_quality = AVIF_QUALITIES[new_quality]
-                    if new_quality == quality:
+                    if new_quality == cur_quality:
                         new_quality = AVIF_QUALITIES[new_quality + 1]
-                quality = new_quality
+                cur_quality = new_quality
             else:
-                quality += 1
+                cur_quality += 1
 
             temp_file.unlink(missing_ok=True)
     return COMPRESS_RESULT.ERROR
@@ -947,21 +975,25 @@ def natural_size(size: int) -> str:
 
 
 def compress_all_aud(
-    input_folder: Path,
+    input_paths: tuple[Path, ...],
     temp_dir_path: Path,
     recursive=True,
     aud_br=AUD_BR,
     copy_cover=COPY_AUD_COVER,
 ):
     audios = []
-    if input_folder.is_file():
-        audios = [input_folder]
-    else:
-        for ext in AUDIO_EXTENSIONS:
-            if recursive:
-                audios += list(input_folder.rglob(f"*{ext}"))
-            else:
-                audios += list(input_folder.glob(f"*{ext}"))
+    for input_path in input_paths:
+        if (
+            input_path.is_file()
+            and input_path.suffix.lower() in AUDIO_EXTENSIONS
+        ):
+            audios.append(input_path)
+        else:
+            for ext in AUDIO_EXTENSIONS:
+                if recursive:
+                    audios += list(input_path.rglob(f"*{ext}"))
+                else:
+                    audios += list(input_path.glob(f"*{ext}"))
 
     if not audios:
         return
@@ -994,22 +1026,32 @@ def compress_all_aud(
                 temp_file.unlink(missing_ok=True)
 
 
-def compress_all_pdf(input_folder: Path, temp_dir_path: Path, recursive=True):
-    if recursive:
-        pdfs = list(input_folder.rglob("*.pdf"))
-    else:
-        pdfs = list(input_folder.glob("*.pdf"))
+def compress_all_pdf(
+    input_paths: tuple[Path, ...], temp_dir_path: Path, recursive=True
+):
+    pdfs = []
+    for input_path in input_paths:
+        if input_path.is_file() and input_path.suffix.lower() == ".pdf":
+            pdfs.append(input_path)
+        else:
+            if recursive:
+                pdfs += list(input_path.rglob("*.pdf"))
+            else:
+                pdfs += list(input_path.glob("*.pdf"))
+
+    if not pdfs:
+        return
+
+    pdfs = [
+        pdf
+        for pdf in tqdm_wrapper(pdfs, desc="Checking PDFs", unit="pdf")
+        if pdf.is_file() and not is_pdf_compressed(pdf)
+    ]
 
     if not pdfs:
         return
 
     for f in tqdm_wrapper(pdfs, desc="Compressing PDFs", unit="pdf"):
-        if not f.is_file():
-            continue
-
-        if is_pdf_compressed(f):
-            continue
-
         logger.info(f'Compressing "{f}" {natural_size(f.stat().st_size)}')
         temp_file = temp_dir_path / f.name
 
@@ -1028,7 +1070,7 @@ def compress_all_pdf(input_folder: Path, temp_dir_path: Path, recursive=True):
                 logger.error(f'Compressed file "{f}" is larger than original')
 
 
-def _compress_image(img, temp_dir_path):
+def _compress_image(img, temp_dir_path, quality: float = MIN_SSIM_IMG):
     if not img.is_file():
         return
 
@@ -1039,7 +1081,7 @@ def _compress_image(img, temp_dir_path):
     temp_file = temp_dir_path / f"{img.stem}.avif"
     start_time = time.time()
 
-    result = compress_img(img, temp_file)
+    result = compress_img(img, temp_file, quality=quality)
 
     total_time = round(time.time() - start_time)
     human_total_time = humanize.precisedelta(total_time)
@@ -1070,61 +1112,86 @@ def _compress_image(img, temp_dir_path):
             temp_file.unlink(missing_ok=True)
 
 
-def compress_all_img(input_folder: Path, temp_dir_path: Path, recursive=True):
+def compress_all_img(
+    input_paths: tuple[Path, ...],
+    temp_dir_path: Path,
+    image_quality: float = MIN_SSIM_IMG,
+    recursive=True,
+):
     images = []
-    if input_folder.is_file():
-        images = [input_folder]
-    else:
-        for ext in IMAGE_EXTENSIONS:
-            if recursive:
-                images += list(input_folder.rglob(f"*{ext}"))
-            else:
-                images += list(input_folder.glob(f"*{ext}"))
+    for input_path in input_paths:
+        if (
+            input_path.is_file()
+            and input_path.suffix.lower() in IMAGE_EXTENSIONS
+        ):
+            images.append(input_path)
+        else:
+            for ext in IMAGE_EXTENSIONS:
+                if recursive:
+                    images += list(input_path.rglob(f"*{ext}"))
+                else:
+                    images += list(input_path.glob(f"*{ext}"))
 
     if not images:
         return
 
     for f in tqdm_wrapper(images, desc="Compressing images", unit="img"):
-        _compress_image(f, temp_dir_path)
-    # pbar = tqdm(total=len(images), desc="Compressing images", unit="img")
-    # with ProcessPoolExecutor(max_workers=3) as executor:
-    #     for _ in executor.map(
-    #         _compress_image, images, itertools.repeat(temp_dir_path)
-    #     ):
-    #         pbar.update(n=1)
+        _compress_image(f, temp_dir_path, quality=image_quality)
 
 
 def compress_all_vid(
-    input_folder: Path,
+    input_paths: tuple[Path, ...],
     temp_dir_path: Path,
     video_quality: int,
+    video_preset: int,
+    video_animation: bool = False,
+    summary: bool = False,
     recursive=True,
 ):
     videos = []
-    if input_folder.is_file():
-        if input_folder.suffix.lower() in VIDEO_EXTENSIONS:
-            videos = [input_folder]
-    else:
-        videos = list_files(
-            input_folder, recursive=recursive, exts=VIDEO_EXTENSIONS
-        )
+    for input_path in input_paths:
+        if (
+            input_path.is_file()
+            and input_path.suffix.lower() in VIDEO_EXTENSIONS
+        ):
+            videos.append(input_path)
+        else:
+            videos += list_files(
+                input_path, recursive=recursive, exts=VIDEO_EXTENSIONS
+            )
 
     if not videos:
         return
 
-    for f in tqdm_wrapper(videos, desc="Compressing videos", unit="vid"):
+    videos = [
+        vid
+        for vid in tqdm_wrapper(videos, desc="Checking videos", unit="vid")
+        if vid.is_file() and not is_vid_compressed(vid)
+    ]
+
+    if not videos:
+        return
+
+    videos_iter = (
+        tqdm_wrapper(videos, desc="Compressing videos", unit="vid")
+        if len(videos) > 1
+        else videos
+    )
+
+    for f in videos_iter:
         try:
-            if not f.is_file():
-                continue
-
-            if is_vid_compressed(f):
-                continue
-
             logger.info(f'Compressing "{f}" {natural_size(f.stat().st_size)}')
             temp_file = temp_dir_path / f"{f.stem}.mkv"
             start_time = time.time()
 
-            result = compress_vid(f, temp_file, video_quality)
+            result = compress_vid(
+                f,
+                temp_file,
+                quality=video_quality,
+                preset=video_preset,
+                animation=video_animation,
+                summary=summary,
+            )
 
             total_time = round(time.time() - start_time)
             human_total_time = humanize.precisedelta(total_time)
@@ -1144,7 +1211,10 @@ def compress_all_vid(
                     f'Compressed file "{f.with_suffix(".mkv")}"'
                     " is larger than original"
                 )
-                set_vid_compressed(f)
+                try:
+                    set_vid_compressed(f)
+                except Exception:
+                    pass
                 temp_file.unlink(missing_ok=True)
                 continue
             elif result == COMPRESS_RESULT.NO_QUALITY:
@@ -1152,7 +1222,7 @@ def compress_all_vid(
                     f'Failed to find good quality for "{f}" after '
                     f"{human_total_time}"
                 )
-                set_vid_compressed(f)
+                # set_vid_compressed(f)
                 temp_file.unlink(missing_ok=True)
                 continue
 
@@ -1162,7 +1232,10 @@ def compress_all_vid(
                     f.unlink()
                     shutil.move(temp_file, f.with_suffix(".mkv"))
                 else:
-                    set_vid_compressed(f)
+                    try:
+                        set_vid_compressed(f)
+                    except Exception:
+                        pass
                     temp_file.unlink(missing_ok=True)
         except FileNotFoundError as e:
             logger.error(f"Error on file {f}: {e}")
@@ -1170,32 +1243,42 @@ def compress_all_vid(
 
 @click.command()
 @click.argument(
-    "folders",
+    "folders_or_files",
     type=click.Path(exists=True, file_okay=True, path_type=Path),
     nargs=-1,
 )
 @click.option("--get-quality", "-g", is_flag=True)
-@click.option("--pdfs/--no-pdfs", "-p/-P", default=True)
-@click.option("--images/--no-images", "-i/-I", default=True)
-@click.option("--videos/--no-videos", "-v/-V", default=True)
-@click.option("--audios/--no-audios", "-a/-A", default=True)
+@click.option("--pdfs", "-p", is_flag=True)
+@click.option("--images", "-i", is_flag=True)
+@click.option("--videos", "-v", is_flag=True)
+@click.option("--audios", "-a", is_flag=True)
 @click.option("--recursive", "-r", is_flag=True)
-@click.option("--video-quality", "-q", type=int, default=0)
+@click.option(
+    "--image-quality", type=click.FloatRange(0, 1), default=MIN_SSIM_IMG
+)
+@click.option("--video-quality", type=click.IntRange(0, 70), default=0)
+@click.option("--video-preset", type=click.IntRange(0, 10), default=0)
+@click.option("--video-animation", is_flag=True, default=False)
+@click.option("--summary", "-s", is_flag=True, default=False)
 def main(
-    folders: tuple[Path],
+    folders_or_files: tuple[Path, ...],
     get_quality: bool,
     pdfs: bool,
     images: bool,
     videos: bool,
     audios: bool,
     recursive: bool,
+    image_quality: float,
     video_quality: int,
+    video_preset: int,
+    video_animation: bool,
+    summary: bool,
 ):
     if get_quality:
-        if len(folders) != 2:
+        if len(folders_or_files) != 2:
             raise ValueError("Can only get quality for two files")
         ssim, ssim_1_percentile, vmaf, vmaf_1_percentile = calculate_metrics(
-            folders[0], folders[1]
+            folders_or_files[0], folders_or_files[1]
         )
         if vmaf == 0:
             print(
@@ -1210,8 +1293,11 @@ def main(
             )
         return
 
-    if not folders:
-        folders = (Path("."),)
+    if not folders_or_files:
+        folders_or_files = (Path("."),)
+
+    if not pdfs and not images and not videos and not audios:
+        pdfs = images = videos = audios = True
 
     with (
         tempfile.TemporaryDirectory() as temp_dir,
@@ -1219,38 +1305,30 @@ def main(
     ):
         temp_dir_path = Path(temp_dir)
         # files = []
-        for folder in folders:
-            if pdfs:
-                compress_all_pdf(folder, temp_dir_path, recursive=recursive)
-            if images:
-                compress_all_img(folder, temp_dir_path, recursive=recursive)
-            if audios:
-                compress_all_aud(folder, temp_dir_path)
-            if videos:
-                compress_all_vid(
-                    folder,
-                    temp_dir_path,
-                    video_quality,
-                    recursive=recursive,
-                )
-        # if videos:
-        #     video_files = []
-        #     for folder in folders:
-        #         if folder.is_file():
-        #             if folder.suffix.lower() in VIDEO_EXTENSIONS:
-        #                 video_files.append(folder)
-        #         else:
-        #             for ext in VIDEO_EXTENSIONS:
-        #                 if recursive:
-        #                     video_files += sorted(folder.rglob(f"*{ext}"))
-        #                 else:
-        #                     video_files += sorted(folder.glob(f"*{ext}"))
-        #     compress_all_vid(
-        #         folder,
-        #         temp_dir_path,
-        #         video_quality,
-        #         recursive=recursive,
-        #     )
+        # for folder_or_file in folders_or_files:
+        if pdfs:
+            compress_all_pdf(
+                folders_or_files, temp_dir_path, recursive=recursive
+            )
+        if images:
+            compress_all_img(
+                folders_or_files,
+                temp_dir_path,
+                image_quality=image_quality,
+                recursive=recursive,
+            )
+        if audios:
+            compress_all_aud(folders_or_files, temp_dir_path)
+        if videos:
+            compress_all_vid(
+                folders_or_files,
+                temp_dir_path,
+                video_quality,
+                video_preset=video_preset,
+                video_animation=video_animation,
+                summary=summary,
+                recursive=recursive,
+            )
 
 
 if __name__ == "__main__":

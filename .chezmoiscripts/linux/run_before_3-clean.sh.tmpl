@@ -42,5 +42,6 @@ if ! [ "$(find "${HOME}/.cache/run-weekly" -mtime -7 2>/dev/null)" ]; then
   rm -rf "${HOME}/.cache/Smart Code ltd/Stremio/QtWebEngine/Default/Cache"
   rm -rf "${HOME}/.cache/vivaldi"
   find "${HOME}/.cache/mozilla" -name "cache2" -type d -prune -exec rm -rf '{}' '+' &>/dev/null || :
+  find "${HOME}/.config/BraveSoftware" -name "CacheStorage" -type d -prune -exec rm -rf '{}' '+' &>/dev/null || :
   touch "${HOME}/.cache/run-weekly"
 fi
