@@ -18,7 +18,11 @@ def main():
                 "-o",
                 "LogLevel=ERROR",
                 "-o",
+                "BatchMode=yes",
+                "-o",
                 "StrictHostKeyChecking=no",
+                "-o",
+                "ConnectTimeout=5",
                 "-t",
                 "termux",
                 "sync-celular",
@@ -82,7 +86,7 @@ def main():
 
     try:
         if not subprocess.run(
-            ["rclone", "lsd", f"{pc}/media/data/Android/"],
+            ["rclone", "lsd", f"{pc}/data/data/Android/"],
             timeout=10,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -98,7 +102,7 @@ def main():
                         filter_file.name,
                         "copy",
                         f"{android}/sdcard/",
-                        f"{pc}/media/data/Android/",
+                        f"{pc}/data/data/Android/",
                     ]
                 )
                 subprocess.run(
@@ -109,7 +113,7 @@ def main():
                         "--exclude=**tmp**",
                         "sync",
                         f"{android}/sdcard/Tachiyomi/",
-                        f"{pc}/media/data/Android/Tachiyomi/",
+                        f"{pc}/data/data/Android/Tachiyomi/",
                     ]
                 )
     except subprocess.TimeoutExpired:

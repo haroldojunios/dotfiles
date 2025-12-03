@@ -14,6 +14,8 @@
 {{-   $isWSL = contains "microsoft" (lower .chezmoi.kernel.osrelease) -}}
 {{- end -}}
 
+{{- $isAndroid := (eq $osid "android") -}}
+
 {{- $isRasp := false -}}
 {{- if hasKey .chezmoi.kernel "osrelease" -}}
 {{-   $isRasp = contains "rpi" (lower .chezmoi.kernel.osrelease) -}}
@@ -42,8 +44,11 @@ encryption = "age"
   recipient = "age1d04ej32j97pcsctxxcm475l5z5nttp6nzd4jr57ruj45qw8hqgwqtpsdzw"
 [cd]
   command = "fish"
+[git]
+    autoPush = {{ not $isAndroid }}
 [data]
   installDE = {{ $installDE }}
+  isAndroid = {{ $isAndroid }}
   isRasp = {{ $isRasp }}
   isServer = {{ $isServer }}
   isWSL = {{ $isWSL }}

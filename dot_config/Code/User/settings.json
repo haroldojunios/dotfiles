@@ -75,6 +75,20 @@
   "code-runner.enableAppInsights": false,
   "comments.openView": "never",
   "cSpell.allowCompoundWords": true,
+  "cSpell.enabledSchemes": {
+    "comment": true,
+    "file": true,
+    "gist": true,
+    "overleaf-workshop": true,
+    "repo": true,
+    "sftp": true,
+    "untitled": true,
+    "vscode-notebook-cell": true,
+    "vscode-scm": true,
+    "vscode-userdata": true,
+    "vscode-vfs": true,
+    "vsls": true
+  },
   "cSpell.language": "pt-BR,fr-FR,en-US",
   "cSpell.userWords": [
     "Alanna",
@@ -463,6 +477,5 @@
     "*.svg": "default"
   },
   "workbench.startupEditor": "none",
-  "workbench.tree.renderIndentGuides": "always",
-  "workbench.activityBar.location": "hidden"
+  "workbench.tree.renderIndentGuides": "always"
 }

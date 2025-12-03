@@ -266,9 +266,11 @@ def get_aud_bitrate(input_file: Path):
 
 def get_aud_channels(input_file):
     metadata = get_vid_metadata(input_file)
+    channels = []
     for stream in metadata["streams"]:
         if stream.get("codec_type") == "audio":
-            return int(stream.get("channels", 0))
+            channels.append(stream.get("channels", 0))
+    return channels
 
 
 def set_file_metadata(filename, reference_file):
@@ -491,16 +493,29 @@ def convert_vid(
         if get_aud_codec(input_file) in ("ogg", "opus")
         else {
             "c:a": "libopus",
-            "b:a": f"{VID_AUD_BR}k",
             "compression_level": 10,
             "vbr": "on",
         }
     )
-    channels = get_aud_channels(input_file) or 2
-    if channels > 2 and audio_codec["c:a"] != "copy":
-        audio_codec["ac"] = channels
-        audio_codec["mapping_family:a"] = 1
-        audio_codec["b:a"] = f"{VID_AUD_SUR_BR}k"
+    channels = get_aud_channels(input_file) or [2]
+    if audio_codec["c:a"] != "copy":
+        if len(channels) == 1:
+            if channels[0] > 2:
+                audio_codec["b:a"] = f"{VID_AUD_SUR_BR}k"
+                audio_codec["ac"] = channels[0]
+                audio_codec["mapping_family:a"] = 1
+            else:
+                audio_codec["b:a"] = f"{VID_AUD_BR}k"
+        elif len(channels) > 1:
+            for i, ch in enumerate(channels):
+                if ch > 2:
+                    audio_codec[f"b:a:{i}"] = f"{VID_AUD_SUR_BR}k"
+                    audio_codec[f"ac:{i}"] = ch
+                    audio_codec[f"mapping_family:a:{i}"] = 1
+                else:
+                    audio_codec[f"b:a:{i}"] = f"{VID_AUD_BR}k"
+        else:
+            audio_codec["b:a"] = f"{VID_AUD_BR}k"
 
     t_param = {}
     if t:
@@ -520,7 +535,7 @@ def convert_vid(
     ffmpeg = (
         FFmpeg()
         .option("y")
-        .input(str(input_file), t_param)
+        .input(str(input_file), {**t_param, "r": get_vid_fps(input_file)})
         .output(
             str(output_file),
             {
@@ -536,13 +551,15 @@ def convert_vid(
             crf=quality,
             # vsync=2,
             # vf="mpdecimate",
-            fps_mode="vfr",
+            # fps_mode="vfr",
             # qmin=max(1, round(0.75 * quality)),
             # qmax=min(99, 2 * quality),
             bf=0,
             metadata="comment=compressed",
         )
     )
+    # print(ffmpeg.arguments)
+
     pbar = None
     try:
         if show_progress:
@@ -565,9 +582,9 @@ def convert_vid(
                 pbar.close()
 
         ffmpeg.execute()
-        # subprocess.run(ffmpeg.arguments, check=True)
         return True
     except Exception:
+        # subprocess.run(ffmpeg.arguments, check=True)
         if pbar is not None:
             pbar.close()
         return False
@@ -1134,6 +1151,8 @@ def compress_all_img(
 
     if not images:
         return
+
+    images.sort(key=lambda p: p.stat().st_mtime)
 
     for f in tqdm_wrapper(images, desc="Compressing images", unit="img"):
         _compress_image(f, temp_dir_path, quality=image_quality)
