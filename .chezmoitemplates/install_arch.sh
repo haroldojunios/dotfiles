@@ -427,7 +427,6 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
     libvdpau
     libxnvctrl
     mesa
-    mesa-vdpau
     nvidia-container-toolkit
     nvidia-utils
     opencl-mesa
