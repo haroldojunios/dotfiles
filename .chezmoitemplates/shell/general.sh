@@ -73,6 +73,7 @@ alias rsh='bash -c "(cd; rsync -amyvhPl --inplace --relative --info=progress2,na
 alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --check-first --links --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
 alias rcc='rc copy'
 alias rcs='rc --track-renames sync'
+alias rcss='rc --track-renames-strategy="modtime,size" sync'
 alias rcm='rc move'
 alias c='TMUX= code'
 alias c.='TMUX= code .'

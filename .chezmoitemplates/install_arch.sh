@@ -211,6 +211,7 @@ packageList=(
   docker
   docker-buildx
   docker-compose
+  earlyoom
   efibootmgr
   exfatprogs
   expac
@@ -506,6 +507,10 @@ if [ -d "/proc/acpi/button/lid" ]; then
     sudo systemctl enable --now NetworkManager-dispatcher.service
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
   fi
+fi
+
+if ! systemctl list-unit-files --user --state=enabled | grep earlyoom.service &>/dev/null; then
+  systemctl enable --now earlyoom.service
 fi
 
 if ! systemctl list-unit-files --user --state=enabled | grep mpd.service &>/dev/null; then
