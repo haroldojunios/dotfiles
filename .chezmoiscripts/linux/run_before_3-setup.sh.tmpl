@@ -153,7 +153,7 @@ fi
 
 if ! [ -f /etc/tmpfiles.d/media.conf ]; then
   sudo bash -c "cat >/etc/tmpfiles.d/media.conf" <<EOF
-D /media 0755 root root 0 -
+D /media 0777 root root 0 -
 EOF
 fi
 
