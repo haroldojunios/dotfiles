@@ -509,7 +509,7 @@ if [ -d "/proc/acpi/button/lid" ]; then
   fi
 fi
 
-if ! systemctl list-unit-files --user --state=enabled | grep earlyoom.service &>/dev/null; then
+if ! systemctl list-unit-files --state=enabled | grep earlyoom.service &>/dev/null; then
   systemctl enable --now earlyoom.service
 fi
 

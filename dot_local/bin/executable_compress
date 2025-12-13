@@ -17,6 +17,7 @@ import humanize
 import numpy as np
 from exiftool import ExifTool, ExifToolHelper
 from ffmpeg import FFmpeg
+from ffmpeg.errors import FFmpegError
 from pypdf import PdfReader, PdfWriter
 from tqdm import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
@@ -271,6 +272,31 @@ def get_aud_channels(input_file):
         if stream.get("codec_type") == "audio":
             channels.append(stream.get("channels", 0))
     return channels
+
+
+def get_vid_cover(input_file):
+    metadata = get_vid_metadata(input_file)
+    index = 0
+    for stream in metadata["streams"]:
+        if stream.get("codec_type") == "video":
+            if stream.get("disposition", {}).get("attached_pic", 0):
+                return index, stream["index"]
+            index += 1
+
+    return None, None
+
+
+def get_vid_idxs(input_file):
+    metadata = get_vid_metadata(input_file)
+    indexes = []
+    index = 0
+    for stream in metadata["streams"]:
+        if stream.get("codec_type") == "video":
+            if not stream.get("disposition", {}).get("attached_pic", 0):
+                indexes.append(index)
+            index += 1
+
+    return indexes
 
 
 def set_file_metadata(filename, reference_file):
@@ -532,38 +558,50 @@ def convert_vid(
             f"variance-boost-strength=1:variance-octile=4:{svtav1_params}"
         )
 
-    ffmpeg = (
-        FFmpeg()
-        .option("y")
-        .input(str(input_file), {**t_param, "r": get_vid_fps(input_file)})
-        .output(
-            str(output_file),
-            {
-                "c:v": "libsvtav1",
-                "svtav1-params": svtav1_params,
-                **audio_codec,
-                "c:s": "copy",
-            },
-            preset=preset,
-            pix_fmt="yuv420p10le",
-            strict=2,
-            map=0,
-            crf=quality,
-            # vsync=2,
-            # vf="mpdecimate",
-            # fps_mode="vfr",
-            # qmin=max(1, round(0.75 * quality)),
-            # qmax=min(99, 2 * quality),
-            bf=0,
-            metadata="comment=compressed",
+    map_params = ["0:v", "0:a?", "0:s?", "0:t?", "0:d?"]
+    total_frames = None
+
+    def build_ffmpeg(map: int | list = 0):
+        ffmpeg = (
+            FFmpeg()
+            .option("y")
+            .input(str(input_file), **t_param)
+            .output(
+                str(output_file),
+                {
+                    "c": "copy",
+                    "c:v:0": "libsvtav1",
+                    "svtav1-params": svtav1_params,
+                    **audio_codec,
+                    "c:s": "copy",
+                    "c:t": "copy",
+                    "c:d": "copy",
+                },
+                preset=preset,
+                pix_fmt="yuv420p10le",
+                strict=2,
+                map=map,
+                # map=map_params,
+                r=get_vid_fps(input_file),
+                crf=quality,
+                # vsync=2,
+                # vf="mpdecimate",
+                # fps_mode="vfr",
+                # qmin=max(1, round(0.75 * quality)),
+                # qmax=min(99, 2 * quality),
+                ignore_unknown=None,
+                bf=0,
+                metadata="comment=compressed",
+            )
         )
-    )
-    # print(ffmpeg.arguments)
+        return ffmpeg
+
+    ffmpeg = build_ffmpeg()
 
     pbar = None
-    try:
-        if show_progress:
-            total_frames = get_vid_frames(input_file)
+
+    def add_progress_callbacks(ffmpeg, pbar=None, total_frames=None):
+        if pbar is None:
             pbar = tqdm(
                 total=total_frames,
                 desc=Path(input_file).name[:50].strip(),
@@ -572,22 +610,41 @@ def convert_vid(
                 smoothing=0.1,
             )
 
-            @ffmpeg.on("progress")
-            def progress_func(progress):
-                cur_frame = progress.frame
+        @ffmpeg.on("progress")
+        def progress_func(progress):
+            cur_frame = progress.frame
+            if pbar is not None:
                 pbar.update(cur_frame - pbar.n)
 
-            @ffmpeg.on("completed")
-            def completed_func():
+        @ffmpeg.on("completed")
+        def completed_func():
+            if pbar is not None:
                 pbar.close()
 
+        return pbar
+
+    if show_progress:
+        total_frames = get_vid_frames(input_file)
+        pbar = add_progress_callbacks(ffmpeg, total_frames=total_frames)
+
+    try:
+        tqdm.write(str(ffmpeg.arguments))
+        # subprocess.run(ffmpeg.arguments, check=True)
         ffmpeg.execute()
         return True
-    except Exception:
-        # subprocess.run(ffmpeg.arguments, check=True)
-        if pbar is not None:
-            pbar.close()
-        return False
+    except FFmpegError:
+        ffmpeg = build_ffmpeg(map=map_params)
+        if show_progress:
+            pbar = add_progress_callbacks(
+                ffmpeg, pbar, total_frames=total_frames
+            )
+        tqdm.write(str(ffmpeg.arguments))
+        ffmpeg.execute()
+        return True
+    # excet Exception:
+    #     if pbar is not None:
+    #         pbar.close()
+    #     return False
 
 
 def find_vid_quality(input_file, preset=VID_PRESET, animation=False):
