@@ -36,7 +36,7 @@ MIN_SSIM_1_PERCENTILE = 0.9
 MIN_VMAF = 94.5
 MIN_VMAF_1_PERCENTILE = 88
 VID_PRESET = 4
-VID_QUALITY_DURATION = 3 * 3
+VID_QUALITY_DURATION = 20
 MIN_VID_QUALITY_DURATION = 4
 MIN_IMG_QUALITY = 45
 MIN_VID_QUALITY = 48
@@ -628,7 +628,7 @@ def convert_vid(
         pbar = add_progress_callbacks(ffmpeg, total_frames=total_frames)
 
     try:
-        tqdm.write(str(ffmpeg.arguments))
+        # tqdm.write(str(ffmpeg.arguments))
         # subprocess.run(ffmpeg.arguments, check=True)
         ffmpeg.execute()
         return True
@@ -638,7 +638,7 @@ def convert_vid(
             pbar = add_progress_callbacks(
                 ffmpeg, pbar, total_frames=total_frames
             )
-        tqdm.write(str(ffmpeg.arguments))
+        # tqdm.write(str(ffmpeg.arguments))
         ffmpeg.execute()
         return True
     # excet Exception:
@@ -651,7 +651,7 @@ def find_vid_quality(input_file, preset=VID_PRESET, animation=False):
     duration = get_vid_duration(input_file)
     fps = get_vid_fps(input_file)
     vid_quality_duration = (
-        round(VID_QUALITY_DURATION * 60 / fps, 1)
+        round(VID_QUALITY_DURATION * 30 / fps, 1)
         if fps
         else VID_QUALITY_DURATION
     )
@@ -752,6 +752,11 @@ def compress_vid(
     if not preset:
         preset = VID_PRESET
 
+    duration = get_vid_duration(input_file)
+    durarion_time = str(timedelta(seconds=duration))
+    duration_time = durarion_time.split(".")[0]
+    logger.debug(f"  Video duration: {duration_time}")
+
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_dir_path = Path(temp_dir)
         # temp_dir_path = Path() / "temp"
@@ -842,6 +847,7 @@ def is_aud_compressed(filename, br=AUD_BR):
 def is_vid_compressed(filename):
     if Path(filename).suffix == ".mkv" and get_vid_codec(filename) == "av1":
         return True
+    return False
     with ExifToolHelper() as et:
         tags = et.get_tags(filename, tags=["comment", "usercomment"])
         comments = [v for k, v in tags[0].items() if "comment" in k.lower()]
