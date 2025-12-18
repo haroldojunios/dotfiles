@@ -12,6 +12,8 @@ if ! command -v pipx &>/dev/null; then
 fi
 # {{ end }}
 
+exit 
+
 if command -v pipx &>/dev/null; then
   pipx ensurepath &>/dev/null || :
 
