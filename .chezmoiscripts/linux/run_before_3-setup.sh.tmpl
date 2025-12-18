@@ -58,10 +58,10 @@ swapon -p 5 /dev/zram0
 EOF
 fi
 # {{    else }}
-if ! grep "zram-size = min(ram, 16384)" /etc/systemd/zram-generator.conf &>/dev/null; then
+if ! grep "zram-size = min(ram, 32768)" /etc/systemd/zram-generator.conf &>/dev/null; then
   sudo bash -c "cat >/etc/systemd/zram-generator.conf" <<EOF
 [zram0]
-zram-size = min(ram, 16384)
+zram-size = min(ram, 32768)
 compression-algorithm = zstd
 host-memory-limit = none
 EOF
