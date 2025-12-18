@@ -338,7 +338,8 @@ def calculate_metrics(
             "[dis][ref]libvmaf=log_fmt=json:"
             f"model=version={vmaf_model}:"
             f"log_path={vmaf_log_file}:"
-            "shortest=1:feature=name=float_ssim:"
+            "shortest=1:"
+            # "feature=name=float_ssim:"
             f"n_threads={N_THREADS}"
         )
         filter_ssim = (
