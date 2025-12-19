@@ -1,8 +1,5 @@
 # Complete compress command
-complete -c compress -f
-
-# Complete folders (paths that exist - both files and directories)
-complete -c compress -a '(__fish_complete_path)'
+complete -c compress -F
 
 # Boolean flags
 complete -c compress -s g -l get-quality -d "Get quality information" -f
