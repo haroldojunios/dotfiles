@@ -52,6 +52,8 @@ def main():
     - /Android/media/com.whatsapp/WhatsApp/.Thumbs/**
     - /Android/media/com.whatsapp/WhatsApp/.trash/**
     - /Android/media/com.whatsapp/WhatsApp/Media/.**
+    + /Android/media/com.whatsapp/WhatsApp/Databases/msgstore.db.crypt14
+    - /Android/media/com.whatsapp/WhatsApp/Databases/**
     + /Android/media/com.whatsapp/**
     - **/.Trash/**
     - **/.thumbnails/**
