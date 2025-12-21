@@ -31,9 +31,9 @@ AUDIO_EXTENSIONS += [ext.upper() for ext in AUDIO_EXTENSIONS]
 PDF_EXTENSIONS = [".pdf"]
 PDF_EXTENSIONS += [ext.upper() for ext in PDF_EXTENSIONS]
 MIN_SSIM = 0.95
-MIN_SSIM_IMG = 0.977
+MIN_SSIM_IMG = 0.98
 MIN_SSIM_1_PERCENTILE = 0.9
-MIN_VMAF = 94.5
+MIN_VMAF = 95
 MIN_VMAF_1_PERCENTILE = 88
 VID_PRESET = 4
 VID_QUALITY_DURATION = 20
@@ -657,7 +657,7 @@ def find_vid_quality(input_file, preset=VID_PRESET, animation=False):
         else VID_QUALITY_DURATION
     )
     vid_quality_duration = max(vid_quality_duration, MIN_VID_QUALITY_DURATION)
-    t = vid_quality_duration if duration > vid_quality_duration else 0
+    t = min(vid_quality_duration, duration)
 
     for div in range(5, 1, -1):
         if duration > vid_quality_duration * div:
