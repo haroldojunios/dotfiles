@@ -7,10 +7,8 @@ paths:
   comp:
     $albumartist/$year - $album%aunique{}
     $atypes/%if{$multidisc,$disc_name/}$track - $title
-  # comp: Various Artists/$year - $album%aunique{} $atypes/$track - $title
   albumtype:soundtrack: Soundtracks/$year - $album $atypes/$track $title
 import:
-  # incremental: yes
   move: yes
   log: ~/.cache/beets-log.txt
   languages: en
@@ -26,14 +24,14 @@ musicbrainz:
   external_ids:
     spotify: yes
     deezer: yes
-#   enabled: no
 pluginpath:
   - ~/.local/share/beets/beetsplug
 plugins:
   - advancedrewrite
   - albumtypes
   - autobpm
-  # - chroma
+  - badfiles
+  - chroma
   - duplicates
   - embedart
   - fetchart
@@ -41,19 +39,20 @@ plugins:
   - fromfilename
   - fuzzy
   - ihate
+  - importadded
   - info
   - inline
-  - lastgenre
   - lastimport
   - lyrics
   - mbsync
+  - musicbrainz
   - play
   - replaygain
   - scrub
   - playlist
   - smartplaylist
   - spotify
-  # - deezer
+  - lastgenre
   - types
   - web
   - singletonpath
@@ -97,6 +96,7 @@ embedart:
 types:
   liked: bool
   anime: bool
+  nacional: bool
   danceability: float
   mood_aggressive: float
   mood_happy: float
@@ -124,6 +124,10 @@ smartplaylist:
       query: liked:1
     - name: Anime.m3u
       query: anime:1
+    - name: Nacional.m3u
+      query: nacional:1
+    - name: Internacional.m3u
+      query: ^nacional:1
     - name: Metal.m3u
       query: genre:metal
     - name: Samba.m3u
@@ -145,10 +149,18 @@ lyrics:
   synced: yes
 scrub:
   auto: yes
+badfiles:
+  check_on_import: yes
+  commands:
+    opus: opusinfo -qq
+importadded:
+  preserve_mtimes: yes
+  preserve_write_mtimes: yes
 autobpm:
   auto: no
 lastgenre:
-  force: no
+  force: yes
+  keep_existing: yes
   canonical: yes
   prefer_specific: yes
   count: 3
