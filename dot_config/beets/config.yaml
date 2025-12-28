@@ -43,6 +43,7 @@ plugins:
   - info
   - inline
   - lastimport
+  - limit
   - lyrics
   - mbsync
   - musicbrainz
@@ -120,6 +121,8 @@ smartplaylist:
   playlist_dir: ~/.config/mpd/playlists
   forward_slash: no
   playlists:
+    - name: Last Added.m3u
+      query: "added- <50"
     - name: Liked.m3u
       query: liked:1
     - name: Anime.m3u
