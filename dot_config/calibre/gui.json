@@ -135,6 +135,30 @@
       [
         "timestamp",
         false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
       ]
     ]
   },
@@ -166,6 +190,30 @@
     "last_modified_injected": true,
     "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -351,26 +399,26 @@
     "frame_geometry": {
       "height": 462,
       "width": 791,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 462,
       "width": 791,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 462,
       "width": 791,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAACpYAAAHNAAAHgAAAAAAAAAqWAAABzQAAAAECAAAAB4AAAAeAAAAAAAAACpYAAAHN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAxYAAAHNAAAAAAAAAAAAAAMWAAABzQAAAAECAAAAB4AAAAAAAAAAAAAAAxYAAAHN"
     },
     "screen": {
       "depth": 32,
@@ -378,13 +426,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 1920,
+        "x": 0,
         "y": 0
       },
       "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2E1",
-      "name": "DP-2",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -401,27 +449,27 @@
   "geometry-of-calibre_main_window_geometry": {
     "frame_geometry": {
       "height": 1038,
-      "width": 949,
-      "x": 1920,
+      "width": 1906,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 1038,
-      "width": 949,
-      "x": 1920,
+      "width": 1906,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 1038,
-      "width": 949,
-      "x": 1920,
+      "width": 1906,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAACzQAAAQNAAAHgAAAAAAAAAs0AAAEDQAAAAECAAAAB4AAAAeAAAAAAAAACzQAAAQN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAdxAAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
     },
     "screen": {
       "depth": 32,
@@ -429,13 +477,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 1920,
+        "x": 0,
         "y": 0
       },
       "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2E1",
-      "name": "DP-2",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -918,7 +966,7 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 56
+    "/home/haroldo/calibre": 60
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -1009,6 +1057,30 @@
     "last_modified_injected": true,
     "path_injected": true,
     "sort_history": [
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
       [
         "title",
         true

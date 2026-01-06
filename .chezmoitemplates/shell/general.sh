@@ -64,13 +64,8 @@ alias sc=sync-celular
 alias rs='rsync --archive --human-readable --partial --progress --fuzzy --inplace --prune-empty-dirs --hard-links --info=progress2,name --no-inc-recursive --no-whole-file'
 alias rsl='rsync --archive --human-readable --whole-file --no-compress --hard-links --fuzzy --inplace --info=progress2,name --no-inc-recursive'
 alias rsd='rs --delete-after'
-alias rsh='bash -c "(cd; rsync -amyvhPl --inplace --relative --info=progress2,name \
-  --no-inc-recursive --exclude={venv,virtualenv,Cache,CachedData} \
-  .ssh Backup Books calibre \
-  Desktop Documents Downloads Music Pictures Videos \
-  /media/data/home)"'
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
-alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --check-first --links --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
+alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --links --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
 alias rcc='rc copy'
 alias rcs='rc --track-renames sync'
 alias rcss='rc --track-renames-strategy="modtime,size" sync'
@@ -93,8 +88,9 @@ alias pm='ps auxf | sort -nr -k 4'
 alias pm10='ps auxf | sort -nr -k 4 | head -10'
 command -v firefox >/dev/null && alias fp='firefox -P personal &>/dev/null & disown'
 command -v vivaldi >/dev/null && alias vp='vivaldi --profile-directory=personal &>/dev/null & disown'
-alias sudo='sudo --preserve-env=PATH'
+command -v sudo >/dev/null && alias sudo='sudo --preserve-env=PATH'
 command -v nvim >/dev/null && alias n='nvim'
 alias nnn='nnn -aeP p'
-alias esp-idf='source /opt/esp-idf/export.fish'
+test -f /opt/esp-idf/export.fish && alias esp-idf='source /opt/esp-idf/export.fish'
 alias tm='tmux at &>/dev/null || tmux'
+command -v yazi >/dev/null && alias y=yazi

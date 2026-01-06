@@ -38,7 +38,7 @@ MIN_VMAF_1_PERCENTILE = 88
 VID_PRESET = 4
 VID_QUALITY_DURATION = 20
 MIN_VID_QUALITY_DURATION = 4
-MIN_IMG_QUALITY = 45
+MIN_IMG_QUALITY = 40
 MIN_VID_QUALITY = 48
 MAX_VID_QUALITY = 32
 VID_AUD_BR = 96  # general
@@ -640,12 +640,17 @@ def convert_vid(
                 ffmpeg, pbar, total_frames=total_frames
             )
         # tqdm.write(str(ffmpeg.arguments))
-        ffmpeg.execute()
-        return True
-    # excet Exception:
-    #     if pbar is not None:
-    #         pbar.close()
-    #     return False
+        try:
+            ffmpeg.execute()
+            return True
+        except FFmpegError:
+            if pbar is not None:
+                pbar.close()
+            return False
+    except Exception:
+        if pbar is not None:
+            pbar.close()
+        return False
 
 
 def find_vid_quality(input_file, preset=VID_PRESET, animation=False):
@@ -848,7 +853,6 @@ def is_aud_compressed(filename, br=AUD_BR):
 def is_vid_compressed(filename):
     if Path(filename).suffix == ".mkv" and get_vid_codec(filename) == "av1":
         return True
-    return False
     with ExifToolHelper() as et:
         tags = et.get_tags(filename, tags=["comment", "usercomment"])
         comments = [v for k, v in tags[0].items() if "comment" in k.lower()]
@@ -953,9 +957,6 @@ def compress_img(input_file, output_file, quality: float = MIN_SSIM_IMG):
         # multiplier = 400 if input_file_path.suffix == ".jxl" else 250
         multiplier = 200
 
-        # quality = (
-        #     50 if input_file_path.suffix.lower() in (".heic", ".jpg") else 60
-        # )
         cur_quality = AVIF_QUALITIES[MIN_IMG_QUALITY]
         while cur_quality < 100:
             temp_file = (
@@ -1069,7 +1070,7 @@ def compress_all_aud(
             and input_path.suffix.lower() in AUDIO_EXTENSIONS
         ):
             audios.append(input_path)
-        else:
+        elif input_path.is_dir():
             for ext in AUDIO_EXTENSIONS:
                 if recursive:
                     audios += list(input_path.rglob(f"*{ext}"))
@@ -1101,7 +1102,7 @@ def compress_all_aud(
             touch(temp_file, times=(f.stat().st_atime, f.stat().st_mtime))
             compare_size(f, temp_file)
             if temp_file.stat().st_size < f.stat().st_size:
-                f.unlink()
+                f.unlink(missing_ok=True)
                 shutil.move(temp_file, f.with_suffix(".opus"))
             else:
                 temp_file.unlink(missing_ok=True)
@@ -1187,7 +1188,7 @@ def _compress_image(img, temp_dir_path, quality: float = MIN_SSIM_IMG):
         touch(temp_file, times=(img.stat().st_atime, img.stat().st_mtime))
         compare_size(img, temp_file)
         if temp_file.stat().st_size < img.stat().st_size:
-            img.unlink()
+            img.unlink(missing_ok=True)
             shutil.move(temp_file, img.with_suffix(".avif"))
         else:
             temp_file.unlink(missing_ok=True)
@@ -1312,7 +1313,7 @@ def compress_all_vid(
             if temp_file.exists():
                 touch(temp_file, times=(f.stat().st_atime, f.stat().st_mtime))
                 if temp_file.stat().st_size < f.stat().st_size:
-                    f.unlink()
+                    f.unlink(missing_ok=True)
                     shutil.move(temp_file, f.with_suffix(".mkv"))
                 else:
                     try:
