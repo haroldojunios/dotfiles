@@ -1,5 +1,13 @@
 [mgr]
+sort_by = "natural"
+sort_dir_first = true
+sort_translit = true
+linemode = "size"
 show_hidden = true
+show_symlink = true
+
+[preview]
+wrap = "yes"
 
 [plugin]
 prepend_preloaders = [
@@ -15,16 +23,10 @@ prepend_previewers = [
   { mime = "application/sqlite3", run = 'piper -- sqlite3 "$1" ".schema --indent"' },
   { url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
 ]
+prepend_fetchers = [
+  { id = "git", name = "*", run = "git" },
+  { id = "git", name = "*/", run = "git" },
+]
 
 [tasks]
 image_alloc = 1073741824 # = 1024*1024*1024 = 1024MB
-
-[[plugin.prepend_fetchers]]
-id = "git"
-name = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id = "git"
-name = "*/"
-run = "git"
