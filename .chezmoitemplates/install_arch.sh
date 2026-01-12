@@ -122,7 +122,7 @@ dePackageList=(
   alacritty
   archlinux-xdg-menu
   blueman
-  calibre
+  calibre-bin
   chromium
   cliphist
   dex

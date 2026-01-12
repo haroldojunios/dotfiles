@@ -27,26 +27,33 @@
   "gui_layout": "wide",
   "highlight_search_matches": false,
   "internally_viewed_formats": [
-    "LRF",
-    "EPUB",
-    "LIT",
-    "MOBI",
-    "PRC",
-    "POBI",
     "AZW",
     "AZW3",
-    "HTML",
+    "EPUB",
     "FB2",
     "FBZ",
-    "PDB",
-    "RB",
-    "SNB",
+    "HTML",
     "HTMLZ",
-    "KEPUB"
+    "KEPUB",
+    "LIT",
+    "LRF",
+    "MOBI",
+    "PDB",
+    "POBI",
+    "PRC",
+    "RB",
+    "SNB"
   ],
   "jobs_search_history": [],
   "lrf_viewer_search_history": [],
-  "main_search_history": [],
+  "main_search_history": [
+    "adeli",
+    "authors:\"=J. R. R. Tolkien\"",
+    "authors:\"=J. R. R. Tolkien\" or authors:\"=Christopher Tolkien\"",
+    "silma",
+    "authors:\"=J. R. R. Tolkien\" or authors:\"=Alan Lee\" or authors:\"=Christopher Tolkien\" or authors:\"=Ronald Kyrmse\"",
+    "authors:\"=Philip Pullman\""
+  ],
   "main_window_geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAAAAAAAAAAABP8AAAP/AAAAAAAAABgAAAT/AAAC/wAAAAECAAAABQAAAAAAAAAAHAAABP8AAAP/"
@@ -59,7 +66,9 @@
   "save_to_disk_template_history": [],
   "scheduler_search_history": [],
   "search_as_you_type": false,
-  "send_to_device_template_history": [],
+  "send_to_device_template_history": [
+    "{author_sort}/{title} - {authors}"
+  ],
   "send_to_storage_card_by_default": false,
   "separate_cover_flow": false,
   "shortcuts_search_history": [],
@@ -75,5 +84,5 @@
   "use_roman_numerals_for_series_number": true,
   "viewer_search_history": [],
   "viewer_toc_search_history": [],
-  "worker_limit": 6
+  "worker_limit": 8
 }

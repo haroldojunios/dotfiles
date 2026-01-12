@@ -126,6 +126,22 @@ def main():
             "rclone",
             *RC_OPTS,
             "--track-renames",
+            "--exclude=.caltrash/**",
+            "--exclude=.calnotes/**",
+            "--exclude=*.mobi",
+            "--exclude=*.db",
+            "--exclude=*.json",
+            "sync",
+            f"{pc or home}calibre/",
+            f"{android}/sdcard/Documents/Books/",
+        ]
+    )
+
+    subprocess.run(
+        [
+            "rclone",
+            *RC_OPTS,
+            "--track-renames",
             "--exclude=*.ini",
             "--exclude=.thumbnails/**",
             "--exclude=Playlists/**",

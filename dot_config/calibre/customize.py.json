@@ -11,6 +11,7 @@
   "plugin_customization": {},
   "plugins": {
     "EpubMerge": "/home/haroldo/.config/calibre/plugins/EpubMerge.zip",
-    "EpubSplit": "/home/haroldo/.config/calibre/plugins/EpubSplit.zip"
+    "EpubSplit": "/home/haroldo/.config/calibre/plugins/EpubSplit.zip",
+    "Goodreads": "/home/haroldo/.config/calibre/plugins/Goodreads.zip"
   }
 }

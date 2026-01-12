@@ -68,7 +68,7 @@
   ],
   "basic_metadata_widget_splitter_state": {
     "__class__": "bytearray",
-    "__value__": "AAAA/wAAAAEAAAADAAAA4AAAAUUAAAEKAf////8BAAAAAQA="
+    "__value__": "AAAA/wAAAAEAAAADAAAA4AAAAVwAAAEKAf////8BAAAAAQA="
   },
   "book_details_splitter_horizontal_state": [
     true,
@@ -84,10 +84,16 @@
       "__value__": "AAAA/wAAAAEAAAACAAABXgAAAV4B/////wEAAAABAA=="
     }
   ],
+  "book_info_dialog_splitter_state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAEAAAACAAABXgAAAV4B/////wEAAAABAA=="
+  },
   "book_list_pin_splitter_state": {
     "__class__": "bytearray",
     "__value__": "AAAA/wAAAAEAAAACAAABAAAAAEYA/////wEAAAABAA=="
   },
+  "bulk-mde-casing-algorithm": "title_case",
+  "bulk_metadata_window_tab": 0,
   "card_a_view books view state": {
     "column_alignment": {
       "size": "center",
@@ -235,6 +241,10 @@
         false
       ]
     ]
+  },
+  "choose-merge-dialog-splitter-state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAEAAAACAAABjwAAAQAA/////wEAAAABAA=="
   },
   "color_palette": "dark",
   "convert_single_dialog_geom": {
@@ -399,26 +409,128 @@
     "frame_geometry": {
       "height": 462,
       "width": 791,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 462,
       "width": 791,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 462,
       "width": 791,
+      "x": 1920,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAeAAAAAAAAACpYAAAHNAAAHgAAAAAAAAAqWAAABzQAAAAECAAAAB4AAAAeAAAAAAAAACpYAAAHN"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-book_info_dialog_geometry": {
+    "frame_geometry": {
+      "height": 980,
+      "width": 910,
+      "x": 488,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 980,
+      "width": 910,
+      "x": 488,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 980,
+      "width": 910,
+      "x": 488,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAHoAAAAAAAABXUAAAPTAAAB6AAAAAAAAAV1AAAD0wAAAAECAAAAB4AAAAHoAAAAAAAABXUAAAPT"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-bulk_metadata_window_geometry": {
+    "frame_geometry": {
+      "height": 1030,
+      "width": 1850,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 1030,
+      "width": 1850,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 1030,
+      "width": 1850,
       "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAxYAAAHNAAAAAAAAAAAAAAMWAAABzQAAAAECAAAAB4AAAAAAAAAAAAAAAxYAAAHN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABzkAAAQFAAAAAAAAAAAAAAc5AAAEBQAAAAECAAAAB4AAAAAAAAAAAAAABzkAAAQF"
     },
     "screen": {
       "depth": 32,
@@ -463,13 +575,166 @@
     "maximized": true,
     "normal_geometry": {
       "height": 1038,
-      "width": 1906,
+      "width": 949,
       "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAdxAAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO0AAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-choose-merge-dialog-geometry": {
+    "frame_geometry": {
+      "height": 653,
+      "width": 677,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 653,
+      "width": 677,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 653,
+      "width": 677,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAqQAAAKMAAAAAAAAAAAAAAKkAAACjAAAAAECAAAAB4AAAAAAAAAAAAAAAqQAAAKM"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-config_widget_dialog_geometry_Sharing_Metadata download": {
+    "frame_geometry": {
+      "height": 585,
+      "width": 515,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 585,
+      "width": 515,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 585,
+      "width": 515,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAgIAAAJIAAAAAAAAAAAAAAICAAACSAAAAAECAAAAB4AAAAAAAAAAAAAAAgIAAAJI"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-convert_bulk_dialog_geom": {
+    "frame_geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 980,
+      "width": 1850,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABzkAAAPTAAAAAAAAAAAAAAc5AAAD0wAAAAECAAAAB4AAAAAAAAAAAAAABzkAAAPT"
     },
     "screen": {
       "depth": 32,
@@ -501,26 +766,26 @@
     "frame_geometry": {
       "height": 980,
       "width": 1850,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 980,
       "width": 1850,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 980,
       "width": 1850,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAADrkAAAPTAAAHgAAAAAAAAA65AAAD0wAAAAECAAAAB4AAAAeAAAAAAAAADrkAAAPT"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABzkAAAPTAAAAAAAAAAAAAAc5AAAD0wAAAAECAAAAB4AAAAAAAAAAAAAABzkAAAPT"
     },
     "screen": {
       "depth": 32,
@@ -528,13 +793,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 1920,
+        "x": 0,
         "y": 0
       },
       "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2E1",
-      "name": "DP-2",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -622,7 +887,7 @@
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAABBgAAAGxAAAAAAAAAAAAAAQYAAABsQAAAAACAAAAB4AAAAAAAAAAAAAABBgAAAGx"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABBgAAAGxAAAAAAAAAAAAAAQYAAABsQAAAAECAAAAB4AAAAAAAAAAAAAABBgAAAGx"
     },
     "screen": {
       "depth": 32,
@@ -633,7 +898,7 @@
         "x": 0,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
       "model": "27G2G4",
       "name": "DP-1",
@@ -653,27 +918,27 @@
   "geometry-of-duplicates-question-dialog-geometry": {
     "frame_geometry": {
       "height": 378,
-      "width": 518,
-      "x": 1920,
+      "width": 556,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 378,
-      "width": 518,
-      "x": 1920,
+      "width": 556,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 378,
-      "width": 518,
-      "x": 1920,
+      "width": 556,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAACYUAAAF5AAAHgAAAAAAAAAmFAAABeQAAAAECAAAAB4AAAAeAAAAAAAAACYUAAAF5"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAisAAAF5AAAAAAAAAAAAAAIrAAABeQAAAAECAAAAB4AAAAAAAAAAAAAAAisAAAF5"
     },
     "screen": {
       "depth": 32,
@@ -681,13 +946,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 1920,
+        "x": 0,
         "y": 0
       },
       "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2E1",
-      "name": "DP-2",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -703,31 +968,31 @@
   },
   "geometry-of-jobs_dialog_geometry": {
     "frame_geometry": {
-      "height": 567,
-      "width": 1111,
-      "x": 200,
-      "y": 224
+      "height": 538,
+      "width": 1103,
+      "x": 0,
+      "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 538,
       "width": 1103,
-      "x": 204,
-      "y": 249
+      "x": 0,
+      "y": 0
     },
-    "maximized": false,
+    "maximized": true,
     "normal_geometry": {
       "height": 538,
       "width": 1103,
-      "x": 204,
-      "y": 249
+      "x": 0,
+      "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAADIAAAA4AAABR4AAAMWAAAAzAAAAPkAAAUaAAADEgAAAAAAAAAAB4AAAADMAAAA+QAABRoAAAMS"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABE4AAAIZAAAAAAAAAAAAAAROAAACGQAAAAECAAAAB4AAAAAAAAAAAAAABE4AAAIZ"
     },
     "screen": {
-      "depth": 24,
+      "depth": 32,
       "device_pixel_ratio": 1.0,
       "geometry_in_logical_pixels": {
         "height": 1080,
@@ -735,18 +1000,18 @@
         "x": 0,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
       "model": "27G2G4",
-      "name": "DP-0",
-      "serial": "RFCN7XA002564",
+      "name": "DP-1",
+      "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
         "width": 1920
       },
       "virtual_geometry": {
         "height": 1080,
-        "width": 1920,
+        "width": 3840,
         "x": 0,
         "y": 0
       }
@@ -826,7 +1091,7 @@
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA1EAAAJXAAAAAAAAAAAAAANRAAACVwAAAAACAAAAB4AAAAAAAAAAAAAAA1EAAAJX"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA1EAAAJXAAAAAAAAAAAAAANRAAACVwAAAAECAAAAB4AAAAAAAAAAAAAAA1EAAAJX"
     },
     "screen": {
       "depth": 32,
@@ -837,7 +1102,7 @@
         "x": 0,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
       "model": "27G2G4",
       "name": "DP-1",
@@ -877,7 +1142,7 @@
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAABzkAAAQFAAAAAAAAAAAAAAc5AAAEBQAAAAACAAAAB4AAAAAAAAAAAAAABzkAAAQF"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABzkAAAQFAAAAAAAAAAAAAAc5AAAEBQAAAAECAAAAB4AAAAAAAAAAAAAABzkAAAQF"
     },
     "screen": {
       "depth": 32,
@@ -888,7 +1153,7 @@
         "x": 0,
         "y": 0
       },
-      "index_in_screens_list": 0,
+      "index_in_screens_list": 1,
       "manufacturer": "AOC",
       "model": "27G2G4",
       "name": "DP-1",
@@ -909,26 +1174,26 @@
     "frame_geometry": {
       "height": 720,
       "width": 930,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 720,
       "width": 930,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 720,
       "width": 930,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAACyEAAALPAAAHgAAAAAAAAAshAAACzwAAAAECAAAAB4AAAAeAAAAAAAAACyEAAALP"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA6EAAALPAAAAAAAAAAAAAAOhAAACzwAAAAECAAAAB4AAAAAAAAAAAAAAA6EAAALP"
     },
     "screen": {
       "depth": 32,
@@ -936,13 +1201,64 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 1920,
+        "x": 0,
         "y": 0
       },
       "index_in_screens_list": 1,
       "manufacturer": "AOC",
-      "model": "27G2E1",
-      "name": "DP-2",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-single-cover-fetch-dialog-geometry": {
+    "frame_geometry": {
+      "height": 586,
+      "width": 848,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 586,
+      "width": 848,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 586,
+      "width": 848,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA08AAAJJAAAAAAAAAAAAAANPAAACSQAAAAECAAAAB4AAAAAAAAAAAAAAA08AAAJJ"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -959,14 +1275,14 @@
   "grid view visible": false,
   "jobs view column layout3": {
     "__class__": "bytearray",
-    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA0AAAAFAQEBAAAAAAAAAAAAAAAAAFX/////AAAAhAAAAAAAAAAFAAACawAAAAEAAAAAAAAAYAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAD6AAAAAAAAAAAAA=="
+    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCwAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAACOwAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAmAAAAAEAAAAAAAAAewAAAAEAAAAAAAAD6AAAAAAAAAAAAA=="
   },
   "jobs_dialog_geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 60
+    "/home/haroldo/calibre": 81
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -1135,7 +1451,8 @@
   "qv_open_at_shutdown": false,
   "recently_used_languages": [
     "Portuguese",
-    "English"
+    "English",
+    "Spanish"
   ],
   "replace_scene_breaks_history": [
     "",
