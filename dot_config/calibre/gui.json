@@ -40,7 +40,8 @@
     "Tweak ePub",
     "Preferences",
     "EpubMerge",
-    "EpubSplit"
+    "EpubSplit",
+    "KOReader Sync"
   ],
   "action-layout-toolbar-device": [
     "Add Books",
@@ -64,7 +65,8 @@
     "Help",
     "Preferences",
     "EpubMerge",
-    "EpubSplit"
+    "EpubSplit",
+    "KOReader Sync"
   ],
   "basic_metadata_widget_splitter_state": {
     "__class__": "bytearray",
@@ -165,6 +167,38 @@
       [
         "timestamp",
         false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
       ]
     ]
   },
@@ -196,6 +230,38 @@
     "last_modified_injected": true,
     "path_injected": true,
     "sort_history": [
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
+      [
+        "timestamp",
+        false
+      ],
+      [
+        "inlibrary",
+        false
+      ],
       [
         "timestamp",
         false
@@ -409,14 +475,14 @@
     "frame_geometry": {
       "height": 462,
       "width": 791,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 462,
       "width": 791,
-      "x": 1920,
+      "x": 0,
       "y": 0
     },
     "maximized": true,
@@ -428,7 +494,7 @@
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAeAAAAAAAAACpYAAAHNAAAHgAAAAAAAAAqWAAABzQAAAAECAAAAB4AAAAeAAAAAAAAACpYAAAHN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAxYAAAHNAAAHgAAAAAAAAAqWAAABzQAAAAECAAAAB4AAAAAAAAAAAAAAAxYAAAHN"
     },
     "screen": {
       "depth": 32,
@@ -574,14 +640,14 @@
     },
     "maximized": true,
     "normal_geometry": {
-      "height": 1038,
-      "width": 949,
+      "height": 1042,
+      "width": 955,
       "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO0AAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO6AAAEEQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
     },
     "screen": {
       "depth": 32,
@@ -1170,6 +1236,57 @@
       }
     }
   },
+  "geometry-of-plugin config dialog:User interface action:KOReader Sync": {
+    "frame_geometry": {
+      "height": 941,
+      "width": 616,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 941,
+      "width": 616,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 941,
+      "width": 616,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAAmcAAAOsAAAAAAAAAAAAAAJnAAADrAAAAAECAAAAB4AAAAAAAAAAAAAAAmcAAAOs"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
   "geometry-of-preferences dialog geometry": {
     "frame_geometry": {
       "height": 720,
@@ -1282,7 +1399,7 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 81
+    "/home/haroldo/calibre": 89
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -1410,6 +1527,38 @@
         true
       ],
       [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
+        "authors",
+        true
+      ],
+      [
+        "title",
+        true
+      ],
+      [
         "inlibrary",
         false
       ],
@@ -1470,6 +1619,7 @@
     "__value__": "AdnQywADAAAAAADhAAAAkAAABAoAAAMIAAAA5gAAAKwAAAQFAAADAwAAAAEAAAAABQAAAADmAAAArAAABAUAAAMD"
   },
   "search bar visible": true,
+  "server3_warning_done": true,
   "show_emblems": false,
   "single-cover-fetch-dialog-geometry": {
     "__class__": "bytearray",
