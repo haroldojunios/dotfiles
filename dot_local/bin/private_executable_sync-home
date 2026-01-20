@@ -1,0 +1,85 @@
+#!/usr/bin/python
+
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
+
+
+def main():
+    OUT_PATH = Path("/data/data")
+    if not OUT_PATH.is_dir():
+        raise FileNotFoundError(f"Missing directory: {OUT_PATH}")
+
+    RCLONE_FILTERS = """
+    - **/venv/**
+    - **/.venv/**
+    - **/node_modules/**
+    + Documents/**
+    + Downloads/**
+    + Music/**
+    + Pictures/**
+    + Videos/**
+    - *
+    """
+
+    RC_OPTS = (
+        "--progress",
+        "--transfers=16",
+        "--checkers=32",
+        "--inplace",
+        "--links",
+        "--retries=10",
+        "--low-level-retries=20",
+        f"--stats-file-name-length={shutil.get_terminal_size().columns - 40}",
+        "--check-first",
+        "--verbose",
+    )
+
+    with tempfile.NamedTemporaryFile("w") as filter_file:
+        filter_file.write(RCLONE_FILTERS)
+        filter_file.flush()
+
+        subprocess.run(
+            [
+                "rclone",
+                *RC_OPTS,
+                "--filter-from",
+                filter_file.name,
+                "copy",
+                f"{Path.home()}",
+                f"{OUT_PATH}",
+            ]
+        )
+
+    subprocess.run(
+        [
+            "rclone",
+            *RC_OPTS,
+            "--track-renames",
+            "sync",
+            f"{Path.home() / 'calibre'}",
+            f"{OUT_PATH / 'calibre'}",
+        ]
+    )
+
+    subprocess.run(
+        [
+            "rclone",
+            *RC_OPTS,
+            "--track-renames",
+            "sync",
+            f"{Path.home() / '.local/share/media-stack'}",
+            f"{OUT_PATH / '.local/share/media-stack'}",
+        ]
+    )
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit()
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        exit(1)
