@@ -336,6 +336,22 @@
     "light_texture": null,
     "migrated": true
   },
+  "custcol-prefs-column_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "custcol-prefs-table-geometry": [
+    62,
+    204,
+    104,
+    406,
+    637,
+    100
+  ],
   "custom_colors_for_color_dialog": [
     [
       255,
@@ -1136,28 +1152,28 @@
   },
   "geometry-of-metadata_single_gui_geom": {
     "frame_geometry": {
-      "height": 600,
-      "width": 850,
+      "height": 625,
+      "width": 1435,
       "x": 0,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
-      "height": 600,
-      "width": 850,
+      "height": 625,
+      "width": 1435,
       "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
-      "height": 600,
-      "width": 850,
+      "height": 625,
+      "width": 1435,
       "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAA1EAAAJXAAAAAAAAAAAAAANRAAACVwAAAAECAAAAB4AAAAAAAAAAAAAAA1EAAAJX"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABZoAAAJwAAAAAAAAAAAAAAWaAAACcAAAAAECAAAAB4AAAAAAAAAAAAAABZoAAAJw"
     },
     "screen": {
       "depth": 32,
@@ -1399,7 +1415,7 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 89
+    "/home/haroldo/calibre": 93
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -1599,8 +1615,8 @@
   "quickview visible": false,
   "qv_open_at_shutdown": false,
   "recently_used_languages": [
-    "Portuguese",
     "English",
+    "Portuguese",
     "Spanish"
   ],
   "replace_scene_breaks_history": [
