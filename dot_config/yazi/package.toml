@@ -33,5 +33,10 @@ use = "boydaihungst/mediainfo"
 rev = "90a1652"
 hash = "7a83bfab51d1d2ba6558cc56bd52539a"
 
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "179ebf6"
+hash = "57056b9728006881d580ccabe8154a9c"
+
 [flavor]
 deps = []
