@@ -131,6 +131,7 @@ dePackageList=(
   filezilla
   fuzzel
   gimp
+  gnome-epub-thumbnailer
   gnome-keyring
   gparted
   grim
@@ -140,7 +141,6 @@ dePackageList=(
   gvfs-smb
   gvfs-wsdd
   inkscape
-  jdownloader2
   kcalc
   kdeconnect
   keepassxc
@@ -304,7 +304,7 @@ packageList=(
   python-discogs-client # beets
   python-flask          # beets
   python-humanize
-  python-iniparse # crudini
+  python-iniparse-git # crudini
   python-matplotlib
   python-mpd2 # beets
   python-pandas

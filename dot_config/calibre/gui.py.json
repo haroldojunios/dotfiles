@@ -37,6 +37,8 @@
     "KEPUB",
     "LIT",
     "LRF",
+    "MARKDOWN",
+    "MD",
     "MOBI",
     "PDB",
     "POBI",
@@ -84,7 +86,7 @@
   },
   "tweaks_search_history": [],
   "upload_news_to_device": true,
-  "use_roman_numerals_for_series_number": true,
+  "use_roman_numerals_for_series_number": false,
   "viewer_search_history": [],
   "viewer_toc_search_history": [],
   "worker_limit": 8

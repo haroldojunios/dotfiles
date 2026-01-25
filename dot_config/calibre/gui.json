@@ -72,6 +72,7 @@
     "__class__": "bytearray",
     "__value__": "AAAA/wAAAAEAAAADAAAA4AAAAVwAAAEKAf////8BAAAAAQA="
   },
+  "bd_overlay_cover_size": true,
   "book_details_splitter_horizontal_state": [
     true,
     200
@@ -321,6 +322,7 @@
     false,
     300
   ],
+  "cover_corner_radius": 5,
   "cover_grid_background": {
     "dark": [
       45,
@@ -478,6 +480,7 @@
     }
   },
   "default_author_link": null,
+  "dnd_merge": false,
   "do_not_show_device_open_popup_message_KINDLE2": true,
   "duplicates-question-dialog-geometry": {
     "__class__": "bytearray",
@@ -487,6 +490,13 @@
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAHBAAABPAAAAyoAAAJ4AAABxgAAAVgAAAMlAAACcwAAAAEAAAAABQAAAAHGAAABWAAAAyUAAAJz"
   },
+  "font": [
+    "Iosevka Nerd Font",
+    9,
+    400,
+    false
+  ],
+  "font_stretch": 0,
   "geometry-of-Plugin Updater plugin:plugin updater dialog": {
     "frame_geometry": {
       "height": 462,
@@ -1150,6 +1160,57 @@
       }
     }
   },
+  "geometry-of-metadata_download_cover_popup_geom": {
+    "frame_geometry": {
+      "height": 1038,
+      "width": 1906,
+      "x": 520,
+      "y": 439
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 1038,
+      "width": 1906,
+      "x": 520,
+      "y": 439
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 123,
+      "width": 861,
+      "x": 520,
+      "y": 439
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAIIAAABtwAACXkAAAXEAAACCAAAAbcAAAVkAAACMQAAAAECAAAAB4AAAAIIAAABtwAACXkAAAXE"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
   "geometry-of-metadata_single_gui_geom": {
     "frame_geometry": {
       "height": 625,
@@ -1406,6 +1467,8 @@
     }
   },
   "grid view visible": false,
+  "image_popup_fit_image": true,
+  "image_popup_zoom_factor": 0.6400000000000001,
   "jobs view column layout3": {
     "__class__": "bytearray",
     "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCwAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAACOwAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAmAAAAAEAAAAAAAAAewAAAAEAAAAAAAAD6AAAAAAAAAAAAA=="
@@ -1415,7 +1478,7 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 93
+    "/home/haroldo/calibre": 100
   },
   "light_palette_name": "__current__",
   "light_palettes": {
@@ -1601,6 +1664,7 @@
     "__value__": "AdnQywADAAAAAACvAAAAigAABFoAAAN6AAAAtAAAAKYAAARVAAADdQAAAAEAAAAABQAAAAC0AAAApgAABFUAAAN1"
   },
   "previous_sort_order_BooksView": {
+    "series": true,
     "timestamp": false,
     "title": true
   },
@@ -1615,9 +1679,9 @@
   "quickview visible": false,
   "qv_open_at_shutdown": false,
   "recently_used_languages": [
-    "English",
     "Portuguese",
-    "Spanish"
+    "Spanish",
+    "English"
   ],
   "replace_scene_breaks_history": [
     "",
@@ -1653,6 +1717,7 @@
     "3": 4,
     "4": 0
   },
+  "toolbar_icon_size": "mid-small",
   "viewer-edit-lookup-locations-geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAACtAAAA5AAAApYAAAITAAAAsgAAAQEAAAKRAAACDgAAAAAAAAAABVYAAACyAAABAQAAApEAAAIO"
