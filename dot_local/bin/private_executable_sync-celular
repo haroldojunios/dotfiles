@@ -132,7 +132,7 @@ def main():
             "--exclude=*.db",
             "--exclude=*.json",
             "sync",
-            f"{pc or home}calibre/",
+            f"{pc or home}.local/share/media-stack/calibre-web/books",
             f"{android}/sdcard/Documents/Books/",
         ]
     )

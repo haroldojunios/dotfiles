@@ -1478,7 +1478,8 @@
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/calibre": 100
+    "/home/haroldo/.local/share/media-stack/calibre-web/books": 3,
+    "/home/haroldo/calibre": 112
   },
   "light_palette_name": "__current__",
   "light_palettes": {

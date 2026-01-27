@@ -58,17 +58,6 @@ def main():
             *RC_OPTS,
             "--track-renames",
             "sync",
-            f"{Path.home() / 'calibre'}",
-            f"{OUT_PATH / 'calibre'}",
-        ]
-    )
-
-    subprocess.run(
-        [
-            "rclone",
-            *RC_OPTS,
-            "--track-renames",
-            "sync",
             f"{Path.home() / '.local/share/media-stack'}",
             f"{OUT_PATH / '.local/share/media-stack'}",
         ]

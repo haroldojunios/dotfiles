@@ -58,7 +58,7 @@
   "installation_uuid": "bbea25ba-536b-4191-9e0b-db0a0f401a3f",
   "isbndb_com_key": "",
   "language": "en",
-  "library_path": "/home/haroldo/calibre",
+  "library_path": "/home/haroldo/.local/share/media-stack/calibre-web/books",
   "limit_search_columns": false,
   "limit_search_columns_to": [
     "title",
