@@ -307,6 +307,7 @@ packageList=(
   python-iniparse-git # crudini
   python-matplotlib
   python-mpd2 # beets
+  python-openpyxl
   python-pandas
   python-pipx
   python-poetry
