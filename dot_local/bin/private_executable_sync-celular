@@ -126,13 +126,15 @@ def main():
             "rclone",
             *RC_OPTS,
             "--track-renames",
+            "--copy-links",
             "--exclude=.caltrash/**",
             "--exclude=.calnotes/**",
             "--exclude=*.mobi",
             "--exclude=*.db",
             "--exclude=*.json",
+            "--exclude=*.sdr",
             "sync",
-            f"{pc or home}.local/share/media-stack/calibre-web/books",
+            f"{pc or home}.local/share/books",
             f"{android}/sdcard/Documents/Books/",
         ]
     )

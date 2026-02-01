@@ -27,6 +27,8 @@
     null,
     "Convert Books",
     "View",
+    "Polish Books",
+    "Embed Metadata",
     null,
     "Store",
     "Donate",
@@ -40,8 +42,7 @@
     "Tweak ePub",
     "Preferences",
     "EpubMerge",
-    "EpubSplit",
-    "KOReader Sync"
+    "EpubSplit"
   ],
   "action-layout-toolbar-device": [
     "Add Books",
@@ -65,8 +66,7 @@
     "Help",
     "Preferences",
     "EpubMerge",
-    "EpubSplit",
-    "KOReader Sync"
+    "EpubSplit"
   ],
   "basic_metadata_widget_splitter_state": {
     "__class__": "bytearray",
@@ -95,6 +95,7 @@
     "__class__": "bytearray",
     "__value__": "AAAA/wAAAAEAAAACAAABAAAAAEYA/////wEAAAABAA=="
   },
+  "bookshelf view visible": false,
   "bulk-mde-casing-algorithm": "title_case",
   "bulk_metadata_window_tab": 0,
   "card_a_view books view state": {
@@ -666,14 +667,14 @@
     },
     "maximized": true,
     "normal_geometry": {
-      "height": 1042,
-      "width": 955,
-      "x": 0,
+      "height": 1038,
+      "width": 949,
+      "x": 1920,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAAAAAAAAAAAAO6AAAEEQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAHgAAAAAAAAAs0AAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
     },
     "screen": {
       "depth": 32,
@@ -1081,7 +1082,58 @@
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAABE4AAAIZAAAAAAAAAAAAAAROAAACGQAAAAECAAAAB4AAAAAAAAAAAAAABE4AAAIZ"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABE4AAAIZAAAAAAAAAAAAAAROAAACGQAAAAACAAAAB4AAAAAAAAAAAAAABE4AAAIZ"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 1920,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "AOC",
+      "model": "27G2E1",
+      "name": "HDMI-A-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-manage-data-files-xx-geometry": {
+    "frame_geometry": {
+      "height": 500,
+      "width": 400,
+      "x": 743,
+      "y": 229
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 500,
+      "width": 400,
+      "x": 743,
+      "y": 229
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 500,
+      "width": 400,
+      "x": 743,
+      "y": 229
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAALnAAAA5QAABHYAAALYAAAC5wAAAOUAAAR2AAAC2AAAAAECAAAAB4AAAALnAAAA5QAABHYAAALY"
     },
     "screen": {
       "depth": 32,
@@ -1471,14 +1523,14 @@
   "image_popup_zoom_factor": 0.6400000000000001,
   "jobs view column layout3": {
     "__class__": "bytearray",
-    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCwAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAACOwAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAmAAAAAEAAAAAAAAAewAAAAEAAAAAAAAD6AAAAAAAAAAAAA=="
+    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCwAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAACOwAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAegAAAAEAAAAAAAAAmAAAAAEAAAAAAAAAewAAAAEAAAAAAAAD6AAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=="
   },
   "jobs_dialog_geometry": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
   "library_usage_stats": {
-    "/home/haroldo/.local/share/media-stack/calibre-web/books": 3,
+    "/home/haroldo/.local/share/media-stack/calibre-web/books": 11,
     "/home/haroldo/calibre": 112
   },
   "light_palette_name": "__current__",
@@ -1659,6 +1711,22 @@
   "metasingle_window_geometry3": {
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAAUAAAAAQAABNcAAAPvAAAAGQAAAB0AAATSAAAD6gAAAAEAAAAABQAAAAAZAAAAHQAABNIAAAPq"
+  },
+  "polish_show_reports": true,
+  "polishing_settings": {
+    "add_soft_hyphens": false,
+    "compress_images": false,
+    "do_cover": false,
+    "download_external_resources": false,
+    "embed": false,
+    "jacket": false,
+    "metadata": false,
+    "remove_jacket": false,
+    "remove_soft_hyphens": false,
+    "remove_unused_css": false,
+    "smarten_punctuation": false,
+    "subset": false,
+    "upgrade_book": true
   },
   "preferences dialog geometry": {
     "__class__": "bytearray",
