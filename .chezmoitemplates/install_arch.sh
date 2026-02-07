@@ -252,7 +252,6 @@ packageList=(
   mediainfo
   micro
   minidlna
-  mongosh
   mpd
   mpd-mpris
   mpv
