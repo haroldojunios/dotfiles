@@ -24,7 +24,7 @@ else
     exit 1
   fi
   if [ -n "$(git status --porcelain)" ]; then
-    command -v prettier &>/dev/null && prettier ./**/*.md --write &>/dev/null
+    command -v prettier &>/dev/null && fd -e md -E '*templates*' -X prettier --write &>/dev/null
     git add .
     git commit -m "$(date --utc -Iseconds)"
     git maintenance run &>/dev/null
