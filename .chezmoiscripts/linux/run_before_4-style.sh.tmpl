@@ -19,7 +19,10 @@ fi
 if ! [ -f /etc/sddm.conf ]; then
   sudo touch /etc/sddm.conf
 fi
-sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
+
+if [ -f /usr/share/sddm/themes/sddm-astronaut-theme/Themes/astronaut.conf ]; then
+  sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
+fi
 
 # if command -v libreoffice &>/dev/null; then
 #   fname="${XDG_CONFIG_HOME:-$HOME/.config}"/libreoffice/*/user/registrymodifications.xcu
