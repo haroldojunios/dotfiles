@@ -6,32 +6,11 @@
 
 set -eu
 
-# exit
 
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 
 {{ if and (not .isWSL) (ne .osid "android") (.installDE) }}
-if ! [ -d /usr/share/sddm/themes/catppuccin-mocha ]; then
-  wget -O "${TEMP_FOLDER}/catppuccin-mocha.zip" https://github.com/catppuccin/sddm/releases/latest/download/catppuccin-mocha.zip
-  (
-    cd "${TEMP_FOLDER}"
-    unzip catppuccin-mocha.zip
-    sudo mv catppuccin-mocha /usr/share/sddm/themes
-  )
-fi
-
-if command -v crudini &>/dev/null && ! [ -f /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user ]; then
-  sudo touch /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user
-  sudo crudini --set /usr/share/sddm/themes/catppuccin-mocha/theme.conf.user General Font '"Iosevka"'
-fi
-
-# icons
-# if ! [ -d /usr/share/icons/candy-icons ]; then
-#   sudo mkdir -p /usr/share/icons
-#   sudo git -C /usr/share/icons clone --depth 1 https://github.com/EliverLara/candy-icons.git
-# fi
-
 if ! [ -d /usr/share/icons/beautyline ]; then
   sudo mkdir -p /usr/share/icons
   sudo git -C /usr/share/icons clone --depth 1 https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline.git
@@ -40,7 +19,7 @@ fi
 if ! [ -f /etc/sddm.conf ]; then
   sudo touch /etc/sddm.conf
 fi
-# sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
+sudo crudini --ini-options=nospace --set /etc/sddm.conf Theme Current sddm-astronaut-theme
 
 # if command -v libreoffice &>/dev/null; then
 #   fname="${XDG_CONFIG_HOME:-$HOME/.config}"/libreoffice/*/user/registrymodifications.xcu

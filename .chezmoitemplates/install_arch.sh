@@ -103,6 +103,9 @@ dePackageList=(
   xdg-desktop-portal-hyprland
   xdg-desktop-portal-gtk
   xwaylandvideobridge
+  kvantum
+  qt5ct
+  qt6ct
   # lxqt
   lxqt-admin
   lxqt-config
