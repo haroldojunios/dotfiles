@@ -157,9 +157,11 @@ dePackageList=(
   ksystemlog
   lxqt-archiver
   mailcap
+  network-manager-applet
   obs-studio
   okular
   opentabletdriver
+  openrgb
   partitionmanager
   pavucontrol
   pcmanfm-qt
@@ -264,6 +266,7 @@ packageList=(
   neovim-remote
   net-tools
   netcat
+  networkmanager
   ninja
   nnn
   nodejs
@@ -453,7 +456,9 @@ for package in "${packageList[@]}"; do
   fi
 done
 
-set -x
+if ! systemctl list-unit-files --state=enabled | grep sshd &>/dev/null; then
+  sudo systemctl enable --now sshd
+fi
 
 if ! systemctl list-unit-files --state=enabled | grep lm_sensors &>/dev/null; then
   sudo systemctl enable --now lm_sensors
@@ -475,17 +480,21 @@ if ! systemctl list-unit-files --state=enabled | grep bluetooth &>/dev/null; the
   sudo systemctl enable --now bluetooth
 fi
 
+if ! systemctl list-unit-files --state=enabled | grep NetworkManager &>/dev/null; then
+  sudo systemctl enable --now NetworkManager
+fi
+
 if ! systemctl list-unit-files --state=enabled | grep docker &>/dev/null; then
   sudo systemctl enable --now docker
   sudo groupadd docker &>/dev/null || true
   sudo usermod -aG docker "${USER}"
 fi
 
-if ! systemctl list-unit-files --state=enabled | grep nvidia-resume &>/dev/null; then
-  sudo systemctl enable --now nvidia-resume
-  sudo systemctl enable --now nvidia-suspend
-  sudo systemctl enable --now nvidia-hibernate
-fi
+# if ! systemctl list-unit-files --state=enabled | grep nvidia-resume &>/dev/null; then
+#   sudo systemctl enable --now nvidia-resume
+#   sudo systemctl enable --now nvidia-suspend
+#   sudo systemctl enable --now nvidia-hibernate
+# fi
 
 if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/dev/null; then
   sudo systemctl enable --now pkgfile-update.timer
