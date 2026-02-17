@@ -6,6 +6,8 @@
 
 set -eu
 
+# exit
+
 TEMP_FOLDER=$(mktemp -d)
 trap 'rm -rf "${TEMP_FOLDER}"' EXIT
 

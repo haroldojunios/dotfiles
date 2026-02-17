@@ -23,10 +23,10 @@ exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
 
-[".config/nvim/spell/pt.utf-8.spl"]
-type = "file"
-url = "http://ftp.nluug.nl/pub/vim/runtime/spell/pt.utf-8.spl"
-refreshPeriod = "168h"
+#[".config/nvim/spell/pt.utf-8.spl"]
+#type = "file"
+#url = "http://ftp.nluug.nl/pub/vim/runtime/spell/pt.utf-8.spl"
+#refreshPeriod = "168h"
 
 [".config/fish/completions/nnn.fish"]
 type = "file"
@@ -34,12 +34,12 @@ url = "https://raw.githubusercontent.com/jarun/nnn/master/misc/auto-completion/f
 refreshPeriod = "168h"
 
 # {{   if .installDE }}
-[".local/share/icons/beautyline"]
-type = "archive"
-url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
+#[".local/share/icons/beautyline"]
+#type = "archive"
+#url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/beautyline/-/archive/master/beautyline-master.tar.gz"
+#exact = true
+#refreshPeriod = "168h"
+#stripComponents = 1
 
 [".config/fish/themes/catppuccin.theme"]
 type = "file"

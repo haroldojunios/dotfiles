@@ -169,7 +169,7 @@ dePackageList=(
   qt6-svg
   screengrab
   slurp
-  stremio
+  #stremio
   swappy
   swayosd-git
   tk
@@ -188,7 +188,7 @@ dePackageList=(
 )
 
 packageList=(
-  advcpmv
+  libheif-highmem
   age
   alsa-card-profiles
   alsa-utils
@@ -241,7 +241,6 @@ packageList=(
   lazygit
   lazynpm
   libarchive
-  libheif-highmem
   libjxl
   libmupdf
   libvncserver
@@ -348,7 +347,7 @@ packageList=(
   wine-gecko
   wine-mono
   winetricks
-  wkhtmltopdf
+  # wkhtmltopdf
   yazi
   zerotier-one
   zip
@@ -389,7 +388,7 @@ packageList=(
   tinymist # typst lsp
   tree-sitter-cli
   typst
-  typstyle-bin # typst formatter
+  typstyle # typst formatter
   yaml-language-server
   yamlfmt
 )
@@ -418,7 +417,7 @@ if lspci -k 2>/dev/null | grep -E "(VGA|3D)" | grep -i nvidia &>/dev/null; then
     lib32-nvidia-utils
     lib32-opencl-nvidia
     libva-mesa-driver
-    libva-nvidia-driver-git
+    libva-nvidia-driver
     libvdpau
     libxnvctrl
     mesa
@@ -450,6 +449,8 @@ for package in "${packageList[@]}"; do
     fi
   fi
 done
+
+set -x
 
 if ! systemctl list-unit-files --state=enabled | grep lm_sensors &>/dev/null; then
   sudo systemctl enable --now lm_sensors
@@ -488,7 +489,7 @@ if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/de
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep plocate-updatedb.timer &>/dev/null; then
-  sudo systemctl enable --now plocate-updatedb.timer
+  sudo systemctl enable --now plocate-updatedb.timer || :
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep avahi-daemon.service &>/dev/null; then
@@ -504,7 +505,7 @@ if [ -d "/proc/acpi/button/lid" ]; then
 fi
 
 if ! systemctl list-unit-files --state=enabled | grep earlyoom.service &>/dev/null; then
-  systemctl enable --now earlyoom.service
+  sudo systemctl enable --now earlyoom.service
 fi
 
 if ! systemctl list-unit-files --user --state=enabled | grep mpd.service &>/dev/null; then
