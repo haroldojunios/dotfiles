@@ -1,7 +1,8 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
+    branch = "master",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
       local ensure_installed = {
