@@ -18,13 +18,11 @@ if ! [ -f "${HOME}/.local/share/fonts/Iosevka/Iosevka-Regular.ttf" ] ||
 fi
 
 if command -v fnt &>/dev/null; then
-  sudo sed -i 's@target="$HOME/.fonts/"@target="$HOME/.local/share/fonts/fnt/"@' "$(command -v fnt)"
-  if ! [ -f "${HOME}/.fnt/Packages.xz" ]; then
+  if ! [ -f "${HOME}/.local/share/fnt/Packages.xz" ]; then
     fnt update &>/dev/null
   fi
 
-  mkdir -p "${HOME}/.local/share/fonts/fnt"
-  fonts_installed_list="$(ls -1 "${HOME}/.local/share/fonts/fnt" | tr '\n' ' ')"
+  fonts_installed_list="$(ls -1 "${HOME}/.local/share/fnt/index" | tr '\n' ' ')"
 
   font_list=(
     arimo

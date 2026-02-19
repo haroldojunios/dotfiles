@@ -99,51 +99,51 @@ gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs"
   done
 fi
 
-# if command -v crudini &>/dev/null; then
-#   # trolltech
-#   if ! [ -f "${HOME}/.config/Trolltech.conf" ]; then
-#     touch "${HOME}/.config/Trolltech.conf"
-#   fi
-#   crudini --set ${HOME}/.config/Trolltech.conf qt font "${font},${font_size},-1,5,50,0,0,0,0,0"
-#
-#   # gtk
-#   if ! [ -f "${HOME}/.config/gtk-3.0/settings.ini" ]; then
-#     mkdir -p "${HOME}/.config/gtk-3.0"
-#     touch "${HOME}/.config/gtk-3.0/settings.ini"
-#   fi
-#   if ! [ -f "${HOME}/.config/gtk-4.0/settings.ini" ]; then
-#     mkdir -p "${HOME}/.config/gtk-4.0"
-#     touch "${HOME}/.config/gtk-4.0/settings.ini"
-#   fi
-#   crudini --set ${HOME}/.config/gtk-3.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
-#   crudini --set ${HOME}/.config/gtk-4.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
-#
-#   # qt 5
-#   if ! [ -f "${HOME}/.config/qt5ct/qt5ct.conf" ]; then
-#     mkdir -p "${HOME}/.config/qt5ct"
-#     touch "${HOME}/.config/qt5ct/qt5ct.conf"
-#   fi
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/Catppuccin-Mocha.conf"
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance custom_palette true
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance icon_theme beautyline
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance standard_dialogs default
-#   crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance style kvantum-dark
-#
-#   # qt 6
-#   if ! [ -f "${HOME}/.config/qt6ct/qt6ct.conf" ]; then
-#     mkdir -p "${HOME}/.config/qt6ct"
-#     touch "${HOME}/.config/qt6ct/qt6ct.conf"
-#   fi
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/Catppuccin-Mocha.conf"
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance custom_palette true
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance icon_theme beautyline
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance standard_dialogs default
-#   crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance style kvantum-dark
-# fi
+if command -v crudini &>/dev/null; then
+  #   # trolltech
+  #   if ! [ -f "${HOME}/.config/Trolltech.conf" ]; then
+  #     touch "${HOME}/.config/Trolltech.conf"
+  #   fi
+  #   crudini --set ${HOME}/.config/Trolltech.conf qt font "${font},${font_size},-1,5,50,0,0,0,0,0"
+  #
+  #   # gtk
+  #   if ! [ -f "${HOME}/.config/gtk-3.0/settings.ini" ]; then
+  #     mkdir -p "${HOME}/.config/gtk-3.0"
+  #     touch "${HOME}/.config/gtk-3.0/settings.ini"
+  #   fi
+  #   if ! [ -f "${HOME}/.config/gtk-4.0/settings.ini" ]; then
+  #     mkdir -p "${HOME}/.config/gtk-4.0"
+  #     touch "${HOME}/.config/gtk-4.0/settings.ini"
+  #   fi
+  #   crudini --set ${HOME}/.config/gtk-3.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
+  #   crudini --set ${HOME}/.config/gtk-4.0/settings.ini Settings gtk-font-name "${font}, ${font_size}"
+
+  # qt 5
+  if ! [ -f "${HOME}/.config/qt5ct/qt5ct.conf" ]; then
+    mkdir -p "${HOME}/.config/qt5ct"
+    touch "${HOME}/.config/qt5ct/qt5ct.conf"
+  fi
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/catppuccin-mocha-lavender.conf"
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance custom_palette true
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance icon_theme beautyline
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance standard_dialogs default
+  crudini --set ${HOME}/.config/qt5ct/qt5ct.conf Appearance style kvantum-dark
+
+  # qt 6
+  if ! [ -f "${HOME}/.config/qt6ct/qt6ct.conf" ]; then
+    mkdir -p "${HOME}/.config/qt6ct"
+    touch "${HOME}/.config/qt6ct/qt6ct.conf"
+  fi
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts general "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Fonts fixed "\"${font},${font_size},-1,5,50,0,0,0,0,0,Regular\""
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance color_scheme_path "${HOME}/.config/qt5ct/colors/catppuccin-mocha-lavender.conf"
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance custom_palette true
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance icon_theme beautyline
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance standard_dialogs default
+  crudini --set ${HOME}/.config/qt6ct/qt6ct.conf Appearance style kvantum-dark
+fi
 
 if command -v gsettings &>/dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme catppuccin-mocha-lavender

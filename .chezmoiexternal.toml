@@ -23,10 +23,10 @@ exact = true
 refreshPeriod = "168h"
 include = ["**/*.otf", "**/*.ttf"]
 
-#[".config/nvim/spell/pt.utf-8.spl"]
-#type = "file"
-#url = "http://ftp.nluug.nl/pub/vim/runtime/spell/pt.utf-8.spl"
-#refreshPeriod = "168h"
+[".config/nvim/spell/pt.utf-8.spl"]
+type = "file"
+url = "http://ftp.nluug.nl/pub/vim/runtime/spell/pt.utf-8.spl"
+refreshPeriod = "168h"
 
 [".config/fish/completions/nnn.fish"]
 type = "file"
@@ -49,6 +49,16 @@ refreshPeriod = "168h"
 [".config/hypr/hyprland/catppuccin.conf"]
 type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/mocha.conf"
+refreshPeriod = "168h"
+
+[".config/qt5ct/colors/catppuccin-mocha-lavender.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/qt5ct/refs/heads/main/themes/catppuccin-mocha-lavender.conf"
+refreshPeriod = "168h"
+
+[".config/qt6ct/colors/catppuccin-mocha-lavender.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/qt5ct/refs/heads/main/themes/catppuccin-mocha-lavender.conf"
 refreshPeriod = "168h"
 
 [".config/waybar/mocha.css"]

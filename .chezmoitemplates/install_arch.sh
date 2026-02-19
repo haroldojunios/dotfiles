@@ -104,6 +104,7 @@ dePackageList=(
   xdg-desktop-portal-gtk
   xwaylandvideobridge
   kvantum
+  kvantum-qt5
   qt5ct
   qt6ct
   swaync
@@ -500,10 +501,6 @@ if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/de
   sudo systemctl enable --now pkgfile-update.timer
 fi
 
-if ! systemctl list-unit-files --state=enabled | grep plocate-updatedb.timer &>/dev/null; then
-  sudo systemctl enable --now plocate-updatedb.timer || :
-fi
-
 if ! systemctl list-unit-files --state=enabled | grep avahi-daemon.service &>/dev/null; then
   sudo systemctl enable --now avahi-daemon.service
 fi
@@ -511,8 +508,8 @@ fi
 if [ -d "/proc/acpi/button/lid" ]; then
   if pacman -Q tlp &>/dev/null && ! systemctl list-unit-files --state=enabled | grep tlp &>/dev/null; then
     sudo systemctl enable --now tlp
-    sudo systemctl enable --now NetworkManager-dispatcher.service
-    sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
+    sudo systemctl enable --now NetworkManager-dispatcher.service || :
+    sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket || :
   fi
 fi
 
