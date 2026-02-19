@@ -66,10 +66,13 @@ alias rsl='rsync --archive --human-readable --whole-file --no-compress --hard-li
 alias rsd='rs --delete-after'
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
 alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --links --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
+alias rcl='rclone lsd'
+alias rcls='rclone ls'
 alias rcc='rc copy'
 alias rcs='rc --track-renames sync'
 alias rcss='rc --track-renames-strategy="modtime,size" sync'
 alias rcm='rc move'
+alias rcd='rc delete --rmdirs'
 alias c='TMUX= code'
 alias c.='TMUX= code .'
 alias tkill='tmux list-sessions | grep -v attached | cut -d: -f1 | xargs -r -t -n1 tmux kill-session -t'

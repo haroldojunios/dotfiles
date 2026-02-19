@@ -250,7 +250,6 @@ packageList=(
   libjxl
   libmupdf
   libvncserver
-  litecli # sqlite cli browser
   lm_sensors
   lshw
   make

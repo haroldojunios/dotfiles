@@ -231,6 +231,13 @@ MimeType=application/pdf;application/x-pdf;image/pdf;
 EOF
 fi
 
+# Use ntfs-3g to mount ntfs
+if ! [ -f /etc/udev/rules.d/99-ntfs3g-default.rules ]; then
+  sudo bash -c "cat >/etc/udev/rules.d/99-ntfs3g-default.rules" <<EOF
+SUBSYSTEM=="block", ENV{ID_FS_TYPE}=="ntfs", ENV{ID_FS_TYPE}="ntfs-3g"
+EOF
+fi
+
 # nvidia
 if command -v nvidia-smi &>/dev/null; then
   sudo bash -c "cat >/etc/modprobe.d/nvidia-i2c.conf" <<EOF

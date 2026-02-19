@@ -4,6 +4,7 @@ Host 192.168.196.129
 
 Host *
   UpdateHostKeys yes
+  StrictHostKeyChecking accept-new
 
 Host android
   Port 2222
