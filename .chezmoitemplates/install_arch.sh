@@ -106,7 +106,7 @@ dePackageList=(
   kvantum
   kvantum-qt5
   qt5ct
-  qt6ct
+  qt6ct-kde
   swaync
   # lxqt
   lxqt-admin
@@ -145,6 +145,7 @@ dePackageList=(
   gvfs-mtp
   gvfs-smb
   gvfs-wsdd
+  gwenview
   inkscape
   kcalc
   kdeconnect
@@ -170,6 +171,7 @@ dePackageList=(
   pdfarranger
   pomodorolm-bin
   purpose5 # sharing to smartphone via KDE Connect
+  python-pystray
   qt6-declarative
   qt6-imageformats
   qt6-jpegxl-image-plugin
