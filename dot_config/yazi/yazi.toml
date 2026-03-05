@@ -19,7 +19,8 @@ prepend_previewers = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "application/postscript", run = "mediainfo" },
-  { url = "*.tar*", run = 'piper --format=url -- tar tf "$1"' },
+  # { url = "*.tar*", run = 'piper --format=url -- tar tf "$1"' },
+  { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --show-file-icons" },
   { mime = "application/sqlite3", run = 'piper -- sqlite3 "$1" ".schema --indent"' },
   { url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
 ]

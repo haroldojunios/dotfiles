@@ -238,6 +238,13 @@ SUBSYSTEM=="block", ENV{ID_FS_TYPE}=="ntfs", ENV{ID_FS_TYPE}="ntfs-3g"
 EOF
 fi
 
+# enable wol
+if ! [ -f /etc/udev/rules.d/81-wol.rules ]; then
+  sudo bash -c "cat >/etc/udev/rules.d/81-wol.rules" <<'EOF'
+ACTION=="add", SUBSYSTEM=="net", NAME=="en*", RUN+="/usr/bin/ethtool -s $name wol g"
+EOF
+fi
+
 # nvidia
 if command -v nvidia-smi &>/dev/null; then
   sudo bash -c "cat >/etc/modprobe.d/nvidia-i2c.conf" <<EOF
