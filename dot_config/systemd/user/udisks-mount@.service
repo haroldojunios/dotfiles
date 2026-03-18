@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount drive with UUID %i via udisks2
+; After=udisks2.service
+; Requires=udisks2.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/udisksctl mount -b /dev/disk/by-uuid/%i --no-user-interaction
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
