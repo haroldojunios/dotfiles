@@ -19,6 +19,8 @@ return {
     opts = {
       formatters_by_ft = {
         bash = { "trim_whitespace", "shfmt" },
+        c = { "clang-format" },
+        cpp = { "clang-format" },
         sh = { "trim_whitespace", "shfmt" },
         css = { "prettierd" },
         fish = { "fish_indent" },
