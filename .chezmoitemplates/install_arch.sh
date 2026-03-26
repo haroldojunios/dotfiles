@@ -493,12 +493,6 @@ if ! systemctl list-unit-files --state=enabled | grep docker &>/dev/null; then
   sudo usermod -aG docker "${USER}"
 fi
 
-# if ! systemctl list-unit-files --state=enabled | grep nvidia-resume &>/dev/null; then
-#   sudo systemctl enable --now nvidia-resume
-#   sudo systemctl enable --now nvidia-suspend
-#   sudo systemctl enable --now nvidia-hibernate
-# fi
-
 if ! systemctl list-unit-files --state=enabled | grep pkgfile-update.timer &>/dev/null; then
   sudo systemctl enable --now pkgfile-update.timer
 fi
