@@ -312,6 +312,7 @@ packageList=(
   python-flask          # beets
   python-humanize
   python-iniparse-git # crudini
+  python-librosa      # beets
   python-matplotlib
   python-mpd2 # beets
   python-openpyxl
