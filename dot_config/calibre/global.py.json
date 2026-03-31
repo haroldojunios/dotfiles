@@ -73,7 +73,7 @@
   "network_timeout": 5,
   "new_book_tags": [],
   "numeric_collation": true,
-  "output_format": "epub",
+  "output_format": "azw3",
   "read_file_metadata": true,
   "saved_searches": {},
   "swap_author_names": false,

@@ -655,26 +655,26 @@
     "frame_geometry": {
       "height": 1038,
       "width": 1906,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "full_screened": false,
     "geometry": {
       "height": 1038,
       "width": 1906,
-      "x": 0,
+      "x": 1920,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
       "height": 1038,
-      "width": 949,
-      "x": 1920,
+      "width": 1906,
+      "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAAB3EAAAQNAAAHgAAAAAAAAAs0AAAEDQAAAAECAAAAB4AAAAAAAAAAAAAAB3EAAAQN"
+      "__value__": "AdnQywADAAAAAAeAAAAAAAAADvEAAAQNAAAAAAAAAAAAAAdxAAAEDQAAAAACAAAAB4AAAAeAAAAAAAAADvEAAAQN"
     },
     "screen": {
       "depth": 32,
@@ -682,13 +682,13 @@
       "geometry_in_logical_pixels": {
         "height": 1080,
         "width": 1920,
-        "x": 0,
+        "x": 1920,
         "y": 0
       },
-      "index_in_screens_list": 1,
+      "index_in_screens_list": 0,
       "manufacturer": "AOC",
-      "model": "27G2G4",
-      "name": "DP-1",
+      "model": "27G2E1",
+      "name": "HDMI-A-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -1097,6 +1097,57 @@
       "manufacturer": "AOC",
       "model": "27G2E1",
       "name": "HDMI-A-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920
+      },
+      "virtual_geometry": {
+        "height": 1080,
+        "width": 3840,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "geometry-of-library-annotations-browser-geometry": {
+    "frame_geometry": {
+      "height": 652,
+      "width": 922,
+      "x": 482,
+      "y": 153
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 652,
+      "width": 922,
+      "x": 482,
+      "y": 153
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 652,
+      "width": 922,
+      "x": 482,
+      "y": 153
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAHiAAAAmQAABXsAAAMkAAAB4gAAAJkAAAV7AAADJAAAAAECAAAAB4AAAAHiAAAAmQAABXsAAAMk"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 1.0,
+      "geometry_in_logical_pixels": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 1,
+      "manufacturer": "AOC",
+      "model": "27G2G4",
+      "name": "DP-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1080,
@@ -1529,8 +1580,12 @@
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAUAAAAAOQAACNcAAAJ3AAAFBQAAAFUAAAjSAAACcgAAAAAAAAAABVYAAAUFAAAAVQAACNIAAAJy"
   },
+  "library-annotations-browser-splitter-state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAEAAAACAAABwgAAAcIA/////wEAAAABAA=="
+  },
   "library_usage_stats": {
-    "/home/haroldo/.local/share/media-stack/calibre-web/books": 11,
+    "/home/haroldo/.local/share/media-stack/calibre-web/books": 13,
     "/home/haroldo/calibre": 112
   },
   "light_palette_name": "__current__",

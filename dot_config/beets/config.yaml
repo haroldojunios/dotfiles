@@ -1,11 +1,9 @@
 original_date: yes
 paths:
   singleton: Non-Album/$artist%if{$singleton_path,/, - }$title
-  default:
-    $albumartist/$year - $album%aunique{}
+  default: $albumartist/$year - $album%aunique{}
     $atypes/%if{$multidisc,$disc_name/}$track - $title
-  comp:
-    $albumartist/$year - $album%aunique{}
+  comp: $albumartist/$year - $album%aunique{}
     $atypes/%if{$multidisc,$disc_name/}$track - $title
   albumtype:soundtrack: Soundtracks/$year - $album $atypes/$track $title
 import:
