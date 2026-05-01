@@ -1,0 +1,12 @@
+# Copy the mtime
+--mtime
+
+# Prefer AV1, fallback to VP9
+-f bestvideo[vcodec^=av01]+bestaudio[acodec=opus]/bestvideo[vcodec^=av01]+bestaudio[acodec=vorbis]/bestvideo[vcodec^=av01]+bestaudio[acodec=aac]/bestvideo[vcodec^=vp09]+bestaudio[acodec=opus]/bestvideo[vcodec^=vp09]+bestaudio[acodec=vorbis]/bestvideo[vcodec^=vp09]+bestaudio[acodec=aac]/bestvideo+bestaudio/best
+
+# Add metadata
+--embed-metadata
+--embed-thumbnail
+
+# Use video name as filename
+-o "%(title)s.%(ext)s"
