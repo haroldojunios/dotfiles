@@ -90,6 +90,7 @@ x-scheme-handler/mailto=vivaldi-stable.desktop;
 x-scheme-handler/ssh=ktelnetservice5.desktop;Hyper.desktop;
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;
 application/x-zstd-compressed-tar=lxqt-archiver.desktop;
+application/x-zerosize=userapp-nvim-DK9NO3.desktop;
 
 [Default Applications]
 application/gzip=org.kde.ark.desktop;

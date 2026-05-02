@@ -8,5 +8,8 @@
 --embed-metadata
 --embed-thumbnail
 
+# Use mkv as container format
+--merge-output-format mkv
+
 # Use video name as filename
 -o "%(title)s.%(ext)s"
