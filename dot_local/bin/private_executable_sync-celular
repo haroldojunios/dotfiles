@@ -81,7 +81,7 @@ def main():
         "--inplace",
         "--retries=10",
         "--low-level-retries=20",
-        f"--stats-file-name-length={shutil.get_terminal_size().columns - 40}",
+        f"--stats-file-name-length={shutil.get_terminal_size().columns - 45}",
         "--check-first",
         "--verbose",
     )
