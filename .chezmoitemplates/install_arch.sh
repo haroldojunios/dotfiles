@@ -197,7 +197,6 @@ dePackageList=(
 )
 
 packageList=(
-  libheif-highmem
   age
   alsa-card-profiles
   alsa-utils
@@ -250,6 +249,7 @@ packageList=(
   lazygit
   lazynpm
   libarchive
+  libheif
   libjxl
   libmupdf
   libvncserver
