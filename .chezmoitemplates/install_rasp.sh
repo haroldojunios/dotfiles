@@ -18,6 +18,7 @@ dePackageList=(
 )
 
 packageList=(
+  7zip
   age
   bat
   bc
@@ -38,7 +39,6 @@ packageList=(
   nano
   ninja-build
   openssh-server
-  p7zip
   python-is-python3
   python3-dev
   python3-pip
