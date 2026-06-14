@@ -25,6 +25,9 @@
     "editor.rulers": [50, 72],
     "workbench.editor.restoreViewState": false
   },
+  "[jsonc]": {
+    "prettier.trailingComma": false
+  },
   "[html][django-html][javascript][c][cpp][erb]": {
     "editor.rulers": [80]
   },
@@ -407,7 +410,7 @@
   },
   "stylua.searchParentDirectories": true,
   "svg.preview.background": "white",
-  "svg.preview.mode": "img",
+  "svg.preview.mode": "svg",
   "tabnine.experimentalAutoImports": true,
   "telemetry.telemetryLevel": "off",
   "template-string-converter.autoRemoveTemplateString": true,

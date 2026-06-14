@@ -4,6 +4,7 @@ file:///home/haroldo/Music Music
 file:///home/haroldo/Pictures Pictures
 file:///home/haroldo/Videos Videos
 file:///torrent torrent
+file:///data/data/Documents/mestrado-ita/01-semestre/ct-234 ct-234
 file:///media/B08E80158E7FD278/PMH_MADEIRA PMH_MADEIRA
 smb://100.121.199.111/ PC_JONAS
 sftp://rt01@100.121.199.111/ PC_JONAS_SSH
@@ -11,4 +12,3 @@ smb://192.168.100.96/pmh%20madeira/ WD_SMB
 sftp://haroldo@192.168.0.22:8022/sdcard Android
 smb://100.90.200.62/ RT02
 smb://100.125.224.1/ RT07
-file:///data/data/Documents/mestrado-ita/01-semestre/ct-234 ct-234

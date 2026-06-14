@@ -46,9 +46,9 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/fish/main/themes/catppuccin-mocha.theme"
 refreshPeriod = "168h"
 
-[".config/hypr/hyprland/catppuccin.conf"]
+[".config/hypr/themes/catppuccin-mocha.lua"]
 type = "file"
-url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/mocha.conf"
+url = "https://raw.githubusercontent.com/catppuccin/hyprland/refs/heads/main/themes/catppuccin-mocha.lua"
 refreshPeriod = "168h"
 
 [".config/qt5ct/colors/catppuccin-mocha-lavender.conf"]
