@@ -15,7 +15,7 @@ fi
 export PATH=$PATH:"${HOME}/.local/bin"
 
 if command -v chezmoi >/dev/null; then
-  chezmoi init --apply haroldojunios
+  chezmoi --keep-going init --apply haroldojunios
 else
-  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply haroldojunios
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin --keep-going init --apply haroldojunios
 fi
