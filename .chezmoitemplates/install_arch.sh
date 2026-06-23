@@ -287,7 +287,7 @@ packageList=(
   otf-latinmodern-math
   p7zip
   pacman-contrib
-  pandoc
+  pandoc-bin
   pdfjs # qutebrowser
   peerflix
   perl-archive-zip # exiftool
@@ -377,7 +377,7 @@ packageList=(
   mypy
   prettierd
   ruff
-  shellcheck
+  shellcheck-bin
   shfmt
   sqlfmt-bin
   stylua

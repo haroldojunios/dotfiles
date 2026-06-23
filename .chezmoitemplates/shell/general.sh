@@ -65,7 +65,7 @@ alias rs='rsync --archive --human-readable --partial --progress --fuzzy --inplac
 alias rsl='rsync --archive --human-readable --whole-file --no-compress --hard-links --fuzzy --inplace --info=progress2,name --no-inc-recursive'
 alias rsd='rs --delete-after'
 # alias rsm='rs --remove-source-files' #find /dir -type d -empty -delete
-alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --links "--order-by=size,mixed" --stats-file-name-length="$(echo $(tput cols) - 40 | bc)"'
+alias rc='rclone --progress --inplace --transfers=8 --checkers=32 --links "--order-by=size,mixed" --stats-file-name-length="$(echo $(tput cols) - 45 | bc)"'
 alias rcl='rclone lsd'
 alias rcls='rclone ls'
 alias rcc='rc copy'
