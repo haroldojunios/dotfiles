@@ -25,11 +25,11 @@
     "editor.rulers": [50, 72],
     "workbench.editor.restoreViewState": false
   },
-  "[jsonc]": {
-    "prettier.trailingComma": false
-  },
   "[html][django-html][javascript][c][cpp][erb]": {
     "editor.rulers": [80]
+  },
+  "[jsonc]": {
+    "prettier.trailingComma": "none"
   },
   "[latex]": {
     "editor.detectIndentation": false,
@@ -257,9 +257,19 @@
   },
   "gitlens.telemetry.enabled": false,
   "html.format.wrapLineLength": 80,
-  "javascript.autoClosingTags": true,
-  "javascript.preferences.quoteStyle": "double",
-  "javascript.suggest.paths": false,
+  "js/ts.autoClosingTags.enabled": true,
+  "js/ts.preferences.quoteStyle": "double",
+  "js/ts.suggest.paths": false,
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true
+  },
   "jupyter.askForKernelRestart": false,
   "latex-workshop.bibtex-format.sort.enabled": true,
   "latex-workshop.formatting.latex": "latexindent",
@@ -270,7 +280,7 @@
     "-y=defaultIndent: '%INDENT%'",
     "-m"
   ],
-  "latex-workshop.latex.build.forceRecipeUsage": false,
+  "latex-workshop.latex.build.enableMagicComments": true,
   "latex-workshop.latex.magic.args": [
     "-synctex=1",
     "-pdf",
@@ -280,8 +290,8 @@
   ],
   "latex-workshop.latex.recipes": [
     {
-      "name": "xelatexmk",
-      "tools": ["xelatexmk"]
+      "name": "lualatexmk",
+      "tools": ["lualatexmk"]
     },
     {
       "name": "latexmk",
@@ -308,7 +318,7 @@
     },
     {
       "args": [
-        "-xelatex",
+        "-lualatex",
         "-shell-escape",
         "-synctex=1",
         "-interaction=nonstopmode",
@@ -319,7 +329,7 @@
         "%DOC%"
       ],
       "command": "latexmk",
-      "name": "xelatexmk"
+      "name": "lualatexmk"
     },
     {
       "args": ["-c"],
@@ -358,14 +368,15 @@
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
   "markdown-preview-enhanced.breakOnSingleNewLine": false,
   "markdown-preview-enhanced.chromePath": "/opt/google/chrome/google-chrome",
-  "markdown-preview-enhanced.codeBlockTheme": "monokai.css",
+  "markdown-preview-enhanced.codeBlockTheme": "vscode.css",
   "markdown-preview-enhanced.enableExtendedTableSyntax": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.enableTypographer": true,
   "markdown-preview-enhanced.HTML5EmbedIsAllowedHttp": true,
-  "markdown-preview-enhanced.latexEngine": "xelatex",
-  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "markdown-preview-enhanced.latexEngine": "lualatex",
+  "markdown-preview-enhanced.previewTheme": "vscode.css",
   "markdown-preview-enhanced.puppeteerWaitForTimeout": 500,
+  "markdown-preview-enhanced.revealjsTheme": "vscode.css",
   "markdown.extension.print.absoluteImgPath": false,
   "markdown.extension.tableFormatter.normalizeIndentation": true,
   "markdown.preview.fontSize": 12,
@@ -383,8 +394,6 @@
     "jupyter-notebook": "left"
   },
   "notebook.output.textLineLimit": 1000,
-  "oneDarkPro.editorTheme": "Shadow",
-  "oneDarkPro.vivid": true,
   "partialDiff.enableTelemetry": false,
   "pasteImage.showFilePathConfirmInputBox": true,
   "path-intellisense.autoSlashAfterDirectory": true,
@@ -463,13 +472,9 @@
   "terminal.integrated.tabs.enabled": false,
   "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "NOTE", "MARK"],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "typescript.autoClosingTags": true,
-  "typescript.suggest.paths": false,
-  "typescript.surveys.enabled": false,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "custom",
-  // "window.zoomLevel": -0.25,
   "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editorAssociations": {

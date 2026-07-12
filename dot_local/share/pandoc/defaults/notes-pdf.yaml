@@ -1,6 +1,6 @@
 from: markdown+mark+wikilinks_title_after_pipe
 to: pdf
-pdf-engine: xelatex
+pdf-engine: lualatex
 toc: true
 number-sections: true
 listings: true
