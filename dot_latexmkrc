@@ -1,0 +1,4 @@
+$pdf_mode = 4; # lualatex
+$aux_dir = 'aux';
+set_tex_cmds("--shell-escape --synctex=1 --interaction=nonstopmode -f --file-line-error %O %S");
+$biber = "biber --validate-datamodel %O %S";
