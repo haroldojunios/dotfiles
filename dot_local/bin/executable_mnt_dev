@@ -3,7 +3,7 @@
 case "${@}" in
 celular)
   mkdir -p "${HOME}/Celular/"{sdcard,termux}
-  sshfs celular:/sdcard/ "${HOME}/Celular/sdcard"
+  sshfs android:/sdcard/ "${HOME}/Celular/sdcard"
   sshfs celular:/data/data/com.termux/files/ "${HOME}/Celular/termux"
   ;;
 rasp)
