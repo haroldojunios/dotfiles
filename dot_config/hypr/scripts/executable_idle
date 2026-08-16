@@ -114,7 +114,11 @@ def set_rgb(on: bool = True):
 
 
 def turn_displays(on: bool = True):
-    cmd = f"hyprctl dispatch dpms {'on' if on else 'off'}"
+    cmd = (
+        "hyprctl dispatch 'hl.dsp.dpms({ action = \""
+        f"{'enable' if on else 'disable'}"
+        "\" })'"
+    )
     run_cmd(cmd)
 
 
