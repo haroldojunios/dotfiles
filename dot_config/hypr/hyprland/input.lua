@@ -1,0 +1,21 @@
+-- See https://wiki.hypr.land/Configuring/Basics/Variables/#input
+
+hl.config({
+  input = {
+    kb_layout = "us(intl)",
+    kb_variant = "",
+    kb_model = "",
+    kb_options = "compose:paus,grp:win_space_toggle",
+    kb_rules = "",
+    follow_mouse = 1,
+    sensitivity = 1, -- -1.0 - 1.0, 0 means no modification.
+    accel_profile = "custom 0.214 0.000 0.224 0.448 0.785 1.122 1.460 1.827 2.339 2.851 3.363 3.876 4.388 4.900 5.412 5.925 6.437 6.949 7.461 7.974 9.032",
+    scroll_factor = 1.5,
+    off_window_axis_events = 2,
+    mouse_refocus = false,
+    numlock_by_default = true,
+    touchpad = {
+      natural_scroll = false,
+    },
+  },
+})
