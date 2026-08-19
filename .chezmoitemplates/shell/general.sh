@@ -1,12 +1,10 @@
 # shellcheck shell=bash
 # ls
-alias ls='eza -a --color=always --group-directories-first --icons'                     # preferred listing
-alias l='ls'                                                                           # alternative
-alias la='eza -a --color=always --group-directories-first --icons'                     # all files and dirs
-alias ll='eza -alb --total-size --color=always --group-directories-first --icons'      # long format
-alias lg='eza -al --git --total-size --color=always --group-directories-first --icons' # long format w/ gitignore
-alias lt='eza -aTI .git --color=always --group-directories-first --icons'              # tree listing
-alias l.="eza -a | egrep '^\.'"                                                        # show only dotfiles
+alias l='eza -a --color=always --group-directories-first --icons=auto' # preferred listing
+alias ll='l -lb --total-size'                                          # long format
+alias llg='ll --git'                                                   # long format w/ gitignore
+alias lt='l -TI .git'                                                  # tree listing
+alias l.="eza -a | egrep '^\.'"                                        # show only dotfiles
 
 # cd
 alias ..='cd ..'
