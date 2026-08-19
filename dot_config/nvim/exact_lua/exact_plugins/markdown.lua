@@ -88,16 +88,18 @@ return {
   },
   {
     "jakewvincent/mkdnflow.nvim",
+    ft = { "markdown", "rmd" },
     opts = {
       to_do = {
-        symbols = { " ", "/", "x" },
-        update_parents = false,
-        not_started = " ",
-        in_progress = "/",
-        complete = "x",
+        statuses = {
+          not_started = { marker = " " },
+          in_progress = { marker = "/" },
+          complete = { marker = "x" },
+        },
+        status_propagation = { up = false, down = false },
       },
       mappings = {
-        MkdnEnter = { { "i", "v" }, "<CR>" },
+        MkdnEnter = { { "i", "n", "v" }, "<CR>" },
         MkdnCreateLinkFromClipboard = { { "n", "v" }, "<M-p>" },
         MkdnFoldSection = { "n", "<leader>fo" },
         MkdnUnfoldSection = { "n", "<leader>Fo" },
