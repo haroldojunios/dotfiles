@@ -6,7 +6,7 @@
 {{ template "shell/npm.sh" . }}
 {{ template "shell/lazy.sh" . }}
 
-{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") }}
+{{ if or (eq .osid "linux-ubuntu") (eq .osidLike "linux-ubuntu") (eq .osid "linux-debian") }}
 {{ template "shell/ubuntu.sh" . }}
 {{ else if or (eq .osidLike "linux-arch") (eq .osidLike "android-arch") }}
 {{ template "shell/arch.sh" . }}
