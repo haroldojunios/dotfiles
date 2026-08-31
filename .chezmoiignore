@@ -50,6 +50,7 @@ scoop
 !.config/yazi
 !.config/lazygit
 !.config/rclone
+!.config/Kvantum
 !.local/bin/executable_start-proot
 !.local/share/pandoc
 {{ end }}

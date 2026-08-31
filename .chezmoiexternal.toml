@@ -138,6 +138,11 @@ type = "file"
 url = "https://raw.githubusercontent.com/catppuccin/mangohud/refs/heads/main/themes/mocha/MangoHud.conf"
 refreshPeriod = "168h"
 
+[".local/share/qterminal/color-schemes/catppuccin-mocha.colorscheme"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/qterminal/refs/heads/main/src/Catppuccin-Mocha.colorscheme"
+refreshPeriod = "168h"
+
 [".config/mpv/scripts/thumbfast.lua"]
 type = "file"
 url = "https://github.com/po5/thumbfast/raw/refs/heads/master/thumbfast.lua"
@@ -151,6 +156,22 @@ refreshPeriod = "168h"
 [".config/mpv/fonts/modernz-icons.ttf"]
 type = "file"
 url = "https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icons.ttf"
+refreshPeriod = "168h"
+
+[".local/share/lxqt/themes/catppuccin-mocha"]
+type = "archive"
+url = "https://github.com/catppuccin/lxqt/archive/refs/heads/main.zip"
+include = ["*/src/catppuccin-mocha/**"]
+stripComponents = 3
+exact = true
+refreshPeriod = "168h"
+
+[".local/share/themes/catppuccin-mocha/openbox-3"]
+type = "archive"
+url = "https://github.com/catppuccin/openbox/archive/refs/heads/main.zip"
+include = ["*/themes/catppuccin-mocha/**"]
+stripComponents = 4
+exact = true
 refreshPeriod = "168h"
 # {{   end }}
 # {{ end }}

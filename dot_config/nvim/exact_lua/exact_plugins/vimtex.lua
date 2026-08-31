@@ -27,13 +27,6 @@ return {
         command = "call b:vimtex.viewer.xdo_focus_vim()",
       })
 
-      -- Cleanup on quit
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VimtexEventQuit",
-        group = au_group,
-        command = "VimtexClean",
-      })
-
       -- Sync pdf with tex
       vim.api.nvim_create_autocmd("User", {
         pattern = "VimtexEventCompileSuccess",
@@ -52,7 +45,13 @@ return {
         "specifier changed to",
         "Token not allowed in a PDF string",
       }
-      vim.g.vimtex_view_method = "zathura_simple"
+      -- vim.g.vimtex_view_method = "zathura_simple"
+      if vim.fn.executable("zathura") == 1 then
+        vim.g.vimtex_view_method = "zathura_simple"
+      else
+        vim.g.vimtex_view_method = "general"
+        vim.g.vimtex_view_general_viewer = "atril"
+      end
       -- vim.g.latex_view_general_viewer = "zathura"
       -- vim.g.tex_flavor = "latex"
       -- vim.g.vimtex_compiler_progname = "nvr"

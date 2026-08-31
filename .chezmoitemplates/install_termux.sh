@@ -26,6 +26,7 @@ packageList=(
   git-delta
   imagemagick
   jq
+  kvantum
   lazygit
   libarchive
   lua-language-server
