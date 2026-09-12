@@ -16,6 +16,7 @@ return {
       "f3fora/cmp-spell",
       "brenoprata10/nvim-highlight-colors",
       "jmbuhr/otter.nvim",
+      "micangl/cmp-vimtex",
     },
     config = function()
       local cmp = require("cmp")
@@ -64,6 +65,7 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          { name = "vimtex" },
           { name = "codeium" },
           { name = "otter" },
           { name = "nvim_lsp" },

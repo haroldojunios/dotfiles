@@ -7,7 +7,7 @@ return {
     config = function()
       local ensure_installed = {
         "bash",
-        "bibtex",
+        -- "bibtex",
         "c",
         "cmake",
         "comment",
@@ -52,11 +52,11 @@ return {
       }
       local ignore_installed = {}
 
-      if os.getenv("PREFIX") == nil then
-        table.insert(ensure_installed, "latex")
-      else
-        table.insert(ignore_installed, "latex")
-      end
+      -- if os.getenv("PREFIX") == nil then
+      --   table.insert(ensure_installed, "latex")
+      -- else
+      --   table.insert(ignore_installed, "latex")
+      -- end
 
       require("nvim-treesitter.configs").setup({
         auto_install = true,
@@ -64,7 +64,7 @@ return {
         ignore_installed = ignore_installed,
         highlight = {
           enable = true,
-          disable = { "csv" },
+          disable = { "csv", "latex", "bibtex" },
           -- additional_vim_regex_highlighting = { "latex", "markdown" },
         },
         indent = { enable = true },
