@@ -7,19 +7,19 @@
     "all-outputs": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "", //"󰲠",
-      "2": "", //"󰲢",
-      "3": "", //"󰲤",
-      "4": "󰲦",
-      "5": "󰲨",
-      "6": "󰲪",
-      "7": "󰲬",
-      "8": "󰲮",
-      "9": "󰲰",
-      "10": "󰿬",
-      "urgent": "",
-      // "active": "",
-      "default": ""
+      "1": " ", //"󰲠 ",
+      "2": " ", //"󰲢 ",
+      "3": " ", //"󰲤 ",
+      "4": "󰲦 ",
+      "5": "󰲨 ",
+      "6": "󰲪 ",
+      "7": "󰲬 ",
+      "8": "󰲮 ",
+      "9": "󰲰 ",
+      "10": "󰿬 ",
+      "urgent": " ",
+      // "active": " ",
+      "default": " "
     },
     "sort-by-number": true,
     "persistent-workspaces": {
@@ -116,7 +116,7 @@
 
   // Clock
   "clock": {
-    "format": "󰸘{0:%d/%m/%Y} {0:%H:%M:%S}",
+    "format": "󰸘 {0:%d/%m/%Y}  {0:%H:%M:%S}",
     "interval": 1,
     "on-click": "kitty --class calendar -o confirm_os_window_close=0 ikhal",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
@@ -149,7 +149,7 @@
   // CPU
   "cpu": {
     "interval": 1,
-    "format": "󰻠{usage}% ",
+    "format": "󰻠 {usage}% ",
     "states": {
       "warning": 70,
       "critical": 90
@@ -160,7 +160,7 @@
   // Memory
   "memory": {
     "interval": 1,
-    "format": "󰍛{}% ",
+    "format": "󰍛 {}% ",
     "states": {
       "warning": 70,
       "critical": 90
@@ -171,7 +171,7 @@
   // Harddisc space used
   "disk": {
     "interval": 1,
-    "format": "󰋊{percentage_used}% ",
+    "format": "󰋊 {percentage_used}% ",
     "path": "/",
     "states": {
       "warning": 70,
@@ -183,13 +183,13 @@
   // CPU temperature
   "custom/cpu_temp": {
     "interval": 1,
-    "format": "{}",
+    "format": " {}",
     "exec": "get-hardware-temp",
     "on-click": "kitty --class system-monitor -o confirm_os_window_close=0 -o clear_all_shortcuts=yes -o tab_bar_style=hidden -e glances"
   },
 
   "hyprland/language": {
-    "format": "󰌌{short}({variant})",
+    "format": "󰌌 {short}({variant})",
     "keyboard-name": "sino-wealth-gaming-keyboard"
   },
 
@@ -221,9 +221,9 @@
 
   // Network
   "network": {
-    "format": "<span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
-    "format-wifi": " <span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
-    "format-ethernet": " <span size='small'>{bandwidthDownBytes} {bandwidthUpBytes}</span>",
+    "format": "<span size='small'> {bandwidthDownBytes} {bandwidthUpBytes} </span>",
+    "format-wifi": " <span size='small'> {bandwidthDownBytes} {bandwidthUpBytes} </span>",
+    "format-ethernet": " <span size='small'> {bandwidthDownBytes} {bandwidthUpBytes} </span>",
     "format-disconnected": "󰞃 ",
     "interval": 1,
     "tooltip-format": " {ifname} 󱂇 {gwaddr}\nIP: {ipaddr}\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
@@ -257,7 +257,7 @@
     "format-bluetooth": "{icon}{volume}% {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": " {format_source}",
-    "format-source": "{volume}%",
+    "format-source": " {volume}%",
     "format-source-muted": "",
     "format-icons": {
       "headphone": " ",
@@ -266,7 +266,7 @@
       "phone": " ",
       "portable": " ",
       "car": " ",
-      "default": [" ", "", ""]
+      "default": [" ", " ", " "]
     },
     "on-click": "pavucontrol"
   },

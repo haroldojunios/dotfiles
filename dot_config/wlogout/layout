@@ -12,13 +12,13 @@
 }
 {
     "label" : "logout",
-    "action" : "sleep 1; pkill -INT brave; hyprctl dispatch exit",
+    "action" : "hyprshutdown --vt 2",
     "text" : "Exit",
     "keybind" : "e"
 }
 {
     "label" : "shutdown",
-    "action" : "pkill -INT brave; systemctl poweroff",
+    "action" : "hyprshutdown -p 'shutdown -P 0'",
     "text" : "Shutdown",
     "keybind" : "s"
 }
@@ -30,7 +30,7 @@
 }
 {
     "label" : "reboot",
-    "action" : "pkill -INT brave; systemctl reboot",
+    "action" : "hyprshutdown -p 'reboot'",
     "text" : "Reboot",
     "keybind" : "r"
 }

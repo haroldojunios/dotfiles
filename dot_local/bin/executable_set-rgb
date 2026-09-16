@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 def list_devices():
-    proc = subprocess.run(["openrgb", "-l"], capture_output=True, text=True)
+    proc = subprocess.run(["openrgb", "-ld"], capture_output=True, text=True)
     result = proc.stdout
 
     matches = re.findall(r"^(\d+):[\w\W]*?Modes: (.*?)$", result, flags=re.M)
