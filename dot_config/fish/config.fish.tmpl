@@ -43,6 +43,7 @@ end
 {{ if eq .osid "android" }}
 set -x USER haroldo
 set -x ZK_NOTEBOOK_DIR ~/storage/shared/Documents/notes
+# set -x PERL5LIB "$PREFIX/share/texlive/2026/texmf-dist/scripts/latexindent"
 
 {{   if .installDE }}
 set -x DISPLAY ":1"
