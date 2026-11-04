@@ -6,9 +6,23 @@ import tempfile
 from pathlib import Path
 
 
+def check_rclone_path(path: str) -> bool:
+    try:
+        proc = subprocess.run(
+            ["rclone", "--contimeout=5s", "lsd", path],
+            timeout=10,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        if proc.returncode:
+            return False
+    except subprocess.TimeoutExpired:
+        return False
+    return True
+
+
 def main():
     android = ""
-    pc = "pc:"
     home = f"{Path.home()}/"
 
     if shutil.which("termux-setup-storage") is None:
@@ -45,6 +59,8 @@ def main():
                 exit(1)
         except subprocess.TimeoutExpired:
             exit(1)
+
+        exit(0)
 
     RCLONE_FILTERS = """
     - /Android/media/com.whatsapp/WhatsApp/.Shared/**
@@ -85,6 +101,8 @@ def main():
         "--check-first",
         "--verbose",
     )
+
+    pc = "pc:" if check_rclone_path("pc:") else "pc-tailscale:"
 
     try:
         if not subprocess.run(
