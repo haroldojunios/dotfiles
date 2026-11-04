@@ -34,7 +34,7 @@ return {
         -- prisma = { "prisma" },
         python = { "ruff_fix", "ruff_format" },
         quarto = { "prettierd", "injected" },
-        tex = { "latexindent" },
+        tex = { "badness" },
         toml = { "taplo" },
         typescript = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
@@ -114,6 +114,11 @@ return {
             end
             return { "$FILENAME" }
           end,
+        },
+        badness = {
+          command = "badness",
+          args = { "format", "-" },
+          stdin = true,
         },
       },
     },

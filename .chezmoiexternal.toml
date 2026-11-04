@@ -158,6 +158,11 @@ type = "file"
 url = "https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icons.ttf"
 refreshPeriod = "168h"
 
+[".config/spotify-player/theme.toml"]
+type = "file"
+url = "https://raw.githubusercontent.com/catppuccin/spotify-player/refs/heads/main/theme.toml"
+refreshPeriod = "168h"
+
 [".local/share/lxqt/themes/catppuccin-mocha"]
 type = "archive"
 url = "https://github.com/catppuccin/lxqt/archive/refs/heads/main.zip"
