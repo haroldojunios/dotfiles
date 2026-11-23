@@ -106,7 +106,7 @@ dePackageList=(
   kvantum
   kvantum-qt5
   qt5ct
-  qt6ct-kde
+  qt6ct
   swaync
   # lxqt
   lxqt-admin
