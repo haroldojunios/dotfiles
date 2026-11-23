@@ -1,9 +1,0 @@
-promptToReturnFromSubprocess: false
-os:
-  editPreset: "nvim-remote"
-  edit: '[ -z "$NVIM" ] && nvim -- {{filename}} || nvim --server "$NVIM" --remote-send "<CMD>LazyGitToggle<CR>" && nvim --server "$NVIM" --remote-tab {{filename}}'
-  editAtLine: '[ -z "$NVIM" ] && nvim +{{line}} -- {{filename}} || nvim --server "$NVIM" --remote-send "<CMD>LazyGitToggle<CR>" &&  nvim --server "$NVIM" --remote-tab {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
-git:
-  diffRenderers:
-    - colorArg: always
-      command: delta --dark --paging=never --line-numbers --side-by-side
